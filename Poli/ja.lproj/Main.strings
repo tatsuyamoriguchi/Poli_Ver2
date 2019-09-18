@@ -1,0 +1,126 @@
+/* Class = "UIButton"; normalTitle = "Update Account Information"; ObjectID = "0WM-Lc-Sbo"; */
+"0WM-Lc-Sbo.normalTitle" = "アカウント情報の更新";
+
+/* Class = "UILabel"; text = "Goal Title"; ObjectID = "2oG-TI-W87"; */
+"2oG-TI-W87.text" = "目標";
+
+/* Class = "UILabel"; text = "BFF App to Help You to Achieve Goals"; ObjectID = "6a0-aQ-bA3"; */
+"6a0-aQ-bA3.text" = "頑張りたいあなたのBFFアプリ";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "8am-Ip-PY2"; */
+"8am-Ip-PY2.placeholder" = "パスワード";
+
+/* Class = "UILabel"; text = "Poli"; ObjectID = "81V-2E-PAo"; */
+"81V-2E-PAo.text" = "Poli";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "abv-Qo-zWm"; */
+"abv-Qo-zWm.normalTitle" = "キャンセル";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ahA-YV-Xcy"; */
+"ahA-YV-Xcy.text" = "Label";
+
+/* Class = "UILabel"; text = "Goal Reward"; ObjectID = "aqB-4O-fKy"; */
+"aqB-4O-fKy.text" = "目標達成時のご褒美";
+
+/* Class = "UINavigationItem"; title = "My Goals"; ObjectID = "AqS-Uw-cHf"; */
+"AqS-Uw-cHf.title" = "私の目標！";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "cqk-Cx-Mfp"; */
+"cqk-Cx-Mfp.normalTitle" = "ログイン";
+
+/* Class = "UILabel"; text = "Use this date as Task's Due Date or Starting Date"; ObjectID = "cUc-0S-wgD"; */
+"cUc-0S-wgD.text" = "タスク実行期限もしくは実行開始日（どちらか決めて変えないように）";
+
+/* Class = "UIViewController"; title = "Goal Reward"; ObjectID = "dSK-z6-Wqj"; */
+"dSK-z6-Wqj.title" = "目標達成時のご褒美";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "dxT-jc-r3f"; */
+"dxT-jc-r3f.text" = "Subtitle";
+
+/* Class = "UIViewController"; title = "Goal Due Date"; ObjectID = "ecZ-ts-SrN"; */
+"ecZ-ts-SrN.title" = "目標達成期限";
+
+/* Class = "UILabel"; text = "Is Important-Urgent?"; ObjectID = "EZw-nK-7p9"; */
+"EZw-nK-7p9.text" = "重要もしくは緊急";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "feu-UW-y72"; */
+"feu-UW-y72.normalTitle" = "ユーザー登録";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "FgT-RZ-aqL"; */
+"FgT-RZ-aqL.normalTitle" = "キャンセル";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gQz-kk-zG1"; */
+"gQz-kk-zG1.text" = "ラベル";
+
+/* Class = "UILabel"; text = "Turn Off Switch to Undone this Goal"; ObjectID = "hHv-qQ-qLs"; */
+"hHv-qQ-qLs.text" = "目標達成済み解除";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "HYm-ox-PTk"; */
+"HYm-ox-PTk.normalTitle" = "キャンセル";
+
+/* Class = "UILabel"; text = "Is Done?"; ObjectID = "iiO-Ej-iHd"; */
+"iiO-Ej-iHd.text" = "完了？";
+
+/* Class = "UIViewController"; title = "Task"; ObjectID = "kmR-6c-LEk"; */
+"kmR-6c-LEk.title" = "タスク";
+
+/* Class = "UIViewController"; title = "Undone Goal"; ObjectID = "kRf-Gi-h3g"; */
+"kRf-Gi-h3g.title" = "目標達成済み";
+
+/* Class = "UILabel"; text = "Start by registering a user name and password."; ObjectID = "MoM-Hf-xoj"; */
+"MoM-Hf-xoj.text" = "ユーザー名とパスワードを登録して始めよう！";
+
+/* Class = "UIViewController"; title = "Add Goal"; ObjectID = "n45-Sq-KFF"; */
+"n45-Sq-KFF.title" = "目標を追加";
+
+/* Class = "UIViewController"; title = "Settings"; ObjectID = "Nax-AD-kiR"; */
+"Nax-AD-kiR.title" = "設定";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Ne9-fc-lnA"; */
+"Ne9-fc-lnA.text" = "タイトル";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "nT0-uU-F2k"; */
+"nT0-uU-F2k.normalTitle" = "キャンセル";
+
+/* Class = "UITextView"; text = "Goal Description"; ObjectID = "pK1-nL-rSe"; */
+"pK1-nL-rSe.text" = "目標の詳細";
+
+/* Class = "UIViewController"; title = "Goal Description"; ObjectID = "qS2-mk-zH3"; */
+"qS2-mk-zH3.title" = "目標の詳細";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qvN-V5-Eto"; */
+"qvN-V5-Eto.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Go To Your Device's Settings"; ObjectID = "usr-gy-7B3"; */
+"usr-gy-7B3.normalTitle" = "このデバイスの設定画面に行く";
+
+/* Class = "UITextField"; placeholder = "Type a To-Do to be done within an hour."; ObjectID = "Vwg-FQ-hP8"; */
+"Vwg-FQ-hP8.placeholder" = "1時間以内にできるタスク内容を記入";
+
+/* Class = "UILabel"; text = "Notifications are not authorized on this device. Please open this device's Settings, turn on  Allow Notifications."; ObjectID = "W4H-Gu-3hI"; */
+"W4H-Gu-3hI.text" = "通知機能がオンになっていません。このデバイスの設定で通知機能をオンにしてください。";
+
+/* Class = "UITextField"; placeholder = "Set a specific, concrete, & realistic Goal Title."; ObjectID = "w6L-8n-6g8"; */
+"w6L-8n-6g8.placeholder" = "具体的で実現可能で現実的な目標を設定しよう。";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wEH-DP-RyJ"; */
+"wEH-DP-RyJ.text" = "タイトル";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "wfW-Is-yca"; */
+"wfW-Is-yca.text" = "詳細";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Wht-4o-Aqe"; */
+"Wht-4o-Aqe.normalTitle" = "キャンセル";
+
+/* Class = "UITextField"; placeholder = "User Name"; ObjectID = "WPP-KT-HvA"; */
+"WPP-KT-HvA.placeholder" = "ユーザー名";
+
+/* Class = "UIButton"; normalTitle = "Set Notificaiton Time"; ObjectID = "WRT-sl-gbc"; */
+"WRT-sl-gbc.normalTitle" = "通知時間設定";
+
+/* Class = "UITextField"; placeholder = "Choose a reward and its image that you really crave."; ObjectID = "X0I-SN-cUg"; */
+"X0I-SN-cUg.placeholder" = "本当に欲しいご褒美とそのイメージを選ぼう。";
+
+/* Class = "UILabel"; text = "Goal Due Date"; ObjectID = "Xre-lg-kuf"; */
+"Xre-lg-kuf.text" = "目標達成期限";
+

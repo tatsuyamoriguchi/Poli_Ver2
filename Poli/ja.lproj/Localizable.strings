@@ -1,0 +1,291 @@
+/* No comment provided by engineer. */
+"NSL_" = "FaceID/TouchIDが設定されていません。";
+
+/* (No Comment) */
+"NSL_alertCancel" = "キャンセル";
+
+/* (No Comment) */
+"NSL_alertMessage_001" = "このアプリのユーザーアカウントが既に存在します。ユーザー情報を変更するにはこのアプリにログインして「設定」を選んで下さい。";
+
+/* (No Comment) */
+"NSL_alertMessage_002" = "ユーザー名とパスワード両方を記入してください。";
+
+/* (No Comment) */
+"NSL_alertMessage_003" = "このアプリにログインするにはユーザー名とパスワードを使ってください。";
+
+/* (No Comment) */
+"NSL_alertMessage_004" = "アカウントが未設定です。アカウント作成してください。";
+
+/* (No Comment) */
+"NSL_alertMessage_005" = "入力情報がユーザー情報と違います。";
+
+/* (No Comment) */
+"NSL_alertMessage_006" = "通知時間設定";
+
+/* (No Comment) */
+"NSL_alertMessage_007" = "お使いになったユーザー名が登録されたものと違います。OKをクリックしてログイン画面に戻り再ログインしてください。";
+
+/* (No Comment) */
+"NSL_alertMessage_008" = "ユーザー名とパスワードの両方を記入してください。";
+
+/* (No Comment) */
+"NSL_alertMessage_009" = "新しいユーザー情報で再ログインしてください。";
+
+/* (No Comment) */
+"NSL_alertMessage_011 " = "\"%@\"に登録されたタスクがすべて完了しました。「目標達成！」ボタンをクリックして目標達成をお祝いしましょう。目標が達成していなくてまだ完了するタスクが他にある場合は「タスクを更に追加」をクリックしてください。";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_014" = "よくできました！ご褒美「%@」を楽しもう！";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_015" = "削除してよろしいですか。";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_016" = "目標\"%3$@\"、%1$d %2$ %達成！";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_017" = "この記入項目は必須です。";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_018" = "画像を選択";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_021" = "タスク期限（開始日）を変更できませんでした。可能にするには目標画面から「変更」機能で目標の完了ステータスをオフに変更してください。";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_022" = "削除してもよろしいですか。";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_024" = "この記入項目は必須です。";
+
+/* (No Comment) */
+"NSL_alertTitel_012" = "まだまだ、タスク追加";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_001" = "ユーザーが既に存在します。";
+
+/* (No Comment) */
+"NSL_alertTitle_002" = "追加情報が必要です。";
+
+/* (No Comment) */
+"NSL_alertTitle_004" = "アカウントがありません。";
+
+/* (No Comment) */
+"NSL_alertTitle_005" = "認証に失敗しました。";
+
+/* (No Comment) */
+"NSL_alertTitle_007" = "ユーザー名が違います。";
+
+/* (No Comment) */
+"NSL_alertTitle_008" = "追加情報が必要です。";
+
+/* (No Comment) */
+"NSL_alertTitle_009" = "ユーザー情報が更新されました。";
+
+/* (No Comment) */
+"NSL_alertTitle_010" = "OK";
+
+/* (No Comment) */
+"NSL_alertTitle_011" = "目標達成しましたか。";
+
+/* (No Comment) */
+"NSL_alertTitle_013" = "目標達成、おめでとう！";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_014" = "やったね！";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_015" = "削除";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_016" = "やったね！";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_017" = "入力がありません。";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_018" = "画像";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_019" = "カメラ";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_020" = "画像ライブラリー";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_021" = "目標は既に完了しています。";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_022" = "削除";
+
+/* No comment provided by engineer. */
+"NSL_alertTitle_024" = "記入がありません。";
+
+/* No comment provided by engineer. */
+"NSL_authFailed" = "個人認証に問題がありました。";
+
+/* No comment provided by engineer. */
+"NSL_bioDefault" = "FaceID/TouchIDが設定できません。";
+
+/* No comment provided by engineer. */
+"NSL_bioLockout" = "FaceID/TouchIDがロックされています。";
+
+/* No comment provided by engineer. */
+"NSL_bioNotAvailable" = "FaceID/TouchIDが使えません。";
+
+/* No comment provided by engineer. */
+"NSL_cancelButton" = "キャンセル";
+
+/* (No Comment) */
+"NSL_contentBody" = "さぁ、タスクの実行に集中しよう！";
+
+/* (No Comment) */
+"NSL_contentSubtitle " = "Poli を開く";
+
+/* (No Comment) */
+"NSL_contentTitle" = "日次の通知";
+
+/* No comment provided by engineer. */
+"NSL_deleteButton_01" = "削除";
+
+/* No comment provided by engineer. */
+"NSL_deleteButton_02" = "削除";
+
+/* No comment provided by engineer. */
+"NSL_deleteButton_03" = "削除";
+
+/* No comment provided by engineer. */
+"NSL_deleteButton_04" = "削除";
+
+/* (No Comment) */
+"NSL_dueDateLabel" = "期限： %1$@ - %2$@";
+
+/* No comment provided by engineer. */
+"NSL_goalDescription" = "目標の目的（ビジョン）、詳細、経過記録、注意事項、課題等自由に書き込んで下さい。";
+
+/* No comment provided by engineer. */
+"NSL_goalTitle" = "目標達成させて自分を変えよう！\n実現可能で進捗が計測できてやる価値のある具体的な目標をまず設定してください。達成すればあなたの生活や仕事に実際にプラスになるものにしましょう。\n「No.1 ファッションフォトグラファーになること」は目標ではありません。それは実現させたいビジョン、つまり夢のことです。いくつもの目標を達成させた先にある最終的に実現させたい夢のことです。ビジョンは山の頂上みたいなもので、一度に一つだけにしましょう。一つのビジョンが実現できたら次のビジョンを作ってください。同時に二つも三つもビジョンを持たないように。一回に登る山は一つだけにしましょう。\n「海岸沿いで行うファッション向け撮影技術を習得する。」が実現させる具体的な目標で、山の頂上「No.1 ファッションフォトグラファーになること」に近づく通過点の一つ、つまり目標のひとつになります。\nタスク（作業）は目標を達成するための実際の実行項目です。「海を背景とした情景撮影法を学ぶ」はタスクとしてはあまり具体的ではありません。「海の風景を背景にファッションモデルを撮影するのに一番良いレンズを選ぶ方法を調べる。」が具体的で実行し易い行動の最小単位、つまりそれ以上他に何したら良いか考えなくて良いサイズの「やること」つまりタスクになります。なるべく2時間以内に完了するタスクを設定しましょう。\n「毎日6時に起床する。」は目標ではなく、反復タスクもしくはタスクを実行し易くするために身に付けたい習慣のことです。習慣付けをタスクの一つにしても構いませんがそれによって達成できる目標を明確にしましょう。\n山の頂上に登るというビジョンのためにいくつも通過点（目標）を目指して山登りをしていくわけで、山登りに必要なもの、ピッケル、登山靴、地図、飲料水を買うことがタスクになります。\n実現させたいビジョン（夢）を具体的に描いたら、その都度目標を設定して、目標ごとの様々なタスクを一つ一つをこなしながらビジョンに近づいて行きましょう。1週間から5週間で達成できる目標が効果的です。短期間でいくつも目標を達成できるとやる気も上がるでしょう。";
+
+/* No comment provided by engineer. */
+"NSL_loginError" = "ログインエラー";
+
+/* No comment provided by engineer. */
+"NSL_loginReason" = "Touch IDでログイン";
+
+/* No comment provided by engineer. */
+"NSL_loginUsername" = "%@ としてログイン";
+
+/* No comment provided by engineer. */
+"NSL_logout" = "ログアウト";
+
+/* No comment provided by engineer. */
+"NSL_naviAdd" = "タスクの追加";
+
+/* No comment provided by engineer. */
+"NSL_naviError" = "エラー：segueNameが確認できませんでした。";
+
+/* No comment provided by engineer. */
+"NSL_naviItem" = "ログイン名：%@";
+
+/* No comment provided by engineer. */
+"NSL_naviMissing" = "ログイン名が認識されまませんでした。";
+
+/* No comment provided by engineer. */
+"NSL_naviPormpt" = "ログイン名：%@";
+
+/* No comment provided by engineer. */
+"NSL_naviTask" = "タスクリスト";
+
+/* No comment provided by engineer. */
+"NSL_naviToday" = "今日の予定タスク";
+
+/* No comment provided by engineer. */
+"NSL_naviUpdate" = "タスク更新";
+
+/* No comment provided by engineer. */
+"NSL_nextButton_01" = "次へ";
+
+/* No comment provided by engineer. */
+"NSL_nextButton_02" = "次へ";
+
+/* No comment provided by engineer. */
+"NSL_nextButton_03" = "次へ";
+
+/* (No Comment) */
+"NSL_notifTitle_001" = "りょ！";
+
+/* (No Comment) */
+"NSL_notifTitle_002" = "あとでやる・・・";
+
+/* No comment provided by engineer. */
+"NSL_noTodaysTask" = "今日のタスクはありません。";
+
+/* (No Comment) */
+"NSL_NSL_alertTitle_003" = "ユーザーアカウント作成完了";
+
+/* No comment provided by engineer. */
+"NSL_oK" = "OK";
+
+/* No comment provided by engineer. */
+"NSL_postMessage" = "以下のタスクを今日完了させます。";
+
+/* No comment provided by engineer. */
+"NSL_progressAmazing" = "すげーな";
+
+/* No comment provided by engineer. */
+"NSL_progressAtomic" = "やべぇな、残りもやっちまおう、今！";
+
+/* No comment provided by engineer. */
+"NSL_progressCompleted" = "目標達成したね！";
+
+/* No comment provided by engineer. */
+"NSL_progressError" = "エラー：Progress Percentageのところで何か変。";
+
+/* No comment provided by engineer. */
+"NSL_progressGood" = "やるねー、その調子！";
+
+/* No comment provided by engineer. */
+"NSL_progressMore" = "もっとできるよ！";
+
+/* No comment provided by engineer. */
+"NSL_progressNothing" = "まーだなんもしてないの？";
+
+/* No comment provided by engineer. */
+"NSL_settingsButton" = "設定";
+
+/* No comment provided by engineer. */
+"NSL_shareAlert" = "FacebookやLinkedInのように今日のTo-Doを表示しないアプリに共有したい場合";
+
+/* No comment provided by engineer. */
+"NSL_shareMessage" = "共有メニューから「コピー」をまず選択し、共有ボタンを再度押してからFacebookやLinkedInの共有ポスティングスクリーンのメッセージ欄にペーストしてください。";
+
+/* No comment provided by engineer. */
+"NSL_statusError" = "エラー：differenceOfDate  out of range";
+
+/* No comment provided by engineer. */
+"NSL_statusLeft" = "残り%1$d日と%2$d時間";
+
+/* No comment provided by engineer. */
+"NSL_statusPassed" = "期限過ぎたんですけど・・・";
+
+/* No comment provided by engineer. */
+"NSL_statusToday" = "残り%d時間";
+
+/* No comment provided by engineer. */
+"NSL_taskList" = "タスクリスト";
+
+/* No comment provided by engineer. */
+"NSL_today" = "今日の予定タスク";
+
+/* No comment provided by engineer. */
+"NSL_updateButton_01" = "更新";
+
+/* No comment provided by engineer. */
+"NSL_updateButton_02" = "更新";
+
+/* No comment provided by engineer. */
+"NSL_userCancel" = "キャンセルされました。";
+
+/* No comment provided by engineer. */
+"NSL_userFallback" = "ユーザー名とパスワードを入力して下さい。";
+

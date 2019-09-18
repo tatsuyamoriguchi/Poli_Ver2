@@ -1,0 +1,15 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Poli";
+
+/* Bundle name */
+"CFBundleName" = "Poli";
+
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "OKをクリックして撮影してください。";
+
+/* Privacy - Face ID Usage Description */
+"NSFaceIDUsageDescription" = "アプリのロック解除にFaceIDを使います。";
+
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "OKをクリックして撮影してください。";
+

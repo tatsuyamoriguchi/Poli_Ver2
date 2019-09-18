@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G84" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Goal" representedClassName=".Goal" syncable="YES">
+        <attribute name="goalDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="goalDone" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="goalDueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="goalReward" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="goalRewardImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="goalTitle" attributeType="String" syncable="YES"/>
+        <relationship name="reward4Goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="reward4Goal" inverseEntity="Reward" syncable="YES"/>
+        <relationship name="tasksAssigned" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="goalAssigned" inverseEntity="Task" syncable="YES"/>
+        <relationship name="vision4Goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vision" inverseName="vision4Goal" inverseEntity="Vision" syncable="YES"/>
+    </entity>
+    <entity name="Reward" representedClassName="Reward" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="reward4Goal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="reward4Goal" inverseEntity="Goal" syncable="YES"/>
+        <relationship name="reward4Task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="reward4Task" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="Task" representedClassName=".Task" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isImportant" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="toDo" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="URI" syncable="YES"/>
+        <relationship name="goalAssigned" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="tasksAssigned" inverseEntity="Goal" syncable="YES"/>
+        <relationship name="reward4Task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="reward4Task" inverseEntity="Reward" syncable="YES"/>
+    </entity>
+    <entity name="Vision" representedClassName=".Vision" syncable="YES">
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="vision4Goal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="vision4Goal" inverseEntity="Goal" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Goal" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Reward" positionX="90" positionY="63" width="128" height="105"/>
+        <element name="Task" positionX="241" positionY="51" width="128" height="150"/>
+        <element name="Vision" positionX="90" positionY="63" width="128" height="105"/>
+    </elements>
+</model>
