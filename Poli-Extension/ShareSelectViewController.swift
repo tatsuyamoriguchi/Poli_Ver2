@@ -13,7 +13,7 @@ protocol ShareSelectViewControllerDelegate: class {
     func selected(goal: Goal)
 }
 
-class ShareSelectViewController: UIViewController  {
+class ShareSelectViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var userGoals: [Goal]!
     weak var delegate: ShareSelectViewControllerDelegate?
@@ -38,6 +38,10 @@ class ShareSelectViewController: UIViewController  {
         
         setupUI()
         
+//        configureFetchedResultsController()
+        
+        fetchGoals()
+        
         tableView.reloadData()
 
         print("Hello")
@@ -45,9 +49,66 @@ class ShareSelectViewController: UIViewController  {
 
     
     
+//    lazy var persistentContainer: NSPersistentContainer = {
+//
+////        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
+//
+//        let container = NSPersistentContainer(name: "Poli")
+//
+//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//
+//
+//            if let error = error as NSError? {
+//                fatalError("Unresolved error \(error), \(error.userInfo)")
+//            }
+//        })
+//        return container
+//    }()
+    
+    
+    // Core Data: NSFetchedResultsConroller
+ //   private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    
+//    private func configureFetchedResultsController() {
+////        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+////            return
+////        }
+//        // Create the fetch request, set some sort descriptor, then feed the fetchedResultsController
+//        // the request with along with the managed object context, which we'll use the view context
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
+//        let sortDescriptorTypeTime = NSSortDescriptor(key: "value", ascending: true)
+//
+//        fetchRequest.sortDescriptors = [sortDescriptorTypeTime]
+//        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+//        fetchedResultsController?.delegate = self
+//        
+//        do {
+//            try fetchedResultsController?.performFetch()
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//    }
+    
+    
+    var fetchedGoals = [Goal]()
+    
     lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Poli")
         
-        let container = NSCustomPersistentContainer(name: "Poli")
+        // Added for Share Extension accessing core data files
+        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
+        var defaultURL: URL?
+        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url
+        {
+            defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
+        }
+        if defaultURL == nil
+        {
+            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
+        }
+        
+        
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -55,21 +116,19 @@ class ShareSelectViewController: UIViewController  {
         })
         return container
     }()
-    
-    // MARK: - Core Data Saving support
-    
-//    func saveContext () {
-//        let context = persistentContainer.viewContext
-//        if context.hasChanges {
-//            do {
-//                try context.save()
-//            } catch {
-//                let nserror = error as NSError
-//                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//            }
-//        }
-//    }
 
+    var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
+    
+    func fetchGoals() {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
+        fetchRequest.predicate = NSPredicate(format: "goalDone = false")
+        let goalDueDateSort = NSSortDescriptor(key:"goalDueDate", ascending:false)
+        fetchRequest.sortDescriptors = [goalDueDateSort]
+        self.fetchedGoals = try! context.fetch(fetchRequest) as! [Goal]
+    }
 
     
     private func setupUI() {
@@ -97,14 +156,41 @@ extension ShareSelectViewController: UITableViewDataSource {
         return 1
     }
     
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        if let frc = fetchedResultsController {
+//            return frc.sections!.count
+//        }
+//        return 0
+//    }
+//
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userGoals.count
+        //return userGoals.count
+        return fetchedGoals.count
+        
     }
     
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        guard let sections = self.fetchedResultsController?.sections else {
+//            fatalError("No sections in fetchedResultscontroller")
+//        }
+//
+//        let sectionInfo = sections[section]
+//        return sectionInfo.numberOfObjects
+//
+//    }
+    
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.GoalCell, for: indexPath)
-        cell.textLabel?.text = userGoals[indexPath.row].goalTitle
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.GoalCell, for: indexPath)
+        
+  //      if let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal {
+  //          cell.textLabel?.text = goal.goalTitle //userGoals[indexPath.row].goalTitle
+  //      }
+//                  cell.textLabel?.text = userGoals[indexPath.row].goalTitle
+                cell.textLabel?.text = fetchedGoals[indexPath.row].goalTitle
         return cell
     }
 
@@ -116,8 +202,11 @@ extension ShareSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let delegate = delegate {
-            delegate.selected(goal: userGoals[indexPath.row])
-        }
+
+//            guard let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal else { return }
+//            delegate.selected(goal: userGoals[indexPath.row])
+             delegate.selected(goal: fetchedGoals[indexPath.row])
+        
 //
 //        // Assign and pass the selected goal back to ShareViewController
 //        let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal
@@ -126,10 +215,10 @@ extension ShareSelectViewController: UITableViewDelegate {
 //        if let delegate = delegate {
 //            delegate.selected(goal: goal!)
 //            print("if let delegate = delegate was true")
-//        } else {
-//            print("delegate.selected(goal: goal) wasn't called!!")
-//        }
-        
+        } else {
+            print("delegate.selected(goal: goal) wasn't called!!")
+        }
+    
         // Back to ShareViewController
         
     }

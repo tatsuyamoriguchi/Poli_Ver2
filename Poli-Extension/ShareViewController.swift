@@ -15,7 +15,6 @@ import MobileCoreServices
 class ShareViewController: SLComposeServiceViewController {
     
      var selectedGoal: Goal?
-    var goals = [Goal]()
 
     
     override func isContentValid() -> Bool {
@@ -100,11 +99,12 @@ class ShareViewController: SLComposeServiceViewController {
         super.viewDidLoad()
         
         fetchGoals()
-        goals = fetchedGoals
+       
         
     }
     
     func fetchGoals() {
+        
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
         fetchRequest.predicate = NSPredicate(format: "goalDone = false")
         let goalDueDateSort = NSSortDescriptor(key:"goalDueDate", ascending:false)
@@ -119,8 +119,22 @@ class ShareViewController: SLComposeServiceViewController {
     var fetchedGoals = [Goal]()
     
     lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Poli")
 
-        let container = NSCustomPersistentContainer(name: "Poli")
+        // Added for Share Extension accessing core data files
+        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
+        var defaultURL: URL?
+        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url
+        {
+            defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
+        }
+        if defaultURL == nil
+        {
+            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
+        }
+        
+        
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -128,6 +142,11 @@ class ShareViewController: SLComposeServiceViewController {
         })
         return container
     }()
+    
+    
+    
+    
+    
     
     
     // MARK: - Core Data Saving support
@@ -154,7 +173,7 @@ class ShareViewController: SLComposeServiceViewController {
             shareLink.tapHandler = {
                 let vc = ShareSelectViewController()
                 vc.delegate = self
-                vc.userGoals = self.goals
+                vc.userGoals = self.fetchedGoals
                 self.pushConfigurationViewController(vc)
             }
             return [shareLink]

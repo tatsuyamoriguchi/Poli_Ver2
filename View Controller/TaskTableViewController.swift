@@ -35,8 +35,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
 
 
-    // Property
-    var selectedIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,69 +212,69 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
         //        let task = tasks[indexPath.row]
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
-        
-        taskCell.textLabel?.numberOfLines = 0
-        taskCell.detailTextLabel?.numberOfLines = 0
-        
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        let dateString = dateFormatter.string(from: (task.date)! as Date)
-        
-        if var rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
-            rewardString = "\nReward: \(rewardString) - Value: \(rewardValue)"
-            taskCell.detailTextLabel?.text = dateString + rewardString
-        } else {
-            taskCell.detailTextLabel?.text = dateString
-        }
-        
-        
-        if task.isDone == true {
-            taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
-            taskCell.detailTextLabel?.textColor = .black
-        } else  {
-            taskCell.accessoryType = UITableViewCell.AccessoryType.none
             
-            let today = Date()
-            let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
+            taskCell.textLabel?.numberOfLines = 0
+            taskCell.detailTextLabel?.numberOfLines = 0
             
-            switch evaluate {
-            // If task date is today, display it in purple
-            case ComparisonResult.orderedSame :
-                taskCell.detailTextLabel?.textColor = .purple
-            // If task date passed today, display it in red
-            case ComparisonResult.orderedAscending :
-                taskCell.detailTextLabel?.textColor = .red
-            default:
-                taskCell.detailTextLabel?.textColor = .black
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .full
+            let dateString = dateFormatter.string(from: (task.date)! as Date)
+            
+            if var rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
+                rewardString = "\nReward: \(rewardString) - Value: \(rewardValue)"
+                taskCell.detailTextLabel?.text = dateString + rewardString
+            } else {
+                taskCell.detailTextLabel?.text = dateString
             }
-        }
-        
-        var toDoString: String?
-        
-        if task.url != nil {
-            //            taskCell.textLabel?.text = "🔗 \(toDoString!)"
-            toDoString = "🔗 \(task.toDo!)"
-        } else {
-            //taskCell.textLabel?.text = toDoString
-            toDoString = task.toDo!
-        }
-        
-        if task.isImportant == true {
-            taskCell.textLabel?.text = "🍖 \(toDoString!)"
-            //toDoString = "🍖 \(task.toDo!)"
             
-        } else {
-            taskCell.textLabel?.text = toDoString
-            //toDoString = task.toDo
-        }
+            
+            if task.isDone == true {
+                taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
+                taskCell.detailTextLabel?.textColor = .black
+            } else  {
+                taskCell.accessoryType = UITableViewCell.AccessoryType.none
+                
+                let today = Date()
+                let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
+                
+                switch evaluate {
+                // If task date is today, display it in purple
+                case ComparisonResult.orderedSame :
+                    taskCell.detailTextLabel?.textColor = .purple
+                // If task date passed today, display it in red
+                case ComparisonResult.orderedAscending :
+                    taskCell.detailTextLabel?.textColor = .red
+                default:
+                    taskCell.detailTextLabel?.textColor = .black
+                }
+            }
+            
+            var toDoString: String?
+            
+            if task.url != nil {
+                //            taskCell.textLabel?.text = "🔗 \(toDoString!)"
+                toDoString = "🔗 \(task.toDo!)"
+            } else {
+                //taskCell.textLabel?.text = toDoString
+                toDoString = task.toDo!
+            }
+            
+            if task.isImportant == true {
+                taskCell.textLabel?.text = "🍖 \(toDoString!)"
+                //toDoString = "🍖 \(task.toDo!)"
+                
+            } else {
+                taskCell.textLabel?.text = toDoString
+                //toDoString = task.toDo
+            }
         } else {
             fatalError("Attempt configure cell without a managed object") }
         
         return taskCell
     }
-        
-        
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         //        let task = tasks[indexPath.row]
@@ -312,18 +310,27 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     }
     
 
+    // Property for editActionForRowAt
+    var selectedTask: Task?
+
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        
 //        let task = tasks[indexPath.row]
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
         
-        let NSL_updateButton_02 = NSLocalizedString("NSL_updateButton_02", value: "Update", comment: "")
+        // MARK: - editActionForRowAt updateACtion
+            let NSL_updateButton_02 = NSLocalizedString("NSL_updateButton_02", value: "Update", comment: "")
         let updateAction = UITableViewRowAction(style: .default, title: NSL_updateButton_02) { (action, indexPath) in
             if task.goalAssigned?.goalDone == true {
                 self.goalDoneAlert()
                 
             } else {
                 // Call update action
-                self.updateAction(task: task, indexPath: indexPath)
+                //self.updateAction(task: task, indexPath: indexPath)
+                self.selectedTask = task
+                self.performSegue(withIdentifier: "updateTask", sender: self)
             }
         }
         
@@ -419,8 +426,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     private func updateAction(task: Task, indexPath: IndexPath) {
         
-        self.selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "updateTask", sender: self)
+        //self.selectedIndex = indexPath.row
+        //self.performSegue(withIdentifier: "updateTask", sender: self)
     }
     
     private func deleteAction(task: Task, indexPath: IndexPath) {
@@ -476,7 +483,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         } else if segue.identifier == "updateTask" {
             
             let destVC = segue.destination as! TaskViewController
-            let selectedTask = tasks[selectedIndex]
+            
             destVC.selectedTask = selectedTask
             destVC.segueName = "updateTask"
         }
