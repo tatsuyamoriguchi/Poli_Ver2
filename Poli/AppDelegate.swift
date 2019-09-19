@@ -59,87 +59,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
 
+
     
-    
-    
-    ////////////////////////////////////////////////////////////////////////////
-    lazy var persistentContainer: NSPersistentContainer =
-        {
+    lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Poli")
-            
-            let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
+        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
+        
         var defaultURL: URL?
-        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url
-        {
+        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
             defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
         }
-        if defaultURL == nil
-        {
+        
+        if defaultURL == nil {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         }
-
-            // debugging purpose
-            print("defaultURL at AppDelegate: \(defaultURL)")
-            print("storetURL at AppDelegate: \(storeURL)")
+        container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
             
-            //
-            
-        container.loadPersistentStores(completionHandler:
-            {
-                [unowned container] (storeDescription, error) in
-                if let error = error as NSError?
-                {
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                    
-                    if let url = defaultURL, url.absoluteString != storeURL.absoluteString
-                    {
-                        let coordinator = container.persistentStoreCoordinator
-                        if let oldStore = coordinator.persistentStore(for: url)
-                        {
-                            do
-                            {
-                                try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
-                            } catch
-                            {
-                                print(error.localizedDescription)
-                            }
-                 
-                            let fileCoordinator = NSFileCoordinator(filePresenter: nil)
-                            fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor:
-                                { url in
-                                    
-                                    do {
-                                        try FileManager.default.removeItem(at: url)
-                                    } catch
-                                    {
-                                        print(error.localizedDescription)
-                                    }
-                                    
-                                    // delete old store
-                                    let fileCoordinator = NSFileCoordinator(filePresenter: nil)
-                                    fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor:
-                                        { url in
-                                            
-                                            do {
-                                                try FileManager.default.removeItem(at: url)
-                                            } catch
-                                            {                                            print(error.localizedDescription)
-                                            }
-                                    
-                                    })
-                            })
-                        }
+            if let url = defaultURL, url.absoluteString != storeURL.absoluteString {
+                let coordinator = container.persistentStoreCoordinator
+                if let oldStore = coordinator.persistentStore(for: url) {
+                    do {
+                        try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
+                    } catch {
+                        print(error.localizedDescription)
                     }
+                    
+                    // delete old store
+                    let fileCoordinator = NSFileCoordinator(filePresenter: nil)
+                    fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: { url in
+                        do {
+                            try FileManager.default.removeItem(at: url)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    })
                 }
-            })
-            return container
+            }
+        })
+        return container
     }()
-                
+    
                 
     /////////////////////////////////////////////////////////////////////////////
     
     // MARK: - Core Data stack
-//    lazy var persistentContainer: NSPersistentContainer = {
+//        lazy var persistentContainer: NSPersistentContainer = {
 //        let container = NSCustomPersistentContainer(name: "Poli")
 //        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
 //            if let error = error as NSError? {
