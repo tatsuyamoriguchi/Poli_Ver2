@@ -29,9 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             print("Notificaiton Request was authorized.")
         }
-
-        
-        //self.migrateCoreData()
         
         return true
     }
@@ -69,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentContainer: NSPersistentContainer =
         {
         let container = NSPersistentContainer(name: "Poli")
+            
             let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
         var defaultURL: URL?
         if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url
@@ -79,6 +77,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         }
+
+            // debugging purpose
+            print("defaultURL at AppDelegate: \(defaultURL)")
+            print("storetURL at AppDelegate: \(storeURL)")
+            
+            //
+            
         container.loadPersistentStores(completionHandler:
             {
                 [unowned container] (storeDescription, error) in
@@ -98,6 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             {
                                 print(error.localizedDescription)
                             }
+                 
                             let fileCoordinator = NSFileCoordinator(filePresenter: nil)
                             fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor:
                                 { url in
