@@ -106,8 +106,13 @@ class ShareViewController: SLComposeServiceViewController {
     
     func fetchGoals() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
-        let goalDoneSort = NSSortDescriptor(key:"goalDone", ascending:false)
-        fetchRequest.sortDescriptors = [goalDoneSort]
+        
+        fetchRequest.predicate = NSPredicate(format: "goalDone = false")
+        let goalDueDateSort = NSSortDescriptor(key:"goalDueDate", ascending:false)
+        fetchRequest.sortDescriptors = [goalDueDateSort]
+        
+//        let goalDoneSort = NSSortDescriptor(key:"goalDone", ascending:false)
+//        fetchRequest.sortDescriptors = [goalDoneSort]
         self.fetchedGoals = try! context.fetch(fetchRequest) as! [Goal]
     }
     
