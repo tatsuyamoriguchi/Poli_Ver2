@@ -15,7 +15,7 @@ class GoalTableViewCell: UITableViewCell {
     @IBOutlet weak var goalDescriptionTextView: UITextView!
     @IBOutlet weak var goalDueDateLabel: UILabel!
     @IBOutlet weak var goalProgressView: UIProgressView!
-    @IBOutlet weak var goalRewardLabel: UILabel!
+    //@IBOutlet weak var goalRewardLabel: UILabel!
     @IBOutlet weak var goalRewardImageView: UIImageView!
     @IBOutlet weak var goalProgressPercentageLabel: UILabel!
   

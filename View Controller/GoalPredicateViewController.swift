@@ -39,15 +39,12 @@ class GoalPredicateViewController: UIViewController, UIPickerViewDelegate, UIPic
             //goalTypePickerValue = pickerData[storedRow]
         }
         
-        
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveGoalType))
         self.navigationItem.rightBarButtonItem = doneButton
-      
     }
     
     @objc func saveGoalType() {
         UserDefaults.standard.setValue(storedRow, forKey: "predicateGoal")
-
         navigationController!.popToRootViewController(animated: true)
     }
     
