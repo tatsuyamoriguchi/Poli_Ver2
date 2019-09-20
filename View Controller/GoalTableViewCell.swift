@@ -22,10 +22,20 @@ class GoalTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        goalTitleLabel?.numberOfLines = 0
+        goalDueDateLabel?.numberOfLines = 0
+        goalDueDateLabel?.numberOfLines = 0
+        //goalRewardLabel?.numberOfLines = 0
+        goalProgressPercentageLabel?.numberOfLines = 0
+        
+        
+        
         // Initialization code
-        GoalTableViewController().tableView.rowHeight = UITableView.automaticDimension
-        //GoalTableViewController().tableView.estimatedRowHeight = 500
+        //GoalTableViewController().tableView.rowHeight = UITableView.automaticDimension
         GoalTableViewController().tableView.estimatedRowHeight = UITableView.automaticDimension
+        //GoalTableViewController().tableView.estimatedRowHeight = 100.0
+        
         
         goalTitleLabel.layer.cornerRadius = 10
         goalTitleLabel.clipsToBounds = true
@@ -35,14 +45,25 @@ class GoalTableViewCell: UITableViewCell {
         goalDueDateLabel.clipsToBounds = true
         goalProgressView.layer.cornerRadius = 5
         goalProgressView.clipsToBounds = true
-        goalRewardLabel.layer.cornerRadius = 10
-        goalRewardLabel.clipsToBounds = true
+        //goalRewardLabel.layer.cornerRadius = 10
+        //goalRewardLabel.clipsToBounds = true
         goalRewardImageView.layer.cornerRadius = 10
         goalRewardImageView.clipsToBounds = true
         goalProgressPercentageLabel.layer.cornerRadius = 5
         goalProgressPercentageLabel.clipsToBounds = true
+     
+        //adjustUITextViewHeight(arg : goalDescriptionTextView)
         
     }
+
+
+    func adjustUITextViewHeight(arg : UITextView)
+    {
+        arg.translatesAutoresizingMaskIntoConstraints = true
+        arg.sizeToFit()
+        arg.isScrollEnabled = true
+    }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

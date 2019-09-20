@@ -41,6 +41,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         
         
         
+        
         let NSL_logout = NSLocalizedString("NSL_logout", value: "Logout", comment: "")
         let logout = UIBarButtonItem(title: NSL_logout, style: .plain, target: self, action: #selector(logoutPressed(_:)))
         //let logout = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.stop, target: self, action: #selector(logoutPressed(_:)))
@@ -54,6 +55,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         
         navigationItem.rightBarButtonItems = [logout, settings, todaysTasks]
     }
+    
     
     @objc func todaysTasksPressed() {
         performSegue(withIdentifier: "todaysTasksSegue", sender: nil)
@@ -140,21 +142,28 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         let goalCell = tableView.dequeueReusableCell(withIdentifier: "goalListCell", for: indexPath) as! GoalTableViewCell
 
         // Configure the cell...
+        
         let goal = goals[indexPath.row]
         
         goalCell.goalTitleLabel.text = goal.goalTitle
-        goalCell.goalDescriptionTextView.text = goal.goalDescription
+        
+
         let NSL_Reward = NSLocalizedString("NSL_Reward", value: "Reward: ", comment: "")
-        let NSL_Value = NSLocalizedString("NSL_Value", value: "\nValue: ", comment: "")
+        let NSL_Value = NSLocalizedString("NSL_Value", value: " Reward Value: ", comment: "")
         let rewardValue: String = String(goal.reward4Goal?.value ?? 0)
-        
-        let visionAssigned = "\nVision: " + (goal.vision4Goal?.title ?? "No vision assigned")
-        
+        let visionAssigned = "\n\nVision: " + (goal.vision4Goal?.title ?? "No vision assigned")
         let rewardPart1 = NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
         let rewardPart2 = NSL_Value + rewardValue + visionAssigned
-        goalCell.goalRewardLabel.text = rewardPart1 + rewardPart2
+        
+        //goalCell.goalRewardLabel.text = rewardPart1 + rewardPart2
         // The line below produces a compiler error, taking too long time to check type.
         //goalCell.goalRewardLabel.text = NSL_Reward + (goal.reward4Goal?.title ?? "No reward found") + "\n" + NSL_Value + rewardValue
+       
+        if let goalDescriptionText = goal.goalDescription {
+        goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 + "\n\nDescription: " + goalDescriptionText
+        } else {
+            goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2
+        }
         
         if let goalRewardImageData = goal.goalRewardImage as Data? {
             
@@ -284,11 +293,11 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             
             
         } else {
-            goalCell.goalDescriptionTextView.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
-            goalCell.backgroundColor = UIColor(red: 171/255, green: 252/255, blue: 214/255, alpha: 1.0)
-            goalCell.goalDueDateLabel.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
-            goalCell.goalRewardLabel.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
-            goalCell.goalProgressPercentageLabel.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+//            goalCell.goalDescriptionTextView.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+//            goalCell.backgroundColor = UIColor(red: 171/255, green: 252/255, blue: 214/255, alpha: 1.0)
+//            goalCell.goalDueDateLabel.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+//            goalCell.goalRewardLabel.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+//            goalCell.goalProgressPercentageLabel.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
             
         }
 
@@ -371,6 +380,12 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     }
 
 
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    
+    
    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
