@@ -56,6 +56,7 @@
 		8C710353231C5E9500D9B1C2 /* GreedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C710352231C5E9500D9B1C2 /* GreedListViewController.swift */; };
 		8C71255221928EB100E42E4C /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C71255121928EB100E42E4C /* KeychainPasswordItem.swift */; };
 		8C807A3D21267F890024D5EB /* TodaysTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C807A3C21267F890024D5EB /* TodaysTasksTableViewController.swift */; };
+		8C927DB92334974B00B70092 /* LocaleConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C927DB82334974B00B70092 /* LocaleConvert.swift */; };
 		8C98C31D21191B1F00FAFADE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C98C31C21191B1F00FAFADE /* AVFoundation.framework */; };
 		8CB3A03B2104097F00774DE6 /* GoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3A03A2104097F00774DE6 /* GoalTableViewCell.swift */; };
 		8CD66AA921A3B1990087C14D /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD66AA821A3B1980087C14D /* TouchIDAuthentication.swift */; };
@@ -136,6 +137,7 @@
 		8C7D95F521305A23005F08D2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		8C7D95F621305A23005F08D2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8C807A3C21267F890024D5EB /* TodaysTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysTasksTableViewController.swift; sourceTree = "<group>"; };
+		8C927DB82334974B00B70092 /* LocaleConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleConvert.swift; sourceTree = "<group>"; };
 		8C98C31C21191B1F00FAFADE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8CB3A03A2104097F00774DE6 /* GoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTableViewCell.swift; sourceTree = "<group>"; };
 		8CD66AA821A3B1980087C14D /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				8C473E32231A17CE0071503B /* VisionViewController.swift */,
 				8C632CF6231E32D400887206 /* Vision4GoalViewController.swift */,
 				8C710352231C5E9500D9B1C2 /* GreedListViewController.swift */,
+				8C927DB82334974B00B70092 /* LocaleConvert.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				8CD66AA921A3B1990087C14D /* TouchIDAuthentication.swift in Sources */,
 				8C807A3D21267F890024D5EB /* TodaysTasksTableViewController.swift in Sources */,
 				8CB3A03B2104097F00774DE6 /* GoalTableViewCell.swift in Sources */,
+				8C927DB92334974B00B70092 /* LocaleConvert.swift in Sources */,
 				8C219F9A22FE613F00E87A2B /* LocationAuth.swift in Sources */,
 				8C65A71E231EAE2100034E09 /* Vision+CoreDataClass.swift in Sources */,
 				8C4A8A4B212BD253009E1E9F /* RootViewController.swift in Sources */,

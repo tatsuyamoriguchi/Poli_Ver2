@@ -24,7 +24,8 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
         guard let maxValue = greedMaxValue.text else { return }
         maxValueFloat = Float(maxValue)
         greedValueSliderOutlet.maximumValue = maxValueFloat ?? 0.0
-        greedValueLabel.text = String(Int(sender.value))
+        let greedValue = LocaleConvert().currency2String(value: Int32(sender.value))
+        greedValueLabel.text = greedValue //String(Int(sender.value))
         
     }
     
@@ -256,7 +257,7 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
         cell.textLabel?.text = greed?.title
         
         guard let value = greed?.value else { return }
-        let greedValue: String = String(value)
+        let greedValue: String = LocaleConvert().currency2String(value: Int32(value)) //String(value)
         cell.detailTextLabel?.text = greedValue
         
     }
@@ -271,7 +272,7 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
         greedTextField.text = greed?.title
         
         guard let value = greed?.value else { return }
-        let greedValue = String(value)
+        let greedValue = LocaleConvert().currency2String(value: Int32(value)) //String(value)
         greedValueLabel.text = greedValue
         
         displayButtons(editStatus: true)

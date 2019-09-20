@@ -222,7 +222,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             let dateString = dateFormatter.string(from: (task.date)! as Date)
             
             if var rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
-                rewardString = "\nReward: \(rewardString) - Value: \(rewardValue)"
+                let rewardValueString = LocaleConvert().currency2String(value: Int32(rewardValue))
+                rewardString = "\nReward: \(rewardString) - Value: \(rewardValueString)"
                 taskCell.detailTextLabel?.text = dateString + rewardString
             } else {
                 taskCell.detailTextLabel?.text = dateString

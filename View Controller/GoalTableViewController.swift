@@ -256,20 +256,22 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             
             
             let NSL_Reward = NSLocalizedString("NSL_Reward", value: "Reward: ", comment: "")
-            let NSL_Value = NSLocalizedString("NSL_Value", value: " Reward Value: ", comment: "")
-            let rewardValue: String = String(goal.reward4Goal?.value ?? 0)
-            let visionAssigned = "\n\nVision: " + (goal.vision4Goal?.title ?? "No vision assigned")
-            let rewardPart1 = NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
-            let rewardPart2 = NSL_Value + rewardValue + visionAssigned
+            let NSL_Value = NSLocalizedString("NSL_Value", value: "- Value: ", comment: "")
+            
+            let rewardValue = LocaleConvert().currency2String(value: goal.reward4Goal?.value ?? 0)  //: String = String(goal.reward4Goal?.value ?? 0)
+            let visionAssigned = "Vision: " + (goal.vision4Goal?.title ?? "No vision assigned")
+            
+            let rewardPart1 = "\n" + NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
+            let rewardPart2 = " " + NSL_Value + rewardValue
             
             //goalCell.goalRewardLabel.text = rewardPart1 + rewardPart2
             // The line below produces a compiler error, taking too long time to check type.
             //goalCell.goalRewardLabel.text = NSL_Reward + (goal.reward4Goal?.title ?? "No reward found") + "\n" + NSL_Value + rewardValue
             
             if let goalDescriptionText = goal.goalDescription {
-                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 + "\n\nDescription: " + goalDescriptionText
+                goalCell.goalDescriptionTextView.text = visionAssigned + rewardPart1 + rewardPart2 +  "\n\nDescription: " + goalDescriptionText
             } else {
-                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2
+                goalCell.goalDescriptionTextView.text = visionAssigned + rewardPart1 + rewardPart2
             }
             
             if let goalRewardImageData = goal.goalRewardImage as Data? {
