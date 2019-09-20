@@ -157,7 +157,7 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
         cell.textLabel?.text = greed?.title
         
         guard let value = greed?.value else { return }
-        let greedValue: String = String(value)
+        let greedValue: String = LocaleConvert().currency2String(value: Int32(value)) //String(value)
         cell.detailTextLabel?.text = greedValue
         
     }

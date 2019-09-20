@@ -476,14 +476,12 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             // Declare ManagedObjectContext
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             // Delete a row from tableview
-            let goalToDelete = self.goals[indexPath.row]
+            let goalToDelete = goal //self.goals[indexPath.row]
             // Delete it from Core Data
             context.delete(goalToDelete)
             // Save the updated data to Core Data
             do {
                 try context.save()
-               
-                
             } catch {
                 print("Saving Failed: \(error.localizedDescription)")
             }
