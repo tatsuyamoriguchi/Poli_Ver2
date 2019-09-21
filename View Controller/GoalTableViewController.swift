@@ -40,14 +40,14 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         }
         
         
-        let NSL_logout = NSLocalizedString("NSL_logout", value: "Logout", comment: "")
+        let NSL_logout = NSLocalizedString("NSL_logout", value: "  ⎋  ", comment: "")
         let logout = UIBarButtonItem(title: NSL_logout, style: .plain, target: self, action: #selector(logoutPressed(_:)))
         
         //let NSL_settingsButton = NSLocalizedString("NSL_settingsButton", value: "Settings", comment: "")
-        let settings = UIBarButtonItem(title: "⚙️", style: .plain, target: self, action: #selector(settingsPressed))
+        let settings = UIBarButtonItem(title: "  ⚙️  ", style: .plain, target: self, action: #selector(settingsPressed))
 
         //let NSL_today = NSLocalizedString("NSL_today", value: "Today", comment: "")
-        let todaysTasks = UIBarButtonItem(title: "📅", style: .done, target: self, action: #selector(todaysTasksPressed))
+        let todaysTasks = UIBarButtonItem(title: "  📅  ", style: .done, target: self, action: #selector(todaysTasksPressed))
         //let todaysTasks = UIBarButtonItem(title: NSL_today, style: .done, target: self, action: nil)
         
         configureFetchedResultsController()
