@@ -21,32 +21,33 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     @IBOutlet var greedValueSliderOutlet: UISlider!
     @IBAction func greedValueSlider(_ sender: UISlider) {
-        guard let maxValue = greedMaxValue.text else { return }
-        maxValueFloat = Float(maxValue)
-        greedValueSliderOutlet.maximumValue = maxValueFloat ?? 0.0
+       
+        let maxValue = Int(greedMaxValue.text!)
+        maxValueFloat = Float(maxValue!)
+        greedValueSliderOutlet.maximumValue = maxValueFloat!
         let greedValue = LocaleConvert().currency2String(value: Int32(sender.value))
-        greedValueLabel.text = greedValue //String(Int(sender.value))
+        greedValueLabel.text = greedValue
         
     }
     
+    // MARK: View
     
     // As default, editStatus is false which means a user is adding a new greed.
     // when a user clicks one of greed titles from tableView,
     // rowSelectedAt changes editStatus to true.
     //var editStatus: Bool?
-    
-    
-    // MARK: View
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        displayButtons(editStatus: false)
+
         greedTextField.delegate = self
         
-        
-        greedMaxValue.text = String(Int(UserDefaults.standard.float(forKey: "greedValueMax")))
-        
-        displayButtons(editStatus: false)
+        if UserDefaults.standard.float(forKey: "greedValueMax") != 0.0 {
+            greedMaxValue.text = String(Int(UserDefaults.standard.float(forKey: "greedValueMax")))
+        } else {
+            greedMaxValue.text = "100"
+        }
         
         // Fetch Core Data
         configureFetchedResultsController()
@@ -57,7 +58,8 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
     func displayButtons(editStatus: Bool) {
         if editStatus == true {
             navigationItem.rightBarButtonItems = []
-            let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editGreed))
+             let editButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(editGreed))
+//            let editButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editGreed))
             let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGreed))
             navigationItem.rightBarButtonItems =  [editButton, addButton]
             
@@ -77,6 +79,7 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
     // To dismiss a keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         greedTextField.resignFirstResponder()
+        greedMaxValue.resignFirstResponder()
         return true
     }
     
@@ -101,24 +104,13 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
         
 
         let itemValue = Int32(greedValueSliderOutlet.value)
-//        print(" ")
-//        print("itemValue: ")
-//        print(itemValue)
-
-        
         
         if let itemTitle = greedTextField.text {
             item.setValue(itemTitle, forKey: "title")
             item.setValue(itemValue, forKey: "value")
-//            print(" ")
-//            print("itemTitle: ")
-//            print(itemTitle)
-//            print("itemValue: ")
-//            print(itemValue)
             
         } else {
-//            print("itemTitle or itemValue is nil???")
-//            print("itemTitle: \(greedTextField.text) - itemValue: \(itemValue)")
+
         }
         
         save()
@@ -130,13 +122,10 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
     @objc func editGreed() {
         
         greed?.title = greedTextField.text
-        guard let value = greedValueLabel.text else { return }
-        
-        guard let greedValue: Int32 = Int32(value) else { return }
+        let greedValue = Int32(greedValueSliderOutlet.value)
         greed?.value = greedValue
         
         save()
-        
     }
     
     func save(){
