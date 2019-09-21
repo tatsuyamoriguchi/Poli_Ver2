@@ -291,13 +291,13 @@
         <scene sceneID="QGL-jx-JfI">
             <objects>
                 <tableViewController storyboardIdentifier="todayVC" id="1Yz-ym-fZw" customClass="TodaysTasksTableViewController" customModule="Poli" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5vH-M8-7wm">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="5vH-M8-7wm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="Ne9-fc-lnA" detailTextLabel="wfW-Is-yca" style="IBUITableViewCellStyleSubtitle" id="3pL-vk-mAb">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3pL-vk-mAb" id="2fv-ep-836">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1302,7 +1302,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="7KY-6u-1Vw"/>
         <segue reference="b71-Er-WlN"/>
-        <segue reference="Uba-WO-OBv"/>
+        <segue reference="dEI-z1-6Eh"/>
         <segue reference="eGG-hh-uDV"/>
         <segue reference="9dh-yv-VDW"/>
     </inferredMetricsTieBreakers>

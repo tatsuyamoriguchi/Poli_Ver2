@@ -81,6 +81,12 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.tableView.sectionHeaderHeight = UITableView.automaticDimension
+//        self.tableView.estimatedSectionHeaderHeight = 25
+//        self.tableView.estimatedRowHeight = 100
+//        self.tableView.rowHeight = UITableView.automaticDimension
+        
 
         if UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
             userName = UserDefaults.standard.string(forKey: "userName")!
@@ -186,13 +192,14 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         fetchRequest.predicate = andPredicate
         
         // Declare sort descriptor
-        let sortByGoalAssigned = NSSortDescriptor(key: #keyPath(Task.goalAssigned), ascending: true)
+        let sortByGoalAssigned = NSSortDescriptor(key: #keyPath(Task.goalAssigned.goalTitle), ascending: true)
         let sortByToDo = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: true)
         let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
         
         // Sort fetchRequest array data
         fetchRequest.sortDescriptors = [sortByGoalAssigned, sortByDate, sortByToDo]
-        
+
+        //fetchRequest.sortDescriptors = [sortByGoalAssigned]
   
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: "goalAssigned.goalTitle", cacheName: nil)
         fetchedResultsController?.delegate = self
@@ -262,6 +269,19 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         print("let sections = fetchedResultsController?.sections Returned nil")
         return nil
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return UITableView.automaticDimension
+//    }
+    
+//    override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+//        return 25
+//
+//    }
     
     
     
