@@ -200,17 +200,17 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             goalCell.goalTitleLabel.text = goal.goalTitle
             
             
-            let NSL_Reward = NSLocalizedString("NSL_Reward", value: "Reward: ", comment: "")
-            let NSL_Value = NSLocalizedString("NSL_Value", value: "- Value: ", comment: "")
+            let NSL_Reward = NSLocalizedString("NSL_Reward", value: "REWARD: ", comment: "")
+            //let NSL_Value = NSLocalizedString("NSL_Value", value: "Value: ", comment: "")
             
             let rewardValue = LocaleConvert().currency2String(value: goal.reward4Goal?.value ?? 0)
             //let visionAssigned = "Vision: " + (goal.vision4Goal?.title ?? "No vision assigned")
             
-            let rewardPart1 = "\n" + NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
-            let rewardPart2 = " " + NSL_Value + rewardValue
+            let rewardPart1 = NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
+            let rewardPart2 = " (" + rewardValue + ")"
             
             if let goalDescriptionText = goal.goalDescription {
-                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 +  "\n\nDescription: " + goalDescriptionText
+                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 +  "\nGOAL NOTES: " + goalDescriptionText
             } else {
                 goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2
             }

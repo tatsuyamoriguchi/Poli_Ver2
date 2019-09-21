@@ -125,12 +125,9 @@ class Vision4GoalViewController: UIViewController, UITextFieldDelegate, UITextVi
             destVC.segueName = segueName
             destVC.goal = goal
             destVC.goalTitle = goalTitle!
-            
-                destVC.goalDescription = goalDescription ?? "ERROR"
-            
+            destVC.goalDescription = goalDescription
             destVC.vision4Goal = vision4Goal
             destVC.goalDueDate = goalDueDate
-            
             
         } else {
             print("segue ID info not available?")
