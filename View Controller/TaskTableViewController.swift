@@ -160,7 +160,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 //    }
     
     
-    var context : NSManagedObjectContext!
+    //var context : NSManagedObjectContext!
     var tasks = [Task]()
     
     var selectedGoal: Goal?
@@ -277,7 +277,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         //        let task = tasks[indexPath.row]
         
         guard let task = self.fetchedResultsController?.object(at: indexPath) as? Task else { return }
@@ -301,12 +302,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 }
             }
             
-//            do {
-//                try context.save()
-//
-//            } catch {
-//                print("Cannot save object: \(error.localizedDescription)")
-//            }
+            do {
+                try context.save()
+
+            } catch {
+                print("Cannot save object: \(error.localizedDescription)")
+            }
         }
     }
     

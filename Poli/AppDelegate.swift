@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let userNotificationDelegate: LocalNotificationDelegate = LocalNotificationDelegate()
 
-
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let center = UNUserNotificationCenter.current()
@@ -102,24 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
-                
-    /////////////////////////////////////////////////////////////////////////////
-    
-    // MARK: - Core Data stack
-//        lazy var persistentContainer: NSPersistentContainer = {
-//        let container = NSCustomPersistentContainer(name: "Poli")
-//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//            if let error = error as NSError? {
-//
-//                fatalError("Unresolved error \(error), \(error.userInfo)")
-//            }
-//
-//        })
-//
-//
-//
-//        return container
-//    }()
     
     
     
@@ -138,151 +118,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
-    // MARK: - Existing Core Data Migration to new location for Share Extension
-    func migrateCoreData() {
-        
-        //        //      lazy var persistentContainer: NSPersistentContainer = {
-        //        let container = NSPersistentContainer(name: "Poli")
-        //        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
-        //
-        //        var defaultURL: URL?
-        //        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
-        //            defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
-        //
-        //        }
-        //
-        //        if defaultURL == nil {
-        //            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
-        //        }
-        //
-        //
-        //        container.loadPersistentStores(completionHandler:
-        //            {
-        //                [unowned container] (storeDescription, error) in
-        //
-        //                if let error = error as NSError?
-        //                {
-        //                    fatalError("Unresolved error \(error), \(error.userInfo)")
-        //
-        //                    if let url = defaultURL, url.absoluteString != storeURL.absoluteString
-        //                    {
-        //                        let coordinator = container.persistentStoreCoordinator
-        //                        if let oldStore = coordinator.persistentStore(for: url)
-        //                        {
-        //                            do
-        //                            {
-        //                                try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
-        //                            } catch
-        //                            {
-        //                                print(error.localizedDescription)
-        //                            }
-        //                            let fileCoordinator = NSFileCoordinator(filePresenter: nil)
-        //                            fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor:
-        //                                { url in
-        //
-        //                                    do {
-        //                                        try FileManager.default.removeItem(at: url)
-        //                                    } catch
-        //                                    {
-        //                                        print(error.localizedDescription)
-        //                                    }
-        //
-        //                                    // delete old store
-        //                                    let fileCoordinator = NSFileCoordinator(filePresenter: nil)
-        //                                    fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor:
-        //                                        { url in
-        //
-        //                                            do {
-        //                                                try FileManager.default.removeItem(at: url)
-        //                                            } catch
-        //                                            {                                            print(error.localizedDescription)
-        //                                            }
-        //                                    })
-        //                            })
-        //                        }
-        //
-        //                    }
-        //                return container
-        //
-        //                }()
-        //
-        ////////////////////////////////////////////////////////////////////////////////////
-        
-        //let persistentContainer: NSPersistentContainer?
-        let container = NSPersistentContainer(name: "Poli")
-        let coordinator = persistentContainer.persistentStoreCoordinator
-        
-        guard let oldURL = container.persistentStoreDescriptions.first?.url else {
-            print("oldURL failed")
-            return }
-        //
-        //        print("oldURL: \(oldURL)")
-        //        print("oldURL.path: \(oldURL.path)")
-        
-        if FileManager.default.fileExists(atPath: oldURL.path) {
-            print("helllo 2")
-            let newURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!
-            
-            //            var storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")
-            //            storeURL = storeURL?.appendingPathComponent("Poli.sqlite")
-            //            let newURL = storeURL!
-            
-            if
-                let oldStore = coordinator.persistentStore(for: oldURL)
-            {
-                print("Hello 3")
-                do  {
-                    try coordinator.migratePersistentStore(oldStore, to: newURL, options: nil, withType: NSSQLiteStoreType)
-                    print("hello 4")
-                } catch {
-                    print("Core Data Migration Error, migratePersistentStore Failed")
-                    print("oldStore: \(oldStore)")
-                    print("newURL: \(newURL)")
-                }
-                
-            } else {
-                print("oldStore doesn't exists")
-                print("oldURL: \(oldURL)")
-                print("newURL: \(newURL)")
-            }
-            
-            
-            
-        } else {
-            print("oldURL file doesn't exist.")
-        }
-        ///////////////////////////////////////////////////////////////////////////////
-        //        let psc = persistentContainer.persistentStoreCoordinator
-        //        let container = NSPersistentContainer(name: "Poli")
-        //
-        //        guard let oldURL = container.persistentStoreDescriptions.first?.url else {
-        //            print("oldURL failed")
-        //            return }
-        //        let oldStoreURL = oldURL.path
-        //
-        //        var storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")
-        //        storeURL = storeURL?.appendingPathComponent("Poli.sqlite")
-        //        let newStoreURL = storeURL!
-        //
-        //        if let oldStore = psc.persistentStore(for: oldURL) {
-        //            print("hello")
-        //            do {
-        //                print("hello 2")
-        //                try psc.migratePersistentStore(oldStore, to: storeURL!, options: nil, withType: NSSQLiteStoreType)
-        //            } catch {
-        //                // Handle error
-        //                print("Failed to move from: \(oldStoreURL) to \(newStoreURL)")
-        //            }
-        //        } else { print("Error at if oldStore = ")
-        //            print("oldStoreURL: \(oldStoreURL)")
-        //            print("newStoreURL: \(newStoreURL)")
-        //        }
-        //////////////////////////////////////////////////////////////////
-        
-    }
-    
-    
-
 }
 

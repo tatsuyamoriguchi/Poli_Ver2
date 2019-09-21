@@ -10,9 +10,8 @@ import UIKit
 import CoreData
 
 
-class TodaysTasksTableViewController: UITableViewController {
+class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var context: NSManagedObjectContext!
     var tasks = [Task]()
     var selectedGoal: Goal?
     var userName: String = ""
@@ -23,6 +22,7 @@ class TodaysTasksTableViewController: UITableViewController {
         let NSL_shareMessage = NSLocalizedString("NSL_shareMessage", value: "Please use 'Copy' first, then tap share button again and paste copied your Today's To-Do(s) to Facebook or LinkedIn Share screen view.", comment: "")
         AlertNotification().alert(title: NSL_shareAlert, message: NSL_shareMessage, sender: self, tag: "shareAlert")
     }
+    
     
     @objc func addTapped() {
         
@@ -35,7 +35,6 @@ class TodaysTasksTableViewController: UITableViewController {
         message = NSL_postMessage
         
         url = URL(string: "https://apps.apple.com/us/app/poli-todo/id1451371111")!
-        
 
 
         var previousGoalTitle: String = ""
@@ -76,24 +75,18 @@ class TodaysTasksTableViewController: UITableViewController {
         
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
-                
+        
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        
-        
-        //let NSL_taskList = NSLocalizedString("NSL_taskList", value: "Task List", comment: "")
-        //self.navigationItem.prompt = NSL_taskList
         if UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
             userName = UserDefaults.standard.string(forKey: "userName")!
-            //let NSL_loginUsername = NSLocalizedString("NSL_loginUsername", value: "Login as \(userName)", comment: "")
             let NSL_loginUsername = String(format: NSLocalizedString("NSL_loginUsername", value: "Login as %@", comment: ""), userName)
-            
             self.navigationItem.prompt = NSL_loginUsername
+
         }else {
             let NSL_loginError = NSLocalizedString("NSL_loginError", value: "Login Error", comment: "")
             self.navigationItem.prompt = NSL_loginError
@@ -102,7 +95,46 @@ class TodaysTasksTableViewController: UITableViewController {
        
         let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks To-Do", comment: "")
         self.navigationItem.title = NSL_naviToday
+        
+        // Fetch Core Data
+        configureFetchedResultsController()
  
+        if let tasks = fetchedResultsController?.fetchedObjects {
+            
+            if tasks.count > 0 {
+                let share = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addTapped))
+                
+                // Create the info button
+                let infoButton = UIButton(type: .infoLight)
+                
+                // You will need to configure the target action for the button itself, not the bar button itemr
+                infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+                
+                // Create a bar button item using the info button as its custom view
+                let info = UIBarButtonItem(customView: infoButton)
+                
+                navigationItem.rightBarButtonItems = [share, info]
+                
+            } else {
+                let NSL_noTodaysTask = NSLocalizedString("NSL_noTodaysTask", value: "No Today's Task now.", comment: "")
+                let noTodaysTaskAlert = UIAlertController(title: "Aelrt", message: NSL_noTodaysTask, preferredStyle: .alert)
+                self.present(noTodaysTaskAlert, animated: true, completion: nil)
+                
+                // Hide rightBarButtonItem
+                navigationItem.rightBarButtonItem = nil
+                
+                // Display congratAlert view for x seconds
+                let when = DispatchTime.now() + 2
+                DispatchQueue.main.asyncAfter(deadline: when, execute: {
+                    noTodaysTaskAlert.dismiss(animated: true, completion: nil)
+                    
+                })
+                
+            }
+        } else { print("Error") }
+        //tableView.reloadData()
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,88 +142,149 @@ class TodaysTasksTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-  
-    override func viewWillAppear(_ animated: Bool) {
-        // Fetch the data from Core Data
-        fetchData()
-        
-        // Reload the table view
-        tableView.reloadData()
-        
-        // Display a share button, if any tasks item. If no tasks, segue back to root view
-        if tasks.count > 0 {
-            let share = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addTapped))
- 
-            // Create the info button
-            let infoButton = UIButton(type: .infoLight)
-            
-            // You will need to configure the target action for the button itself, not the bar button itemr
-            infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-            
-            // Create a bar button item using the info button as its custom view
-            let info = UIBarButtonItem(customView: infoButton)
-            
-            navigationItem.rightBarButtonItems = [share, info]
-            
-        } else {
-            let NSL_noTodaysTask = NSLocalizedString("NSL_noTodaysTask", value: "No Today's Task now.", comment: "")
-            let noTodaysTaskAlert = UIAlertController(title: "Aelrt", message: NSL_noTodaysTask, preferredStyle: .alert)
-            self.present(noTodaysTaskAlert, animated: true, completion: nil)
-            
-            // Hide rightBarButtonItem
-            navigationItem.rightBarButtonItem = nil
-            
-            // Display congratAlert view for x seconds
-            let when = DispatchTime.now() + 2
-            DispatchQueue.main.asyncAfter(deadline: when, execute: {
-                noTodaysTaskAlert.dismiss(animated: true, completion: nil)
-                
-            })
-            
-            //navigationController!.popToRootViewController(animated: true)
-            
-        }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        
+//        // Fetch Core Data
+// //       configureFetchedResultsController()
+//        
+//        // Reload the table view
+////        tableView.reloadData()
+//        
+//        // Display a share button, if any tasks item. If no tasks, segue back to root view
+//     }
+    
+    // MARK: - Core Data NSFetchedResultsController
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
-
-
+    // MARK: Core Data
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
-    func fetchData() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<Task>(entityName: "Task")
-        
+    
+    private func configureFetchedResultsController() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        // Create the fetch request, set some sort descriptor, then feed the fetchedResultsController
+        // the request with along with the managed object context, which we'll use the view context
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+  
         //var taskDate = Task.date
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
         
         let dateFrom = calendar.startOfDay(for: Date())
         let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
-//        let todayPredicate = NSPredicate(format: "date >= %@ AND date < %@", dateFrom as CVarArg, dateTo! as CVarArg)
+        //        let todayPredicate = NSPredicate(format: "date >= %@ AND date < %@", dateFrom as CVarArg, dateTo! as CVarArg)
         let todayPredicate = NSPredicate(format: "date < %@", dateTo! as CVarArg)
-
+        
         let donePredicate = NSPredicate(format: "isDone == %@", NSNumber(value: false))
         let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [todayPredicate, donePredicate])
         
         fetchRequest.predicate = andPredicate
         
-        
         // Declare sort descriptor
         let sortByGoalAssigned = NSSortDescriptor(key: #keyPath(Task.goalAssigned), ascending: true)
         let sortByToDo = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: true)
-        
-//        let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
         let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
         
         // Sort fetchRequest array data
         fetchRequest.sortDescriptors = [sortByGoalAssigned, sortByDate, sortByToDo]
         
+  
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController?.delegate = self
+        
         do {
-            tasks = try context.fetch(fetchRequest)
-            
+            try fetchedResultsController?.performFetch()
         } catch {
             print(error.localizedDescription)
         }
     }
+    
+    
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .fade)
+            }
+            break;
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            break;
+        case .update:
+            if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
+                configureCell(cell, at: indexPath)
+            }
+            break;
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+            break;
+            
+        }
+    }
+    
+    
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("The Controller Content Has Changed.")
+        tableView.endUpdates()
+    }
+    
+
+    //
+//    func fetchData() {
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        let fetchRequest = NSFetchRequest<Task>(entityName: "Task")
+//
+//        //var taskDate = Task.date
+//        var calendar = Calendar.current
+//        calendar.timeZone = NSTimeZone.local
+//
+//        let dateFrom = calendar.startOfDay(for: Date())
+//        let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
+////        let todayPredicate = NSPredicate(format: "date >= %@ AND date < %@", dateFrom as CVarArg, dateTo! as CVarArg)
+//        let todayPredicate = NSPredicate(format: "date < %@", dateTo! as CVarArg)
+//
+//        let donePredicate = NSPredicate(format: "isDone == %@", NSNumber(value: false))
+//        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [todayPredicate, donePredicate])
+//
+//        fetchRequest.predicate = andPredicate
+//
+//
+//        // Declare sort descriptor
+//        let sortByGoalAssigned = NSSortDescriptor(key: #keyPath(Task.goalAssigned), ascending: true)
+//        let sortByToDo = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: true)
+//
+////        let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
+//        let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
+//
+//        // Sort fetchRequest array data
+//        fetchRequest.sortDescriptors = [sortByGoalAssigned, sortByDate, sortByToDo]
+//
+//        do {
+//            tasks = try context.fetch(fetchRequest)
+//
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//    }
     
     
     // MARK: - Table view data source
@@ -201,53 +294,74 @@ class TodaysTasksTableViewController: UITableViewController {
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        guard let tasks = fetchedResultsController?.fetchedObjects else { return 0 }
         return tasks.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        // Configure the cell...
-        cell.textLabel?.numberOfLines = 0
-        cell.detailTextLabel?.numberOfLines = 0
-        
-        let task = tasks[indexPath.row]
-        cell.textLabel?.text = task.toDo
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        let dateString = dateFormatter.string(from: (task.date)! as Date)
-       
-        if let goalTitle = task.goalAssigned?.goalTitle {
-            cell.detailTextLabel?.text =  "\(dateString) : \(goalTitle)"
-        }else{
-            cell.detailTextLabel?.text =  dateString
-        }
-    
-        
-        let today = Date()
-        let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
-        
-        switch evaluate {
-        // If task date is today, display it in purple
-        case ComparisonResult.orderedSame :
-            cell.detailTextLabel?.textColor = .purple
-        // If task date passed today, display it in red
-        case ComparisonResult.orderedAscending :
-            cell.detailTextLabel?.textColor = .red
-        default:
-            cell.detailTextLabel?.textColor = .black
-        }
+        configureCell(cell, at: indexPath)
         
         return cell
     }
     
+    
+    func configureCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
+        
+        if let task = fetchedResultsController?.object(at: indexPath) as? Task {
+            // Configure the cell...
+            cell.textLabel?.numberOfLines = 0
+            cell.detailTextLabel?.numberOfLines = 0
+            
+            cell.textLabel?.text = task.toDo
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .full
+            let dateString = dateFormatter.string(from: (task.date)! as Date)
+            
+            if let goalTitle = task.goalAssigned?.goalTitle {
+                cell.detailTextLabel?.text =  "\(dateString) : \(goalTitle)"
+            }else{
+                cell.detailTextLabel?.text =  dateString
+            }
+            
+            let today = Date()
+            let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
+            
+            
+            switch evaluate {
+            // If task date is today, display it in purple
+            case ComparisonResult.orderedSame :
+                cell.detailTextLabel?.textColor = .purple
+            // If task date passed today, display it in red
+            case ComparisonResult.orderedAscending :
+                cell.detailTextLabel?.textColor = .red
+            default:
+                cell.detailTextLabel?.textColor = .black
+            }
+            
+        } else {
+            fatalError("Attempt configure cell without a managed object")
+        }
+        
+    }
+    
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toTaskList", sender: self)
+        if let task = fetchedResultsController?.object(at: indexPath) as? Task {
+        
+            selectedGoal = task.goalAssigned
+            performSegue(withIdentifier: "toTaskList", sender: self)
+        }
     }
 
+    
+    
+    
     
     // MARK: - Navigation
 
@@ -256,8 +370,8 @@ class TodaysTasksTableViewController: UITableViewController {
         if segue.identifier == "toTaskList" {
             if let vc = segue.destination as? TaskTableViewController {
                 
-                let indexPath = self.tableView.indexPathForSelectedRow
-                selectedGoal = tasks[(indexPath?.row)!].goalAssigned //goals[(indexPath?.row)!]
+//                let indexPath = self.tableView.indexPathForSelectedRow
+//                selectedGoal = tasks[(indexPath?.row)!].goalAssigned //goals[(indexPath?.row)!]
                 
                 vc.selectedGoal = selectedGoal
             }

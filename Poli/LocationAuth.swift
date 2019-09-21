@@ -5,6 +5,7 @@
 //  Created by Tatsuya Moriguchi on 8/9/19.
 //  Copyright © 2019 Becko's Inc. All rights reserved.
 //
+// To authorize to use location service for Calendar EventKit
 
 import Foundation
 import CoreLocation

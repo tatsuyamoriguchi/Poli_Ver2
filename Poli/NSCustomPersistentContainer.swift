@@ -6,6 +6,8 @@
 //  Copyright © 2019 Becko's Inc. All rights reserved.
 //
 
+// ShareViewController.swift uses this class
+
 import UIKit
 import CoreData
 

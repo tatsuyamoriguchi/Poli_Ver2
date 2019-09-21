@@ -13,11 +13,10 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     
     var userName: String! = ""
     
-    var goals = [Goal]()
-    var tasks = [Task]()
+    //var goals = [Goal]()
+    //var tasks = [Task]()
     // Declare a variable to pass to UpdateGoalViewController
     var selectedGoal: Goal?
-    var selectedIndex: Int = 0
     var statusString: String = ""
     var status: Bool = false
     
@@ -41,8 +40,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         }
         
         
-        
-        
         let NSL_logout = NSLocalizedString("NSL_logout", value: "Logout", comment: "")
         let logout = UIBarButtonItem(title: NSL_logout, style: .plain, target: self, action: #selector(logoutPressed(_:)))
         
@@ -51,12 +48,12 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 
         let NSL_today = NSLocalizedString("NSL_today", value: "Today", comment: "")
         let todaysTasks = UIBarButtonItem(title: NSL_today, style: .done, target: self, action: #selector(todaysTasksPressed))
+        //let todaysTasks = UIBarButtonItem(title: NSL_today, style: .done, target: self, action: nil)
         
         configureFetchedResultsController()
         
         navigationItem.rightBarButtonItems = [logout, settings, todaysTasks]
     }
-    
     
     @objc func todaysTasksPressed() {
         performSegue(withIdentifier: "todaysTasksSegue", sender: nil)
@@ -74,11 +71,8 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 
     override func viewWillAppear(_ animated: Bool) {
         
-        // Fetch the data from Core Data
-        //fetchData()
         configureFetchedResultsController()
         tableView.reloadData()
-
     }
     
     
@@ -170,52 +164,9 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     }
     
     
-//    func fetchData() {
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//        let fetchRequest = NSFetchRequest<Goal>(entityName: "Goal")
-//
-//
-//        if let predicateGoalValue = UserDefaults.standard.object(forKey: "predicateGoal") as? Int {
-//
-//            switch predicateGoalValue {
-//            case 2:
-//                fetchRequest.predicate = NSPredicate(format: "goalDone = true")
-//            case 1:
-//                fetchRequest.predicate = NSPredicate(format: "goalDone = false")
-//            case 0:
-//                print("goalAll was selected for predicateGoal.")
-//            default:
-//                print("default case was chosen for predicateGoal.")
-//            }
-//
-//        } else {
-//            UserDefaults.standard.setValue(0, forKey: "predicateGoal")
-//            print("if let predicateGoalValue statement failed.")
-//        }
-//
-//        // Declare sort descriptor
-//        let sortByDone = NSSortDescriptor(key: #keyPath(Goal.goalDone), ascending: true)
-//        let sortByDueDate = NSSortDescriptor(key: #keyPath(Goal.goalDueDate), ascending: true)
-//        let sortByTitle = NSSortDescriptor(key: #keyPath(Goal.goalTitle), ascending: true)
-//        // Sort fetchRequest array data
-//        fetchRequest.sortDescriptors = [sortByDone, sortByDueDate, sortByTitle]
-//
-//        do {
-//            goals = try context.fetch(fetchRequest)
-//        }catch{
-//
-//            print("\n")
-//            print("Fetch Error: \(error.localizedDescription)")
-//        }
-//    }
-//
-//
-    
-    
-    
-    
     func addMoreTask(goal: Goal, indexPath: IndexPath) {
-        selectedIndex = indexPath.row
+        
+        selectedGoal = goal
         performSegue(withIdentifier: "taskList", sender: self)
      
     }
@@ -223,8 +174,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-     //   return 1
         
         if let frc = fetchedResultsController {
             return frc.sections!.count
@@ -233,8 +182,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        //return goals.count
         guard let sections = self.fetchedResultsController?.sections else {
             fatalError("No sections in fetchedResultscontroller")
         }
@@ -250,23 +197,17 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         // Configure the cell...
         if let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal {
             
-            //let goal = goals[indexPath.row]
-            
             goalCell.goalTitleLabel.text = goal.goalTitle
             
             
             let NSL_Reward = NSLocalizedString("NSL_Reward", value: "Reward: ", comment: "")
             let NSL_Value = NSLocalizedString("NSL_Value", value: "- Value: ", comment: "")
             
-            let rewardValue = LocaleConvert().currency2String(value: goal.reward4Goal?.value ?? 0)  //: String = String(goal.reward4Goal?.value ?? 0)
+            let rewardValue = LocaleConvert().currency2String(value: goal.reward4Goal?.value ?? 0)
             let visionAssigned = "Vision: " + (goal.vision4Goal?.title ?? "No vision assigned")
             
             let rewardPart1 = "\n" + NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
             let rewardPart2 = " " + NSL_Value + rewardValue
-            
-            //goalCell.goalRewardLabel.text = rewardPart1 + rewardPart2
-            // The line below produces a compiler error, taking too long time to check type.
-            //goalCell.goalRewardLabel.text = NSL_Reward + (goal.reward4Goal?.title ?? "No reward found") + "\n" + NSL_Value + rewardValue
             
             if let goalDescriptionText = goal.goalDescription {
                 goalCell.goalDescriptionTextView.text = visionAssigned + rewardPart1 + rewardPart2 +  "\n\nDescription: " + goalDescriptionText
@@ -286,7 +227,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             dateFormatter.locale = .current
             dateFormatter.dateStyle = .full
             let date = dateFormatter.string(from: (goal.goalDueDate)! as Date)
-            //let weekday = (dateFormatter.shortWeekdaySymbols[Calendar.current.component(.weekday, from: (goal.goalDueDate)! as Date)])
+
             
             (statusString, status) = GoalProgress().goalStatusAlert(dueDate: goal.goalDueDate! as Date, isDone: goal.goalDone)
             let NSL_dueDateLabel = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@ \n %@", comment: " "), date, statusString)
@@ -325,7 +266,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
                 let NSL_alertMessage_011 = String(format: NSLocalizedString("NSL_alertMessage_011 ", value: "All tasks registered to \"%@\" have been completed. If you have finished, press 'Celebrate it!' If you still need to continue, press 'Add More Task' and go to Task List view to add more.", comment: " "), goal.goalTitle!)
                 
                 let alert = UIAlertController(title: NSL_alertTitle_011, message: NSL_alertMessage_011, preferredStyle: .alert)
-                //alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 
                 let NSL_alertTitle_012 = NSLocalizedString("NSL_alertTitel_012", value: "Not Done Yet, Add More Task", comment: " ")
                 alert.addAction(UIAlertAction(title: NSL_alertTitle_012, style: .default, handler: {(alert: UIAlertAction!) in
@@ -341,9 +281,8 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
                     // Display Congratulation Message and Reward Image
                     
                     let NSL_alertTitle_014 = NSLocalizedString("NSL_alertTitle_014", value: "Congratulation!", comment: "")
-                    
                     let reward: String?
-                    //if goal.goalReward == "" { reward = "Poli" } else { reward = goal.goalReward }
+                    
                     if goal.reward4Goal?.title == nil { reward = "Poli" } else { reward = goal.reward4Goal?.title }
                     let NSL_alertMessage_014 = String(format: NSLocalizedString("NSL_alertMessage_014", value: "You now deserve %@! now. Celebrate your accomplishment with the reward RIGHT NOW!", comment: ""), reward!)
                     
@@ -397,15 +336,13 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
                 goalCell.goalDescriptionTextView.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
                 goalCell.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
                 goalCell.goalDueDateLabel.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
-               // goalCell.goalRewardLabel.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
-                goalCell.goalProgressPercentageLabel.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
+                               goalCell.goalProgressPercentageLabel.backgroundColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
                 
                 
             } else {
                             goalCell.goalDescriptionTextView.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
                             goalCell.backgroundColor = UIColor(red: 171/255, green: 252/255, blue: 214/255, alpha: 1.0)
                             goalCell.goalDueDateLabel.backgroundColor = UIColor(red: 171/255, green: 252/255, blue: 214/255, alpha: 1.0)
-                //            goalCell.goalRewardLabel.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
                             goalCell.goalProgressPercentageLabel.backgroundColor = UIColor(red: 171/255, green: 252/255, blue: 214/255, alpha: 1.0)
                 
                 
@@ -420,7 +357,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal else { return }
-        //selectedIndex = indexPath.row
+       
         selectedGoal = goal
         self.performSegue(withIdentifier: "taskList", sender: self)
         
@@ -428,7 +365,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        //let goal = goals[indexPath.row]
+        
         if let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal {
             
             let NSL_updateButton_01 = NSLocalizedString("NSL_updateButton_01", value: "Update", comment: "")
@@ -462,7 +399,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             self.performSegue(withIdentifier: "toGoalDone", sender: self)
         }
 
-        //self.fetchData()
     }
     
     private func deleteAction(goal: Goal, indexPath: IndexPath) {
@@ -485,8 +421,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             } catch {
                 print("Saving Failed: \(error.localizedDescription)")
             }
-            // Fetch the updated data
-            //self.fetchData()
             
             // Refresh tableView with updated data
             self.tableView.reloadData()
@@ -515,34 +449,20 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         if segue.identifier == "updateGoal" {
 
             let destVC = segue.destination as! GoalTitleViewController
-            //let goal = goals[selectedIndex]
             
             destVC.goal = selectedGoal
             destVC.segueName = segue.identifier
-            //destVC.vision4Goal = vision4Goal
             
         } else if segue.identifier == "toGoalDone" {
             let destVC = segue.destination as! GoalDoneViewController
-            //let goal = goals[selectedIndex]
             destVC.goal = selectedGoal
             destVC.userName = userName!
             
         } else if segue.identifier == "taskList" {
 
             let destVC = segue.destination as! TaskTableViewController
-            
-            //let goal = goals[selectedIndex]
             destVC.selectedGoal = selectedGoal
-            //destVC.userName = userName
-            
 
-            /*
-            let _ = sender as? UITableViewCell,
-            let vc = segue.destination as? TaskTableViewController
-            let indexPath = self.tableView.indexPathForSelectedRow
-            selectedGoal = goals[(indexPath?.row)!]
-            vc.selectedGoal = selectedGoal
-             */
             
         } else if segue.identifier == "settingsSegue" {
             let destVC = segue.destination as! SettingsViewController
@@ -561,5 +481,3 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     }
     
 }
-
-
