@@ -53,6 +53,12 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     var timePicker: UIDatePicker?
     
     
+    // Properties for Goal Type to dislay
+    @IBOutlet var GoalTypePicker: UIPickerView!
+    var pickerData: [String] = [String]()
+    var storedRow: Int?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -95,21 +101,27 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-    
-        let NSL_goalPredicate = NSLocalizedString("NSL_goalPredicate", value: "Goal Types", comment: "")
-        let goalPredicate = UIBarButtonItem(title: NSL_goalPredicate, style: .plain, target: self, action: #selector(goalPredicatePressed))
         
+        // PickerView for Goal Type
+        self.GoalTypePicker.delegate = self
+        self.GoalTypePicker.dataSource = self
+        pickerData = ["All Goals", "Undone Goals Only", "Done Goals Only"]
         
-        
-        navigationItem.rightBarButtonItem = goalPredicate
-    
+        if let storedRow = UserDefaults.standard.object(forKey: "predicateGoal") as? Int {
+            
+            // Place UIPicker.selectRow() below UIPicker.delegate and UIPicker.dataSource
+            // Otherwise no data to select
+            GoalTypePicker.selectRow(storedRow, inComponent: 0, animated: true)
+            
+            // To make the pickerData as the same before when a new value wasn't selected on UIDataPicker
+            // Keep the storedRow of UserDefaults when just pressing Save button.
+            //goalTypePickerValue = pickerData[storedRow]
+        }
     }
     
     @objc func goalPredicatePressed() {
         performSegue(withIdentifier: "goalPredicateSegue", sender: nil)
-        
     }
-    
 
 
     // To dismiss a keyboard
@@ -265,5 +277,31 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             let destVC = segue.destination as! GoalTableViewController
             destVC.userName = userName
         }
+    }
+    
+    @IBAction func saveGoalType(_ sender: UIButton) {
+        UserDefaults.standard.setValue(storedRow, forKey: "predicateGoal")
+        navigationController!.popToRootViewController(animated: true)
+    }
+    
+}
+
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        storedRow = row
     }
 }
