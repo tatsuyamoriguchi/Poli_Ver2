@@ -194,7 +194,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         fetchRequest.sortDescriptors = [sortByGoalAssigned, sortByDate, sortByToDo]
         
   
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: "goalAssigned.goalTitle", cacheName: nil)
         fetchedResultsController?.delegate = self
         
         do {
@@ -247,55 +247,40 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         tableView.endUpdates()
     }
     
-
-    //
-//    func fetchData() {
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//        let fetchRequest = NSFetchRequest<Task>(entityName: "Task")
-//
-//        //var taskDate = Task.date
-//        var calendar = Calendar.current
-//        calendar.timeZone = NSTimeZone.local
-//
-//        let dateFrom = calendar.startOfDay(for: Date())
-//        let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
-////        let todayPredicate = NSPredicate(format: "date >= %@ AND date < %@", dateFrom as CVarArg, dateTo! as CVarArg)
-//        let todayPredicate = NSPredicate(format: "date < %@", dateTo! as CVarArg)
-//
-//        let donePredicate = NSPredicate(format: "isDone == %@", NSNumber(value: false))
-//        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [todayPredicate, donePredicate])
-//
-//        fetchRequest.predicate = andPredicate
-//
-//
-//        // Declare sort descriptor
-//        let sortByGoalAssigned = NSSortDescriptor(key: #keyPath(Task.goalAssigned), ascending: true)
-//        let sortByToDo = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: true)
-//
-////        let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
-//        let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
-//
-//        // Sort fetchRequest array data
-//        fetchRequest.sortDescriptors = [sortByGoalAssigned, sortByDate, sortByToDo]
-//
-//        do {
-//            tasks = try context.fetch(fetchRequest)
-//
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//    }
     
     
     // MARK: - Table view data source
+    
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let sections = fetchedResultsController?.sections {
+            let sectionTitle = sections[section]
+ 
+            //return currentSection.name
+            return sectionTitle.name
+        }
+        print("let sections = fetchedResultsController?.sections Returned nil")
+        return nil
+    }
+    
+    
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if let frc = fetchedResultsController {
+            return frc.sections!.count
+        }
+        return 0
     }
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let tasks = fetchedResultsController?.fetchedObjects else { return 0 }
-        return tasks.count
+        
+        guard let sections = self.fetchedResultsController?.sections else {
+            fatalError("No sections in fetchedResultscontroller")
+        }
+        
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
 
     
@@ -316,17 +301,18 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             cell.textLabel?.numberOfLines = 0
             cell.detailTextLabel?.numberOfLines = 0
             
-            cell.textLabel?.text = task.toDo
+            if task.isImportant == true {
+                cell.textLabel?.text = "🍖 \(task.toDo!)"
+                
+            } else {
+                cell.textLabel?.text = task.toDo
+            }
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .full
             let dateString = dateFormatter.string(from: (task.date)! as Date)
-            
-            if let goalTitle = task.goalAssigned?.goalTitle {
-                cell.detailTextLabel?.text =  "\(dateString) : \(goalTitle)"
-            }else{
-                cell.detailTextLabel?.text =  dateString
-            }
+
+            cell.detailTextLabel?.text =  dateString
             
             let today = Date()
             let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)

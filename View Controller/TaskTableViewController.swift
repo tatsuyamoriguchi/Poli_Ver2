@@ -236,7 +236,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         let sectionInfo = sections[section]
         return sectionInfo.numberOfObjects
         
-        //return tasks.count
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
