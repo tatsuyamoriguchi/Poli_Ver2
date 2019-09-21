@@ -96,14 +96,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             }
         }
     
-        let NSL_goalPredicate = NSLocalizedString("NSL_goalPredicate", value: "Goal Display", comment: "")
+        let NSL_goalPredicate = NSLocalizedString("NSL_goalPredicate", value: "Goal Types", comment: "")
         let goalPredicate = UIBarButtonItem(title: NSL_goalPredicate, style: .plain, target: self, action: #selector(goalPredicatePressed))
         
-        let NSL_visionButton = NSLocalizedString("NSL_visionButton", value: "Vision", comment: "")
-        let vision = UIBarButtonItem(title: NSL_visionButton, style: .plain, target: self, action: #selector(visionPressed))
+        //let NSL_visionButton = NSLocalizedString("NSL_visionButton", value: "Vision", comment: "")
+        let vision = UIBarButtonItem(title: "🌈", style: .plain, target: self, action: #selector(visionPressed))
         
-        let NSL_greedList = NSLocalizedString("NSL_greedList", value: "Greed List", comment: "")
-        let greedList = UIBarButtonItem(title: NSL_greedList, style: .done, target: self, action: #selector(greedListPressed))
+        //let NSL_greedList = NSLocalizedString("NSL_greedList", value: "Greed List", comment: "")
+        let greedList = UIBarButtonItem(title: "🎁", style: .done, target: self, action: #selector(greedListPressed))
         
         
         navigationItem.rightBarButtonItems = [greedList, vision, goalPredicate]

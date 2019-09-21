@@ -43,11 +43,11 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         let NSL_logout = NSLocalizedString("NSL_logout", value: "Logout", comment: "")
         let logout = UIBarButtonItem(title: NSL_logout, style: .plain, target: self, action: #selector(logoutPressed(_:)))
         
-        let NSL_settingsButton = NSLocalizedString("NSL_settingsButton", value: "Settings", comment: "")
-        let settings = UIBarButtonItem(title: NSL_settingsButton, style: .plain, target: self, action: #selector(settingsPressed))
+        //let NSL_settingsButton = NSLocalizedString("NSL_settingsButton", value: "Settings", comment: "")
+        let settings = UIBarButtonItem(title: "⚙️", style: .plain, target: self, action: #selector(settingsPressed))
 
-        let NSL_today = NSLocalizedString("NSL_today", value: "Today", comment: "")
-        let todaysTasks = UIBarButtonItem(title: NSL_today, style: .done, target: self, action: #selector(todaysTasksPressed))
+        //let NSL_today = NSLocalizedString("NSL_today", value: "Today", comment: "")
+        let todaysTasks = UIBarButtonItem(title: "📅", style: .done, target: self, action: #selector(todaysTasksPressed))
         //let todaysTasks = UIBarButtonItem(title: NSL_today, style: .done, target: self, action: nil)
         
         configureFetchedResultsController()
@@ -204,15 +204,15 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             let NSL_Value = NSLocalizedString("NSL_Value", value: "- Value: ", comment: "")
             
             let rewardValue = LocaleConvert().currency2String(value: goal.reward4Goal?.value ?? 0)
-            let visionAssigned = "Vision: " + (goal.vision4Goal?.title ?? "No vision assigned")
+            //let visionAssigned = "Vision: " + (goal.vision4Goal?.title ?? "No vision assigned")
             
             let rewardPart1 = "\n" + NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
             let rewardPart2 = " " + NSL_Value + rewardValue
             
             if let goalDescriptionText = goal.goalDescription {
-                goalCell.goalDescriptionTextView.text = visionAssigned + rewardPart1 + rewardPart2 +  "\n\nDescription: " + goalDescriptionText
+                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 +  "\n\nDescription: " + goalDescriptionText
             } else {
-                goalCell.goalDescriptionTextView.text = visionAssigned + rewardPart1 + rewardPart2
+                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2
             }
             
             if let goalRewardImageData = goal.goalRewardImage as Data? {

@@ -45,6 +45,26 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         self.navigationItem.title = selectedGoal?.goalTitle
         
 
+        let addTask = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        
+        if selectedGoal?.vision4Goal != nil {
+            // Create the info button
+            //let infoButton = UIButton(type: .)
+            // You will need to configure the target action for the button itself, not the bar button itemr
+            //infoButton.addTarget(self, action: #selector(getVisionAction), for: .touchUpInside)
+            // Create a bar button item using the info button as its custom view
+            //let info = UIBarButtonItem(customView: infoButton)
+            
+            let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
+            // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁
+            navigationItem.rightBarButtonItems = [addTask, vision]
+        } else {
+            navigationItem.rightBarButtonItem = addTask
+        }
+        
+        
+        
+        
         configureFetchedResultsController()
         tableView.reloadData()
         
@@ -52,9 +72,21 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
     }
     
+    @objc func addTapped(){
+        self.performSegue(withIdentifier: "addTask", sender: self)
+    }
+    
+    @objc func getVisionAction() {
+        
+        if let visionAlert = selectedGoal?.vision4Goal?.title,
+            let visionNotes = selectedGoal?.vision4Goal?.notes {
+            AlertNotification().alert(title: visionAlert, message: visionNotes, sender: self, tag: "visionAlert")
+        } else { print("Error at getVisionAction()") }
+    }
+    
+    
     // When notified, reload Core Data with a change
     func reload(nofitication: Notification) {
-
         print("reload was touched")
         configureFetchedResultsController()
         tableView.reloadData()
