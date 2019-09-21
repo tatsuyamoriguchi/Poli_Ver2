@@ -30,6 +30,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureFetchedResultsController()
         
         if UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
             userName = UserDefaults.standard.string(forKey: "userName")
@@ -40,19 +41,34 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         }
         
         
-        let NSL_logout = NSLocalizedString("NSL_logout", value: "  ⎋  ", comment: "")
+        let NSL_logout = NSLocalizedString("NSL_logout", value: " ⎋ ", comment: "")
         let logout = UIBarButtonItem(title: NSL_logout, style: .plain, target: self, action: #selector(logoutPressed(_:)))
         
         //let NSL_settingsButton = NSLocalizedString("NSL_settingsButton", value: "Settings", comment: "")
-        let settings = UIBarButtonItem(title: "  ⚙️  ", style: .plain, target: self, action: #selector(settingsPressed))
+        let settings = UIBarButtonItem(title: " ⚙️ ", style: .plain, target: self, action: #selector(settingsPressed))
 
         //let NSL_today = NSLocalizedString("NSL_today", value: "Today", comment: "")
-        let todaysTasks = UIBarButtonItem(title: "  📅  ", style: .done, target: self, action: #selector(todaysTasksPressed))
+        let todaysTasks = UIBarButtonItem(title: " 📅 ", style: .done, target: self, action: #selector(todaysTasksPressed))
         //let todaysTasks = UIBarButtonItem(title: NSL_today, style: .done, target: self, action: nil)
         
-        configureFetchedResultsController()
         
-        navigationItem.rightBarButtonItems = [logout, settings, todaysTasks]
+        
+        let vision = UIBarButtonItem(title: " 🌈 ", style: .plain, target: self, action: #selector(visionPressed))
+        
+        let greedList = UIBarButtonItem(title: " 🎁 ", style: .done, target: self, action: #selector(greedListPressed))
+
+        
+        navigationItem.rightBarButtonItems = [logout, settings, vision, greedList, todaysTasks]
+    }
+    
+    @objc func visionPressed() {
+        performSegue(withIdentifier: "visionSegue", sender: nil)
+        
+    }
+    
+    @objc func greedListPressed() {
+        performSegue(withIdentifier: "greedListSegue", sender: nil)
+        
     }
     
     @objc func todaysTasksPressed() {

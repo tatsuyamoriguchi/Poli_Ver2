@@ -99,14 +99,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         let NSL_goalPredicate = NSLocalizedString("NSL_goalPredicate", value: "Goal Types", comment: "")
         let goalPredicate = UIBarButtonItem(title: NSL_goalPredicate, style: .plain, target: self, action: #selector(goalPredicatePressed))
         
-        //let NSL_visionButton = NSLocalizedString("NSL_visionButton", value: "Vision", comment: "")
-        let vision = UIBarButtonItem(title: "🌈", style: .plain, target: self, action: #selector(visionPressed))
-        
-        //let NSL_greedList = NSLocalizedString("NSL_greedList", value: "Greed List", comment: "")
-        let greedList = UIBarButtonItem(title: "🎁", style: .done, target: self, action: #selector(greedListPressed))
         
         
-        navigationItem.rightBarButtonItems = [greedList, vision, goalPredicate]
+        navigationItem.rightBarButtonItem = goalPredicate
     
     }
     
@@ -115,15 +110,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    @objc func visionPressed() {
-        performSegue(withIdentifier: "visionSegue", sender: nil)
-        
-    }
-    
-    @objc func greedListPressed() {
-        performSegue(withIdentifier: "greedListSegue", sender: nil)
-        
-    }
+
 
     // To dismiss a keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

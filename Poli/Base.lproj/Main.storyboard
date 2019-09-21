@@ -127,8 +127,6 @@
                         <segue destination="71g-LD-oV9" kind="presentation" identifier="backtoLoginSegue" id="7KY-6u-1Vw"/>
                         <segue destination="d4h-Jc-DXe" kind="show" identifier="ToGoalListSegue" id="rgA-VP-5DN"/>
                         <segue destination="aFb-Eg-P8g" kind="show" identifier="goalPredicateSegue" id="HFN-XN-1Do"/>
-                        <segue destination="fMP-cx-ZVu" kind="show" identifier="visionSegue" id="aZY-4Q-h1l"/>
-                        <segue destination="6yU-7v-tHW" kind="show" identifier="greedListSegue" id="mAb-kr-E0y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDr-Ra-KWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -239,7 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O78-7k-L9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2361" y="-2218"/>
+            <point key="canvasLocation" x="1856" y="-732"/>
         </scene>
         <!--Todays Tasks Table View Controller-->
         <scene sceneID="QGL-jx-JfI">
@@ -405,6 +403,8 @@
                         <segue destination="kRf-Gi-h3g" kind="show" identifier="toGoalDone" id="RZ0-xt-YyH"/>
                         <segue destination="1Yz-ym-fZw" kind="show" identifier="todaysTasksSegue" id="Fw7-DA-uKc"/>
                         <segue destination="PZL-Nv-HMk" kind="show" identifier="taskList" id="Uba-WO-OBv"/>
+                        <segue destination="fMP-cx-ZVu" kind="show" identifier="visionSegue" id="WZr-nN-PC1"/>
+                        <segue destination="6yU-7v-tHW" kind="show" identifier="greedListSegue" id="eQw-zL-b1a"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BcP-DG-YdP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1171,7 +1171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vys-lb-xkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2285.625" y="-1420.7746478873239"/>
+            <point key="canvasLocation" x="1710" y="-1468"/>
         </scene>
         <!--Set Vision for Goal-->
         <scene sceneID="3Ox-KM-DFD">
@@ -1252,9 +1252,10 @@
         <image name="Touch-icon-lg" width="138" height="137.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7KY-6u-1Vw"/>
+        <segue reference="8cS-7F-8KA"/>
+        <segue reference="743-aW-3gV"/>
         <segue reference="b71-Er-WlN"/>
-        <segue reference="dEI-z1-6Eh"/>
+        <segue reference="Uba-WO-OBv"/>
         <segue reference="eGG-hh-uDV"/>
         <segue reference="rgA-VP-5DN"/>
     </inferredMetricsTieBreakers>
