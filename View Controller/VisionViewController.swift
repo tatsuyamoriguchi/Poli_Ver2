@@ -158,57 +158,72 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     var vision: Vision?
     
     @objc func addVision() {
-        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let entity = NSEntityDescription.entity(forEntityName: "Vision", in: managedContext)!
-        let item = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        if let itemTitle = visionTextField.text, let itemNotes = visionNotesTextView.text {
-            let itemStatus = statusPicker.selectedRow(inComponent: 0)
-            item.setValue(itemTitle, forKey: "title")
-            item.setValue(itemNotes, forKey: "notes")
-            item.setValue(itemStatus, forKey: "status")
+        if visionTextField.text != "" {
+            
+            
+            let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            let entity = NSEntityDescription.entity(forEntityName: "Vision", in: managedContext)!
+            let item = NSManagedObject(entity: entity, insertInto: managedContext)
+            
+            if let itemTitle = visionTextField.text, let itemNotes = visionNotesTextView.text {
+                let itemStatus = statusPicker.selectedRow(inComponent: 0)
+                item.setValue(itemTitle, forKey: "title")
+                item.setValue(itemNotes, forKey: "notes")
+                item.setValue(itemStatus, forKey: "status")
+            } else {
+                print("itemTitle or itemNotes is nil???")
+            }
+            
+            save()
+            
         } else {
-            print("itemTitle or itemNotes is nil???")
+            AlertNotification().alert(title: "No Vision Title Detected", message: "Please type a title for a vision.", sender: self, tag: "noVisionTitle")
         }
-
-        save()
     }
-   
-   
+    
     
     @objc func editVision() {
-        
-        vision?.title = visionTextField.text
-        vision?.notes = visionNotesTextView.text
-        vision?.status = Int16(statusPicker.selectedRow(inComponent: 0))
-
-        save()
+        if visionTextField.text != "" {
+            vision?.title = visionTextField.text
+            vision?.notes = visionNotesTextView.text
+            vision?.status = Int16(statusPicker.selectedRow(inComponent: 0))
+            
+            save()
+            
+        } else {
+            AlertNotification().alert(title: "No Vision Title Detected", message: "Please type a title for a vision.", sender: self, tag: "noVisionTitle")
+        }
     }
-
+    
     
     
     func save(){
-        do {
-            try (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext.save()
-            print("managedContext was saved.")
-            
-        } catch {
-            print("Failed to save an item #2: \(error.localizedDescription)")
-        }
+     
         
-
-        visionTextField.text = ""
-        visionNotesTextView.text = ""
-        visionNotesTextView.textColor = UIColor.darkGray
+            do {
+                try (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext.save()
+                print("managedContext was saved.")
+                
+            } catch {
+                print("Failed to save an item #2: \(error.localizedDescription)")
+            }
         
-        statusPicker.selectRow(0, inComponent: 0, animated: true)
-        displayButtons(editStatus: false)
-
-        visionTextField.resignFirstResponder()
-        visionNotesTextView.resignFirstResponder()
         
-        displayInstruction(textView: visionNotesTextView)
+            visionTextField.text = ""
+            visionNotesTextView.text = ""
+            visionNotesTextView.textColor = UIColor.darkGray
+        
+            statusPicker.selectRow(0, inComponent: 0, animated: true)
+            displayButtons(editStatus: false)
+        
+            visionTextField.resignFirstResponder()
+            visionNotesTextView.resignFirstResponder()
+        
+            displayInstruction(textView: visionNotesTextView)
+    
+ 
     }
     
     
@@ -421,16 +436,21 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     // MARK: - Placeholder in textView
     func textViewDidBeginEditing(_ textView: UITextView) {
         
+      
+        //displayInstruction(textView: visionNotesTextView)
+
         if visionNotesTextView.textColor == UIColor.lightGray {
-            visionNotesTextView.text = nil
+            visionNotesTextView.text = ""
             visionNotesTextView.textColor = UIColor.darkGray
         }
-        
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
 
         displayInstruction(textView: visionNotesTextView)
+        //visionNotesTextView.text = String()
+
+        
     }
     
     func displayInstruction(textView: UITextView) {
