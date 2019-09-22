@@ -780,9 +780,13 @@
                     </navigationItem>
                     <connections>
                         <segue destination="kmR-6c-LEk" kind="show" identifier="updateTask" id="XHg-Fr-gtW"/>
+                        <segue destination="StY-U2-yJw" kind="unwind" unwindAction="unwindToGoal:" id="5cQ-5W-Te3"/>
+                        <segue destination="StY-U2-yJw" kind="unwind" unwindAction="unwindToGoal:" id="MRY-S2-WEi"/>
+                        <segue destination="StY-U2-yJw" kind="unwind" unwindAction="unwindToGoal:" id="APV-NW-Wy1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Om-wZ-eb2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="StY-U2-yJw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3000" y="75"/>
         </scene>
@@ -1302,7 +1306,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="743-aW-3gV"/>
         <segue reference="b71-Er-WlN"/>
-        <segue reference="Uba-WO-OBv"/>
+        <segue reference="dEI-z1-6Eh"/>
         <segue reference="eGG-hh-uDV"/>
         <segue reference="9dh-yv-VDW"/>
     </inferredMetricsTieBreakers>

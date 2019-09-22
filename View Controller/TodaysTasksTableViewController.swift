@@ -15,7 +15,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     var tasks = [Task]()
     var selectedGoal: Goal?
     var userName: String = ""
-
+    
 
     @objc func getInfoAction() {
         let NSL_shareAlert = NSLocalizedString("NSL_shareAlert", value: "To share with Facebook, LinkedIn or app that doens't show your Today's To-Do", comment: "")
@@ -84,13 +84,13 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.tableView.sectionHeaderHeight = UITableView.automaticDimension
-//        self.tableView.estimatedSectionHeaderHeight = 25
-//        self.tableView.estimatedRowHeight = 100
-//        self.tableView.rowHeight = UITableView.automaticDimension
-        
+//
+//    override func viewWillAppear(_ animated: Bool) {
 
+        // Fetch Core Data
+        configureFetchedResultsController()
+        self.tableView.reloadData()
+        
         if UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
             userName = UserDefaults.standard.string(forKey: "userName")!
             let NSL_loginUsername = String(format: NSLocalizedString("NSL_loginUsername", value: "Login as %@", comment: ""), userName)
@@ -105,8 +105,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks To-Do", comment: "")
         self.navigationItem.title = NSL_naviToday
         
-        // Fetch Core Data
-        configureFetchedResultsController()
+   
  
         if let tasks = fetchedResultsController?.fetchedObjects {
             
@@ -141,8 +140,6 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
                 
             }
         } else { print("Error") }
-        //tableView.reloadData()
-
         
     }
 
@@ -152,16 +149,17 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     }
 
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        // Fetch Core Data
-        configureFetchedResultsController()
-        
-        // Reload the table view
-        tableView.reloadData()
-        
-        // Display a share button, if any tasks item. If no tasks, segue back to root view
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        // Fetch Core Data
+//        configureFetchedResultsController()
+//        // Reload the table view
+//        self.tableView.reloadData()
+//        DispatchQueue.main.async {
+//            self.tableView.reloadSectionIndexTitles()
+//        }
+//
+//
+//    }
     
     // MARK: - Core Data NSFetchedResultsController
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -205,6 +203,8 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         //fetchRequest.sortDescriptors = [sortByGoalAssigned]
   
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: "goalAssigned.goalTitle", cacheName: nil)
+        //"goalAssigned.goalTitle"
+        
         fetchedResultsController?.delegate = self
         
         do {
@@ -220,6 +220,23 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         tableView.beginUpdates()
     }
     
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        case .delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+        case .move:
+            break
+        case .update:
+//            DispatchQueue.main.async {
+//                self.tableView!.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+//            }
+            break
+        }
+    }
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
         case .insert:
@@ -233,8 +250,10 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             }
             break;
         case .update:
+            
             if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
                 configureCell(cell, at: indexPath)
+                
             }
             break;
         case .move:
@@ -272,19 +291,6 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         print("let sections = fetchedResultsController?.sections Returned nil")
         return nil
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return UITableView.automaticDimension
-//    }
-    
-//    override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//        return 25
-//
-//    }
     
     
     

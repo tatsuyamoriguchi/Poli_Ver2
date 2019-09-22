@@ -32,6 +32,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 
         configureFetchedResultsController()
         
+        
         if UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
             userName = UserDefaults.standard.string(forKey: "userName")
             let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "Login as %@", comment: ""), userName)
@@ -91,7 +92,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         tableView.reloadData()
     }
     
-    
+
     
     // Core Data: NSFetchedResultsConroller
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
@@ -150,6 +151,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         print("controllerWillChangeContent was detected")
     }
     
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
@@ -159,10 +161,9 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             print("delete was detected.")
             self.tableView.deleteRows(at: [indexPath! as IndexPath], with: .fade)
         case .update:
+            
             if(indexPath != nil) {
                 self.tableView.cellForRow(at: indexPath! as IndexPath)
-                
-                
             }
         case .move:
             self.tableView.deleteRows(at: [indexPath! as IndexPath], with: .fade)
@@ -334,7 +335,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
                     self.present(congratAlert, animated: true, completion: nil)
                     
                     // Display congratAlert view for x seconds
-                    let when = DispatchTime.now() + 5
+                    let when = DispatchTime.now() + 3
                     DispatchQueue.main.asyncAfter(deadline: when, execute: {
                         congratAlert.dismiss(animated: true, completion: nil)
                         
