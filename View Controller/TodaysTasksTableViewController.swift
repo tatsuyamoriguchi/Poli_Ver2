@@ -36,7 +36,9 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         
         url = URL(string: "https://apps.apple.com/us/app/poli-todo/id1451371111")!
 
-
+        
+        tasks = fetchedResultsController?.fetchedObjects as! [Task]
+            
         var previousGoalTitle: String = ""
         for task in tasks {
             
@@ -49,6 +51,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             } else {
                 message.append("\n- To Do: \(toDo ?? "ERROR NO TODO") ")
             }
+            
         }
 
         //let activityItems = [message, url] as [Any]
@@ -273,7 +276,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
 //    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return UITableView.automaticDimension
 //    }
-//    
+//
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        return UITableView.automaticDimension
 //    }
