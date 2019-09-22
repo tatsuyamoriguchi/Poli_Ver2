@@ -97,7 +97,7 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfr-k8-Obr">
-                                <rect key="frame" x="0.0" y="335" width="0.0" height="120"/>
+                                <rect key="frame" x="0.0" y="335" width="238" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="YwE-Dn-psZ"/>
                                 </constraints>
@@ -345,51 +345,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="goalListCell" rowHeight="291" id="nzY-WQ-DZQ" customClass="GoalTableViewCell" customModule="Poli" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="291"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="goalListCell" rowHeight="317" id="nzY-WQ-DZQ" customClass="GoalTableViewCell" customModule="Poli" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="317"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nzY-WQ-DZQ" id="EYg-Ny-YZb">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="291"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="317"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WBl-qN-gyC">
-                                            <rect key="frame" x="8" y="110" width="140" height="160"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="140" id="CU8-Vz-Ptw"/>
-                                                <constraint firstAttribute="height" constant="160" id="sCp-iJ-qDL"/>
-                                            </constraints>
-                                        </imageView>
                                         <textView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFit" pagingEnabled="YES" bouncesZoom="NO" editable="NO" text="Goal Description" translatesAutoresizingMaskIntoConstraints="NO" id="pK1-nL-rSe">
-                                            <rect key="frame" x="156" y="110" width="156" height="173"/>
+                                            <rect key="frame" x="156" y="136" width="156" height="173"/>
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Goal Due Date" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xre-lg-kuf">
-                                            <rect key="frame" x="20" y="40" width="280" height="20"/>
+                                            <rect key="frame" x="20" y="40" width="280" height="48"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="vCa-sO-0ck"/>
+                                                <constraint firstAttribute="height" constant="48" id="vCa-sO-0ck"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eb8-3k-NRK">
-                                            <rect key="frame" x="20" y="92" width="280" height="2"/>
+                                            <rect key="frame" x="20" y="118" width="280" height="2"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="2" id="6nD-5W-mh4"/>
                                             </constraints>
                                             <color key="progressTintColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </progressView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Goal Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2oG-TI-W87">
-                                            <rect key="frame" x="0.0" y="8" width="320" height="28"/>
+                                            <rect key="frame" x="0.0" y="8" width="320" height="30"/>
                                             <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahA-YV-Xcy">
-                                            <rect key="frame" x="20" y="64" width="280" height="20"/>
+                                            <rect key="frame" x="20" y="90" width="280" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="gjB-BP-6mc"/>
                                             </constraints>
@@ -397,22 +390,29 @@
                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WBl-qN-gyC">
+                                            <rect key="frame" x="8" y="136" width="140" height="173"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="140" id="CU8-Vz-Ptw"/>
+                                                <constraint firstAttribute="height" constant="173" id="sCp-iJ-qDL"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="ahA-YV-Xcy" secondAttribute="trailing" constant="4" id="0Am-6B-2zL"/>
                                         <constraint firstAttribute="bottom" secondItem="pK1-nL-rSe" secondAttribute="bottom" constant="8" id="3aW-pS-nhf"/>
                                         <constraint firstItem="2oG-TI-W87" firstAttribute="top" secondItem="EYg-Ny-YZb" secondAttribute="top" constant="8" id="48l-QL-F7C"/>
-                                        <constraint firstItem="Xre-lg-kuf" firstAttribute="top" secondItem="2oG-TI-W87" secondAttribute="bottom" constant="4" id="E5w-If-jZW"/>
+                                        <constraint firstItem="Xre-lg-kuf" firstAttribute="top" secondItem="2oG-TI-W87" secondAttribute="bottom" constant="2" id="E5w-If-jZW"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="eb8-3k-NRK" secondAttribute="trailing" constant="4" id="Ehl-bI-ivT"/>
                                         <constraint firstItem="ahA-YV-Xcy" firstAttribute="leading" secondItem="EYg-Ny-YZb" secondAttribute="leadingMargin" constant="4" id="Iw7-aa-dcq"/>
-                                        <constraint firstItem="ahA-YV-Xcy" firstAttribute="top" secondItem="Xre-lg-kuf" secondAttribute="bottom" constant="4" id="NrC-Wb-Xnx"/>
+                                        <constraint firstItem="ahA-YV-Xcy" firstAttribute="top" secondItem="Xre-lg-kuf" secondAttribute="bottom" constant="2" id="NrC-Wb-Xnx"/>
                                         <constraint firstAttribute="trailing" secondItem="2oG-TI-W87" secondAttribute="trailing" id="Ysk-ys-9UB"/>
                                         <constraint firstItem="eb8-3k-NRK" firstAttribute="top" secondItem="ahA-YV-Xcy" secondAttribute="bottom" constant="8" id="dOl-zU-BG2"/>
                                         <constraint firstItem="eb8-3k-NRK" firstAttribute="leading" secondItem="EYg-Ny-YZb" secondAttribute="leadingMargin" constant="4" id="dzM-fI-ze2"/>
                                         <constraint firstItem="WBl-qN-gyC" firstAttribute="leading" secondItem="EYg-Ny-YZb" secondAttribute="leading" constant="8" id="khm-RW-Yg1"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Xre-lg-kuf" secondAttribute="trailing" constant="4" id="m8y-86-7EK"/>
                                         <constraint firstAttribute="trailing" secondItem="pK1-nL-rSe" secondAttribute="trailing" constant="8" id="nnj-93-RTf"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="WBl-qN-gyC" secondAttribute="bottom" constant="10" id="stx-Zu-iLc"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="WBl-qN-gyC" secondAttribute="bottom" constant="-3" id="stx-Zu-iLc"/>
                                         <constraint firstItem="pK1-nL-rSe" firstAttribute="top" secondItem="eb8-3k-NRK" secondAttribute="bottom" constant="16" id="uAm-Gc-LZV"/>
                                         <constraint firstItem="WBl-qN-gyC" firstAttribute="top" secondItem="eb8-3k-NRK" secondAttribute="bottom" constant="16" id="uiF-Op-QIe"/>
                                         <constraint firstItem="pK1-nL-rSe" firstAttribute="leading" secondItem="WBl-qN-gyC" secondAttribute="trailing" constant="8" id="wfU-4j-z6X"/>
@@ -1300,9 +1300,9 @@
         <image name="Touch-icon-lg" width="138" height="137.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7KY-6u-1Vw"/>
+        <segue reference="743-aW-3gV"/>
         <segue reference="b71-Er-WlN"/>
-        <segue reference="dEI-z1-6Eh"/>
+        <segue reference="Uba-WO-OBv"/>
         <segue reference="eGG-hh-uDV"/>
         <segue reference="9dh-yv-VDW"/>
     </inferredMetricsTieBreakers>

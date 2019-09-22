@@ -246,7 +246,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 
             
             (statusString, status) = GoalProgress().goalStatusAlert(dueDate: goal.goalDueDate! as Date, isDone: goal.goalDone)
-            let NSL_dueDateLabel = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@ \n %@", comment: " "), date, statusString)
+            let NSL_dueDateLabel = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@\n%@", comment: " "), date, statusString)
             goalCell.goalDueDateLabel.text = NSL_dueDateLabel
             if status == true {goalCell.goalDueDateLabel.textColor = .red} else { goalCell.goalDueDateLabel.textColor = .black
             }
