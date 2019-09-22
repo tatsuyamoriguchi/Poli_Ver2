@@ -152,16 +152,16 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     }
 
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        
-//        // Fetch Core Data
-// //       configureFetchedResultsController()
-//        
-//        // Reload the table view
-////        tableView.reloadData()
-//        
-//        // Display a share button, if any tasks item. If no tasks, segue back to root view
-//     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        // Fetch Core Data
+        configureFetchedResultsController()
+        
+        // Reload the table view
+        tableView.reloadData()
+        
+        // Display a share button, if any tasks item. If no tasks, segue back to root view
+    }
     
     // MARK: - Core Data NSFetchedResultsController
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
