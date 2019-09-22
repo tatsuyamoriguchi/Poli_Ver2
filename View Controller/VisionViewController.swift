@@ -85,7 +85,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
             
             navigationItem.rightBarButtonItems = []
-            let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editVision))
+            let editButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(editVision))
             let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addVision))
             navigationItem.rightBarButtonItems =  [editButton, addButton, info]
             
