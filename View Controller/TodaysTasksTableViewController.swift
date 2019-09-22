@@ -341,7 +341,15 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             dateFormatter.dateStyle = .full
             let dateString = dateFormatter.string(from: (task.date)! as Date)
 
-            cell.detailTextLabel?.text =  dateString
+            
+            if var rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
+                let rewardValueString = LocaleConvert().currency2String(value: Int32(rewardValue))
+                rewardString = "\nReward: \(rewardString) - Value: \(rewardValueString)"
+                cell.detailTextLabel?.text = dateString + rewardString
+            } else {
+                cell.detailTextLabel?.text = dateString
+            }
+            
             
             let today = Date()
             let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
