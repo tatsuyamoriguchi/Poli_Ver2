@@ -26,10 +26,6 @@ class GoalPredicateViewController: UIViewController, UIPickerViewDelegate, UIPic
         
         if let storedRow = UserDefaults.standard.object(forKey: "predicateGoal") as? Int {
             
-            print(" ")
-            print("storedRow")
-            print(storedRow)
-            
             // Place UIPicker.selectRow() below UIPicker.delegate and UIPicker.dataSource
             // Otherwise no data to select
             GoalTypePicker.selectRow(storedRow, inComponent: 0, animated: true)
