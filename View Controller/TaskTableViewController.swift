@@ -15,16 +15,17 @@ import UserNotifications
 
 class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEventEditViewDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
+    
+    var eventStore: EKEventStore!
+    
     // EventKit to share to iCalendar
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    var eventStore: EKEventStore!
-    
     // to post an event to Calendar
     func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func eventEditViewControllerDefaultCalendar(forNewEents controller: EKEventEditViewController) -> EKCalendar {
@@ -33,8 +34,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         return calendar!
     }
     
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -350,102 +349,121 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        
-//        let task = tasks[indexPath.row]
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
-        
-        // MARK: - editActionForRowAt updateACtion
-            let NSL_updateButton_02 = NSLocalizedString("NSL_updateButton_02", value: "Update", comment: "")
-        let updateAction = UITableViewRowAction(style: .default, title: NSL_updateButton_02) { (action, indexPath) in
-            if task.goalAssigned?.goalDone == true {
-                self.goalDoneAlert()
-                
-            } else {
-                // Call update action
-                //self.updateAction(task: task, indexPath: indexPath)
-                self.selectedTask = task
-                self.performSegue(withIdentifier: "updateTask", sender: self)
-            }
-        }
-        
-        let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
-        let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
-            if task.goalAssigned?.goalDone == true {
-                self.goalDoneAlert()
-                
-            } else {
-                // Call delete action
-                self.deleteAction(task: task, indexPath: indexPath)
-            }
-        }
-        
-        let calendarAction = UITableViewRowAction(style: .default, title: "Calendar") { (action, indexPath)
-            in
             
-            if task.goalAssigned?.goalDone == true {
-                self.goalDoneAlert()
+            // MARK: - editActionForRowAt updateACtion
+            let NSL_updateButton_02 = NSLocalizedString("NSL_updateButton_02", value: "Update", comment: "")
+            let updateAction = UITableViewRowAction(style: .default, title: NSL_updateButton_02) { (action, indexPath) in
+                if task.goalAssigned?.goalDone == true {
+                    self.goalDoneAlert()
+                    
+                } else {
+                    // Call update action
+                    //self.updateAction(task: task, indexPath: indexPath)
+                    self.selectedTask = task
+                    self.performSegue(withIdentifier: "updateTask", sender: self)
+                }
+            }
+            
+            let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
+            let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
+                if task.goalAssigned?.goalDone == true {
+                    self.goalDoneAlert()
+                    
+                } else {
+                    // Call delete action
+                    self.deleteAction(task: task, indexPath: indexPath)
+                }
+            }
+            
+            
+            
+            
+            let calendarAction = UITableViewRowAction(style: .default, title: "Calendar") { (action, indexPath)
+                in
                 
-            } else {
                 
-                self.eventStore = EKEventStore.init()
                 
-                self.eventStore.requestAccess(to: .event, completion:  {
-                    (granted, error) in
-                    if granted {
-                        print("granted \(granted)")
-                        
-                        let eventVC = EKEventEditViewController.init()
-                        eventVC.event = EKEvent.init(eventStore: self.eventStore)
-                        eventVC.eventStore = self.eventStore
-                        eventVC.editViewDelegate = self
-                        
-                        eventVC.event?.title = task.toDo
-                        
-                        let startDate = task.date! as Date
-                        let endDate = startDate.addingTimeInterval(60 * 60)
-                        eventVC.event?.startDate = startDate
-                        eventVC.event?.endDate = endDate
-                        
-                        if let rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
-                            let reward4ThisTask = "\nReward: \(rewardString) \nValue: \(rewardValue)"
+                if task.goalAssigned?.goalDone == true {
+                    self.goalDoneAlert()
+                    
+                } else {
+                    
+                    self.eventStore = EKEventStore.init()
+                    self.eventStore.requestAccess(to: .event, completion:  {
+                        (granted, error) in
+                        if granted
+                        {
+                            print("granted \(granted)")
+                            // To prevent warning
+                            DispatchQueue.main.async
+                                {
+                                    
+                                    let eventVC = EKEventEditViewController.init()
+                                    eventVC.event = EKEvent.init(eventStore: self.eventStore)
+                                    eventVC.eventStore = self.eventStore
+                                    eventVC.editViewDelegate = self
+                                    
+                                    eventVC.event?.title = task.toDo
+                                    
+                                    let startDate = task.date! as Date
+                                    let endDate = startDate.addingTimeInterval(60 * 60)
+                                    eventVC.event?.startDate = startDate
+                                    eventVC.event?.endDate = endDate
+                                    
+                                    var eventString: String?
+                                    var eventURL: String?
+                                    
+                                    if task.url != nil {
+                                        eventURL = task.url?.absoluteString
+                                    } else { eventURL = "" }
+                                    
+                                    if let rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
+                                        let reward4ThisTask = "\nReward: \(rewardString) \nValue: \(rewardValue)"
+                                        
+                                        eventString = "Goal: \(task.goalAssigned?.goalTitle ?? "No goal assignd")" + reward4ThisTask + "\n" + eventURL!
+                                        
+                                    } else {
+                                        eventString = "Goal: \(task.goalAssigned?.goalTitle ?? "No goal assignd")" + "\n" + eventURL!
+                                    }
+                                    
+                                    eventVC.event?.notes = eventString
+                                    eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
+                                    
+                                    self.present(eventVC, animated: false, completion: nil)
+                                    
+                            }
                             
-                            eventVC.event?.notes = "Goal: \(task.goalAssigned?.goalTitle ?? "No goal assignd")" + reward4ThisTask
                         } else {
-                            eventVC.event?.notes = "Goal: \(task.goalAssigned?.goalTitle ?? "No goal assignd")"
+                            print("error \(String(describing: error))")
+                            AlertNotification().alert(title: "Calendar Access Denied", message: "Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on.", sender: self, tag: "calendar")
                         }
                         
-                        eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
-                        
-                        self.present(eventVC, animated: true, completion: nil)
-                        
-                        
-                    } else {
-                        print("error \(String(describing: error))")
-                        AlertNotification().alert(title: "Calendar Access Denied", message: "Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on.", sender: self, tag: "calendar")
-                    }
-                })
+                    })
+                }
             }
-        }
-        
-        let NSL_linkButton = NSLocalizedString("NSL_linkButton", value: "Link", comment: "")
-        let linkAction = UITableViewRowAction(style: .default, title: NSL_linkButton) { (action, indexPath) in
             
-            self.linkAction(task: task, indexPath: indexPath)
-        }
-        
-        deleteAction.backgroundColor = .red
-        updateAction.backgroundColor = .blue
-        calendarAction.backgroundColor = .purple
-        linkAction.backgroundColor = .darkGray
-        
-        if task.url != nil {
-            return [deleteAction, updateAction, calendarAction, linkAction]
-        } else {
-            return [deleteAction, updateAction, calendarAction]
-        }
+            let NSL_linkButton = NSLocalizedString("NSL_linkButton", value: "Link", comment: "")
+            let linkAction = UITableViewRowAction(style: .default, title: NSL_linkButton) { (action, indexPath) in
+                
+                self.linkAction(task: task, indexPath: indexPath)
+            }
+            
+            deleteAction.backgroundColor = .red
+            updateAction.backgroundColor = .blue
+            calendarAction.backgroundColor = .purple
+            linkAction.backgroundColor = .darkGray
+            
+            if task.url != nil {
+                return [deleteAction, updateAction, calendarAction, linkAction]
+            } else {
+                return [deleteAction, updateAction, calendarAction]
+            }
             
         } else {
-            fatalError("Attempt configure cell without a managed object") }
+            fatalError("Attempt configure cell without a managed object")
+        }
+        
     }
     
     
