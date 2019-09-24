@@ -45,21 +45,13 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         let NSL_logout = NSLocalizedString("NSL_logout", value: " ⎋ ", comment: "")
         let logout = UIBarButtonItem(title: NSL_logout, style: .plain, target: self, action: #selector(logoutPressed(_:)))
         
-        //let NSL_settingsButton = NSLocalizedString("NSL_settingsButton", value: "Settings", comment: "")
-        let settings = UIBarButtonItem(title: " ⚙️ ", style: .plain, target: self, action: #selector(settingsPressed))
-
-        //let NSL_today = NSLocalizedString("NSL_today", value: "Today", comment: "")
-        let todaysTasks = UIBarButtonItem(title: " 📅 ", style: .done, target: self, action: #selector(todaysTasksPressed))
-        //let todaysTasks = UIBarButtonItem(title: NSL_today, style: .done, target: self, action: nil)
-        
-        
-        
-        let vision = UIBarButtonItem(title: " 🌈 ", style: .plain, target: self, action: #selector(visionPressed))
-        
-        let greedList = UIBarButtonItem(title: " 🎁 ", style: .done, target: self, action: #selector(greedListPressed))
-
-        
-        navigationItem.rightBarButtonItems = [logout, settings, vision, greedList, todaysTasks]
+        let settings = UIBarButtonItem(title: "⚙️", style: .plain, target: self, action: #selector(settingsPressed))
+        let todaysTasks = UIBarButtonItem(title: "📅", style: .done, target: self, action: #selector(todaysTasksPressed))
+        let vision = UIBarButtonItem(title: "🌈", style: .plain, target: self, action: #selector(visionPressed))
+        let greedList = UIBarButtonItem(title: "🎁", style: .done, target: self, action: #selector(greedListPressed))
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+        space.width = 30
+        navigationItem.rightBarButtonItems = [logout, space, settings, space, vision, space, greedList, space, todaysTasks]
     }
     
     @objc func visionPressed() {

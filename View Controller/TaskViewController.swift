@@ -51,14 +51,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
 
         }
         
-        //taskDatePicker.backgroundColor = UIColor.lightGray
-        
-       
         // Link button
-//        let linkButton = UIButton(type: .contactAdd)
-//        linkButton.addTarget(self, action: #selector(addUpdateLink), for: .touchUpInside)
-//        let link = UIBarButtonItem(customView: linkButton)
-        
         let link = UIBarButtonItem(title: "🔗", style: .done, target: self, action: #selector(addUpdateLink))
         
         
@@ -69,9 +62,11 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
         // Create a bar button item using the info button as its custom view
         let info = UIBarButtonItem(customView: infoButton)
-        
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTask))
-        self.navigationItem.rightBarButtonItems = [saveButton, info, link]
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+        space.width = 30
+
+        self.navigationItem.rightBarButtonItems = [saveButton, space, info, space, link]
         
         // To dismiss a keyboard
         toDoTextField.delegate = self
@@ -97,52 +92,26 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     
     
     @objc func addUpdateLink() {
-        //AlertNotification().alert(title: "Add/Update Link Info", message: "Hello TEST", sender: self, tag: "linkAlert")
         
         let alert = UIAlertController(title: "Add or Edit a link", message: "Add or edit URL.", preferredStyle: .alert)
-       
-//        var textFieldData: String?
-//
-//        if  self.selectedTask.url != nil {
-//            let urlString = self.selectedTask?.url?.absoluteString
-//
-//            alert.addTextField { (textField) in
-//                textField.text = urlString
-//            }
-//
-//            textFieldData = urlString
-//        } else {
-//            alert.addTextField { (textField) in
-//                textField.text = nil
-//                textFieldData = nil
-//
-//            }
-//        }
         
-        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { action in
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler:{ action in
         
             let textField = alert.textFields![0] as UITextField
+            
             if self.segueName == "updateTask", textField.text != "" {
                 // convert string url back to URL/URI, use URL(string: String)
                 self.addBookmark(name: textField.text!)
 
-                print("Hello 1")
-            
             } else if self.segueName == "updateTask", textField.text == "" {
-            
                 self.selectedTask.url = nil
 
             } else if textField.text != nil {
-                print("Hello 2 - 1")
-                
                 self.urlURL = URL(string: (textField.text)!)
                 
-                print("Hello 2 - 2")
             } else {
-                
                 print("textField.text was nil.")
             }
-
         })
         
         
@@ -152,17 +121,17 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         alert.addTextField { (textField: UITextField) in
             if self.segueName == "updateTask", self.selectedTask.url != nil {
                 
-                
-                
-                    let urlString = self.selectedTask?.url?.absoluteString
-                    textField.text = urlString
+                let urlString = self.selectedTask?.url?.absoluteString
+                textField.text = urlString
                 
             } else if self.urlURL != nil {
                 textField.text = self.urlURL?.absoluteString
                 
             }else {
-                textField.placeholder = "type url here. http://www.beckos.com"
+                textField.placeholder = "Type url here. http://www.beckos.com"
             }
+            textField.delegate = self
+            textField.keyboardType = UIKeyboardType.URL
         }
         
         alert.addAction(cancelAction)
@@ -172,26 +141,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     }
     
     func addBookmark(name: String) {
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//
-//        let managedContext = appDelegate.persistentContainer.viewContext
-//        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)
-//        let bookmark = NSManagedObject(entity: entity!, insertInto: managedContext)
-        
         let nameURL = URL(string: name)
         selectedTask.url = nameURL
-        
-//        bookmark.setValue(nameURL, forKey: "url")
-        
-//        do {
-//            try managedContext.save()
-//
-//        } catch let error as NSError {
-//            print("Could not save. \(error), \(error.userInfo)")
-//        }
-        
     }
     
 
@@ -339,8 +290,6 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(" ")
-//        print("didSelectRowAt was executed")
         
         // Deselect row remove checkmark when tapping the same row as last Selected row.
         if  let lastSelectedIndex = lastSelected, lastSelected == indexPath {
@@ -354,18 +303,6 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
 
             // In case when tapping any of other rows than previously selected row.
         }else {
-            // If lastSelected reward exists, deselect and remove checkmark.
-            // isn't this the same as code block above???
-//            if lastSelected != nil {
-//                tableView.cellForRow(at: lastSelected!)?.accessoryType = .none
-//                print(" ")
-//                print("lastSelected: \(lastSelected)")
-//                print("checkmark was deseleced.")
-//
-//                // If lastSelected is nil, select and add checkmark.
-//            } else {
-            
-                // select the new row
 
         if lastSelected != nil {
             tableView.cellForRow(at: lastSelected!)?.accessoryType = .none
@@ -374,21 +311,14 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             //selectedTask.reward4Task = greed
             self.lastSelected = indexPath
             
-            
-            print(" ")
-            print("greed was checkmarked: \(greed)")
-            
         } else {
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
             greed = self.fetchedResultsController?.object(at: indexPath) as? Reward
-            //selectedTask.reward4Task = greed
             self.lastSelected = indexPath
         }
-        
                         print("let selected = self.lastSelected failed")
         
         }
-        //        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -397,6 +327,5 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         print(" ")
         print("*******didDESelectRowAt was excuted********")
     }
-    
     
 }

@@ -56,13 +56,14 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             
             let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
             // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁
-            navigationItem.rightBarButtonItems = [addTask, vision]
+            
+            let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+            space.width = 30
+            
+            navigationItem.rightBarButtonItems = [addTask, space, vision]
         } else {
             navigationItem.rightBarButtonItem = addTask
         }
-        
-        
-        
         
         configureFetchedResultsController()
         tableView.reloadData()
@@ -93,17 +94,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        // Fetch the data from Core Data
-//
-//        //configureFetchedResultsController()
-//        //fetchData()
-//        // Reload the table view
-//        tableView.reloadData()
-//    }
 
 
     // Core Data: NSFetchedResultsConroller
@@ -120,16 +112,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         // Create the fetch request, set some sort descriptor, then feed the fetchedResultsController
         // the request with along with the managed object context, which we'll use the view context
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
-        //let sortDescriptorURL = NSSortDescriptor(key: "url", ascending: false)
-        //let sortDescriptorTitle = NSSortDescriptor(key: "date", ascending: true)
         fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal!)
 
         let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
         let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
         let sortByToDo = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: true)
         
-        //tasks = self.selectedGoal?.tasksAssigned?.sortedArray(using: sortDescriptors) as! [Task]
-        //fetchRequest.sortDescriptors = [sortDescriptorURL, sortDescriptorTitle]
         fetchRequest.sortDescriptors = [sortByDone, sortByDate, sortByToDo]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController?.delegate = self
@@ -176,38 +164,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         tableView.reloadData()
     }
 
-    
-    // Craig Spell's advise BEGIN
-    //When using coredata relationships are automatically resolved. There is no need to create a fetch and make a round trip to the database everytime you want to update an attribute or relationship.
-//    //func updateTasks(){ //This method replaces your fetchData() method.
-//    func fetchData() {
-//        print("hello2")
-//        let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
-//        let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
-//        let sortByToDo = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: true)
-//
-//        let sortDescriptors = [sortByDone, sortByDate, sortByToDo]
-//        tasks = self.selectedGoal?.tasksAssigned?.sortedArray(using: sortDescriptors) as! [Task]
-//    }
-    
-    
-    //var context : NSManagedObjectContext!
     var tasks = [Task]()
     
     var selectedGoal: Goal?
-//    {
-//        didSet{
-//            self.context = selectedGoal?.managedObjectContext //Unless you have a specific reason to create a new context, you don't have to. every managed object carrys its context with it and is accessed by the managedObjectContext property on the object
-//            //self.updateTasks() // here you can populate the tasks array as soon as the selectedGoal is set
-//            self.fetchData()
-//        }
-//    }
-    
-    // Craig's Advise END
-    
-    
-    
-    
     
     func goalDoneAlert() {
 
@@ -241,12 +200,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let taskCell = tableView.dequeueReusableCell(withIdentifier: "taskListCell", for: indexPath)
         
-        //        let task = tasks[indexPath.row]
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
             
             taskCell.textLabel?.numberOfLines = 0
             taskCell.detailTextLabel?.numberOfLines = 0
-            
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .full
@@ -359,7 +316,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     
                 } else {
                     // Call update action
-                    //self.updateAction(task: task, indexPath: indexPath)
                     self.selectedTask = task
                     self.performSegue(withIdentifier: "updateTask", sender: self)
                 }
@@ -377,18 +333,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             }
             
             
-            
-            
             let calendarAction = UITableViewRowAction(style: .default, title: "Calendar") { (action, indexPath)
                 in
                 
-                
-                
                 if task.goalAssigned?.goalDone == true {
                     self.goalDoneAlert()
-                    
                 } else {
-                    
                     self.eventStore = EKEventStore.init()
                     self.eventStore.requestAccess(to: .event, completion:  {
                         (granted, error) in
@@ -431,7 +381,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                     eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
                                     
                                     self.present(eventVC, animated: false, completion: nil)
-                                    
                             }
                             
                         } else {
@@ -476,11 +425,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
     }
     
-    private func updateAction(task: Task, indexPath: IndexPath) {
-        
-        //self.selectedIndex = indexPath.row
-        //self.performSegue(withIdentifier: "updateTask", sender: self)
-    }
     
     private func deleteAction(task: Task, indexPath: IndexPath) {
         // Pop up an alert to warn a user of deletion of data
@@ -493,10 +437,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             // Declare ManagedObjectContext
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             // Delete a row from tableview
-            //let taskToDelete = self.tasks[indexPath.row]
             let taskToDelete = self.fetchedResultsController?.object(at: indexPath)
             // Delete it from Core Data
-            //context.delete(taskToDelete)
             context.delete(taskToDelete as! NSManagedObject)
             // Save the updated data to Core Data
             do {
@@ -504,11 +446,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             } catch {
                 print("Saving Failed: \(error.localizedDescription)")
             }
-            // Fetch the updated data
-            //self.fetchData()
-            // Refresh tableView with updated data
-            //self.tableView.reloadData()
-        }
+         }
+ 
         let NSL_cancelButton = NSLocalizedString("NSL_cancelButton", value: "Cancel", comment: "")
         let cancelAction = UIAlertAction(title: NSL_cancelButton, style: .cancel, handler: nil)
         
@@ -542,4 +481,3 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     }
     
 }
-

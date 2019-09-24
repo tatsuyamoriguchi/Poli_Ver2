@@ -74,6 +74,10 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     
     func displayButtons(editStatus: Bool) {
+        
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+        space.width = 30
+        
         if editStatus == true {
             
             // Create the info button
@@ -87,7 +91,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             navigationItem.rightBarButtonItems = []
             let editButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(editVision))
             let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addVision))
-            navigationItem.rightBarButtonItems =  [editButton, addButton, info]
+            navigationItem.rightBarButtonItems =  [editButton, space, addButton, space, info]
             
         } else {
             
@@ -101,7 +105,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
             navigationItem.rightBarButtonItem = nil
             let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addVision))
-            navigationItem.rightBarButtonItems = [addButton, info]
+            navigationItem.rightBarButtonItems = [addButton, space, info]
             
         }
     }

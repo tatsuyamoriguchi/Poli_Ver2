@@ -120,8 +120,10 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
                 
                 // Create a bar button item using the info button as its custom view
                 let info = UIBarButtonItem(customView: infoButton)
+                let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+                space.width = 30
                 
-                navigationItem.rightBarButtonItems = [share, info]
+                navigationItem.rightBarButtonItems = [share, space, info]
                 
             } else {
                 let NSL_noTodaysTask = NSLocalizedString("NSL_noTodaysTask", value: "No Today's Task now.", comment: "")

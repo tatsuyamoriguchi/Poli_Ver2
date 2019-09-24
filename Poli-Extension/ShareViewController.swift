@@ -29,10 +29,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     override func didSelectPost() {
         
-        // ******** This is the problem???? **********
         let managedContext = self.persistentContainer.viewContext
-        //let managedContext = ShareSelectViewController().persistentContainer.viewContext
-        
         let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)
         let newBookmark = NSManagedObject(entity: entity!, insertInto: managedContext)
         
@@ -42,14 +39,18 @@ class ShareViewController: SLComposeServiceViewController {
         newBookmark.setValue(contentTextString, forKey: "toDo")
         newBookmark.setValue(false, forKey: "isImportant")
         newBookmark.setValue(false, forKey: "isDone")
-        let today = Date()
-        newBookmark.setValue(today, forKey: "date")
-        print("selectedGoal at didSelectPost(): \(selectedGoal)")
-        // this is the problem
+
+        
+        
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: Date())
+        
+        var components = DateComponents()
+        components.setValue(1, for: .day)
+        let dateScheduled = Calendar.current.date(byAdding: components, to: startOfToday)
+
+        newBookmark.setValue(dateScheduled, forKey: "date")
         newBookmark.setValue(selectedGoal, forKey: "goalAssigned")
-        
-        
-        //saveContext()
         
         // Get web URL
         if let item = extensionContext?.inputItems[0] as? NSExtensionItem {
@@ -108,9 +109,6 @@ class ShareViewController: SLComposeServiceViewController {
         fetchRequest.predicate = NSPredicate(format: "goalDone = false")
         let goalDueDateSort = NSSortDescriptor(key:"goalDueDate", ascending:false)
         fetchRequest.sortDescriptors = [goalDueDateSort]
-        
-//        let goalDoneSort = NSSortDescriptor(key:"goalDone", ascending:false)
-//        fetchRequest.sortDescriptors = [goalDoneSort]
         self.fetchedGoals = try! context.fetch(fetchRequest) as! [Goal]
     }
     
@@ -119,17 +117,6 @@ class ShareViewController: SLComposeServiceViewController {
     }
     
     var fetchedGoals = [Goal]()
-    
-//    lazy var persistentContainer: NSPersistentContainer = {
-//        
-//        let container = NSPersistentContainer(name: "Poli")
-//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//            if let error = error as NSError? {
-//                fatalError("Unresolved error \(error), \(error.userInfo)")
-//            }
-//        })
-//        return container
-//    }()
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSCustomPersistentContainer(name: "Poli")
@@ -152,13 +139,7 @@ class ShareViewController: SLComposeServiceViewController {
     }()
 
   
-    
-    
-    
-    
-    
     // MARK: - Core Data Saving support
-    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -188,9 +169,6 @@ class ShareViewController: SLComposeServiceViewController {
         }
         return nil
     }
-    
-    
-    
 }
 
 

@@ -62,7 +62,11 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
         infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
         // Create a bar button item using the info button as its custom view
         let info = UIBarButtonItem(customView: infoButton)
-        navigationItem.rightBarButtonItems = [nextButton, info]
+        
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+        space.width = 30
+        
+        navigationItem.rightBarButtonItems = [nextButton, space, info]
         
 
         //
