@@ -28,54 +28,51 @@ class GoalProgress: NSNumber {
     var status: Bool = false
     
     func goalStatusAlert(dueDate: Date, isDone: Bool) -> (String, Bool) {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        print("today: \(today)")
         
-        let today = Date()
-        let differenceOfDate = Calendar.current.dateComponents([.day, .hour], from: today, to: dueDate)
-        var remainingHours = 24 + differenceOfDate.hour!
+        let differenceOfDate = calendar.dateComponents([.day], from: today, to: dueDate)
+        print("differenceOfDate: \(differenceOfDate)")
         var remainingDays: Int
+//        var remainingHours: Int
         
         if isDone == false {
-            if differenceOfDate.day! == 0 && remainingHours < 24 {
 
-                let NSL_statusToday = String(format: NSLocalizedString("NSL_statusToday", value: "%d hours remaining!", comment: ""), remainingHours)
-                statusString = NSL_statusToday
-                status = true
-                
-            } else if differenceOfDate.day! < 0 {
-                let NSL_statusPassed = NSLocalizedString("NSL_statusPassed", value: "Due Date has passed.", comment: "")
-                statusString = NSL_statusPassed
-                status = true
-                
-                
-            } else if remainingHours > 24 || differenceOfDate.day! >= 1 {
-                remainingHours = remainingHours - 23
-                remainingDays = differenceOfDate.day! + 1
-                
-                let NSL_statusLeft = String(format: NSLocalizedString("NSL_statusLeft", value: "%d day(s) and %d hour{s} left.", comment: ""), remainingDays, remainingHours)
-                statusString = NSL_statusLeft
-                status = false
-    
-                
-            } else {
-                print("differenceOfDate exception error")
-                let NSL_statusError = NSLocalizedString("NSL_statusError", value: "differenceOfDate  out of range error", comment: "")
-                statusString = NSL_statusError
-                status = false
-              
+            if let dayInt = differenceOfDate.day {
+                switch dayInt {
+                case ..<0:
+                    let NSL_statusPassed = NSLocalizedString("NSL_statusPassed", value: "Due Date has passed.", comment: "")
+                    statusString = NSL_statusPassed
+                    status = true
+                    
+                case 0:
+                    let NSL_statusToday = String(format: NSLocalizedString("NSL_statusToday", value: "Due Date Today!!", comment: ""))
+                    statusString = NSL_statusToday
+                    status = true
+                    
+                case 1:
+                    
+                    remainingDays = differenceOfDate.day!
+                    let NSL_statusLeft = String(format: NSLocalizedString("NSL_statusLeft", value: "Due Day Tomorrow", comment: ""), remainingDays)
+                    statusString = NSL_statusLeft
+                    status = false
+                    
+                default:
+                    remainingDays = differenceOfDate.day!
+                    let NSL_statusLeft = String(format: NSLocalizedString("NSL_statusLeft", value: "%d days left.", comment: ""), remainingDays)
+                    statusString = NSL_statusLeft
+                    status = false
+                }
             }
+            
         
         } else {
             statusString = ""
             status = false
- 
-        }
-        
+       }
         return (statusString, status)
-        
     }
-    
-    
-    
     
     
     func goalProgressCalc(goal: Goal, sender: UIViewController) -> Float {
@@ -84,11 +81,11 @@ class GoalProgress: NSNumber {
         
         if goalProgressPercentage.isNaN == true {
             goalProgressPercentage = 0
-            
         } else {}
         
         return goalProgressPercentage
     }
+    
     
     func goalProgressAchieved(percentage: Float) -> String {
         
