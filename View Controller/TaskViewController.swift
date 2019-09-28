@@ -93,9 +93,9 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     
     @objc func addUpdateLink() {
         
-        let alert = UIAlertController(title: "Add or Edit a link", message: "Add or edit URL.", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Add or Edit a link", comment: "Alert title"), message: NSLocalizedString("Add or edit URL.", comment: "Alert message"), preferredStyle: .alert)
         
-        let saveAction = UIAlertAction(title: "Save", style: .default, handler:{ action in
+        let saveAction = UIAlertAction(title: NSLocalizedString("Save", comment: "Alert title"), style: .default, handler:{ action in
         
             let textField = alert.textFields![0] as UITextField
             
@@ -115,7 +115,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         })
         
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Alert button"), style: .default, handler: nil)
         
         
         alert.addTextField { (textField: UITextField) in
@@ -128,7 +128,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                 textField.text = self.urlURL?.absoluteString
                 
             }else {
-                textField.placeholder = "Type url here. http://www.beckos.com"
+                textField.placeholder = NSLocalizedString("Type url here like https://www.beckos.com", comment: "Placeholder")
             }
             textField.delegate = self
             textField.keyboardType = UIKeyboardType.URL
@@ -149,7 +149,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     
     @objc func getInfoAction() {
         let NSL_shareAlert = NSLocalizedString("NSL_addTaskAlert", value: "How to set a task", comment: "")
-        let NSL_shareMessage = NSLocalizedString("NSL_taskTitle", value: "A task is a thing to do to achieve a goal. In order to achieve a goal, “Make a faster start 0.5 seconds.”, one of your tasks is “Learn Usain Bolt’s start by watching videos A, B, and C on 8/1/2019” \n\nA task is usually a thing to-do done within an hour or so. Divide a thing to-do into smaller pieces if it takes more than an hour to complete. Give yourself reward to complete a task if it is not motivating to do. \n\nA task description has to be clear and shouldn’t have any ambiguity so that you can immediately start working on it. A task is often ambiguous when you are procrastinating. Make it specific and divide it into smaller pieces.", comment: "")
+        let NSL_shareMessage = NSLocalizedString("NSL_taskTitle", value: "A task is a thing to do to achieve a goal. In order to achieve a goal, 'Make a faster start 0.5 seconds.', one of your tasks is 'Learn Usain Bolt’s start by watching videos A, B, and C on 8/1/2019' \n\nA task is usually a thing to-do done within an hour or so. Divide a thing to-do into smaller pieces if it takes more than an hour to complete. Give yourself reward to complete a task if it is not motivating to do. \n\nA task description has to be clear and shouldn’t have any ambiguity so that you can immediately start working on it. A task is often ambiguous when you are procrastinating. Make it specific and divide it into smaller pieces.", comment: "")
         
         AlertNotification().alert(title: NSL_shareAlert, message: NSL_shareMessage, sender: self, tag: "shareAlert")
     }

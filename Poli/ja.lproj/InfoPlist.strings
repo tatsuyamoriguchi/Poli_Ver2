@@ -4,11 +4,23 @@
 /* Bundle name */
 "CFBundleName" = "Poli";
 
+/* Privacy - Calendars Usage Description */
+"NSCalendarsUsageDescription" = "作業予定を入れるのにCalendarへのアクセスをこのアプリに認める。";
+
 /* Privacy - Camera Usage Description */
 "NSCameraUsageDescription" = "OKをクリックして撮影してください。";
 
+/* Privacy - Contacts Usage Description */
+"NSContactsUsageDescription" = "このアプリからCalendarイベントを作成する際連絡先データにアクセスする必要があります。";
+
 /* Privacy - Face ID Usage Description */
 "NSFaceIDUsageDescription" = "アプリのロック解除にFaceIDを使います。";
+
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際位置情報にアクセスする必要があります。";
+
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際このアプリが起動されている間、位置情報にアクセスする必要があります。";
 
 /* Privacy - Photo Library Usage Description */
 "NSPhotoLibraryUsageDescription" = "OKをクリックして撮影してください。";

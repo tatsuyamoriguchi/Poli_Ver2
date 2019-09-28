@@ -1,4 +1,4 @@
-/* Class = "UIButton"; normalTitle = "Update Account Information"; ObjectID = "0WM-Lc-Sbo"; */
+/* Class = "UIButton"; normalTitle = "Update Account Info"; ObjectID = "0WM-Lc-Sbo"; */
 "0WM-Lc-Sbo.normalTitle" = "アカウント情報の更新";
 
 /* Class = "UILabel"; text = "Goal Title"; ObjectID = "2oG-TI-W87"; */
@@ -7,23 +7,47 @@
 /* Class = "UILabel"; text = "BFF App to Help You to Achieve Goals"; ObjectID = "6a0-aQ-bA3"; */
 "6a0-aQ-bA3.text" = "頑張りたいあなたのBFFアプリ";
 
+/* Class = "UIViewController"; title = "Reward List"; ObjectID = "6yU-7v-tHW"; */
+"6yU-7v-tHW.title" = "ご褒美リスト";
+
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "8am-Ip-PY2"; */
 "8am-Ip-PY2.placeholder" = "パスワード";
+
+/* Class = "UILabel"; text = "Pick a reward for this task."; ObjectID = "8Lu-TT-hkT"; */
+"8Lu-TT-hkT.text" = "該当作業予定向けご褒美の選択";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "15f-Hk-JWJ"; */
+"15f-Hk-JWJ.text" = "詳細";
+
+/* Class = "UITextField"; text = "Set slider's max value"; ObjectID = "77l-c4-fJY"; */
+"77l-c4-fJY.text" = "スライダー最大値の設定";
 
 /* Class = "UILabel"; text = "Poli"; ObjectID = "81V-2E-PAo"; */
 "81V-2E-PAo.text" = "Poli";
 
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "abv-Qo-zWm"; */
-"abv-Qo-zWm.normalTitle" = "キャンセル";
+/* Class = "UILabel"; text = "Detail"; ObjectID = "A1C-gH-0BC"; */
+"A1C-gH-0BC.text" = "詳細";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "aAs-sn-vmz"; */
+"aAs-sn-vmz.text" = "詳細";
+
+/* Class = "UIViewController"; title = "Goal Display"; ObjectID = "aFb-Eg-P8g"; */
+"aFb-Eg-P8g.title" = "目標の表示";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "ahA-YV-Xcy"; */
 "ahA-YV-Xcy.text" = "Label";
 
-/* Class = "UILabel"; text = "Goal Reward"; ObjectID = "aqB-4O-fKy"; */
-"aqB-4O-fKy.text" = "目標達成時のご褒美";
-
 /* Class = "UINavigationItem"; title = "My Goals"; ObjectID = "AqS-Uw-cHf"; */
 "AqS-Uw-cHf.title" = "私の目標！";
+
+/* Class = "UIViewController"; title = "Set Vision for Goal"; ObjectID = "bCl-aG-SHj"; */
+"bCl-aG-SHj.title" = "該当目標のVisionの選択";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "C8Q-NY-jab"; */
+"C8Q-NY-jab.text" = "タイトル";
+
+/* Class = "UITextField"; placeholder = "Vision or Dream to realize"; ObjectID = "Cj7-M9-Me6"; */
+"Cj7-M9-Me6.placeholder" = "実現させるVisionもしくは夢";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "cqk-Cx-Mfp"; */
 "cqk-Cx-Mfp.normalTitle" = "ログイン";
@@ -37,9 +61,6 @@
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "dxT-jc-r3f"; */
 "dxT-jc-r3f.text" = "Subtitle";
 
-/* Class = "UIViewController"; title = "Goal Due Date"; ObjectID = "ecZ-ts-SrN"; */
-"ecZ-ts-SrN.title" = "目標達成期限";
-
 /* Class = "UILabel"; text = "Is Important-Urgent?"; ObjectID = "EZw-nK-7p9"; */
 "EZw-nK-7p9.text" = "重要もしくは緊急";
 
@@ -49,17 +70,26 @@
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "FgT-RZ-aqL"; */
 "FgT-RZ-aqL.normalTitle" = "キャンセル";
 
+/* Class = "UIViewController"; title = "Vision"; ObjectID = "fMP-cx-ZVu"; */
+"fMP-cx-ZVu.title" = "Vision";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "gQz-kk-zG1"; */
 "gQz-kk-zG1.text" = "ラベル";
 
 /* Class = "UILabel"; text = "Turn Off Switch to Undone this Goal"; ObjectID = "hHv-qQ-qLs"; */
 "hHv-qQ-qLs.text" = "目標達成済み解除";
 
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "HYm-ox-PTk"; */
-"HYm-ox-PTk.normalTitle" = "キャンセル";
+/* Class = "UILabel"; text = "Set a monetary value for the reward."; ObjectID = "HjO-Pi-zTG"; */
+"HjO-Pi-zTG.text" = "ご褒美の金額の設定";
 
 /* Class = "UILabel"; text = "Is Done?"; ObjectID = "iiO-Ej-iHd"; */
 "iiO-Ej-iHd.text" = "完了？";
+
+/* Class = "UIButton"; normalTitle = "Set Goal Type to Display"; ObjectID = "isE-BP-08c"; */
+"isE-BP-08c.normalTitle" = "表示する目標タイプの選択";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "jPx-Zc-C87"; */
+"jPx-Zc-C87.normalTitle" = "キャンセル";
 
 /* Class = "UIViewController"; title = "Task"; ObjectID = "kmR-6c-LEk"; */
 "kmR-6c-LEk.title" = "タスク";
@@ -82,17 +112,29 @@
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "nT0-uU-F2k"; */
 "nT0-uU-F2k.normalTitle" = "キャンセル";
 
+/* Class = "UITextField"; placeholder = "Vision or Dream to realize"; ObjectID = "pD6-et-wNc"; */
+"pD6-et-wNc.placeholder" = "実現させるVisionもしくは夢";
+
 /* Class = "UITextView"; text = "Goal Description"; ObjectID = "pK1-nL-rSe"; */
 "pK1-nL-rSe.text" = "目標の詳細";
 
-/* Class = "UIViewController"; title = "Goal Description"; ObjectID = "qS2-mk-zH3"; */
-"qS2-mk-zH3.title" = "目標の詳細";
+/* Class = "UILabel"; text = "Title"; ObjectID = "QbC-ly-b2e"; */
+"QbC-ly-b2e.text" = "タイトル";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "qqg-qM-rYG"; */
+"qqg-qM-rYG.text" = "タイトル";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "qvN-V5-Eto"; */
 "qvN-V5-Eto.text" = "Label";
 
+/* Class = "UILabel"; text = "Max:"; ObjectID = "Tvj-Gq-yaS"; */
+"Tvj-Gq-yaS.text" = "最大値：";
+
 /* Class = "UIButton"; normalTitle = "Go To Your Device's Settings"; ObjectID = "usr-gy-7B3"; */
 "usr-gy-7B3.normalTitle" = "このデバイスの設定画面に行く";
+
+/* Class = "UITextField"; placeholder = "Reward for Achieving a Goal or Completing a Task"; ObjectID = "VNX-rQ-nuV"; */
+"VNX-rQ-nuV.placeholder" = "目標実現もしくは作業実行時のご褒美";
 
 /* Class = "UITextField"; placeholder = "Type a To-Do to be done within an hour."; ObjectID = "Vwg-FQ-hP8"; */
 "Vwg-FQ-hP8.placeholder" = "1時間以内にできるタスク内容を記入";
@@ -100,26 +142,20 @@
 /* Class = "UILabel"; text = "Notifications are not authorized on this device. Please open this device's Settings, turn on  Allow Notifications."; ObjectID = "W4H-Gu-3hI"; */
 "W4H-Gu-3hI.text" = "通知機能がオンになっていません。このデバイスの設定で通知機能をオンにしてください。";
 
-/* Class = "UITextField"; placeholder = "Set a specific, concrete, & realistic Goal Title."; ObjectID = "w6L-8n-6g8"; */
-"w6L-8n-6g8.placeholder" = "具体的で実現可能で現実的な目標を設定しよう。";
-
 /* Class = "UILabel"; text = "Title"; ObjectID = "wEH-DP-RyJ"; */
 "wEH-DP-RyJ.text" = "タイトル";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "wfW-Is-yca"; */
 "wfW-Is-yca.text" = "詳細";
 
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Wht-4o-Aqe"; */
-"Wht-4o-Aqe.normalTitle" = "キャンセル";
-
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "WPP-KT-HvA"; */
 "WPP-KT-HvA.placeholder" = "ユーザー名";
 
-/* Class = "UIButton"; normalTitle = "Set Notificaiton Time"; ObjectID = "WRT-sl-gbc"; */
+/* Class = "UIButton"; normalTitle = "Set Reminder Time"; ObjectID = "WRT-sl-gbc"; */
 "WRT-sl-gbc.normalTitle" = "通知時間設定";
 
 /* Class = "UITextField"; placeholder = "Choose a reward and its image that you really crave."; ObjectID = "X0I-SN-cUg"; */
-"X0I-SN-cUg.placeholder" = "本当に欲しいご褒美とそのイメージを選ぼう。";
+"X0I-SN-cUg.placeholder" = "本当に欲しいご褒美とその画像を選ぼう。";
 
 /* Class = "UILabel"; text = "Goal Due Date"; ObjectID = "Xre-lg-kuf"; */
 "Xre-lg-kuf.text" = "目標達成期限";

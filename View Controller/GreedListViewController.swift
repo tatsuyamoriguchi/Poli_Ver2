@@ -58,7 +58,7 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
     func displayButtons(editStatus: Bool) {
         if editStatus == true {
             navigationItem.rightBarButtonItems = []
-             let editButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(editGreed))
+             let editButton = UIBarButtonItem(title: NSLocalizedString("Update", comment: "Button"), style: .done, target: self, action: #selector(editGreed))
 //            let editButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editGreed))
             let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGreed))
             navigationItem.rightBarButtonItems =  [editButton, addButton]
@@ -97,38 +97,38 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
     var greed: Reward?
     
     @objc func addGreed() {
-        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        let entity = NSEntityDescription.entity(forEntityName: "Reward", in: managedContext)!
-        let item = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-
-        let itemValue = Int32(greedValueSliderOutlet.value)
-        
-        if let itemTitle = greedTextField.text {
-            item.setValue(itemTitle, forKey: "title")
-            item.setValue(itemValue, forKey: "value")
+   
+        if greedTextField.text == "" {
+            noTextInputAlert()
             
         } else {
-
+            let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let entity = NSEntityDescription.entity(forEntityName: "Reward", in: managedContext)!
+            let item = NSManagedObject(entity: entity, insertInto: managedContext)
+            let itemValue = Int32(greedValueSliderOutlet.value)
+            let itemTitle = greedTextField.text
+            item.setValue(itemTitle, forKey: "title")
+            item.setValue(itemValue, forKey: "value")
+            save()
         }
-        
-        save()
         
     }
     
     
     
     @objc func editGreed() {
-        
-        greed?.title = greedTextField.text
-        let greedValue = Int32(greedValueSliderOutlet.value)
-        greed?.value = greedValue
-        
-        save()
+        if greedTextField.text == "" {
+            noTextInputAlert()
+        } else {
+            greed?.title = greedTextField.text
+            let greedValue = Int32(greedValueSliderOutlet.value)
+            greed?.value = greedValue
+            save()
+        }
     }
     
     func save(){
+        
         do {
             try (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext.save()
             print("managedContext was saved.")
@@ -138,7 +138,7 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
         }
         
         greedTextField.text = ""
-        greedValueLabel.text = "Use the slider below to set a value."
+        greedValueLabel.text = NSLocalizedString("Use the slider below to set a value.", comment: "Instruction for slider")
         displayButtons(editStatus: false)
         
         UserDefaults.standard.set(maxValueFloat, forKey: "greedValueMax")
@@ -148,6 +148,14 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
         
     }
     
+func noTextInputAlert() {
+    
+    let NSL_alertTitle_024 = NSLocalizedString("NSL_alertTitle_024", value: "No Text Entry", comment: "")
+    let NSL_alertMessage_024 = NSLocalizedString("NSL_alertMessage_024", value: "This entry is mandatory. Please type one in the text field.", comment: "")
+    AlertNotification().alert(title: NSL_alertTitle_024, message: NSL_alertMessage_024, sender: self, tag: "noTextEntry")
+    
+}
+
     
     
     private func configureFetchedResultsController() {

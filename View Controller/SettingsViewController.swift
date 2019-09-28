@@ -105,7 +105,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         // PickerView for Goal Type
         self.GoalTypePicker.delegate = self
         self.GoalTypePicker.dataSource = self
-        pickerData = ["All Goals", "Undone Goals Only", "Done Goals Only"]
+        pickerData = [NSLocalizedString("All Goals", comment: "Picker menu"), NSLocalizedString("Undone Goals Only", comment: "Picker menu"), NSLocalizedString("Done Goals Only", comment: "Picker menu")]
         
         if let storedRow = UserDefaults.standard.object(forKey: "predicateGoal") as? Int {
             

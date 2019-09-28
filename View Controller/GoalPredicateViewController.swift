@@ -21,7 +21,7 @@ class GoalPredicateViewController: UIViewController, UIPickerViewDelegate, UIPic
         
         self.GoalTypePicker.delegate = self
         self.GoalTypePicker.dataSource = self
-        pickerData = ["All Goals", "Undone Goals Only", "Done Goals Only"]
+        pickerData = [NSLocalizedString("All Goals", comment: "Picker manu"), NSLocalizedString("Undone Goals Only", comment: "Picker menu"), NSLocalizedString("Done Goals Only", comment: "Picker menu")]
         
         
         if let storedRow = UserDefaults.standard.object(forKey: "predicateGoal") as? Int {

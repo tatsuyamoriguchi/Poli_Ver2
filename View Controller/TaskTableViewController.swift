@@ -30,7 +30,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     func eventEditViewControllerDefaultCalendar(forNewEents controller: EKEventEditViewController) -> EKCalendar {
         let calendar = self.eventStore.defaultCalendarForNewEvents
-        controller.title = "Event for \(calendar!.title)"
+        controller.title = NSLocalizedString("Event for \(calendar!.title)", comment: "Calendar event title")
         return calendar!
     }
     
@@ -209,10 +209,13 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             dateFormatter.dateStyle = .full
             let dateString = dateFormatter.string(from: (task.date)! as Date)
             
-            if var rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
+            if let rewardTitle = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
+                
                 let rewardValueString = LocaleConvert().currency2String(value: Int32(rewardValue))
-                rewardString = "\nReward: \(rewardString) - Value: \(rewardValueString)"
-                taskCell.detailTextLabel?.text = dateString + rewardString
+                
+                let rewardString = NSLocalizedString("Reward: ", comment: "") + rewardTitle + " - " + NSLocalizedString("Value: ", comment: "") +  rewardValueString
+                
+                taskCell.detailTextLabel?.text = dateString + "\n" + rewardString
             } else {
                 taskCell.detailTextLabel?.text = dateString
             }
@@ -309,9 +312,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
             
             // MARK: - editActionForRowAt updateACtion
-            let NSL_updateButton_02 = NSLocalizedString("NSL_updateButton_02", value: "Update", comment: "")
-            let updateAction = UITableViewRowAction(style: .default, title: NSL_updateButton_02) { (action, indexPath) in
-                if task.goalAssigned?.goalDone == true {
+//            let NSL_updateButton_02 = NSLocalizedString("NSL_updateButton_02", value: "Update", comment: "")
+//            let updateAction = UITableViewRowAction(style: .default, title: NSL_updateButton_02) { (action, indexPath) in
+            let updateAction = UITableViewRowAction(style: .default, title: "✏️") { (action, indexPath) in
+            if task.goalAssigned?.goalDone == true {
                     self.goalDoneAlert()
                     
                 } else {
@@ -321,8 +325,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 }
             }
             
-            let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
-            let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
+//            let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "", comment: "")
+//            let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath)
+            let deleteAction = UITableViewRowAction(style: .default, title: "🗑") { (action, indexPath)
+              in
                 if task.goalAssigned?.goalDone == true {
                     self.goalDoneAlert()
                     
@@ -333,7 +339,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             }
             
             
-            let calendarAction = UITableViewRowAction(style: .default, title: "Calendar") { (action, indexPath)
+            let calendarAction = UITableViewRowAction(style: .default, title: "📅") { (action, indexPath)
                 in
                 
                 if task.goalAssigned?.goalDone == true {
@@ -369,12 +375,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                     } else { eventURL = "" }
                                     
                                     if let rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
-                                        let reward4ThisTask = "\nReward: \(rewardString) \nValue: \(rewardValue)"
+                                        let reward4ThisTask = NSLocalizedString("Reward: ", comment: "") +  rewardString + "\n" + NSLocalizedString("Value: ", comment: "") + String(rewardValue)
                                         
-                                        eventString = "Goal: \(task.goalAssigned?.goalTitle ?? "No goal assignd")" + reward4ThisTask + "\n" + eventURL!
+                                        eventString = "Goal: \(task.goalAssigned?.goalTitle ?? NSLocalizedString("No goal assignd", comment: "Error message"))" + "\n" + reward4ThisTask + "\n" + eventURL!
                                         
                                     } else {
-                                        eventString = "Goal: \(task.goalAssigned?.goalTitle ?? "No goal assignd")" + "\n" + eventURL!
+                                        eventString = "Goal: \(task.goalAssigned?.goalTitle ?? NSLocalizedString("No goal assignd", comment: "Error message"))" + "\n" + eventURL!
                                     }
                                     
                                     eventVC.event?.notes = eventString
@@ -385,16 +391,17 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                             
                         } else {
                             print("error \(String(describing: error))")
-                            AlertNotification().alert(title: "Calendar Access Denied", message: "Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on.", sender: self, tag: "calendar")
+                            AlertNotification().alert(title: NSLocalizedString("Calendar Access Denied", comment: "Alert title"), message: NSLocalizedString("Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on.", comment: "Alert message"), sender: self, tag: "calendar")
                         }
                         
                     })
                 }
             }
             
-            let NSL_linkButton = NSLocalizedString("NSL_linkButton", value: "Link", comment: "")
-            let linkAction = UITableViewRowAction(style: .default, title: NSL_linkButton) { (action, indexPath) in
-                
+//            let NSL_linkButton = NSLocalizedString("NSL_linkButton", value: "Link", comment: "")
+//            let linkAction = UITableViewRowAction(style: .default, title: NSL_linkButton) { (action, indexPath) in
+                let linkAction = UITableViewRowAction(style: .default, title: "🔗") { (action, indexPath) in
+                    
                 self.linkAction(task: task, indexPath: indexPath)
             }
             

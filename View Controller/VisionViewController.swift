@@ -67,7 +67,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     @objc func getInfoAction() {
         let NSL_shareAlert = NSLocalizedString("NSL_addVisionAlert", value: "How to set a vision", comment: "")
-        let NSL_shareMessage = NSLocalizedString("NSL_visionTitle", value: "A vision is an ultimate destination to reach in order to full fill your dream. What do you want to become? \n\nFor instance, to become an iOS developer is a vision. To obtain an iOS developer’s job is one of goals that you need to achieve in order to become an iOS developer. \n\nQuestion yourself what kind of iOS developer do you want to be? Do you want to work in a large organization to be financially stable, a start-up company to have a risky but challenging work-style, or work as an independent freelancer to have unstable but flexible work-style? Where do you want to live and work? What type of persons do you want to work with? What type of product or project do you want to work with? \n\nVision doesn’t have to be just one in your life. It is highly recommended to have one at the time in order to not to loose your focus. You could, however, have one vision for your career, another vision for your health, and another one for your family, for instance. But two career visions at the same time is not recommended. \n\nVision doesn’t have time-deadline since it is about becoming something, state of yourself. For instance, to become a gold medal olympian athlete in volleyball is a vision, but to obtain a gold medal in Tokyo Olympic 2020 is one of goals to achieve to relaize your vision, “To become a gold medal olympian”. ", comment: "")
+        let NSL_shareMessage = NSLocalizedString("NSL_visionTitle", value: "A vision is an ultimate destination to reach in order to full fill your dream. What do you want to become? \n\nFor instance, to become an iOS developer is a vision. To obtain an iOS developer’s job is one of goals that you need to achieve in order to become an iOS developer. \n\nQuestion yourself what kind of iOS developer do you want to be? Do you want to work in a large organization to be financially stable, a start-up company to have a risky but challenging work-style, or work as an independent freelancer to have unstable but flexible work-style? Where do you want to live and work? What type of persons do you want to work with? What type of product or project do you want to work with? \n\nVision doesn’t have to be just one in your life. It is highly recommended to have one at the time in order to not to loose your focus. You could, however, have one vision for your career, another vision for your health, and another one for your family, for instance. But two career visions at the same time is not recommended. \n\nVision doesn’t have time-deadline since it is about becoming something, state of yourself. For instance, to become a gold medal olympian athlete in volleyball is a vision, but to obtain a gold medal in Tokyo Olympic 2020 is one of goals to achieve to relaize your vision, 'To become a gold medal olympian'. ", comment: "")
         
         AlertNotification().alert(title: NSL_shareAlert, message: NSL_shareMessage, sender: self, tag: "shareAlert")
     }
@@ -89,7 +89,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
             
             navigationItem.rightBarButtonItems = []
-            let editButton = UIBarButtonItem(title: "Update", style: .done, target: self, action: #selector(editVision))
+            let editButton = UIBarButtonItem(title: NSLocalizedString("Update", comment: "Button"), style: .done, target: self, action: #selector(editVision))
             let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addVision))
             navigationItem.rightBarButtonItems =  [editButton, space, addButton, space, info]
             
@@ -137,7 +137,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     // MARK: PickerView
     // PickerView properteis
     @IBOutlet var statusPicker: UIPickerView!
-    private var pickerData: [String] = ["Active", "Inactive", "Done"]
+    private var pickerData: [String] = [NSLocalizedString("Active", comment: "Picker menu"), NSLocalizedString("Inactive", comment: "Picker menu"), NSLocalizedString("Done", comment: "Picker menu")]
     private var storedRow: Int?
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -183,7 +183,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             save()
             
         } else {
-            AlertNotification().alert(title: "No Vision Title Detected", message: "Please type a title for a vision.", sender: self, tag: "noVisionTitle")
+            AlertNotification().alert(title: NSLocalizedString("No Vision Title Detected", comment: "Alert title"), message: NSLocalizedString("Please type a title for a vision.", comment: "Alert message"), sender: self, tag: "noVisionTitle")
         }
     }
     
@@ -197,7 +197,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             save()
             
         } else {
-            AlertNotification().alert(title: "No Vision Title Detected", message: "Please type a title for a vision.", sender: self, tag: "noVisionTitle")
+            AlertNotification().alert(title: NSLocalizedString("No Vision Title Detected", comment: "Alert title"), message: NSLocalizedString("Please type a title for a vision.", comment: "Alert message"), sender: self, tag: "noVisionTitle")
         }
     }
     
@@ -459,7 +459,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     func displayInstruction(textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "Note this vision's summary, description, resources, related parties, locations, and any to note."
+            textView.text = NSLocalizedString("Note this vision's summary, description, resources, related parties, locations, and any to note.", comment: "Placeholder")
             textView.textColor = UIColor.lightGray
         }
     }

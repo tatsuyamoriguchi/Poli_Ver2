@@ -39,8 +39,7 @@ class ShareSelectViewController: UIViewController  {
         setupUI()
         
         tableView.reloadData()
-        
-        print("Hello")
+
     }
     
     
@@ -48,7 +47,7 @@ class ShareSelectViewController: UIViewController  {
     
     private func setupUI() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        title = "Select a Goal."
+        title = NSLocalizedString("Select a Goal.", comment: "Placeholder")
         view.addSubview(tableView)
     }
 }

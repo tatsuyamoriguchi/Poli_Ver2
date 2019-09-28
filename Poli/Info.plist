@@ -7,13 +7,13 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>Allow this app to access to Calendar to le you schedule a task.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to access location data. </string>
+	<string>When creating an Calendar event from this app, it needs to access location data.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to access location data. </string>
+	<string>When creating an Calendar event from this app, it needs to access location data, (always). </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to access location data. </string>
+	<string>When creating an Calendar event from this app, it needs to access location data, while it is in use.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to accee contact data.</string>
+	<string>When creating an Calendar event from this app, it needs to accee contact data, while it is in use.</string>
 	<key>CFBundleDisplayName</key>
 	<string>Poli</string>
 	<key>CFBundleDocumentTypes</key>

@@ -38,7 +38,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "Login as %@", comment: ""), userName)
             self.navigationItem.prompt = NSL_naviItem
         }else {
-            self.navigationItem.prompt = "Log in error"
+            self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")
         }
         
         
@@ -50,7 +50,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         let vision = UIBarButtonItem(title: "🌈", style: .plain, target: self, action: #selector(visionPressed))
         let greedList = UIBarButtonItem(title: "🎁", style: .done, target: self, action: #selector(greedListPressed))
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
-        space.width = 30
+        space.width = 25
         navigationItem.rightBarButtonItems = [logout, space, settings, space, vision, space, greedList, space, todaysTasks]
     }
     
@@ -215,11 +215,11 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             let rewardValue = LocaleConvert().currency2String(value: goal.reward4Goal?.value ?? 0)
             //let visionAssigned = "Vision: " + (goal.vision4Goal?.title ?? "No vision assigned")
             
-            let rewardPart1 = NSL_Reward + (goal.reward4Goal?.title ?? "No reward assigned")
-            let rewardPart2 = " (" + rewardValue + ")"
+            let rewardPart1 = NSL_Reward + (goal.reward4Goal?.title ?? NSLocalizedString("No reward assigned", comment: "Error message"))
+            let rewardPart2 = " (" + rewardValue + ")\n"
             
             if let goalDescriptionText = goal.goalDescription {
-                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 +  "\nGOAL NOTES: " + goalDescriptionText
+                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 +  NSLocalizedString("GOAL NOTES: ", comment: "Title for goal description") + goalDescriptionText
             } else {
                 goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2
             }
@@ -239,8 +239,9 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 
             
             (statusString, status) = GoalProgress().goalStatusAlert(dueDate: goal.goalDueDate! as Date, isDone: goal.goalDone)
-            let NSL_dueDateLabel = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@\n%@", comment: " "), date, statusString)
-            goalCell.goalDueDateLabel.text = NSL_dueDateLabel
+            let dueDateString = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@ - %@", comment: "Due date text with parameters"), date, statusString)
+           
+            goalCell.goalDueDateLabel.text = dueDateString
             if status == true {goalCell.goalDueDateLabel.textColor = .red} else { goalCell.goalDueDateLabel.textColor = .black
             }
             

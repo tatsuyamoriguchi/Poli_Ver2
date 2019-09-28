@@ -50,7 +50,7 @@ class BiometricIDAuth {
         // 2 You’re using canEvaluatePolicy() to check whether the device is capable of biometric authentication.
         guard canEvaluatePolicy() else {
             
-            completion("Touch ID not available")
+            completion(NSLocalizedString("Touch ID not available", comment: "Error message"))
             return
         }
         

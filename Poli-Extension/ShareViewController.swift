@@ -157,8 +157,8 @@ class ShareViewController: SLComposeServiceViewController {
     override func configurationItems() -> [Any]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
         if let shareLink = SLComposeSheetConfigurationItem() {
-            shareLink.title = "Goal Selected"
-            shareLink.value = selectedGoal?.goalTitle ?? "Select a Goal"
+            shareLink.title = NSLocalizedString("Goal Selected", comment: "sharelink.title")
+            shareLink.value = selectedGoal?.goalTitle ?? NSLocalizedString("Select a Goal", comment: "Placeholder")
             shareLink.tapHandler = {
                 let vc = ShareSelectViewController()
                 vc.delegate = self

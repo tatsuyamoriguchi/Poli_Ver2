@@ -46,10 +46,10 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             let toDo = task.toDo
             
             if goalTitle != previousGoalTitle {
-                message.append("\n\nGoal: \(goalTitle ?? "ERROR NO GOALTITLE")\n- To Do: \(toDo ?? "ERROR NO TODO")  ")
+                message.append(NSLocalizedString("\n\nGoal: \(goalTitle ?? "ERROR NO GOALTITLE")\n- To Do: \(toDo ?? "ERROR NO TODO") ", comment: "Message"))
                 previousGoalTitle = goalTitle!
             } else {
-                message.append("\n- To Do: \(toDo ?? "ERROR NO TODO") ")
+                message.append(NSLocalizedString("\n- To Do: \(toDo ?? "ERROR NO TODO")", comment: "Message"))
             }
             
         }
@@ -127,7 +127,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
                 
             } else {
                 let NSL_noTodaysTask = NSLocalizedString("NSL_noTodaysTask", value: "No Today's Task now.", comment: "")
-                let noTodaysTaskAlert = UIAlertController(title: "Aelrt", message: NSL_noTodaysTask, preferredStyle: .alert)
+                let noTodaysTaskAlert = UIAlertController(title: NSLocalizedString("Alert", comment: "Alert title"), message: NSL_noTodaysTask, preferredStyle: .alert)
                 self.present(noTodaysTaskAlert, animated: true, completion: nil)
                 
                 // Hide rightBarButtonItem
@@ -346,8 +346,9 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             
             if var rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
                 let rewardValueString = LocaleConvert().currency2String(value: Int32(rewardValue))
-                rewardString = "\nReward: \(rewardString) - Value: \(rewardValueString)"
-                cell.detailTextLabel?.text = dateString + rewardString
+                rewardString = NSLocalizedString("Reward: ", comment: "") + rewardString + " - " + NSLocalizedString("Value: ", comment: "") + rewardValueString
+                
+                cell.detailTextLabel?.text = dateString + "\n" + rewardString
             } else {
                 cell.detailTextLabel?.text = dateString
             }

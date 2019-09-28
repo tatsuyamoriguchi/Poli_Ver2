@@ -1,5 +1,75 @@
+/* Picker menu */
+"Active" = "選択可";
+
+/* Alert title */
+"Add or Edit a link" = "リンク先を追加・更新する。";
+
+/* Alert message */
+"Add or edit URL." = "URLを追加・更新する。";
+
+/* Alert title */
+"Alert" = "注意";
+
+/* Picker manu
+   Picker menu */
+"All Goals" = "全目標";
+
+/* Alert title */
+"Calendar Access Denied" = "Calendarへのアクセス拒否";
+
+/* Alert button */
+"Cancel" = "キャンセル";
+
+/* Picker menu */
+"Done" = "完了";
+
+/* Picker menu */
+"Done Goals Only" = "完了した目標のみ表示";
+
+/* Alert title */
+"Error" = "エラー";
+
+/* Calendar event title */
+"Event for (calendar!.title)" = "(calendar!.title) 向けイベント";
+
+/* Title for goal description */
+"GOAL NOTES: " = "目標メモ：";
+
+/* Picker menu */
+"Inactive" = "使用停止中";
+
+/* Login error */
+"Log in error" = "ログインエラー";
+
+/* Error message */
+"No goal assignd" = "目標が設定されていません。";
+
+/* Error message */
+"No reward assigned" = "ご褒美が設定されていません。";
+
+/* Alert message */
+"No User Name found" = "ユーザー名が見つかりません。";
+
+/* Alert title */
+"No Vision Title Detected" = "Visionタイトルが見つかりません。";
+
+/* Placeholder */
+"Note this goal's summary, description, resources, related parties, locations, and any to note." = "目標の要約、詳細、リソース、関連先、位置情報等を書き込んでください。";
+
+/* Placeholder */
+"Note this vision's summary, description, resources, related parties, locations, and any to note." = "目標の要約、詳細、リソース、関連先、位置情報等を書き込んでください。";
+
 /* No comment provided by engineer. */
 "NSL_" = "FaceID/TouchIDが設定されていません。";
+
+/* No comment provided by engineer. */
+"NSL_addGoalAlert" = "目標設定法";
+
+/* No comment provided by engineer. */
+"NSL_addTaskAlert" = "作業予定の策定法";
+
+/* No comment provided by engineer. */
+"NSL_addVisionAlert" = "Visionの描き方";
 
 /* (No Comment) */
 "NSL_alertCancel" = "キャンセル";
@@ -157,14 +227,17 @@
 /* No comment provided by engineer. */
 "NSL_deleteButton_04" = "削除";
 
-/* (No Comment) */
+/* Due date text with parameters */
 "NSL_dueDateLabel" = "期限： %1$@ - %2$@";
 
 /* No comment provided by engineer. */
 "NSL_goalDescription" = "目標の目的（ビジョン）、詳細、経過記録、注意事項、課題等自由に書き込んで下さい。";
 
 /* No comment provided by engineer. */
-"NSL_goalTitle" = "目標達成させて自分を変えよう！\n実現可能で進捗が計測できてやる価値のある具体的な目標をまず設定してください。達成すればあなたの生活や仕事に実際にプラスになるものにしましょう。\n「No.1 ファッションフォトグラファーになること」は目標ではありません。それは実現させたいビジョン、つまり夢のことです。いくつもの目標を達成させた先にある最終的に実現させたい夢のことです。ビジョンは山の頂上みたいなもので、一度に一つだけにしましょう。一つのビジョンが実現できたら次のビジョンを作ってください。同時に二つも三つもビジョンを持たないように。一回に登る山は一つだけにしましょう。\n「海岸沿いで行うファッション向け撮影技術を習得する。」が実現させる具体的な目標で、山の頂上「No.1 ファッションフォトグラファーになること」に近づく通過点の一つ、つまり目標のひとつになります。\nタスク（作業）は目標を達成するための実際の実行項目です。「海を背景とした情景撮影法を学ぶ」はタスクとしてはあまり具体的ではありません。「海の風景を背景にファッションモデルを撮影するのに一番良いレンズを選ぶ方法を調べる。」が具体的で実行し易い行動の最小単位、つまりそれ以上他に何したら良いか考えなくて良いサイズの「やること」つまりタスクになります。なるべく2時間以内に完了するタスクを設定しましょう。\n「毎日6時に起床する。」は目標ではなく、反復タスクもしくはタスクを実行し易くするために身に付けたい習慣のことです。習慣付けをタスクの一つにしても構いませんがそれによって達成できる目標を明確にしましょう。\n山の頂上に登るというビジョンのためにいくつも通過点（目標）を目指して山登りをしていくわけで、山登りに必要なもの、ピッケル、登山靴、地図、飲料水を買うことがタスクになります。\n実現させたいビジョン（夢）を具体的に描いたら、その都度目標を設定して、目標ごとの様々なタスクを一つ一つをこなしながらビジョンに近づいて行きましょう。1週間から5週間で達成できる目標が効果的です。短期間でいくつも目標を達成できるとやる気も上がるでしょう。";
+"NSL_goalTitle" = "目標達成させて自分を変えよう！実現可能で進捗が計測できてやる価値のある具体的な目標をまず設定してください。達成すればあなたの生活や仕事に実際にプラスになるものにしましょう。\n\n「No.1 ファッションフォトグラファーになること」は目標ではありません。それは実現させたいビジョン、つまり夢のことです。いくつもの目標を達成させた先にある最終的に実現させたい夢のことです。ビジョンは山の頂上みたいなもので、一度に一つだけにしましょう。一つのビジョンが実現できたら次のビジョンを作ってください。同時に二つも三つもビジョンを持たないように。一回に登る山は一つだけにしましょう。\n\n「海岸沿いで行うファッション向け撮影技術を習得する。」が実現させる具体的な目標で、山の頂上「No.1 ファッションフォトグラファーになること」に近づく通過点の一つ、つまり目標のひとつになります。タスク（作業）は目標を達成するための実際の実行項目です。「海を背景とした情景撮影法を学ぶ」はタスクとしてはあまり具体的ではありません。「海の風景を背景にファッションモデルを撮影するのに一番良いレンズを選ぶ方法を調べる。」が具体的で実行し易い行動の最小単位、つまりそれ以上他に何したら良いか考えなくて良いサイズの「やること」つまりタスクになります。なるべく2時間以内に完了するタスクを設定しましょう。\n\n「毎日6時に起床する。」は目標ではなく、反復タスクもしくはタスクを実行し易くするために身に付けたい習慣のことです。習慣付けをタスクの一つにしても構いませんがそれによって達成できる目標を明確にしましょう。山の頂上に登るというビジョンのためにいくつも通過点（目標）を目指して山登りをしていくわけで、山登りに必要なもの、ピッケル、登山靴、地図、飲料水を買うことがタスクになります。\n\n実現させたいビジョン（夢）を具体的に描いたら、その都度目標を設定して、目標ごとの様々なタスクを一つ一つをこなしながらビジョンに近づいて行きましょう。1週間から5週間で達成できる目標が効果的です。短期間でいくつも目標を達成できるとやる気も上がるでしょう";
+
+/* No comment provided by engineer. */
+"NSL_linkButton" = "リンク";
 
 /* No comment provided by engineer. */
 "NSL_loginError" = "ログインエラー";
@@ -174,9 +247,6 @@
 
 /* No comment provided by engineer. */
 "NSL_loginUsername" = "%@ としてログイン";
-
-/* No comment provided by engineer. */
-"NSL_logout" = "ログアウト";
 
 /* No comment provided by engineer. */
 "NSL_naviAdd" = "タスクの追加";
@@ -205,12 +275,6 @@
 /* No comment provided by engineer. */
 "NSL_nextButton_01" = "次へ";
 
-/* No comment provided by engineer. */
-"NSL_nextButton_02" = "次へ";
-
-/* No comment provided by engineer. */
-"NSL_nextButton_03" = "次へ";
-
 /* (No Comment) */
 "NSL_notifTitle_001" = "りょ！";
 
@@ -225,9 +289,6 @@
 
 /* No comment provided by engineer. */
 "NSL_oK" = "OK";
-
-/* No comment provided by engineer. */
-"NSL_postMessage" = "以下のタスクを今日完了させます。";
 
 /* No comment provided by engineer. */
 "NSL_progressAmazing" = "すげーな";
@@ -251,16 +312,13 @@
 "NSL_progressNothing" = "まーだなんもしてないの？";
 
 /* No comment provided by engineer. */
-"NSL_settingsButton" = "設定";
+"NSL_Reward" = "ご褒美：";
 
 /* No comment provided by engineer. */
 "NSL_shareAlert" = "FacebookやLinkedInのように今日のTo-Doを表示しないアプリに共有したい場合";
 
 /* No comment provided by engineer. */
 "NSL_shareMessage" = "共有メニューから「コピー」をまず選択し、共有ボタンを再度押してからFacebookやLinkedInの共有ポスティングスクリーンのメッセージ欄にペーストしてください。";
-
-/* No comment provided by engineer. */
-"NSL_statusError" = "エラー：differenceOfDate  out of range";
 
 /* No comment provided by engineer. */
 "NSL_statusLeft" = "残り%1$d日と%2$d時間";
@@ -272,10 +330,7 @@
 "NSL_statusToday" = "残り%d時間";
 
 /* No comment provided by engineer. */
-"NSL_taskList" = "タスクリスト";
-
-/* No comment provided by engineer. */
-"NSL_today" = "今日の予定タスク";
+"NSL_taskTitle" = "タスクとは目標を達成させるのに必要な作業のこと。「100m走で0.5秒スタートを速める。」という目標を達成させるために、「Usain Boldのスタートの仕方をビデオA、 B、 Cを8月1日までに見て学ぶ。」というのが作業の例です。作業は通常1時間以内に完了するものです。完了するのに1時間以上必要な場合は、その作業を分割しましょう。もし該当する作業実行に気乗りしない時は、何かご褒美を設定しましょう。作業の内容は明確にし、すぐにその作業を始められるように曖昧なところがないようにしましょう。後回しにしようとする時は大抵作業内容が曖昧であることが多いです。作業内容は極力具体的に、またなるべく小さく分割しましょう。";
 
 /* No comment provided by engineer. */
 "NSL_updateButton_01" = "更新";
@@ -288,4 +343,44 @@
 
 /* No comment provided by engineer. */
 "NSL_userFallback" = "ユーザー名とパスワードを入力して下さい。";
+
+/* No comment provided by engineer. */
+"NSL_Value" = "金額：";
+
+/* No comment provided by engineer. */
+"NSL_vision4GoalButton" = "Vision";
+
+/* No comment provided by engineer. */
+"NSL_visionTitle" = "Vision（理想）とはあなたの夢を実現させるために到達する最終地点のことで、「何になりたいか。」ということです。例えば、iOSアプリ開発者になることがVisionであり、iOSアプリ開発の仕事を取ることは手段（目標）の一つに過ぎません。どんなiOSアプリ開発者になりたいのか自問してください。安定を求めて大きい組織で働きたいのか、リスクはあるが様々なことに挑戦できるスタートアップで働きたいのか、不安定でもフレキシブルな働き方のできるフリーランサーとして働きたいのか。どの地域で働きたいのか。どんなタイプの人たちと働きたいのか。どんな製品やプロジェクトで働きたいのか。\n\nVisionは一つである必要はないですが、できれば同時に複数はもたず一つに絞ることをお勧めします。但し、キャリアのVision、健康改善のVision、家族のVisionというように種類別に持つことも可能です。\n\nVisionには期限がありません。何かになっていること、その状態がVisionだからです。例えば、バレーボールで金メダル獲得したオリンピック選手であることがVisionであり、東京オリンピックで金メダルを獲得することはVisionを実現させるための目標の一つに過ぎません。";
+
+/* Alert message */
+"Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on." = "Poli ToDoにCalendarへのアクセスを許可してください。iPhoneの設定アプリでPoliをクリック、Calendar設定をONにしてください。";
+
+/* Alert message */
+"Please type a title for a vision." = "Visionのタイトルを記入してください。";
+
+/* Alert title */
+"Save" = "保存";
+
+/* Error message */
+"Touch ID not available" = "Touch IDが使えません。";
+
+/* Placeholder */
+"Type a concice specific goal." = "目標を具体的に短めに記入してください。";
+
+/* Placeholder */
+"Type url here like https://www.beckos.com" = "URLを記入してください。例：https://www.beckos.com";
+
+/* Picker menu */
+"Undone Goals Only" = "未了の目標のみ表示";
+
+/* Button */
+"Update" = "更新";
+
+/* Instruction for slider */
+"Use the slider below to set a value." = "スライダーを動かして金額を設定してください。";
+
+"Reward: " = "ご褒美：";
+
+"Value: " = "金額：";
 

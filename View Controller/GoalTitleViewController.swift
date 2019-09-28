@@ -25,6 +25,8 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
         navigationController!.popToRootViewController(animated: true)
     }
     
+    let goalTitlePlaceholder = NSLocalizedString("Type a concice specific goal.", comment: "Placeholder")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,9 +43,10 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
             goalDescriptionTextView.text = goal?.goalDescription
             goalDueDatePicker.date = goal.goalDueDate! as Date
         } else {
-            goalTitleTextView.text = "Type a concice specific goal."
+            
+            goalTitleTextView.text = goalTitlePlaceholder
             goalTitleTextView.textColor = UIColor.lightGray
-            goalDescriptionTextView.text = "Note this goal's summary, description, resources, related parties, locations, and any to note."
+            goalDescriptionTextView.text = NSLocalizedString("Note this goal's summary, description, resources, related parties, locations, and any to note.", comment: "Placeholder")
             goalDescriptionTextView.textColor = UIColor.lightGray
         }
         goalTitleTextView.delegate = self
@@ -82,7 +85,8 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
 
     @objc func getInfoAction() {
         let NSL_shareAlert = NSLocalizedString("NSL_addGoalAlert", value: "How to set a goal", comment: "")
-        let NSL_shareMessage = NSLocalizedString("NSL_goalTitle", value: "A goal is one of requirements to achieve in order to realize your vision/dream. A goal should be compliant to S.M.A.R.T. [S: Specific, M: Measurable, A: Achievable, R: Relevant, T: Time-Bound]\n\nSpecific: Remove ambiguity from the goal statement such as “I want to master how to run faster.”, instead write a statement like “Make a faster start 0.5 seconds.”, “Sustain the initial start speed for 30 meters.”, “Boost the speed in the last 40 m.”\n\nMeasurable: A goal statement has to be able to be measurable by numbers so that you can monitor your progress. Instead of stating like “Increase monthly sale”, say “Increase monthly sale from $500,000 to $600,000.” The achievement of a goal has to be clear and obvious by numbers or specific and concrete event or result.\n\nAchievable: A goal has to be realistically achievable in skill-wise, time-wise, location-wise, and financial-wise. Do not underestimate unexpected event and lack of skill/knowledge/resource. Take time to examine if your goal is realistically achievable.\n\nRelevant: A goal has to be aligned to realizing your vision/dream. Do not mix irrelevant item with goals. A goal has to be one of requirements and worthwhile for contributing to realize your vision/dream.\n\nTime-Bound: A goal has to have a deadline. Do not unrealistically set deadline, but once it is set, stick with it. Once postponing it, you’d never be able to complete it. The shorter the time range is, The better. Start with setting up a goal to be done by one week. It shouldn’t be more than 6 weeks to sustain your motivation.\n\nAchieving a goal is sometime hard to do. Give yourself reward to motivate. ", comment: "")
+        
+        let NSL_shareMessage = NSLocalizedString("NSL_goalTitle", value: "A goal is one of requirements to achieve in order to realize your vision/dream. A goal should be compliant to S.M.A.R.T. [S: Specific, M: Measurable, A: Achievable, R: Relevant, T: Time-Bound]\n\nSpecific: Remove ambiguity from the goal statement such as 'I want to master how to run faster.', instead write a statement like 'Make a faster start 0.5 seconds.', 'Sustain the initial start speed for 30 meters.', 'Boost the speed in the last 40 m.'\n\nMeasurable: A goal statement has to be able to be measurable by numbers so that you can monitor your progress. Instead of stating like 'Increase monthly sale', say 'Increase monthly sale from $500,000 to $600,000.' The achievement of a goal has to be clear and obvious by numbers or specific and concrete event or result.\n\nAchievable: A goal has to be realistically achievable in skill-wise, time-wise, location-wise, and financial-wise. Do not underestimate unexpected event and lack of skill/knowledge/resource. Take time to examine if your goal is realistically achievable.\n\nRelevant: A goal has to be aligned to realizing your vision/dream. Do not mix irrelevant item with goals. A goal has to be one of requirements and worthwhile for contributing to realize your vision/dream.\n\nTime-Bound: A goal has to have a deadline. Do not unrealistically set deadline, but once it is set, stick with it. Once postponing it, you’d never be able to complete it. The shorter the time range is, The better. Start with setting up a goal to be done by one week. It shouldn’t be more than 6 weeks to sustain your motivation.\n\nAchieving a goal is sometime hard to do. Give yourself reward to motivate. ", comment: "")
         
         AlertNotification().alert(title: NSL_shareAlert, message: NSL_shareMessage, sender: self, tag: "shareAlert")
     }
@@ -98,7 +102,7 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
     
     @objc func nextGoal() {
 
-        if goalTitleTextView.text != "" {
+        if goalTitleTextView.text != "" && goalTitleTextView.text != goalTitlePlaceholder {
 
             // Call segue to go next
             self.performSegue(withIdentifier: "vision4GoalSegue", sender: self)
@@ -129,7 +133,7 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
             destVC.goal = goal
             destVC.goalTitle = goalTitleTextView.text!
             
-            if goalDescriptionTextView.text != "Note this goal's summary, description, resources, related parties, locations, and any to note." {
+            if goalDescriptionTextView.text != NSLocalizedString("Note this goal's summary, description, resources, related parties, locations, and any to note.", comment: "Placeholder") {
                 destVC.goalDescription = goalDescriptionTextView.text
             
             } else { destVC.goalDescription = nil }
@@ -189,12 +193,12 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if goalTitleTextView.text.isEmpty {
-            goalTitleTextView.text = "Type a concice specific goal."
+            goalTitleTextView.text = NSLocalizedString("Type a concice specific goal.", comment: "Placeholder")
             goalTitleTextView.textColor = UIColor.lightGray
         }
         
         else if goalDescriptionTextView.text.isEmpty {
-            goalDescriptionTextView.text = "Note this goal's summary, description, resources, related parties, locations, and any to note."
+            goalDescriptionTextView.text = NSLocalizedString("Note this goal's summary, description, resources, related parties, locations, and any to note.", comment: "Placeholder")
             goalDescriptionTextView.textColor = UIColor.lightGray
         } else {}
     }
