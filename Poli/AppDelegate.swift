@@ -72,6 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         }
         container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
+            
+          container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType //NSMergeByPropertyObjectTrumpMergePolicy
+            
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
@@ -106,6 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Core Data Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
+        
         if context.hasChanges {
             do {
                 try context.save()

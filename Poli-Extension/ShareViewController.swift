@@ -29,9 +29,12 @@ class ShareViewController: SLComposeServiceViewController {
     
     override func didSelectPost() {
         
-        let managedContext = self.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)
-        let newBookmark = NSManagedObject(entity: entity!, insertInto: managedContext)
+        //let managedContext = self.persistentContainer.viewContext
+        //managedContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+        
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
+        let newBookmark = NSManagedObject(entity: entity!, insertInto: context)
         
         // Get web title
         let contentTextString: String = contentText
@@ -113,6 +116,7 @@ class ShareViewController: SLComposeServiceViewController {
     }
     
     var context: NSManagedObjectContext {
+    
         return persistentContainer.viewContext
     }
     
@@ -131,6 +135,8 @@ class ShareViewController: SLComposeServiceViewController {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+            
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
@@ -142,6 +148,7 @@ class ShareViewController: SLComposeServiceViewController {
     // MARK: - Core Data Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
+ 
         if context.hasChanges {
             do {
                 try context.save()

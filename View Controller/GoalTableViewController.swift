@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class GoalTableViewController: UITableViewController, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
@@ -30,6 +31,8 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
         configureFetchedResultsController()
         
         
@@ -52,8 +55,32 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
         space.width = 25
         navigationItem.rightBarButtonItems = [logout, space, settings, space, vision, space, greedList, space, todaysTasks]
+    
+    
+//         To notify a change made to Core Data by Share Extension
+                NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("GoalTVC  viewWillAppear was touched.")
+        // To notify a change made to Core Data by Share Extension
+//        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
+        
+        configureFetchedResultsController()
+        self.tableView.reloadData()
+    }
+
+    // When notified, reload Core Data with a change
+    func reload(nofitication: Notification) {
+        print("GoalTVC reload was touched")
+        
+
+        configureFetchedResultsController()
+        tableView.reloadData()
+    }
+    
+
     @objc func visionPressed() {
         performSegue(withIdentifier: "visionSegue", sender: nil)
         
@@ -78,11 +105,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        
-        configureFetchedResultsController()
-        tableView.reloadData()
-    }
     
 
     
@@ -94,6 +116,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     private func configureFetchedResultsController() {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+
             return
         }
         
@@ -130,6 +153,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController?.delegate = self
         
+
         do {
             try fetchedResultsController?.performFetch()
         } catch {

@@ -11,8 +11,10 @@ import CoreData
 
 class GoalProgress: NSNumber {
     //NSNumber
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
+    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    
     let fetchRequest = NSFetchRequest<Goal>(entityName: "Goal")
 
     var totalNumberOfTasksSumCount: Int = 0
@@ -77,6 +79,8 @@ class GoalProgress: NSNumber {
     
     func goalProgressCalc(goal: Goal, sender: UIViewController) -> Float {
         
+        //context.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+
         var goalProgressPercentage: Float = Float(totalNumberOfCompletedTasksSum(goal: goal)) / Float(totalNumberOfTasksSum(goal: goal))
         
         if goalProgressPercentage.isNaN == true {

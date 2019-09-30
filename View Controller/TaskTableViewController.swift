@@ -89,6 +89,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     func reload(nofitication: Notification) {
         print("reload was touched")
         configureFetchedResultsController()
+        
         tableView.reloadData()
     }
     
@@ -269,8 +270,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         //        let task = tasks[indexPath.row]
+        
         
         guard let task = self.fetchedResultsController?.object(at: indexPath) as? Task else { return }
         
@@ -293,12 +295,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 }
             }
             
-            do {
-                try context.save()
-
-            } catch {
-                print("Cannot save object: \(error.localizedDescription)")
-            }
+//            do {
+//                try context.save()
+//
+//            } catch {
+//                print("Cannot save object: \(error.localizedDescription)")
+//            }
         }
     }
     
@@ -443,16 +445,18 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             
             // Declare ManagedObjectContext
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            
             // Delete a row from tableview
             let taskToDelete = self.fetchedResultsController?.object(at: indexPath)
             // Delete it from Core Data
             context.delete(taskToDelete as! NSManagedObject)
             // Save the updated data to Core Data
-            do {
-                try context.save()
-            } catch {
-                print("Saving Failed: \(error.localizedDescription)")
-            }
+//            do {
+//                try context.save()
+//            } catch {
+//                print("Saving Failed: \(error.localizedDescription)")
+//            }
          }
  
         let NSL_cancelButton = NSLocalizedString("NSL_cancelButton", value: "Cancel", comment: "")

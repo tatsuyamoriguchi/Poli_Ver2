@@ -31,6 +31,8 @@
 		8C58CE27211B618900AE695F /* GoalDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C58CE26211B618900AE695F /* GoalDoneViewController.swift */; };
 		8C5AFB00232CDC5A002A2F77 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5AFAFE232CDC5A002A2F77 /* Task+CoreDataClass.swift */; };
 		8C5AFB01232CDC5A002A2F77 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5AFAFF232CDC5A002A2F77 /* Task+CoreDataProperties.swift */; };
+		8C5EFBB82341646F00CD8D4B /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65FCEF232DE6C1009BD6B0 /* ShareViewController.swift */; };
+		8C5EFBB92341647300CD8D4B /* ShareSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AD418232EE0CB0041A451 /* ShareSelectViewController.swift */; };
 		8C616A8C2130CCF200784934 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C616A8A2130CCF200784934 /* InfoPlist.strings */; };
 		8C616A8F2130CCF200784934 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C616A8D2130CCF200784934 /* Localizable.strings */; };
 		8C632CF7231E32D400887206 /* Vision4GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C632CF6231E32D400887206 /* Vision4GoalViewController.swift */; };
@@ -426,9 +428,11 @@
 				8C6B80B820FD749C0055D505 /* Poli.xcdatamodeld in Sources */,
 				8C632CF7231E32D400887206 /* Vision4GoalViewController.swift in Sources */,
 				8C65A725231EAE2100034E09 /* Goal+CoreDataProperties.swift in Sources */,
+				8C5EFBB92341647300CD8D4B /* ShareSelectViewController.swift in Sources */,
 				8C27360F2116CB2200A482B3 /* SettingsViewController.swift in Sources */,
 				8C5AFB01232CDC5A002A2F77 /* Task+CoreDataProperties.swift in Sources */,
 				8C71255221928EB100E42E4C /* KeychainPasswordItem.swift in Sources */,
+				8C5EFBB82341646F00CD8D4B /* ShareViewController.swift in Sources */,
 				8CE809B9212A31A20076756C /* LocalNotificationDelegate.swift in Sources */,
 				8C27360D21169F1600A482B3 /* LoginViewController.swift in Sources */,
 				8C433CD3211272DC008B946F /* GoalRewardViewController.swift in Sources */,
