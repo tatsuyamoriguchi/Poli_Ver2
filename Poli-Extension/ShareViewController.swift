@@ -98,7 +98,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        placeholder = "Type something here to activate 'Post' button."
+        placeholder = NSLocalizedString("Type something here to activate 'Post' button.", comment: "Placeholder")
         
         fetchGoals()
         goals = fetchedGoals
