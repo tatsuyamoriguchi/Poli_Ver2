@@ -18,6 +18,7 @@ class ShareViewController: SLComposeServiceViewController {
     var goals = [Goal]()
     
     
+    
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
         if selectedGoal == nil || contentText.isEmpty {
@@ -97,6 +98,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        placeholder = "Type something here to activate 'Post' button."
         
         fetchGoals()
         goals = fetchedGoals
