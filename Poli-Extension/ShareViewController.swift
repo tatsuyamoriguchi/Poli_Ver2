@@ -29,10 +29,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     override func didSelectPost() {
         
-        //let managedContext = self.persistentContainer.viewContext
-        //managedContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
-        
-        
+    
         let entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
         let newBookmark = NSManagedObject(entity: entity!, insertInto: context)
         
@@ -135,8 +132,9 @@ class ShareViewController: SLComposeServiceViewController {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
             
+            //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }

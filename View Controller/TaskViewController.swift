@@ -158,6 +158,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
 
         if toDoTextField.text != "" {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+           // context.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+            
             if segueName == "updateTask" {
                 
                 selectedTask.toDo = toDoTextField.text

@@ -88,9 +88,14 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     // When notified, reload Core Data with a change
     func reload(nofitication: Notification) {
         print("reload was touched")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//
+//        context.refresh(Task(), mergeChanges: true)
+        context.reset()
         configureFetchedResultsController()
-        
         tableView.reloadData()
+        
+//        AlertNotification().alert(title: "Warning", message: "Please terminate and relaunch this app in order to reload the data changes you made from Share Extension. Otherwise this app may crash.", sender: self, tag: "extension")
     }
     
     override func didReceiveMemoryWarning() {

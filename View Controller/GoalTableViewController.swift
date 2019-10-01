@@ -56,30 +56,24 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         space.width = 25
         navigationItem.rightBarButtonItems = [logout, space, settings, space, vision, space, greedList, space, todaysTasks]
     
-    
-//         To notify a change made to Core Data by Share Extension
-                NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
-        
+        //        //         To notify a change made to Core Data by Share Extension
+        //        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: Task(), queue: nil, using: reload)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("GoalTVC  viewWillAppear was touched.")
-        // To notify a change made to Core Data by Share Extension
-//        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
-        
-        configureFetchedResultsController()
-        self.tableView.reloadData()
-    }
-
-    // When notified, reload Core Data with a change
-    func reload(nofitication: Notification) {
-        print("GoalTVC reload was touched")
-        
 
         configureFetchedResultsController()
         tableView.reloadData()
+        
+    // When notified, reload Core Data with a change
+//    func reload(nofitication: Notification) {
+//        print("GoalTVC reload was touched")
+//        configureFetchedResultsController()
+//        tableView.reloadData()
+//    }
     }
-    
 
     @objc func visionPressed() {
         performSegue(withIdentifier: "visionSegue", sender: nil)

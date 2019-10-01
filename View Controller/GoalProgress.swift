@@ -10,12 +10,6 @@ import UIKit
 import CoreData
 
 class GoalProgress: NSNumber {
-    //NSNumber
-    
-    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    
-    let fetchRequest = NSFetchRequest<Goal>(entityName: "Goal")
 
     var totalNumberOfTasksSumCount: Int = 0
     var totalNumberOfCompletedTasksSumCount: Int = 0
@@ -37,7 +31,6 @@ class GoalProgress: NSNumber {
         let differenceOfDate = calendar.dateComponents([.day], from: today, to: dueDate)
         print("differenceOfDate: \(differenceOfDate)")
         var remainingDays: Int
-//        var remainingHours: Int
         
         if isDone == false {
 
@@ -79,8 +72,6 @@ class GoalProgress: NSNumber {
     
     func goalProgressCalc(goal: Goal, sender: UIViewController) -> Float {
         
-        //context.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
-
         var goalProgressPercentage: Float = Float(totalNumberOfCompletedTasksSum(goal: goal)) / Float(totalNumberOfTasksSum(goal: goal))
         
         if goalProgressPercentage.isNaN == true {
