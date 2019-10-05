@@ -4,16 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Allow this app to access to Calendar to le you schedule a task.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to access location data.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to access location data, (always). </string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to access location data, while it is in use.</string>
-	<key>NSContactsUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to accee contact data, while it is in use.</string>
 	<key>CFBundleDisplayName</key>
 	<string>Poli</string>
 	<key>CFBundleDocumentTypes</key>
@@ -29,17 +19,27 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Allow this app to access to Calendar to le you schedule a task.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please click OK to take a photo.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>When creating an Calendar event from this app, it needs to accee contact data, while it is in use.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We use FaceID to unlock the app.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>When creating an Calendar event from this app, it needs to access location data.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>When creating an Calendar event from this app, it needs to access location data, (always). </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>When creating an Calendar event from this app, it needs to access location data, while it is in use.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please click OK to choose a photo.</string>
 	<key>UILaunchStoryboardName</key>
@@ -63,5 +63,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

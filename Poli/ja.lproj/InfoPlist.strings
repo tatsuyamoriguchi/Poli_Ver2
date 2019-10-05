@@ -11,17 +11,19 @@
 "NSCameraUsageDescription" = "OKをクリックして撮影してください。";
 
 /* Privacy - Contacts Usage Description */
-"NSContactsUsageDescription" = "このアプリからCalendarイベントを作成する際連絡先データにアクセスする必要があります。";
+"NSContactsUsageDescription" = "このアプリからCalendarイベントを作成する際連絡先データにアクセスします。";
 
 /* Privacy - Face ID Usage Description */
 "NSFaceIDUsageDescription" = "アプリのロック解除にFaceIDを使います。";
 
 /* Privacy - Location Always and When In Use Usage Description */
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際位置情報にアクセスする必要があります。";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際位置情報にアクセスします。";
 
 /* Privacy - Location When In Use Usage Description */
-"NSLocationWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際このアプリが起動されている間、位置情報にアクセスする必要があります。";
+"NSLocationWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際このアプリが起動されている間、位置情報にアクセスします。";
 
 /* Privacy - Photo Library Usage Description */
 "NSPhotoLibraryUsageDescription" = "OKをクリックして撮影してください。";
 
+/* Privacy - Location Always Usage Description */
+"NSLocationAlwaysUsageDescription" = "このアプリからCalendarイベントを作成する際常に位置情報にアクセスします。";

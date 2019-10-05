@@ -43,8 +43,7 @@ class AlertNotification: UIViewController {
         
 
     }
-    
- 
+
 
     
     func goToSettings(alert: UIAlertAction!) {

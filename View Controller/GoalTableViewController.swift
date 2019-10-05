@@ -24,9 +24,34 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
    
     @IBAction func logoutPressed(_ sender: Any) {
         // Logout and back to login view
+//        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+//        performSegue(withIdentifier: "logoutSegue", sender: nil)
+        logoutAction()
+    
+    }
+    
+    func logoutAction() {
+        // Logout and back to login view
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
         performSegue(withIdentifier: "logoutSegue", sender: nil)
     }
+    
+    
+    func alertAction(title: String, message: String, actionPassed: @escaping ()->Void) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let NSL_alertTitle_010 = NSLocalizedString("NSL_alertTitle_010", value: "OK", comment: " ")
+        alert.addAction(UIAlertAction(title: NSL_alertTitle_010, style: .default, handler: {
+            action in
+            actionPassed()
+        }))
+        let NSL_alertCancel = NSLocalizedString("NSL_alertCancel", value: "Cancel", comment: " ")
+        alert.addAction(UIAlertAction(title: NSL_alertCancel, style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +66,9 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "Login as %@", comment: ""), userName)
             self.navigationItem.prompt = NSL_naviItem
         }else {
-            self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")
+            //self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")
+            alertAction(title: "Login Aelrt", message: "Problem reading login information in UserDefaults. Please re-login.", actionPassed: logoutAction)
+            
         }
         
         
