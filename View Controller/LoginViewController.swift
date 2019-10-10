@@ -77,20 +77,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
                 // Save the password for the new item.
                 try passwordItem.savePassword(userPassword)
                 
+                // Set a user login account
+                UserDefaults.standard.set(userName, forKey: "userName")
+                if UserDefaults.standard.value(forKey: "userName") != nil {
+                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+
+                    print(" ")
+                    print("userName: \(userName)")
+                    performSegue(withIdentifier: "loginSegue", sender: self)
+                }
+
             }catch {
                 fatalError("Error updating keychain = \(error)")
             }
             
             
-            // Set a user login account
-            UserDefaults.standard.set(userName, forKey: "userName")
-            //UserDefaults.standard.set(userPassword, forKey: "userPassword")
-            
-            userNameTextField.text = ""
-            passwordTextField.text = ""
-            
-            performSegue(withIdentifier: "loginSegue", sender: self)
-            
+//            userNameTextField.text = ""
+//            passwordTextField.text = ""
 //            let NSL_alertTitle_003 = NSLocalizedString("NSL_NSL_alertTitle_003", value: "User Account Created", comment: " ")
 //            let NSL_alertMessage_003 = NSLocalizedString("NSL_alertMessage_003", value: "Please use the user name and password just created to login Poli.", comment: " ")
 //            AlertNotification().alert(title: NSL_alertTitle_003, message: NSL_alertMessage_003, sender: self, tag: "accountCreated")
@@ -141,8 +144,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
                 
             } else if let message = message {
                 // if the completion is not nil show an alert
-                AlertNotification().alert(title: NSLocalizedString("Error", comment: "Alert title"), message: message, sender: self as Any, tag: "loginError")
-                
+                // something wrong here
+//                AlertNotification().alert(title: NSLocalizedString("Error", comment: "Alert title"), message: message, sender: self as Any, tag: "loginError")
+
+                print(" ")
+                print("message: ")
+                print(message)
+                print(" ")
 //                let alertView = UIAlertController(title: "Error",
 //                                                  message: message,
 //                                                  preferredStyle: .alert)

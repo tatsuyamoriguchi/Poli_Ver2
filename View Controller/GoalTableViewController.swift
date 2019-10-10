@@ -80,7 +80,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         let vision = UIBarButtonItem(title: "🌈", style: .plain, target: self, action: #selector(visionPressed))
         let greedList = UIBarButtonItem(title: "🎁", style: .done, target: self, action: #selector(greedListPressed))
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
-        space.width = 25
+        space.width = 20
         navigationItem.rightBarButtonItems = [logout, space, settings, space, vision, space, greedList, space, todaysTasks]
     
         //        //         To notify a change made to Core Data by Share Extension
