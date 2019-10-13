@@ -13,6 +13,8 @@ class RootViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        isModalInPresentation = true
+        
         // Do any additional setup after loading the view.
     }
 
