@@ -140,7 +140,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
             // 2 Unwrap the message and display it with an alert.
             
             if (UserDefaults.standard.object(forKey: "userName") as? String) == nil {
-                AlertNotification().alert(title: NSLocalizedString("Error", comment: "Alert title"), message: NSLocalizedString("No User Name found", comment: "Alert message"), sender: self!, tag: "noUserName")
+                //AlertNotification().alert(title: NSLocalizedString("Error", comment: "Alert title"), message: NSLocalizedString("No User Name found", comment: "Alert message"), sender: self!, tag: "noUserName")
                 
             } else if let message = message {
                 // if the completion is not nil show an alert
