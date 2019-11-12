@@ -136,7 +136,8 @@ class ShareViewController: SLComposeServiceViewController {
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             
             //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
-
+            
+            
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }

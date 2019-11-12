@@ -15,7 +15,6 @@ import UserNotifications
 
 class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEventEditViewDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
-    
     var eventStore: EKEventStore!
     
     // EventKit to share to iCalendar
@@ -35,8 +34,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     }
     
     
+    
+    var tasks = [Task]()
+    
+    var selectedGoal: Goal!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        print("selectedGoal.goalTitle: \(String(describing: selectedGoal?.goalTitle))")
         
         // NavigationItem
         let NSL_naviTask = NSLocalizedString("NSL_naviTask", value: "Task List", comment: "")
@@ -61,6 +67,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             space.width = 30
             
             navigationItem.rightBarButtonItems = [addTask, space, vision]
+
         } else {
             navigationItem.rightBarButtonItem = addTask
         }
@@ -89,12 +96,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     func reload(nofitication: Notification) {
         print("reload was touched")
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//
+
 //        context.refresh(Task(), mergeChanges: true)
-        context.reset()
+        //context.reset()
+        context.refreshAllObjects()
         configureFetchedResultsController()
         tableView.reloadData()
         
+        
+
 //        AlertNotification().alert(title: "Warning", message: "Please terminate and relaunch this app in order to reload the data changes you made from Share Extension. Otherwise this app may crash.", sender: self, tag: "extension")
     }
     
@@ -170,9 +180,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         tableView.reloadData()
     }
 
-    var tasks = [Task]()
-    
-    var selectedGoal: Goal?
     
     func goalDoneAlert() {
 
@@ -485,6 +492,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 let destVC = segue.destination as! TaskViewController
                 destVC.selectedGoal = selectedGoal
                 destVC.segueName = "addTask"
+                print("selectedGoal.goalTitle: \(String(describing: selectedGoal?.goalTitle))")
+                
             }
             
         } else if segue.identifier == "updateTask" {

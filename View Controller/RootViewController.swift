@@ -13,7 +13,11 @@ class RootViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        isModalInPresentation = true
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
         
         // Do any additional setup after loading the view.
     }

@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
             
           //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+            container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
             
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

@@ -24,7 +24,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     private var datePicker: UIDatePicker?
     
     var segueName: String?
-    var selectedGoal: Goal?
+    var selectedGoal: Goal!
     var selectedTask: Task!
     var context: NSManagedObjectContext!
     var urlURL: URL?
@@ -32,6 +32,10 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        print(" ")
+//        print("task.selectedGoal.goalTitle: \(String(describing: selectedGoal.goalTitle))")
+        
+        
         if segueName == "addTask" {
             isDoneSwitch.isOn = false
             let NSL_naviAdd = NSLocalizedString("NSL_naviAdd", value: "Add Task", comment: "")
