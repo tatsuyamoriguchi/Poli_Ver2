@@ -274,7 +274,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 //toDoString = task.toDo
             }
         } else {
-            fatalError("Attempt configure cell without a managed object") }
+            fatalError("Attempt configure cell without a managed object")
+            
+        }
         
         return taskCell
     }

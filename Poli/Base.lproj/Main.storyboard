@@ -801,9 +801,7 @@
                             <outlet property="delegate" destination="6WB-0P-iTW" id="d78-we-J63"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="z8i-1T-20J">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="20E-bV-CId"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="z8i-1T-20J"/>
                     <connections>
                         <outlet property="tableView" destination="WFR-Zn-eaw" id="kHB-sR-6k5"/>
                     </connections>

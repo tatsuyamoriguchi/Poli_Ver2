@@ -10,87 +10,104 @@ import UIKit
 import CoreData
 
 
-class TaskGoalTableViewController: UITableViewController {
+class TaskGoalTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    
     var selectedTask: Task?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        configureFetchedResultsController()
     }
+    
+    // MARK: - Core Data
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    
+    // Fetch Goal data
+    private func configureFetchedResultsController() {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        // Create the fetch request, set some sort descriptor, then feed the fetchedResultsController
+        // the request with along with the managed object context, which we'll use the view context
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
+        //fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal!)
+        
+        let sortByDone = NSSortDescriptor(key: #keyPath(Goal.goalDone), ascending: true)
+        let sortByDate = NSSortDescriptor(key: #keyPath(Goal.goalDueDate), ascending: true)
+        let sortByToDo = NSSortDescriptor(key: #keyPath(Goal.goalTitle), ascending: true)
+        
+        fetchRequest.sortDescriptors = [sortByDone, sortByDate, sortByToDo]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController?.delegate = self
+        
+        do {
+            try fetchedResultsController?.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+    
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if let frc = fetchedResultsController {
+            return frc.sections!.count
+        }
         return 0
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sections = self.fetchedResultsController?.sections else {
+            fatalError("No sections in fetchedResultscontroller")
+        }
+        
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
+    }
 
-        // Configure the cell...
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskGoalCell", for: indexPath)
+
+        if let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal {
+            cell.textLabel?.text = goal.goalTitle
+            if goal.goalTitle == selectedTask?.goalAssigned?.goalTitle {
+                cell.accessoryType = .checkmark
+                
+            } else {
+                cell.accessoryType = .none
+            }
+        
+        }
 
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
+   
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+        guard let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal else { return }
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+            selectedTask?.goalAssigned? = goal
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+            
+            PlayAudio.sharedInstance.playClick(fileName: "smallbark", fileExt: ".wav")
+        }
+        tableView.reloadData()
 
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .none
+        }
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
