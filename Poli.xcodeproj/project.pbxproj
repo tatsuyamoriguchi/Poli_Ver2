@@ -68,6 +68,7 @@
 		8CF0733523355FEE0083FCB5 /* PoliRoundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CF0733423355FEE0083FCB5 /* PoliRoundIcon.png */; };
 		8CF25A0721195E3200634987 /* PlayAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF25A0621195E3200634987 /* PlayAudio.swift */; };
 		8CF86D89211AD5A10079A8C9 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF86D88211AD5A10079A8C9 /* SpriteKit.framework */; };
+		CBC4637E23C30679008C289C /* TaskGoalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC4637D23C30679008C289C /* TaskGoalTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		8CF0733423355FEE0083FCB5 /* PoliRoundIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PoliRoundIcon.png; sourceTree = "<group>"; };
 		8CF25A0621195E3200634987 /* PlayAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAudio.swift; sourceTree = "<group>"; };
 		8CF86D88211AD5A10079A8C9 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		CBC4637D23C30679008C289C /* TaskGoalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGoalTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				8C58CE26211B618900AE695F /* GoalDoneViewController.swift */,
 				8C004A6F20FEB3A600960B3A /* TaskTableViewController.swift */,
 				8C004A7120FEB3C100960B3A /* TaskViewController.swift */,
+				CBC4637D23C30679008C289C /* TaskGoalTableViewController.swift */,
 				8CF25A0621195E3200634987 /* PlayAudio.swift */,
 				8C493FEB2118B447007D490D /* AlertNotification.swift */,
 				8C807A3C21267F890024D5EB /* TodaysTasksTableViewController.swift */,
@@ -437,6 +440,7 @@
 				8CE809B9212A31A20076756C /* LocalNotificationDelegate.swift in Sources */,
 				8C27360D21169F1600A482B3 /* LoginViewController.swift in Sources */,
 				8C433CD3211272DC008B946F /* GoalRewardViewController.swift in Sources */,
+				CBC4637E23C30679008C289C /* TaskGoalTableViewController.swift in Sources */,
 				8C004A6E20FEB14D00960B3A /* GoalTableViewController.swift in Sources */,
 				8C473E33231A17CE0071503B /* VisionViewController.swift in Sources */,
 				8C5AFB00232CDC5A002A2F77 /* Task+CoreDataClass.swift in Sources */,

@@ -2,7 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="71g-LD-oV9">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -770,11 +771,46 @@
                     </navigationItem>
                     <connections>
                         <segue destination="kmR-6c-LEk" kind="show" identifier="updateTask" id="XHg-Fr-gtW"/>
+                        <segue destination="6WB-0P-iTW" kind="show" identifier="updateTaskGoalSegue" id="wDx-MT-Dsk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Om-wZ-eb2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3000" y="75"/>
+        </scene>
+        <!--Task Goal Table View Controller-->
+        <scene sceneID="awK-VX-dAV">
+            <objects>
+                <tableViewController id="6WB-0P-iTW" customClass="TaskGoalTableViewController" customModule="Poli" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WFR-Zn-eaw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskGoalCell" id="EXL-12-Tcb">
+                                <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EXL-12-Tcb" id="19p-Dd-QAv">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6WB-0P-iTW" id="wCo-mH-BP2"/>
+                            <outlet property="delegate" destination="6WB-0P-iTW" id="d78-we-J63"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="z8i-1T-20J">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="20E-bV-CId"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="WFR-Zn-eaw" id="kHB-sR-6k5"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P56-GH-YPr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3000" y="906"/>
         </scene>
         <!--Task-->
         <scene sceneID="eIE-pb-uk0">
@@ -1286,7 +1322,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="743-aW-3gV"/>
-        <segue reference="b71-Er-WlN"/>
+        <segue reference="XHg-Fr-gtW"/>
         <segue reference="Uba-WO-OBv"/>
         <segue reference="eGG-hh-uDV"/>
         <segue reference="9dh-yv-VDW"/>
