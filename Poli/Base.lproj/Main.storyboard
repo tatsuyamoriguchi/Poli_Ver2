@@ -801,7 +801,13 @@
                             <outlet property="delegate" destination="6WB-0P-iTW" id="d78-we-J63"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="z8i-1T-20J"/>
+                    <navigationItem key="navigationItem" id="z8i-1T-20J">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="lr4-6u-2lY">
+                            <connections>
+                                <action selector="saveTaskGoal:" destination="6WB-0P-iTW" id="exL-hH-fxr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="WFR-Zn-eaw" id="kHB-sR-6k5"/>
                     </connections>

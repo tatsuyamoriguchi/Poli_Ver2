@@ -14,6 +14,16 @@ class TaskGoalTableViewController: UITableViewController, NSFetchedResultsContro
 
     var selectedTask: Task?
     
+    @IBAction func saveTaskGoal(_ sender: UIBarButtonItem) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        do {
+            try context.save()
+        }catch{
+            print("Saving Error: \(error.localizedDescription)")
+        }
+        navigationController!.popViewController(animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureFetchedResultsController()
