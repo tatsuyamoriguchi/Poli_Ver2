@@ -19,7 +19,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     @IBOutlet weak var taskDatePicker: UIDatePicker!
     @IBOutlet weak var isDoneSwitch: UISwitch!
     
-   
+    @IBOutlet weak var dateSwitch: UISwitch!
+    
     
     private var datePicker: UIDatePicker?
     
@@ -29,6 +30,18 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     var context: NSManagedObjectContext!
     var urlURL: URL?
   
+
+    @IBAction func dateSwitchAction(_ sender: UISwitch) {
+        
+        if taskDatePicker.isEnabled == true {
+            taskDatePicker.isEnabled = false
+        } else {
+            taskDatePicker.isEnabled = true
+        }
+    }
+    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,10 +53,24 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             isDoneSwitch.isOn = false
             let NSL_naviAdd = NSLocalizedString("NSL_naviAdd", value: "Add Task", comment: "")
             self.navigationItem.title = NSL_naviAdd
+            
+            dateSwitch.isOn = false
+            taskDatePicker.isEnabled = false
+            
+            
         } else if segueName == "updateTask" {
             toDoTextField.text = selectedTask.toDo
             isImportantSwitch.isOn = selectedTask.isImportant
-            taskDatePicker.date = selectedTask.date! as Date
+            
+            if selectedTask.date != nil {
+                taskDatePicker.date = selectedTask.date! as Date
+                taskDatePicker.isEnabled = true
+                dateSwitch.isOn = true
+            } else {
+                dateSwitch.isOn = false
+                taskDatePicker.isEnabled = false
+            }
+            
             isDoneSwitch.isOn = selectedTask.isDone
             let NSL_naviUpdate = NSLocalizedString("NSL_naviUpdate", value: "Update Task", comment: "")
             self.navigationItem.title = NSL_naviUpdate
@@ -170,7 +197,11 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                 selectedTask.isImportant = isImportantSwitch.isOn
                 
                 selectedTask.isDone = isDoneSwitch.isOn
-                selectedTask.date = taskDatePicker.date as Date as NSDate
+                if dateSwitch.isOn == true {
+                    selectedTask.date = taskDatePicker.date as Date as NSDate }
+                else {
+                    selectedTask.date = nil
+                }
                 selectedTask.reward4Task = greed
                 
                 
@@ -180,7 +211,11 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                 
                 task.toDo = toDoTextField.text
                 task.isImportant = isImportantSwitch.isOn
-                task.date = taskDatePicker.date as NSDate
+                if dateSwitch.isOn {
+                    task.date = taskDatePicker.date as NSDate }
+                else {
+                    task.date = nil
+                }
                 task.isDone = false
                 task.goalAssigned = selectedGoal
                 task.reward4Task = greed

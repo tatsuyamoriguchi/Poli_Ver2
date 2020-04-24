@@ -218,9 +218,18 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             taskCell.textLabel?.numberOfLines = 0
             taskCell.detailTextLabel?.numberOfLines = 0
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .full
-            let dateString = dateFormatter.string(from: (task.date)! as Date)
+
+            var dateString: String
+            
+            // Crash when task.date is nil
+            if task.date != nil {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .full
+                
+                dateString = dateFormatter.string(from: (task.date)! as Date)
+            } else {
+                dateString = "No date assigned"
+            }
             
             if let rewardTitle = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
                 
@@ -234,10 +243,14 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             }
             
             
+            
             if task.isDone == true {
                 taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
                 taskCell.detailTextLabel?.textColor = .black
-            } else  {
+            } else if task.date == nil {
+                taskCell.detailTextLabel?.textColor = .gray
+            
+            }  else {
                 taskCell.accessoryType = UITableViewCell.AccessoryType.none
                 
                 let today = Date()
