@@ -82,9 +82,18 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
     }
     
+    var showNoDateTaskToggle: Bool? = false
+    
     @objc func showNoDateTask() {
         //
         print("showNoDateTask() was tapped.")
+        if showNoDateTaskToggle == true {
+           showNoDateTaskToggle = false
+        } else {
+            showNoDateTaskToggle = true
+        }
+        
+        tableView.reloadData()
     }
     @objc func addTapped(){
         self.performSegue(withIdentifier: "addTask", sender: self)
@@ -136,6 +145,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         // the request with along with the managed object context, which we'll use the view context
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
         fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal!)
+        
+        
+        // not working here
+        if showNoDateTaskToggle == true {
+            fetchRequest.predicate = NSPredicate(format: "Task.date != nil", selectedGoal!)
+        }
 
         let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
         let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
@@ -250,12 +265,18 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             }
             
             
-            
+            // this if clause cauese a wrong check mark appearing in a row
             if task.isDone == true {
                 taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
                 taskCell.detailTextLabel?.textColor = .black
             } else if task.date == nil {
-                taskCell.detailTextLabel?.textColor = .gray
+                if task.isDone == true {
+                    taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
+                    taskCell.detailTextLabel?.textColor = .gray
+                } else {
+                    taskCell.accessoryType = UITableViewCell.AccessoryType.none
+                    taskCell.detailTextLabel?.textColor = .gray
+                }
             
             }  else {
                 taskCell.accessoryType = UITableViewCell.AccessoryType.none
