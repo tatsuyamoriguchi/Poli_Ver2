@@ -52,6 +52,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 
         let addTask = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         
+        let noDateTask = UIBarButtonItem(title: "📆", style: .done, target: self, action: #selector(showNoDateTask))
+        
+        
         if selectedGoal?.vision4Goal != nil {
             // Create the info button
             //let infoButton = UIButton(type: .)
@@ -63,10 +66,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
             // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁
             
-            let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
-            space.width = 30
+            let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+            space.width = 40
             
-            navigationItem.rightBarButtonItems = [addTask, space, vision]
+            navigationItem.rightBarButtonItems = [addTask, space, vision,  space, noDateTask, space]
 
         } else {
             navigationItem.rightBarButtonItem = addTask
@@ -79,6 +82,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
     }
     
+    @objc func showNoDateTask() {
+        //
+        print("showNoDateTask() was tapped.")
+    }
     @objc func addTapped(){
         self.performSegue(withIdentifier: "addTask", sender: self)
     }
