@@ -52,19 +52,16 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 
         let addTask = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         
-        let noDateTask = UIBarButtonItem(title: "📆", style: .done, target: self, action: #selector(showNoDateTask))
-        
+        let noDateTask = UIBarButtonItem(title: "🗂", style: .done, target: self, action: #selector(showNoDateTask))
+    
+//        let noDateTask = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(showNoDateTask))
+//        let noDataTaskImage = UIImage(named: "coffeefilter")
+//        noDateTask.image = noDataTaskImage
         
         if selectedGoal?.vision4Goal != nil {
-            // Create the info button
-            //let infoButton = UIButton(type: .)
-            // You will need to configure the target action for the button itself, not the bar button itemr
-            //infoButton.addTarget(self, action: #selector(getVisionAction), for: .touchUpInside)
-            // Create a bar button item using the info button as its custom view
-            //let info = UIBarButtonItem(customView: infoButton)
-            
+
             let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
-            // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁
+            // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁📆
             
             let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
             space.width = 40
@@ -82,17 +79,18 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
     }
     
-    var showNoDateTaskToggle: Bool? = false
+    var showAllTaskToggle: Bool? = false
     
     @objc func showNoDateTask() {
         //
         print("showNoDateTask() was tapped.")
-        if showNoDateTaskToggle == true {
-           showNoDateTaskToggle = false
+        if showAllTaskToggle == true {
+           showAllTaskToggle = false
         } else {
-            showNoDateTaskToggle = true
+            showAllTaskToggle = true
         }
-       configureFetchedResultsController()
+        
+        configureFetchedResultsController()
        tableView.reloadData()
     }
     
@@ -141,14 +139,14 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         // Create the fetch request, set some sort descriptor, then feed the fetchedResultsController
         // the request with along with the managed object context, which we'll use the view context
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
-        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal!)
         
         
-        // not working here
-        if showNoDateTaskToggle == true {
-            fetchRequest.predicate = NSPredicate(format: "date != nil", selectedGoal!)
+        
+        if showAllTaskToggle == false {
+            fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@ && date != nil && isDone = false", selectedGoal!)
+        } else {
+            fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal!)
         }
-        
 
         let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
         let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)

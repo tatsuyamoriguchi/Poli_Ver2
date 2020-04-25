@@ -8,6 +8,7 @@
 
 import UIKit
 import QuartzCore
+import AVFoundation
 
 // Keychain Configuration
 struct KeychainConfiguration {
@@ -204,8 +205,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
         
         // Opening Sound
         if isOpening != false {
+            
+            
             PlayAudio.sharedInstance.playClick(fileName: "bigdog", fileExt: ".wav")
             isOpening = false
+            
+//            try? AVAudioSession.sharedInstance().setCategory(.ambient)
+//            try? AVAudioSession.sharedInstance().setActive(true)
+            
         }
         userNameTextField.delegate = self
         passwordTextField.delegate = self
