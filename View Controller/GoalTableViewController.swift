@@ -12,6 +12,7 @@ import UserNotifications
 
 class GoalTableViewController: UITableViewController, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
+    
     var userName: String! = ""
     
     //var goals = [Goal]()
@@ -96,13 +97,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 
         configureFetchedResultsController()
         tableView.reloadData()
-        
-    // When notified, reload Core Data with a change
-//    func reload(nofitication: Notification) {
-//        print("GoalTVC reload was touched")
-//        configureFetchedResultsController()
-//        tableView.reloadData()
-//    }
+
     }
 
     @objc func visionPressed() {
@@ -280,18 +275,36 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
                 goalCell.goalRewardImageView.image = UIImage(named: "PoliRoundIcon")
             }
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = .current
-            dateFormatter.dateStyle = .full
-            let date = dateFormatter.string(from: (goal.goalDueDate)! as Date)
-
+ 
+            var dueDateString: String?
             
-            (statusString, status) = GoalProgress().goalStatusAlert(dueDate: goal.goalDueDate! as Date, isDone: goal.goalDone)
-            let dueDateString = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@ - %@", comment: "Due date text with parameters"), date, statusString)
-           
-            goalCell.goalDueDateLabel.text = dueDateString
-            if status == true {goalCell.goalDueDateLabel.textColor = .red} else { goalCell.goalDueDateLabel.textColor = .black
+            // Crash when task.date is nil
+            if goal.goalDueDate != nil {
+                let dateFormatter = DateFormatter()
+                 dateFormatter.locale = .current
+                 dateFormatter.dateStyle = .full
+
+                 let date = dateFormatter.string(from: (goal.goalDueDate)! as Date)
+
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateStyle = .full
+//
+//                dateString = dateFormatter.string(from: (task.date)! as Date)
+
+                dueDateString = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@ - %@", comment: "Due date text with parameters"), date, statusString)
+                (statusString, status) = GoalProgress().goalStatusAlert(dueDate: goal.goalDueDate! as Date, isDone: goal.goalDone)
+                 
+
+                  if status == true {goalCell.goalDueDateLabel.textColor = .red} else { goalCell.goalDueDateLabel.textColor = .black
+                  }
+
+
+            } else {
+                dueDateString = "No date assigned"
             }
+             
+            goalCell.goalDueDateLabel.text = dueDateString
+            
             
             
             // Get goalProgress rate

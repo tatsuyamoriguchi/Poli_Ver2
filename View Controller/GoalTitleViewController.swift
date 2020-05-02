@@ -21,6 +21,19 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var goalDueDatePicker: UIDatePicker!
     
+    @IBOutlet weak var goalDateSwitch: UISwitch!
+ 
+    @IBAction func goalDateSwitchAction(_ sender: UISwitch) {
+    
+        if goalDueDatePicker.isEnabled == true {
+            goalDueDatePicker.isEnabled = false
+        } else {
+            goalDueDatePicker.isEnabled = true
+        }
+        
+    }
+    
+    
     @IBAction func cancelToRoot(_ sender: Any) {
         navigationController!.popToRootViewController(animated: true)
     }
@@ -41,13 +54,30 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
         if segueName == "updateGoal" {
             goalTitleTextView.text = goal.goalTitle
             goalDescriptionTextView.text = goal?.goalDescription
-            goalDueDatePicker.date = goal.goalDueDate! as Date
+//            goalDueDatePicker.date = goal.goalDueDate! as Date
+            
+            //
+            if goal.goalDueDate != nil {
+                goalDueDatePicker.date = goal.goalDueDate! as Date
+                goalDueDatePicker.isEnabled = true
+                goalDateSwitch.isOn = true
+            } else {
+                goalDateSwitch.isOn = false
+                goalDueDatePicker.isEnabled = false
+            }
+
+            
         } else {
             
             goalTitleTextView.text = goalTitlePlaceholder
             goalTitleTextView.textColor = UIColor.lightGray
             goalDescriptionTextView.text = NSLocalizedString("Note this goal's summary, description, resources, related parties, locations, and any to note.", comment: "Placeholder")
             goalDescriptionTextView.textColor = UIColor.lightGray
+           
+            // goalDateSwitch is false as default when adding a goal
+            goalDateSwitch.isOn = false
+            goalDueDatePicker.isEnabled = false
+
         }
         goalTitleTextView.delegate = self
         datePicker = UIDatePicker()
@@ -138,23 +168,17 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
             
             } else { destVC.goalDescription = nil }
             
-            
-//            if ((goal?.vision4Goal) != nil) {
-//                destVC.vision4Goal = goal.vision4Goal
-//            
-//                print(" ")
-//                print("goal.vision4Goal")
-//                print(goal.vision4Goal)
-//                
-//            } else {
-//                print("goal.vision4Goal is nil")
-//            }
-            
-            
-            let dueDate = goalDueDatePicker.date as Date
-            let startOfDate = Calendar.current.startOfDay(for: dueDate)
-            destVC.goalDueDate = startOfDate
-            
+            if goalDateSwitch.isOn == true {
+                let dueDate = goalDueDatePicker.date as Date
+                let startOfDate = Calendar.current.startOfDay(for: dueDate)
+                destVC.goalDueDate = startOfDate
+                
+            } else {
+                destVC.goalDueDate = nil
+            }
+            // debug
+            print("********destVC.goalDueDate******")
+            print(destVC.goalDueDate)
        
         } else {
             print("segue ID info not available?")

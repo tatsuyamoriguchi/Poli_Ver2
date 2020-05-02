@@ -195,10 +195,15 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
         if segueName == "updateGoal" {
             goal.goalTitle = goalTitle
             goal.goalDescription = goalDescription
-            goal.goalDueDate = goalDueDate! as NSDate
+            goal.goalDueDate = goalDueDate as NSDate? ?? nil
+            
+            // debug
+               print("********goal.goalDueDate******")
+               print(goal.goalDueDate)
+            
             goal.goalDone = false
             goal.vision4Goal = vision4Goal
-
+            
             // -> Reward entity
             //goal.goalReward = goalRewardTextField.text
             goal.reward4Goal = greed
@@ -208,24 +213,32 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             let goal = Goal(context: context)
             goal.goalTitle = goalTitle
             goal.goalDescription = goalDescription
-            goal.goalDueDate = goalDueDate! as NSDate
+            //goal.goalDueDate = goalDueDate! as NSDate
+            goal.goalDueDate = goalDueDate as NSDate? ?? nil
+            
+            // debug
+               print("********goal.goalDueDate******")
+               print(goal.goalDueDate)
+            
             goal.goalDone = false
             goal.vision4Goal = vision4Goal
-
+            
             // -> Reward entity
             //goal.goalReward = goalRewardTextField.text // goalReward
             goal.reward4Goal = greed // goalReward
             
             goal.goalRewardImage =  goalRewardImageView.image!.pngData() as NSData?
         }
-       
-            do {
-                try context.save()
-            }catch{
-                print("Saving Error: \(error.localizedDescription)")
-            }
         
-            navigationController!.popToRootViewController(animated: true)
+        
+        
+        do {
+            try context.save()
+        }catch{
+            print("Saving Error: \(error.localizedDescription)")
+        }
+        
+        navigationController!.popToRootViewController(animated: true)
         
     }
     

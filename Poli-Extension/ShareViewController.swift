@@ -59,36 +59,53 @@ class ShareViewController: SLComposeServiceViewController {
             if let itemProviders = item.attachments {
                 
                 for itemProvider: NSItemProvider in itemProviders {
-                    
+                
+                    // info.plist
+                    // <key>NSExtensionActivationSupportsWebURLWithMacCount</key>
+                    // <integer>1</integer>
                     if itemProvider.hasItemConformingToTypeIdentifier("public.url") {
                         itemProvider.loadItem(forTypeIdentifier: "public.url", options: nil, completionHandler: { (url, error) -> Void in
                             if let shareURL = url as? URL {
                                 // Save url to Core Data
                                 newBookmark.setValue(shareURL, forKey: "url")
-                                
+
                                 //newBookmark.url = shareURL
-                                
+
                                 self.saveContext()
-                                
+
                                 print(" ")
                                 print("if let shareURL = url as? URL was true")
                                 print("shareURL: \(shareURL)")
                             }
                         })
-                        
-                        // Grab preview
-                        //                        itemProvider.loadPreviewImage(options: nil, completionHandler: { (item, error) in
-                        //                            if let image = item as? UIImage {
-                        //                                if let data = image.pngData() {
-                        //                                    newBookmark.setValue(data, forKey: "preview")
-                        //                                    self.saveContext()
-                        //                                    print(" ")
-                        //                                    print("if let image = item as? UIImage cluase was executed.")
-                        //                                }
-                        //                            }
-                        //                        })
-                        
+
+                    } else
+
+                        // "public.plain-text" kUTTypePlainText as String
+                    if itemProvider.hasItemConformingToTypeIdentifier(kUTTypePlainText as String) {
+                        itemProvider.loadItem(forTypeIdentifier: kUTTypePlainText as String, options: nil, completionHandler: { (string, error) -> Void in
+                            if let string = (string as? String), let shareURL = URL(string: string) {
+                                
+                                newBookmark.setValue(shareURL, forKey: "url")
+                                self.saveContext()
+                                print(" ")
+                                print("if let shareText = item as? URL was true")
+                                print("shareURL: \(shareURL)")
+                            }
+                        })
                     }
+                    
+                    // Grab preview
+                              //                        itemProvider.loadPreviewImage(options: nil, completionHandler: { (item, error) in
+                              //                            if let image = item as? UIImage {
+                              //                                if let data = image.pngData() {
+                              //                                    newBookmark.setValue(data, forKey: "preview")
+                              //                                    self.saveContext()
+                              //                                    print(" ")
+                              //                                    print("if let image = item as? UIImage cluase was executed.")
+                              //                                }
+                              //                            }
+                              //                        })
                 }
             }
         }
