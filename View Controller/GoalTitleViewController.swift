@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+
 
 class GoalTitleViewController: UIViewController, UITextViewDelegate {
     
@@ -35,8 +37,60 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func cancelToRoot(_ sender: Any) {
-        navigationController!.popToRootViewController(animated: true)
+        
+        
+        if goalTitleTextView.text != "" && goalTitleTextView.text != goalTitlePlaceholder {
+            
+           
+            
+            navigationController!.popToRootViewController(animated: true)
+            
+            
+        } else {
+            let NSL_alertTitle_017 = NSLocalizedString("NSL_alertTitle_017", value: "No Text Entry", comment: "")
+            let NSL_alertMessage_017 = NSLocalizedString("NSL_alertMessage_017", value: "This entry is mandatory. Please type one in the text field.", comment: "")
+            AlertNotification().alert(title: NSL_alertTitle_017, message: NSL_alertMessage_017, sender: self, tag: "noTextEntry")
+        }
+        
+        
     }
+    
+    
+    
+    @IBAction func saveButtonAction(_ sender: Any) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        if segueName == "addGoal" {
+                goal = Goal(context: context)
+        } else {}
+        
+        goal.goalTitle = goalTitleTextView.text
+
+        goal.goalDone = false
+        goal.goalDescription = goalDescriptionTextView.text
+        if goalDateSwitch.isOn == true {
+            goal.goalDueDate = goalDueDatePicker.date as NSDate
+            
+            
+            //             let dueDate = goalDueDatePicker.date as Date
+            //             let startOfDate = Calendar.current.startOfDay(for: dueDate)
+            //             goal.goalDueDate = startOfDate
+            
+        } else {
+            goal.goalDueDate = nil
+        }
+        
+        
+        do {
+            try context.save()
+        }catch{
+            print("Saving Error: \(error.localizedDescription)")
+        }
+        
+        navigationController!.popToRootViewController(animated: true)
+        
+    }
+    
     
     let goalTitlePlaceholder = NSLocalizedString("Type a concice specific goal.", comment: "Placeholder")
     
@@ -131,12 +185,12 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func nextGoal() {
-
+        
         if goalTitleTextView.text != "" && goalTitleTextView.text != goalTitlePlaceholder {
-
+            
             // Call segue to go next
             self.performSegue(withIdentifier: "vision4GoalSegue", sender: self)
-          
+            
         } else {
             let NSL_alertTitle_017 = NSLocalizedString("NSL_alertTitle_017", value: "No Text Entry", comment: "")
             let NSL_alertMessage_017 = NSLocalizedString("NSL_alertMessage_017", value: "This entry is mandatory. Please type one in the text field.", comment: "")
@@ -149,12 +203,6 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //if segue.identifier == "toGoalDescription" {
-        //    let destVC  = segue.destination as! GoalDescriptionViewController
-         //   destVC.segueName = segueName
-         //   destVC.goal = goal
-         //   destVC.goalTitle = goalTitleTextView.text!
-        
         
         if segue.identifier == "vision4GoalSegue" {
             let destVC  = segue.destination as! Vision4GoalViewController
@@ -176,9 +224,6 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
             } else {
                 destVC.goalDueDate = nil
             }
-            // debug
-            print("********destVC.goalDueDate******")
-            print(destVC.goalDueDate)
        
         } else {
             print("segue ID info not available?")

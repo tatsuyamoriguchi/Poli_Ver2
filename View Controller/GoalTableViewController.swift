@@ -12,11 +12,13 @@ import UserNotifications
 
 class GoalTableViewController: UITableViewController, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
+    @IBAction func addGoalAction(_ sender: UIBarButtonItem) {
+        
+        
+    }
     
     var userName: String! = ""
-    
-    //var goals = [Goal]()
-    //var tasks = [Task]()
+
     // Declare a variable to pass to UpdateGoalViewController
     var selectedGoal: Goal?
     var statusString: String = ""
@@ -519,7 +521,13 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       
-        if segue.identifier == "updateGoal" {
+        if segue.identifier == "addGoal"{
+            let destVC = segue.destination as! GoalTitleViewController
+            
+            //destVC.goal = Goal
+            destVC.segueName = segue.identifier
+    
+        } else if segue.identifier == "updateGoal" {
 
             let destVC = segue.destination as! GoalTitleViewController
             

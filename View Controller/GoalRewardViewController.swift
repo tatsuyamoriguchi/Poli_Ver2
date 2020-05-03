@@ -197,10 +197,6 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             goal.goalDescription = goalDescription
             goal.goalDueDate = goalDueDate as NSDate? ?? nil
             
-            // debug
-               print("********goal.goalDueDate******")
-               print(goal.goalDueDate)
-            
             goal.goalDone = false
             goal.vision4Goal = vision4Goal
             
@@ -213,13 +209,8 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             let goal = Goal(context: context)
             goal.goalTitle = goalTitle
             goal.goalDescription = goalDescription
-            //goal.goalDueDate = goalDueDate! as NSDate
             goal.goalDueDate = goalDueDate as NSDate? ?? nil
-            
-            // debug
-               print("********goal.goalDueDate******")
-               print(goal.goalDueDate)
-            
+                        
             goal.goalDone = false
             goal.vision4Goal = vision4Goal
             
