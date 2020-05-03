@@ -17,19 +17,18 @@ class ShareViewController: SLComposeServiceViewController {
     var selectedGoal: Goal?
     var goals = [Goal]()
     
-    
-    
     override func isContentValid() -> Bool {
+        
         // Do validation of contentText and/or NSExtensionContext attachments here
         if selectedGoal == nil || contentText.isEmpty {
             return false
         } else {
             return true
         }
+        
     }
     
     override func didSelectPost() {
-        
     
         let entity = NSEntityDescription.entity(forEntityName: "Task", in: context)
         let newBookmark = NSManagedObject(entity: entity!, insertInto: context)
