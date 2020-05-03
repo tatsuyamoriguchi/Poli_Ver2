@@ -89,8 +89,8 @@ class Vision4GoalViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         
         navigationItem.rightBarButtonItem = nil
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(editVision))
-        
+//        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(editVision))
+        let saveButton = UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(editVision))
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
         space.width = 30
         navigationItem.rightBarButtonItems = [saveButton, space, info]
