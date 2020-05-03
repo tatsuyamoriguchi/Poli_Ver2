@@ -23,7 +23,8 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     var selectedGoal: Goal?
     var statusString: String = ""
     var status: Bool = false
-    
+    var dueDateString: String? = ""
+
    
     @IBAction func logoutPressed(_ sender: Any) {
         // Logout and back to login view
@@ -280,27 +281,22 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             }
             
  
-            var dueDateString: String?
-            
+
             // Crash when task.date is nil
             if goal.goalDueDate != nil {
+                
                 let dateFormatter = DateFormatter()
-                 dateFormatter.locale = .current
-                 dateFormatter.dateStyle = .full
-
-                 let date = dateFormatter.string(from: (goal.goalDueDate)! as Date)
-
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateStyle = .full
-//
-//                dateString = dateFormatter.string(from: (task.date)! as Date)
-
-                dueDateString = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@ - %@", comment: "Due date text with parameters"), date, statusString)
+                dateFormatter.locale = .current
+                dateFormatter.dateStyle = .full
+                
+                let date = dateFormatter.string(from: (goal.goalDueDate)! as Date)
+                
                 (statusString, status) = GoalProgress().goalStatusAlert(dueDate: goal.goalDueDate! as Date, isDone: goal.goalDone)
-                 
-
-                  if status == true {goalCell.goalDueDateLabel.textColor = .red} else { goalCell.goalDueDateLabel.textColor = .black
-                  }
+                dueDateString = String(format: NSLocalizedString("NSL_dueDateLabel", value: "Due Date: %@ - %@", comment: "Due date text with parameters"), date, statusString)
+                
+                
+                if status == true {goalCell.goalDueDateLabel.textColor = .red} else { goalCell.goalDueDateLabel.textColor = .black
+                }
 
 
             } else {

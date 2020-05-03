@@ -26,16 +26,29 @@ class GoalProgress: NSNumber {
     func goalStatusAlert(dueDate: Date, isDone: Bool) -> (String, Bool) {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        print("today: \(today)")
-        
         let differenceOfDate = calendar.dateComponents([.day], from: today, to: dueDate)
-        print("differenceOfDate: \(differenceOfDate)")
         var remainingDays: Int
+
+        print("++++++++++++++++++")
+        print("dueDate")
+        print(dueDate)
+        print("today")
+        print(today)
+        print("differenceOfDate")
+        print(differenceOfDate)
+        print("++++++++++++++++++")
         
         if isDone == false {
 
             if let dayInt = differenceOfDate.day {
+
+                print("dayInt")
+                print(dayInt)
+
                 switch dayInt {
+
+
+
                 case ..<0:
                     let NSL_statusPassed = NSLocalizedString("NSL_statusPassed", value: "Due Date has passed.", comment: "")
                     statusString = NSL_statusPassed
@@ -53,15 +66,30 @@ class GoalProgress: NSNumber {
                     statusString = NSL_statusLeft
                     status = false
                     
+                case _ where dayInt > 1 :
+                    remainingDays = differenceOfDate.day!
+                    let NSL_statusLeft = String(format: NSLocalizedString("NSL_statusLeft", value: "%d days left.", comment: ""), remainingDays)
+                    statusString = NSL_statusLeft
+                    status = false
+                    print("++++++++A++++++++++")
+                    print("remainingDays")
+                    print(remainingDays)
+
+
                 default:
                     remainingDays = differenceOfDate.day!
                     let NSL_statusLeft = String(format: NSLocalizedString("NSL_statusLeft", value: "%d days left.", comment: ""), remainingDays)
                     statusString = NSL_statusLeft
                     status = false
+
+                    print("+++++++++B+++++++++")
+                    print("remainingDays")
+                    print(remainingDays)
+
+
                 }
             }
             
-        
         } else {
             statusString = ""
             status = false
