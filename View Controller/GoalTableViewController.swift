@@ -145,10 +145,12 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         if let predicateGoalValue = UserDefaults.standard.object(forKey: "predicateGoal") as? Int {
             
             switch predicateGoalValue {
-            case 2:
+            case 3:
                 fetchRequest.predicate = NSPredicate(format: "goalDone = true")
+            case 2:
+                fetchRequest.predicate = NSPredicate(format: "goalDone = false && goalDueDate = nil")
             case 1:
-                fetchRequest.predicate = NSPredicate(format: "goalDone = false")
+                fetchRequest.predicate = NSPredicate(format: "goalDone = false && goalDueDate != nil")
             case 0:
                 print("goalAll was selected for predicateGoal.")
             default:
