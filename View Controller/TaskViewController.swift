@@ -13,6 +13,27 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
 
 
     
+    @IBOutlet weak var repeatSegmentedControl: UISegmentedControl!
+    
+//    @IBAction func repeatSegmentedControllAction(_ sender: UISegmentedControl) {
+  
+//        switch repeatSegmentedControl.selectedSegmentIndex {
+//          case 0:
+//            selectedTask.repeat = 0
+//          case 1:
+//          selectedTask.repeat = 1
+//          case 2:
+//          selectedTask.repeat = 2
+//          case 3:
+//          selectedTask.repeat = 3
+//          default:
+//          selectedTask.repeat = 0
+//
+//          }
+//    }
+  
+    
+    
     @IBOutlet weak var toDoTextField: UITextField!
     @IBOutlet weak var isImportantSwitch: UISwitch!
     
@@ -44,9 +65,6 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        print(" ")
-//        print("task.selectedGoal.goalTitle: \(String(describing: selectedGoal.goalTitle))")
         
         
         if segueName == "addTask" {
@@ -203,7 +221,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                     selectedTask.date = nil
                 }
                 selectedTask.reward4Task = greed
-                
+                                
                 
             }else if segueName == "addTask" {
                 

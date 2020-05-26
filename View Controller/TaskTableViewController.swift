@@ -54,22 +54,18 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
         let noDateTask = UIBarButtonItem(title: "🗂", style: .done, target: self, action: #selector(showNoDateTask))
     
-//        let noDateTask = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(showNoDateTask))
-//        let noDataTaskImage = UIImage(named: "coffeefilter")
-//        noDateTask.image = noDataTaskImage
+
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        space.width = 40
         
+        let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
+        // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁📆
+
+    
         if selectedGoal?.vision4Goal != nil {
-
-            let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
-            // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁📆
-            
-            let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-            space.width = 40
-            
             navigationItem.rightBarButtonItems = [addTask, space, vision,  space, noDateTask, space]
-
         } else {
-            navigationItem.rightBarButtonItem = addTask
+            navigationItem.rightBarButtonItems = [addTask, space, noDateTask, space]
         }
         
         configureFetchedResultsController()
