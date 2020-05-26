@@ -118,6 +118,8 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
+        default:
+            print("switch default")
             
         }
     }

@@ -37,6 +37,10 @@ class BiometricIDAuth {
             return .touchID
         case .faceID:
             return .faceID
+            
+        default:
+            print("switch default")
+            return .none
         }
     }
     

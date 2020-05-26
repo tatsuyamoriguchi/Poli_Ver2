@@ -236,6 +236,9 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
 //                self.tableView!.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
 //            }
             break
+
+        default:
+                print("switch default")
         }
     }
     
@@ -267,7 +270,9 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
-            
+
+        default:
+            print("switch default")
         }
     }
     
@@ -415,7 +420,7 @@ class ActivityItemSource: NSObject, UIActivityItemSource {
     }
     
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return message
+        return message as Any
         // to display Instagram button, return image
         // image: Mail, Message, Notes, Twitter, Instagram, Shared Album, Post to Google Maps, Messenger, LINE, Snapchat, Facebook
         // message: Mail, Message, Notes, Twitter, Messenger, LINE, Facebook, LinkedIn
@@ -472,7 +477,7 @@ class ActivityItemSourceImage: NSObject, UIActivityItemSource {
     
     
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return image
+        return image as Any
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
@@ -526,7 +531,7 @@ class ActivityItemSourceURL: NSObject, UIActivityItemSource {
     }
     
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return url
+        return url as Any
         
     }
     

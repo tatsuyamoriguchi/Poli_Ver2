@@ -210,7 +210,9 @@ func noTextInputAlert() {
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
-            
+
+        default:
+                print("switch default")
         }
     }
     

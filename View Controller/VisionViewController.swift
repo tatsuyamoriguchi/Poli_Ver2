@@ -301,6 +301,8 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
+        default:
+            print("switch default")
             
         }
     }

@@ -132,10 +132,6 @@ class Vision4GoalViewController: UIViewController, UITextFieldDelegate, UITextVi
             destVC.vision4Goal = vision4Goal
             destVC.goalDueDate = goalDueDate
             
-            // debug
-               print("********destVC.goalDueDate******")
-               print(destVC.goalDueDate)
-            
         } else {
             print("segue ID info not available?")
         }
@@ -242,7 +238,9 @@ class Vision4GoalViewController: UIViewController, UITextFieldDelegate, UITextVi
                 tableView.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
-            
+
+        default:
+            print("switch default")
         }
     }
     

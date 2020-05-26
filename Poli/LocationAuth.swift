@@ -36,7 +36,9 @@ class LocationAuth {
             print("enableBasicLocationServices() switch.authorizedWhenInUse, .authorizedAlways was executed.")
             
             break
-            
+           
+        default:
+                print("switch default")
         }
         
     }
@@ -58,6 +60,10 @@ class LocationAuth {
         case .notDetermined, .authorizedAlways:
             print("locationManager() .notDetermined, .authorizedAlways, denied was executed.")
             break
+            
+        default:
+            print("switch default")
+            
         }
     }
     
