@@ -321,13 +321,13 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         switch repeatType {
         case 1:
             repeatString = "Daily"
-            repeatAlertConfirm(title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
+            repeatAlertConfirm(clickedTask: previousTask, title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
         case 2:
             repeatString = "Weekdays"
-            repeatAlertConfirm(title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
+            repeatAlertConfirm(clickedTask: previousTask, title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
         case 3:
             repeatString = "Weekly"
-            repeatAlertConfirm(title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
+            repeatAlertConfirm(clickedTask: previousTask, title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
 
         default:
             print("repeatType error: nil or something else")
@@ -338,7 +338,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 
     }
     
-    func repeatAlertConfirm(title: String, message: String) {
+    func repeatAlertConfirm(clickedTask: Task, title: String, message: String) {
         
         print("****repeatAlertConfirm() was run*****")
         
@@ -350,7 +350,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         //alert.addAction(UIAlertAction(title: NSL_oK, style: .default, handler: goToRepeat(previousTask: selectedTask!)))
         
         alert.addAction(UIAlertAction(title: NSL_oK, style: .default, handler: {(handler) in
-            self.goToRepeat(previousTask: self.selectedTask!)
+            self.goToRepeat(previousTask: clickedTask)
             
             print("*****alert.addAction was run******")
         }))

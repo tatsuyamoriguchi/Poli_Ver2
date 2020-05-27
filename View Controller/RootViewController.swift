@@ -15,6 +15,7 @@ class RootViewController: UINavigationController {
 
         if #available(iOS 13.0, *) {
             isModalInPresentation = true
+            
         } else {
             // Fallback on earlier versions
         }

@@ -330,6 +330,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
             let targetVC = destVC.topViewController as! GoalTableViewController
             targetVC.userName = userName
             
+            
+            /*
+             let sb = UIStoryboard(name: "Main", bundle: nil)
+             let rootVC = sb.instantiateViewController(withIdentifier: "rootNavigator") as! RootViewController
+              let newViewController = sb.instantiateViewController(withIdentifier: "todayVC") as! TodaysTasksTableViewController
+              appDelegate.window?.rootViewController = rootVC
+              rootVC.pushViewController(newViewController, animated: true)
+            */
         }
         // Pass the selected object to the new view controller.
     }
