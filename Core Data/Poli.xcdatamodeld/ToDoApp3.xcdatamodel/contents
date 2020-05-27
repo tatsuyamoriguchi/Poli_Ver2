@@ -21,7 +21,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isImportant" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="repeat" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repeatTask" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="toDo" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <relationship name="goalAssigned" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="tasksAssigned" inverseEntity="Goal"/>

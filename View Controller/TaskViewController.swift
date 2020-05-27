@@ -15,22 +15,22 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     
     @IBOutlet weak var repeatSegmentedControl: UISegmentedControl!
     
-//    @IBAction func repeatSegmentedControllAction(_ sender: UISegmentedControl) {
+    @IBAction func repeatSegmentedControllAction(_ sender: UISegmentedControl) {
   
-//        switch repeatSegmentedControl.selectedSegmentIndex {
-//          case 0:
-//            selectedTask.repeat = 0
-//          case 1:
-//          selectedTask.repeat = 1
-//          case 2:
-//          selectedTask.repeat = 2
-//          case 3:
-//          selectedTask.repeat = 3
-//          default:
-//          selectedTask.repeat = 0
-//
-//          }
-//    }
+        switch repeatSegmentedControl.selectedSegmentIndex {
+          case 0:
+            selectedTask.repeatTask = 0
+          case 1:
+          selectedTask.repeatTask = 1
+          case 2:
+          selectedTask.repeatTask = 2
+          case 3:
+          selectedTask.repeatTask = 3
+          default:
+          selectedTask.repeatTask = 0
+
+          }
+    }
   
     
     
@@ -67,6 +67,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         super.viewDidLoad()
         
         
+        
         if segueName == "addTask" {
             isDoneSwitch.isOn = false
             let NSL_naviAdd = NSLocalizedString("NSL_naviAdd", value: "Add Task", comment: "")
@@ -74,7 +75,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             
             dateSwitch.isOn = false
             taskDatePicker.isEnabled = false
-            
+                
+            repeatSegmentedControl.selectedSegmentIndex = 0
             
         } else if segueName == "updateTask" {
             toDoTextField.text = selectedTask.toDo
@@ -90,6 +92,11 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             }
             
             isDoneSwitch.isOn = selectedTask.isDone
+
+            if selectedTask != nil { repeatSegmentedControl.selectedSegmentIndex = selectedTask.repeatTask as! Int } else {
+                repeatSegmentedControl.selectedSegmentIndex = 0
+            }
+            
             let NSL_naviUpdate = NSLocalizedString("NSL_naviUpdate", value: "Update Task", comment: "")
             self.navigationItem.title = NSL_naviUpdate
 
@@ -221,6 +228,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                     selectedTask.date = nil
                 }
                 selectedTask.reward4Task = greed
+                
+                selectedTask.repeatTask = NSNumber(value: repeatSegmentedControl.selectedSegmentIndex)
                                 
                 
             }else if segueName == "addTask" {

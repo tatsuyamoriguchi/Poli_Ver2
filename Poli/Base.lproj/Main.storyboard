@@ -975,7 +975,7 @@
                                     <outlet property="delegate" destination="kmR-6c-LEk" id="gvo-g7-yNf"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sar-dt-QYa">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="sar-dt-QYa">
                                 <rect key="frame" x="0.0" y="334" width="375" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="gZk-Ax-Pes"/>

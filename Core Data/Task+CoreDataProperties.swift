@@ -24,5 +24,6 @@ extension Task {
     @NSManaged public var url: URL?
     @NSManaged public var goalAssigned: Goal?
     @NSManaged public var reward4Task: Reward?
+    @NSManaged public var repeatTask: NSNumber?
 
 }
