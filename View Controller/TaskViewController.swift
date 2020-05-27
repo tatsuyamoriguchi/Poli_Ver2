@@ -17,19 +17,23 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     
     @IBAction func repeatSegmentedControllAction(_ sender: UISegmentedControl) {
   
-        switch repeatSegmentedControl.selectedSegmentIndex {
-          case 0:
-            selectedTask.repeatTask = 0
-          case 1:
-          selectedTask.repeatTask = 1
-          case 2:
-          selectedTask.repeatTask = 2
-          case 3:
-          selectedTask.repeatTask = 3
-          default:
-          selectedTask.repeatTask = 0
-
-          }
+        if selectedTask != nil {
+            switch repeatSegmentedControl.selectedSegmentIndex {
+            case 0:
+                selectedTask.repeatTask = 0
+            case 1:
+                selectedTask.repeatTask = 1
+            case 2:
+                selectedTask.repeatTask = 2
+            case 3:
+                selectedTask.repeatTask = 3
+            default:
+                selectedTask.repeatTask = 0
+                
+            }
+        } else {
+            
+        }
     }
   
     
@@ -56,8 +60,17 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         
         if taskDatePicker.isEnabled == true {
             taskDatePicker.isEnabled = false
+            // ****
+            repeatSegmentedControl.setEnabled(false, forSegmentAt: 1)
+            repeatSegmentedControl.setEnabled(false, forSegmentAt: 2)
+            repeatSegmentedControl.setEnabled(false, forSegmentAt: 3)
+
         } else {
             taskDatePicker.isEnabled = true
+            repeatSegmentedControl.setEnabled(true, forSegmentAt: 1)
+            repeatSegmentedControl.setEnabled(true, forSegmentAt: 2)
+            repeatSegmentedControl.setEnabled(true, forSegmentAt: 3)
+
         }
     }
     
@@ -67,7 +80,6 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         super.viewDidLoad()
         
         
-        
         if segueName == "addTask" {
             isDoneSwitch.isOn = false
             let NSL_naviAdd = NSLocalizedString("NSL_naviAdd", value: "Add Task", comment: "")
@@ -75,7 +87,11 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             
             dateSwitch.isOn = false
             taskDatePicker.isEnabled = false
-                
+
+            repeatSegmentedControl.setEnabled(false, forSegmentAt: 1)
+            repeatSegmentedControl.setEnabled(false, forSegmentAt: 2)
+            repeatSegmentedControl.setEnabled(false, forSegmentAt: 3)
+
             repeatSegmentedControl.selectedSegmentIndex = 0
             
         } else if segueName == "updateTask" {
@@ -89,11 +105,18 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             } else {
                 dateSwitch.isOn = false
                 taskDatePicker.isEnabled = false
+
+                repeatSegmentedControl.setEnabled(false, forSegmentAt: 1)
+                repeatSegmentedControl.setEnabled(false, forSegmentAt: 2)
+                repeatSegmentedControl.setEnabled(false, forSegmentAt: 3)
+                repeatSegmentedControl.selectedSegmentIndex = 0
             }
             
             isDoneSwitch.isOn = selectedTask.isDone
 
-            if selectedTask != nil { repeatSegmentedControl.selectedSegmentIndex = selectedTask.repeatTask as! Int } else {
+            if selectedTask.repeatTask != nil {
+                repeatSegmentedControl.selectedSegmentIndex = selectedTask.repeatTask as! Int
+            } else {
                 repeatSegmentedControl.selectedSegmentIndex = 0
             }
             
@@ -239,8 +262,10 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                 task.toDo = toDoTextField.text
                 task.isImportant = isImportantSwitch.isOn
                 if dateSwitch.isOn {
-                    task.date = taskDatePicker.date as NSDate }
-                else {
+                    task.date = taskDatePicker.date as NSDate
+                    task.repeatTask = NSNumber(value: repeatSegmentedControl.selectedSegmentIndex)
+
+                } else {
                     task.date = nil
                 }
                 task.isDone = false

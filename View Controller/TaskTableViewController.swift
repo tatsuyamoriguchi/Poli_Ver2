@@ -314,6 +314,129 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     }
     
     
+    func repeatAlert(previousTask: Task, repeatType: NSNumber) {
+
+        let repeatString: String
+
+        switch repeatType {
+        case 1:
+            repeatString = "Daily"
+            repeatAlertConfirm(title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
+        case 2:
+            repeatString = "Weekdays"
+            repeatAlertConfirm(title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
+        case 3:
+            repeatString = "Weekly"
+            repeatAlertConfirm(title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
+
+        default:
+            print("repeatType error: nil or something else")
+
+        }
+  
+        
+
+    }
+    
+    func repeatAlertConfirm(title: String, message: String) {
+        
+        print("****repeatAlertConfirm() was run*****")
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let NSL_oK = NSLocalizedString("NSL_oK", value: "OK", comment: "")
+        let NSL_cancelButton = NSLocalizedString("NSL_cancelButton", value: "Cancel", comment: "")
+        alert.addAction(UIAlertAction(title: NSL_cancelButton, style: .default, handler: nil))
+        
+        //alert.addAction(UIAlertAction(title: NSL_oK, style: .default, handler: goToRepeat(previousTask: selectedTask!)))
+        
+        alert.addAction(UIAlertAction(title: NSL_oK, style: .default, handler: {(handler) in
+            self.goToRepeat(previousTask: self.selectedTask!)
+            
+            print("*****alert.addAction was run******")
+        }))
+        present(alert, animated: true)
+        
+    }
+    
+    func goToRepeat(previousTask: Task) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let newTask = Task(context: context)
+        
+        newTask.toDo = previousTask.toDo
+        newTask.isImportant = previousTask.isImportant
+        
+        newTask.date = nextRepeatDate(previousTaskDate: previousTask.date! as Date, repeatType: previousTask.repeatTask as! Int) as NSDate
+        newTask.isDone = false
+        newTask.goalAssigned = selectedGoal
+        newTask.reward4Task = previousTask.reward4Task
+        newTask.url = previousTask.url
+        newTask.repeatTask = previousTask.repeatTask
+        
+        print("****goToRepeat is run*****")
+        
+        do {
+            try context.save()
+            print("*****goToRepeat-context.save() was run******")
+        }catch{
+            print("Saving Error: \(error.localizedDescription)")
+        }
+    }
+    
+//    func dayNumberOfWeek() -> Int? {
+//        return Calendar.current.dateComponents([.weekday], from: self).weekday
+//    }
+    
+    func nextRepeatDate(previousTaskDate: Date, repeatType: Int) -> Date {
+        let currentDate = previousTaskDate
+        
+        var dateComponent = DateComponents()
+        
+        let addDays: Int
+        
+        switch repeatType {
+        case 1:
+            addDays = 1
+            dateComponent.day = addDays
+        case 2:
+            let weekdayIndex = Calendar.current.dateComponents([.weekday], from: currentDate).weekday
+            
+            switch weekdayIndex {
+            case 1:
+                addDays = 1
+            case 6:
+                addDays = 3
+            case 7:
+                addDays = 2
+            default:
+                addDays = 1
+                
+            }
+            dateComponent.day = addDays
+            
+        case 3:
+            addDays = 7
+            dateComponent.day = addDays
+        default:
+            print("Error func nextRepeatDate")
+        }
+   
+        //dateComponent.day = addDays
+        
+        guard let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate as Date) else { return currentDate as Date }
+        
+        print("")
+        print("currentDate: ")
+        print(currentDate)
+        print("futureDate")
+        print(futureDate)
+        print("")
+        
+        return futureDate
+        
+    }
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
  
@@ -332,6 +455,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     task.isDone = false
                     PlayAudio.sharedInstance.playClick(fileName: "whining", fileExt: ".wav")
                 }else {
+                    print("*****task.repeatTask*****")
+                    print(task.repeatTask as Any)
+                    print("")
+                    
+                    if task.repeatTask != nil || task.repeatTask != 0 {
+                        repeatAlert(previousTask: task, repeatType: task.repeatTask!)
+                        print("***matched***")
+                    }
+                    
                     taskCell.accessoryType = .checkmark
                     task.isDone = true
                     PlayAudio.sharedInstance.playClick(fileName: "smallbark", fileExt: ".wav")

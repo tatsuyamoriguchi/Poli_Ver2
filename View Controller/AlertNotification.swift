@@ -26,6 +26,7 @@ class AlertNotification: UIViewController {
             alert.addAction(UIAlertAction(title: NSL_cancelButton, style: .default, handler: nil))
 
             alert.addAction(UIAlertAction(title: NSL_oK, style: .default, handler: goToSettings))
+        
         default:
             alert.addAction(UIAlertAction(title: NSL_oK, style: .default, handler: nil))
 
@@ -44,15 +45,10 @@ class AlertNotification: UIViewController {
 
     }
 
-
-    
     func goToSettings(alert: UIAlertAction!) {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url)
         }
-        
     }
-    
-    
-    
+
 }
