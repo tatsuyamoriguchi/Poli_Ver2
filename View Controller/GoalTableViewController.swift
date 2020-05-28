@@ -72,6 +72,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "Login as %@", comment: ""), userName)
             self.navigationItem.prompt = NSL_naviItem
             
+            
         }else {
             //self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")
             alertAction(title: "Login Aelrt", message: "Problem reading login information in UserDefaults. Please re-login.", actionPassed: logoutAction)

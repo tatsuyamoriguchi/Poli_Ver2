@@ -607,19 +607,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT0-uU-F2k">
-                                <rect key="frame" x="0.0" y="637" width="375" height="30"/>
-                                <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="xVg-wt-F9y"/>
-                                </constraints>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelToRoot:" destination="dSK-z6-Wqj" eventType="touchUpInside" id="Jsj-Si-ZYJ"/>
-                                </connections>
-                            </button>
                             <imageView contentMode="scaleAspectFit" image="PoliRoundIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ptq-7j-Ud0">
                                 <rect key="frame" x="76" y="477" width="224" height="150"/>
                                 <gestureRecognizers/>
@@ -673,21 +660,53 @@
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="VMG-Cf-4rp">
+                                <rect key="frame" x="67.5" y="637" width="240" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT0-uU-F2k">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                        <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="kGz-PB-E3n"/>
+                                            <constraint firstAttribute="width" constant="100" id="rEV-Bs-naA"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelToRoot:" destination="dSK-z6-Wqj" eventType="touchUpInside" id="Jsj-Si-ZYJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqI-CZ-95c">
+                                        <rect key="frame" x="140" y="0.0" width="100" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="rET-p0-jjK"/>
+                                            <constraint firstAttribute="height" constant="30" id="wpK-pm-sgi"/>
+                                        </constraints>
+                                        <state key="normal" title="No Reward">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="noRewardAction:" destination="dSK-z6-Wqj" eventType="touchUpInside" id="9f9-Iw-ljh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lm5-ja-paL" firstAttribute="leading" secondItem="lhY-DK-af4" secondAttribute="leading" id="7gd-sh-GRw"/>
                             <constraint firstItem="lm5-ja-paL" firstAttribute="top" secondItem="X0I-SN-cUg" secondAttribute="bottom" constant="10" id="8ve-hb-NTa"/>
-                            <constraint firstItem="nT0-uU-F2k" firstAttribute="leading" secondItem="lhY-DK-af4" secondAttribute="leading" id="Apy-4l-8KN"/>
                             <constraint firstItem="ptq-7j-Ud0" firstAttribute="leading" secondItem="lhY-DK-af4" secondAttribute="leading" constant="76" id="Cow-ww-fhe"/>
-                            <constraint firstItem="nT0-uU-F2k" firstAttribute="bottom" secondItem="lhY-DK-af4" secondAttribute="bottom" id="FGh-kE-zTy"/>
                             <constraint firstItem="lhY-DK-af4" firstAttribute="trailing" secondItem="ptq-7j-Ud0" secondAttribute="trailing" constant="75" id="UNX-lQ-PTW"/>
                             <constraint firstItem="ptq-7j-Ud0" firstAttribute="top" secondItem="lm5-ja-paL" secondAttribute="bottom" constant="10" id="WDR-yJ-K5t"/>
-                            <constraint firstItem="nT0-uU-F2k" firstAttribute="top" secondItem="ptq-7j-Ud0" secondAttribute="bottom" constant="10" id="bAu-tr-05f"/>
+                            <constraint firstItem="VMG-Cf-4rp" firstAttribute="top" secondItem="ptq-7j-Ud0" secondAttribute="bottom" constant="10" id="Ymo-tT-nlD"/>
+                            <constraint firstItem="VMG-Cf-4rp" firstAttribute="centerX" secondItem="qzN-vb-zSc" secondAttribute="centerX" id="hgl-V5-0fE"/>
                             <constraint firstItem="X0I-SN-cUg" firstAttribute="leading" secondItem="lhY-DK-af4" secondAttribute="leading" constant="10" id="i93-oD-D5I"/>
                             <constraint firstItem="lm5-ja-paL" firstAttribute="trailing" secondItem="lhY-DK-af4" secondAttribute="trailing" id="lFC-Db-659"/>
-                            <constraint firstItem="nT0-uU-F2k" firstAttribute="trailing" secondItem="lhY-DK-af4" secondAttribute="trailing" id="qoa-wc-FMH"/>
                             <constraint firstItem="X0I-SN-cUg" firstAttribute="top" secondItem="lhY-DK-af4" secondAttribute="top" constant="10" id="tWo-qP-4PB"/>
+                            <constraint firstItem="VMG-Cf-4rp" firstAttribute="bottom" secondItem="lhY-DK-af4" secondAttribute="bottom" id="tcr-p8-zPQ"/>
                             <constraint firstAttribute="trailing" secondItem="X0I-SN-cUg" secondAttribute="trailing" constant="10" id="xI0-cS-lVf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lhY-DK-af4"/>
@@ -706,7 +725,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="516" y="2451"/>
+            <point key="canvasLocation" x="1764" y="1833.7331334332835"/>
         </scene>
         <!--Undone Goal-->
         <scene sceneID="Zv9-8Q-VHI">

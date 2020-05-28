@@ -15,6 +15,13 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var goalRewardImageView: UIImageView!
     @IBOutlet var tableView: UITableView!
     
+    @IBAction func noRewardAction(_ sender: UIButton) {
+        goalRewardTextField.text = nil
+        //goal.reward4Goal = nil
+        greed = nil
+        goalRewardImageView.image = UIImage(named: "PoliRoundIcon.png")
+        
+    }
     @IBAction func cancelToRoot(_ sender: UIButton) {
          navigationController!.popToRootViewController(animated: true)
     }
