@@ -71,7 +71,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             
             let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "Login as %@", comment: ""), userName)
             self.navigationItem.prompt = NSL_naviItem
-            
+            //self.navigationItem.title = "My Goals - \(NSL_naviItem)"
             
         }else {
             //self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")

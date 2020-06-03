@@ -24,7 +24,7 @@
         <attribute name="repeatTask" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="toDo" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
-        <relationship name="goalAssigned" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="tasksAssigned" inverseEntity="Goal"/>
+        <relationship name="goalAssigned" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="tasksAssigned" inverseEntity="Goal"/>
         <relationship name="reward4Task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="reward4Task" inverseEntity="Reward"/>
     </entity>
     <entity name="Vision" representedClassName=".Vision" syncable="YES">

@@ -64,6 +64,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         let activityItems = [ActivityItemSource(message: message), ActivityItemSourceImage(image: image), ActivityItemSourceURL(url: url)]
         let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
+        
         activityVC.excludedActivityTypes = [
             UIActivity.ActivityType.assignToContact,
             UIActivity.ActivityType.print,
@@ -71,12 +72,23 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             UIActivity.ActivityType.markupAsPDF,
             UIActivity.ActivityType.saveToCameraRoll,
             UIActivity.ActivityType.openInIBooks,
+            //UIActivity.ActivityType.postToTwitter
+            //UIActivity.ActivityType.airDrop,
+            //UIActivity.ActivityType.init(rawValue: "com.apple.iTunesStore")
+           
             //UIActivity.ActivityType(rawValue: "com.snapchat.Share")
             //UIActivity.ActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
-            //UIActivity.ActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
+            //UIActivity.ActivityType(rawValue: "com.apple.mobilenotes.SharingExtension")
         ]
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityVC.popoverPresentationController?.sourceView = self.view
+            activityVC.popoverPresentationController?.sourceRect = CGRect(x:0,y:0,width:500,height:500)
+            
+            
+        }else {
+            activityVC.popoverPresentationController?.sourceView = self.view
+        }
         
-        activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
         
     }
