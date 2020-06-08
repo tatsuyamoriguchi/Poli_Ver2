@@ -7,84 +7,182 @@
 //
 
 import UIKit
+import CoreData
 
-class MigrateTableViewController: UITableViewController {
+class MigrateTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            configureFetchedResultsController()
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        configureFetchedResultsController()
+        
     }
 
+    // MARK: -Configure FetchResultsController
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    
+    private func configureFetchedResultsController() {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
+        
+        // Declare sort descriptor
+        let sortByDone = NSSortDescriptor(key: #keyPath(Goal.goalDone), ascending: true)
+        let sortByTitle = NSSortDescriptor(key: #keyPath(Goal.goalTitle), ascending: true)
+        
+        // Sort fetchRequest array data
+        fetchRequest.sortDescriptors = [sortByDone, sortByTitle]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController?.delegate = self
+        
+        do {
+            try fetchedResultsController?.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+        print("controllerWillChangeContent was detected")
+    }
+    
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath! as IndexPath], with: .fade)
+        case .delete:
+            print("delete was detected.")
+            self.tableView.deleteRows(at: [indexPath! as IndexPath], with: .fade)
+        case .update:
+            
+            if(indexPath != nil) {
+                self.tableView.cellForRow(at: indexPath! as IndexPath)
+            }
+        case .move:
+            self.tableView.deleteRows(at: [indexPath! as IndexPath], with: .fade)
+            self.tableView.insertRows(at: [indexPath! as IndexPath], with: .fade)
+        @unknown default:
+            print("Fatal Error at switch")
+        }
+    }
+    
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
+        print("tableView data update was ended at controllerDidChangeContent().")
+        tableView.reloadData()
+    }
+    
+    
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        if let frc = fetchedResultsController {
+            return frc.sections!.count
+        }
         return 0
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let sections = self.fetchedResultsController?.sections else {
+            fatalError("No sections in fetchedResultscontroller")
+        }
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
-
-    /*
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GoalCell", for: indexPath)
+        
+        if let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal {
+            cell.textLabel?.text = goal.goalTitle
+            if goal.goalDone == true { cell.backgroundColor = .gray } else { cell.backgroundColor = .clear }
+        }
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let selectedGoal = self.fetchedResultsController?.object(at: indexPath) as? Goal else { return }
+        migrateOneGoal(selectedGoal: selectedGoal)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    
+    func migrateOneGoal(selectedGoal: Goal) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let newGoal = Goal(context: context)
+        
+        newGoal.goalTitle = selectedGoal.goalTitle! + " iCloud syncing"
+        newGoal.goalDone = selectedGoal.goalDone
+        newGoal.goalDescription = selectedGoal.goalDescription
+        newGoal.goalDueDate = selectedGoal.goalDueDate
+        newGoal.goalReward = selectedGoal.goalReward
+        newGoal.goalRewardImage = selectedGoal.goalRewardImage
+        newGoal.vision4Goal = selectedGoal.vision4Goal
+        newGoal.tasksAssigned = selectedGoal.tasksAssigned
+        newGoal.reward4Goal = selectedGoal.reward4Goal
+        
+        migrateTasksOfOneGoal(selectedGoal: selectedGoal, newGoal: newGoal)
+        
+        do {
+            // Delete it from Core Data
+            context.delete(selectedGoal as NSManagedObject)
+            try context.save()
+        }catch{
+            print("Saving or Deleting Goal context Error: \(error.localizedDescription)")
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    func migrateTasksOfOneGoal(selectedGoal: Goal, newGoal: Goal) {
+        
+        let taskArray = selectedGoalTasksToArray(selectedGoal: selectedGoal)
+        
+        for taskToMigrate in taskArray {
+            
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let newTask = Task(context: context)
+            
+            newTask.toDo = taskToMigrate.toDo
+            newTask.isDone = taskToMigrate.isDone
+            newTask.date = taskToMigrate.date
+            newTask.isImportant = taskToMigrate.isImportant
+            newTask.repeatTask = taskToMigrate.repeatTask
+            newTask.url = taskToMigrate.url
+            newTask.reward4Task = taskToMigrate.reward4Task
+            newTask.goalAssigned = newGoal
+            
+            do {
+                context.delete(taskToMigrate as NSManagedObject)
+                try context.save()
+            }catch{
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func selectedGoalTasksToArray(selectedGoal: Goal) -> Array<Task> {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal)
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        var objects: [Task]
+        do {
+            try objects = context.fetch(fetchRequest) as! [Task]
+            return objects
+        } catch {
+            print("Error in fetching Task data ")
+            return []
+        }
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

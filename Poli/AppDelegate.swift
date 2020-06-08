@@ -80,53 +80,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Couldn't retreve a persisten store description.")
         }
         
+        
         // Initialize the CloudKit schema
         let id = "iCloud.com.beckos.Poli"
         let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
         description.cloudKitContainerOptions = options
-
         
-        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
         
-        var defaultURL: URL?
-        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
-            defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
-        }
-        
-        if defaultURL == nil {
-            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
-        }
+//        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
+//
+//        var defaultURL: URL?
+//        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
+//            defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
+//        }
+//
+//        if defaultURL == nil {
+//            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
+//        }
 
         container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
             
           //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
-            container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
-            
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-            
-            if let url = defaultURL, url.absoluteString != storeURL.absoluteString {
-                let coordinator = container.persistentStoreCoordinator
-                if let oldStore = coordinator.persistentStore(for: url) {
-                    do {
-                        try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                    
-                    // delete old store
-                    let fileCoordinator = NSFileCoordinator(filePresenter: nil)
-                    fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: { url in
-                        do {
-                            try FileManager.default.removeItem(at: url)
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                    })
-                }
-            }
+//            container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
+//
+//            if let error = error as NSError? {
+//                fatalError("Unresolved error \(error), \(error.userInfo)")
+//            }
+//
+//            if let url = defaultURL, url.absoluteString != storeURL.absoluteString {
+//                let coordinator = container.persistentStoreCoordinator
+//                if let oldStore = coordinator.persistentStore(for: url) {
+//                    do {
+//                        try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
+//
+//                    // delete old store
+//                    let fileCoordinator = NSFileCoordinator(filePresenter: nil)
+//                    fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: { url in
+//                        do {
+//                            try FileManager.default.removeItem(at: url)
+//                        } catch {
+//                            print(error.localizedDescription)
+//                        }
+//                    })
+//                }
+//            }
         })
+
+ 
+///
+        do {
+            // Uncomment to do a dry run and print the CK records it'll make
+             //           try container.initializeCloudKitSchema(options: [.dryRun, .printSchema])
+            // Uncomment to initialize your schema
+            try container.initializeCloudKitSchema()
+        } catch {
+            print("Unable to initialize CloudKit schema: \(error.localizedDescription)")
+        }
+///
+        
+        
         return container
     }()
 

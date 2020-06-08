@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Goal" representedClassName=".Goal" syncable="YES">
         <attribute name="goalDescription" optional="YES" attributeType="String"/>
-        <attribute name="goalDone" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="goalDone" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="goalDueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goalReward" optional="YES" attributeType="String"/>
         <attribute name="goalRewardImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <attribute name="goalTitle" attributeType="String"/>
+        <attribute name="goalTitle" optional="YES" attributeType="String"/>
         <relationship name="reward4Goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="reward4Goal" inverseEntity="Reward"/>
         <relationship name="tasksAssigned" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="goalAssigned" inverseEntity="Task"/>
         <relationship name="vision4Goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vision" inverseName="vision4Goal" inverseEntity="Vision"/>
@@ -20,9 +20,9 @@
     <entity name="Task" representedClassName=".Task" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="isImportant" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isImportant" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="repeatTask" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="toDo" attributeType="String"/>
+        <attribute name="toDo" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <relationship name="goalAssigned" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="tasksAssigned" inverseEntity="Goal"/>
         <relationship name="reward4Task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="reward4Task" inverseEntity="Reward"/>
@@ -34,7 +34,7 @@
         <relationship name="vision4Goal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="vision4Goal" inverseEntity="Goal"/>
     </entity>
     <elements>
-        <element name="Goal" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Goal" positionX="-63" positionY="-18" width="128" height="178"/>
         <element name="Reward" positionX="90" positionY="63" width="128" height="105"/>
         <element name="Task" positionX="241" positionY="51" width="128" height="163"/>
         <element name="Vision" positionX="90" positionY="63" width="128" height="105"/>

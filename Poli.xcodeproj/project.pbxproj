@@ -56,6 +56,7 @@
 		8C710353231C5E9500D9B1C2 /* GreedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C710352231C5E9500D9B1C2 /* GreedListViewController.swift */; };
 		8C71255221928EB100E42E4C /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C71255121928EB100E42E4C /* KeychainPasswordItem.swift */; };
 		8C714D24248DC41400FB69BB /* MigrateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C714D23248DC41400FB69BB /* MigrateTableViewController.swift */; };
+		8C74D7E2248DF22B00D75523 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C74D7E1248DF22A00D75523 /* CloudKit.framework */; };
 		8C807A3D21267F890024D5EB /* TodaysTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C807A3C21267F890024D5EB /* TodaysTasksTableViewController.swift */; };
 		8C902EF6233F2E1300CC93A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C902EF4233F2E1300CC93A5 /* Localizable.strings */; };
 		8C902EF9233F2E1300CC93A5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C902EF7233F2E1300CC93A5 /* InfoPlist.strings */; };
@@ -137,6 +138,7 @@
 		8C710352231C5E9500D9B1C2 /* GreedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedListViewController.swift; sourceTree = "<group>"; };
 		8C71255121928EB100E42E4C /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		8C714D23248DC41400FB69BB /* MigrateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MigrateTableViewController.swift; path = "View Controller/MigrateTableViewController.swift"; sourceTree = SOURCE_ROOT; };
+		8C74D7E1248DF22A00D75523 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8C7AD418232EE0CB0041A451 /* ShareSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSelectViewController.swift; sourceTree = "<group>"; };
 		8C7D95F521305A23005F08D2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		8C7D95F621305A23005F08D2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C74D7E2248DF22B00D75523 /* CloudKit.framework in Frameworks */,
 				8CF86D89211AD5A10079A8C9 /* SpriteKit.framework in Frameworks */,
 				8C98C31D21191B1F00FAFADE /* AVFoundation.framework in Frameworks */,
 			);
@@ -278,6 +281,7 @@
 		8C98C31B21191B1E00FAFADE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C74D7E1248DF22A00D75523 /* CloudKit.framework */,
 				8CF86D88211AD5A10079A8C9 /* SpriteKit.framework */,
 				8C98C31C21191B1F00FAFADE /* AVFoundation.framework */,
 			);
@@ -716,7 +720,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Poli/Poli.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GY7BG2G9TC;
@@ -741,7 +745,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Poli/Poli.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GY7BG2G9TC;
