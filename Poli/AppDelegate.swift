@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
+    @available(iOS 13.0, *)
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -61,16 +62,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    @available(iOS 13.0, *)
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
-
-
     
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Poli")
+    
+    @available(iOS 13.0, *)
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "Poli")
+        
+        
+        // Get the store description
+        guard let description = container.persistentStoreDescriptions.first else {
+            fatalError("Couldn't retreve a persisten store description.")
+        }
+        
+        // Initialize the CloudKit schema
+        let id = "iCloud.com.beckos.Poli"
+        let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
+        description.cloudKitContainerOptions = options
+
+        
         let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
         
         var defaultURL: URL?
@@ -81,6 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if defaultURL == nil {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         }
+
         container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
             
           //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
@@ -113,11 +129,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-    
-    
-    
+
     
     // MARK: - Core Data Saving support
+    @available(iOS 13.0, *)
     func saveContext () {
         let context = persistentContainer.viewContext
         
