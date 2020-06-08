@@ -75,29 +75,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let container = NSPersistentCloudKitContainer(name: "Poli")
         
         
-        // Get the store description
-        guard let description = container.persistentStoreDescriptions.first else {
-            fatalError("Couldn't retreve a persisten store description.")
-        }
-        
-        
-        // Initialize the CloudKit schema
-        let id = "iCloud.com.beckos.Poli"
-        let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
-        description.cloudKitContainerOptions = options
-        
-        
-//        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
-//
-//        var defaultURL: URL?
-//        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
-//            defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
+//        // Get the store description
+//        guard let description = container.persistentStoreDescriptions.first else {
+//            fatalError("Couldn't retreve a persisten store description.")
 //        }
-//
-//        if defaultURL == nil {
-//            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
-//        }
+        
 
+        
+        
+        let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
+
+        var defaultURL: URL?
+        if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
+            defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
+ 
+        // Initialize the CloudKit schema
+         let id = "iCloud.com.beckos.Poli"
+         let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
+         storeDescription.cloudKitContainerOptions = options
+        
+        }
+
+        if defaultURL == nil {
+            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
+        }
+
+ 
+
+        
+        
         container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
             
           //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
@@ -129,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
         })
 
- 
+
 ///
         do {
             // Uncomment to do a dry run and print the CK records it'll make
