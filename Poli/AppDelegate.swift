@@ -98,6 +98,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if defaultURL == nil {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
+            
+            
+            let storeDescription = container.persistentStoreDescriptions.first
+            // Initialize the CloudKit schema
+            let id = "iCloud.com.beckos.Poli"
+            let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
+            storeDescription?.cloudKitContainerOptions = options
         }
 
  
@@ -136,16 +143,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
 
 
-///
-        do {
-            // Uncomment to do a dry run and print the CK records it'll make
-             //           try container.initializeCloudKitSchema(options: [.dryRun, .printSchema])
-            // Uncomment to initialize your schema
-            try container.initializeCloudKitSchema()
-        } catch {
-            print("Unable to initialize CloudKit schema: \(error.localizedDescription)")
-        }
-///
+        // Initialize CloudKit schema
+//        do {
+//            // Uncomment to do a dry run and print the CK records it'll make
+//             //           try container.initializeCloudKitSchema(options: [.dryRun, .printSchema])
+//            // Uncomment to initialize your schema
+//            try container.initializeCloudKitSchema()
+//        } catch {
+//            print("Unable to initialize CloudKit schema: \(error.localizedDescription)")
+//        }
+        // End initializing CloudKit schema
         
         
         return container

@@ -37,6 +37,6 @@
         <element name="Goal" positionX="-63" positionY="-18" width="128" height="178"/>
         <element name="Reward" positionX="90" positionY="63" width="128" height="105"/>
         <element name="Task" positionX="241" positionY="51" width="128" height="163"/>
-        <element name="Vision" positionX="90" positionY="63" width="128" height="105"/>
+        <element name="Vision" positionX="90" positionY="63" width="128" height="103"/>
     </elements>
 </model>

@@ -21,6 +21,10 @@ class MigrateTableViewController: UITableViewController, NSFetchedResultsControl
         configureFetchedResultsController()
         
     }
+    
+    
+    
+    
 
     // MARK: -Configure FetchResultsController
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
@@ -165,6 +169,7 @@ class MigrateTableViewController: UITableViewController, NSFetchedResultsControl
                 context.delete(taskToMigrate as NSManagedObject)
                 try context.save()
             }catch{
+                print("*******migrateTasksOfOneGoal() delete or saving error*******")
             }
         }
     }
@@ -184,5 +189,5 @@ class MigrateTableViewController: UITableViewController, NSFetchedResultsControl
             return []
         }
     }
-
+    
 }

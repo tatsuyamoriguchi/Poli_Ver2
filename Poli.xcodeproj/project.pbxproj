@@ -25,6 +25,8 @@
 		8C433CD3211272DC008B946F /* GoalRewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C433CD2211272DC008B946F /* GoalRewardViewController.swift */; };
 		8C433CD521127328008B946F /* GoalTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C433CD421127328008B946F /* GoalTitleViewController.swift */; };
 		8C473E33231A17CE0071503B /* VisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C473E32231A17CE0071503B /* VisionViewController.swift */; };
+		8C491FDE248F7CC9007DED98 /* MigrateRewardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C491FDD248F7CC9007DED98 /* MigrateRewardTableViewController.swift */; };
+		8C491FE0248F7D4D007DED98 /* MigrateVisionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C491FDF248F7D4D007DED98 /* MigrateVisionTableViewController.swift */; };
 		8C493FEC2118B447007D490D /* AlertNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C493FEB2118B447007D490D /* AlertNotification.swift */; };
 		8C4A8A4B212BD253009E1E9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A8A4A212BD253009E1E9F /* RootViewController.swift */; };
 		8C58CE27211B618900AE695F /* GoalDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C58CE26211B618900AE695F /* GoalDoneViewController.swift */; };
@@ -106,6 +108,8 @@
 		8C433CD2211272DC008B946F /* GoalRewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRewardViewController.swift; sourceTree = "<group>"; };
 		8C433CD421127328008B946F /* GoalTitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTitleViewController.swift; sourceTree = "<group>"; };
 		8C473E32231A17CE0071503B /* VisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionViewController.swift; sourceTree = "<group>"; };
+		8C491FDD248F7CC9007DED98 /* MigrateRewardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MigrateRewardTableViewController.swift; path = "View Controller/MigrateRewardTableViewController.swift"; sourceTree = SOURCE_ROOT; };
+		8C491FDF248F7D4D007DED98 /* MigrateVisionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrateVisionTableViewController.swift; sourceTree = "<group>"; };
 		8C493FEB2118B447007D490D /* AlertNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertNotification.swift; sourceTree = "<group>"; };
 		8C4A8A4A212BD253009E1E9F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		8C547A1D211F5F7900ED675D /* Poli.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Poli.entitlements; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 				8C27360E2116CB2200A482B3 /* SettingsViewController.swift */,
 				8CE809B8212A31A20076756C /* LocalNotificationDelegate.swift */,
 				8C714D23248DC41400FB69BB /* MigrateTableViewController.swift */,
+				8C491FDF248F7D4D007DED98 /* MigrateVisionTableViewController.swift */,
+				8C491FDD248F7CC9007DED98 /* MigrateRewardTableViewController.swift */,
 				8C004A6D20FEB14D00960B3A /* GoalTableViewController.swift */,
 				8CB3A03A2104097F00774DE6 /* GoalTableViewCell.swift */,
 				8CE90871210ECC3D007AB95F /* GoalProgress.swift */,
@@ -442,6 +448,7 @@
 				8C71255221928EB100E42E4C /* KeychainPasswordItem.swift in Sources */,
 				8C5EFBB82341646F00CD8D4B /* ShareViewController.swift in Sources */,
 				8CE809B9212A31A20076756C /* LocalNotificationDelegate.swift in Sources */,
+				8C491FE0248F7D4D007DED98 /* MigrateVisionTableViewController.swift in Sources */,
 				8C27360D21169F1600A482B3 /* LoginViewController.swift in Sources */,
 				8C433CD3211272DC008B946F /* GoalRewardViewController.swift in Sources */,
 				CBC4637E23C30679008C289C /* TaskGoalTableViewController.swift in Sources */,
@@ -454,6 +461,7 @@
 				8C927DB92334974B00B70092 /* LocaleConvert.swift in Sources */,
 				8C219F9A22FE613F00E87A2B /* LocationAuth.swift in Sources */,
 				8C65A71E231EAE2100034E09 /* Vision+CoreDataClass.swift in Sources */,
+				8C491FDE248F7CC9007DED98 /* MigrateRewardTableViewController.swift in Sources */,
 				8C4A8A4B212BD253009E1E9F /* RootViewController.swift in Sources */,
 				8C004A7020FEB3A600960B3A /* TaskTableViewController.swift in Sources */,
 				8C004A7220FEB3C100960B3A /* TaskViewController.swift in Sources */,
