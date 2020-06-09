@@ -45,50 +45,57 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXz-Mm-ZAf">
-                                <rect key="frame" x="8" y="17" width="91" height="20"/>
+                                <rect key="frame" x="8" y="8" width="100" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="mYg-h3-dpA"/>
-                                    <constraint firstAttribute="width" constant="91" id="ym6-7U-OsL"/>
+                                    <constraint firstAttribute="height" constant="20" id="HVF-ET-Q5W"/>
+                                    <constraint firstAttribute="width" constant="100" id="nYb-1e-xvx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="253" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iM6-Rq-Nvv">
-                                <rect key="frame" x="101" y="12" width="192" height="30"/>
+                                <rect key="frame" x="110" y="8" width="183" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Xxr-bk-eeW"/>
+                                    <constraint firstAttribute="height" constant="30" id="XQk-qV-ZCF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kde-Yv-OSL" userLabel="Password:">
-                                <rect key="frame" x="8" y="51" width="78" height="20"/>
+                                <rect key="frame" x="8" y="48" width="100" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Q1n-Nl-a3h"/>
+                                    <constraint firstAttribute="width" constant="100" id="Bjv-D6-OZw"/>
+                                    <constraint firstAttribute="height" constant="20" id="g1W-Du-zx2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FTa-KW-fsg">
-                                <rect key="frame" x="101" y="47" width="192" height="30"/>
+                                <rect key="frame" x="110" y="46" width="183" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="l03-25-uk9"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ijg-nR-t3L"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications are not authorized on this device. Please open this device's Settings, turn on  Allow Notifications." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4H-Gu-3hI">
-                                <rect key="frame" x="0.0" y="123" width="375" height="74"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="74"/>
                                 <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="S2R-3k-1SF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usr-gy-7B3">
-                                <rect key="frame" x="0.0" y="199" width="375" height="36"/>
+                                <rect key="frame" x="0.0" y="160" width="375" height="36"/>
                                 <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="NcA-vN-RQe"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Go To Your Device's Settings">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -97,19 +104,12 @@
                                     <action selector="goToSettingsPressed:" destination="Nax-AD-kiR" eventType="touchUpInside" id="O2u-42-3oL"/>
                                 </connections>
                             </button>
-                            <datePicker contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ymI-S9-nG7">
-                                <rect key="frame" x="0.0" y="102" width="293" height="120"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="RZn-y1-BOy"/>
-                                </constraints>
-                            </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="isE-BP-08c">
-                                <rect key="frame" x="295" y="252" width="80" height="65"/>
+                                <rect key="frame" x="295" y="226" width="80" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="C6a-JR-GTe"/>
-                                    <constraint firstAttribute="height" constant="65" id="eHU-YV-WFB"/>
+                                    <constraint firstAttribute="width" constant="80" id="wfD-cb-D68"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="65" id="ygx-bt-Yk8"/>
                                 </constraints>
                                 <state key="normal" title="Set Goal Type to Display">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,13 +119,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WOi-ii-poE">
-                                <rect key="frame" x="295" y="361" width="80" height="65"/>
+                                <rect key="frame" x="0.0" y="582" width="80" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="43i-fU-JCd"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="XGj-pf-tJp"/>
-                                    <constraint firstAttribute="width" constant="80" id="aim-3C-gkL"/>
-                                    <constraint firstAttribute="height" constant="65" id="shK-8X-ZE2"/>
+                                    <constraint firstAttribute="width" constant="80" id="CLX-rR-aq5"/>
+                                    <constraint firstAttribute="height" constant="65" id="viY-ge-atf"/>
                                 </constraints>
                                 <state key="normal" title="Goal Task Data Migration">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -134,32 +132,12 @@
                                     <segue destination="FTY-FO-dAY" kind="show" identifier="migrateSegue" id="ZT9-O5-kTO"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfr-k8-Obr">
-                                <rect key="frame" x="0.0" y="224" width="293" height="121"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="121" id="YwE-Dn-psZ"/>
-                                </constraints>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WRT-sl-gbc">
-                                <rect key="frame" x="295" y="124" width="80" height="67"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="67" id="34t-ZD-H4X"/>
-                                    <constraint firstAttribute="width" constant="80" id="Y4O-rS-UA4"/>
-                                </constraints>
-                                <state key="normal" title="Set Reminder Time">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="notificationSetPressed:" destination="Nax-AD-kiR" eventType="touchUpInside" id="eus-5r-WRI"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0WM-Lc-Sbo">
-                                <rect key="frame" x="295" y="12" width="80" height="65"/>
+                                <rect key="frame" x="295" y="8" width="80" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="L01-pE-utm"/>
-                                    <constraint firstAttribute="height" constant="65" id="vfp-H8-101"/>
+                                    <constraint firstAttribute="width" constant="80" id="E0J-vj-fUY"/>
+                                    <constraint firstAttribute="height" constant="65" id="zrz-b9-WXi"/>
                                 </constraints>
                                 <state key="normal" title="Update Account Info">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,34 +147,19 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyz-iR-ulv">
-                                <rect key="frame" x="0.0" y="361" width="295" height="286"/>
+                                <rect key="frame" x="0.0" y="313" width="375" height="261"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">[Warning 1] If updating Poli ToDo from ver 2, use the right button, "iCloud Sync Data Migration"  to migrate existing local data (goals and tasks) to iCloud sync, if you want to sync your data among different iOS devices using iCloud. You can specify which goal data to migrate to iCloud. You will need to login to your iCloud account from each device. Once migrated, data won't be reverted to local store only mode. Make sure you have enough storage space in your iCloud before migrating huge amount of local data to iCloud. [Warning 2] The button "Reward &amp; Vision Data Migration" migrates to iCloud sync if pressed once. It cannot be reverted. </string>
+                                <string key="text">[Warning Please Read!] If updating Poli ToDo from ver 2, use the buttons below to migrate existing local data (goals and tasks, vision, and reward), if you want to sync your data among different iOS devices using your iCloud account. You need to migrate data only once and also can leave some goal data on your device for now and migrate them later if you want. You can specify which goal, vision, or reward data to migrate to iCloud sync mode. Newly added data will be however automatically synced to iCloud from now on,  even you decided to leave a specific old goal and associated task data on your device and not synced to iCloud, a newly added task data to that goal, for instance,  will be synced to your iCloud along with that specific assigned goal data. Some data duplicate may occur depending on the timing to migrate your data. You will need to login to your iCloud account from each device, and install this version of Poli ToDo to sync data on iCloud. The data on your iCloud is accessible only with your iCloud account unless the government's access is granted in some country (Chinese government has access to iCloud data stored on servers in China) Once migrated, data cannot be reverted to local store mode. Make sure you have enough storage space on your iCloud before migrating huge amount of local data to iCloud. </string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0yZ-mc-5im">
-                                <rect key="frame" x="295" y="446" width="80" height="64"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="Juo-UQ-4bu"/>
-                                    <constraint firstAttribute="width" constant="80" id="KYV-IK-dfl"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <state key="normal" title="Vision Data Migration: ">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="i2L-Za-wzo" kind="show" id="Wv5-Ru-j6T"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MHh-Bq-R2h">
-                                <rect key="frame" x="295" y="529" width="80" height="64"/>
+                                <rect key="frame" x="295" y="582" width="80" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="J6J-gT-glr"/>
-                                    <constraint firstAttribute="width" constant="80" id="TMH-Ja-Pg6"/>
+                                    <constraint firstAttribute="height" constant="65" id="W8d-3v-14n"/>
+                                    <constraint firstAttribute="width" constant="80" id="ZI1-HG-jG8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <state key="normal" title="Reward Data Migration: ">
@@ -206,47 +169,90 @@
                                     <segue destination="bPh-r4-IV1" kind="show" id="KEI-wv-8Ww"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfr-k8-Obr">
+                                <rect key="frame" x="0.0" y="212" width="293" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="Dxv-am-WjV"/>
+                                </constraints>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WRT-sl-gbc">
+                                <rect key="frame" x="295" y="112" width="80" height="65"/>
+                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="8nd-rW-98q"/>
+                                    <constraint firstAttribute="width" constant="80" id="uAU-nX-ooH"/>
+                                </constraints>
+                                <state key="normal" title="Set Reminder Time">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="notificationSetPressed:" destination="Nax-AD-kiR" eventType="touchUpInside" id="eus-5r-WRI"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ymI-S9-nG7">
+                                <rect key="frame" x="0.0" y="84" width="293" height="120"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="WJh-2Y-LBx"/>
+                                </constraints>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0yZ-mc-5im">
+                                <rect key="frame" x="147.5" y="582" width="80" height="65"/>
+                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="5Nf-Bd-Zj8"/>
+                                    <constraint firstAttribute="height" constant="65" id="Y1T-Z7-h2K"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                <state key="normal" title="Vision Data Migration: ">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="i2L-Za-wzo" kind="show" id="Wv5-Ru-j6T"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ZXz-Mm-ZAf" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" constant="8" id="50K-Ke-qNp"/>
-                            <constraint firstItem="0WM-Lc-Sbo" firstAttribute="leading" secondItem="FTa-KW-fsg" secondAttribute="trailing" constant="2" id="6On-lR-p4Q"/>
-                            <constraint firstItem="W4H-Gu-3hI" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="6Zk-4M-SdU"/>
-                            <constraint firstItem="W4H-Gu-3hI" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="6j5-fw-38Z"/>
-                            <constraint firstItem="isE-BP-08c" firstAttribute="top" secondItem="WRT-sl-gbc" secondAttribute="bottom" constant="61" id="AQG-Zd-qV6"/>
-                            <constraint firstItem="iM6-Rq-Nvv" firstAttribute="leading" secondItem="ZXz-Mm-ZAf" secondAttribute="trailing" constant="2" id="D6j-dk-843"/>
-                            <constraint firstItem="Kde-Yv-OSL" firstAttribute="top" secondItem="ZXz-Mm-ZAf" secondAttribute="bottom" constant="14" id="ENh-LQ-d42"/>
-                            <constraint firstItem="usr-gy-7B3" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="HfI-9U-AVN"/>
-                            <constraint firstItem="iM6-Rq-Nvv" firstAttribute="top" secondItem="mvh-3p-dW3" secondAttribute="top" constant="12" id="IPe-eH-WZu"/>
-                            <constraint firstItem="isE-BP-08c" firstAttribute="top" secondItem="usr-gy-7B3" secondAttribute="bottom" constant="17" id="LSk-EX-IT4"/>
-                            <constraint firstItem="fyz-iR-ulv" firstAttribute="top" secondItem="wfr-k8-Obr" secondAttribute="bottom" constant="16" id="NXn-sO-vZg"/>
-                            <constraint firstItem="ymI-S9-nG7" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="Pny-qi-h7D"/>
-                            <constraint firstItem="0WM-Lc-Sbo" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="RAv-EN-LsG"/>
-                            <constraint firstItem="isE-BP-08c" firstAttribute="leading" secondItem="wfr-k8-Obr" secondAttribute="trailing" constant="2" id="W0C-E5-DGg"/>
-                            <constraint firstItem="WRT-sl-gbc" firstAttribute="leading" secondItem="ymI-S9-nG7" secondAttribute="trailing" constant="2" id="WME-vU-ftO"/>
-                            <constraint firstItem="mvh-3p-dW3" firstAttribute="trailing" secondItem="isE-BP-08c" secondAttribute="trailing" id="YHK-cy-SVF"/>
-                            <constraint firstItem="WOi-ii-poE" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="YYw-hO-hcG"/>
-                            <constraint firstItem="0WM-Lc-Sbo" firstAttribute="leading" secondItem="iM6-Rq-Nvv" secondAttribute="trailing" constant="2" id="ZPe-8A-KfY"/>
-                            <constraint firstItem="ymI-S9-nG7" firstAttribute="top" secondItem="Kde-Yv-OSL" secondAttribute="bottom" constant="31" id="beG-bH-vuV"/>
-                            <constraint firstItem="0yZ-mc-5im" firstAttribute="top" secondItem="WOi-ii-poE" secondAttribute="bottom" constant="20" id="bwE-M8-bT4"/>
-                            <constraint firstItem="MHh-Bq-R2h" firstAttribute="top" secondItem="0yZ-mc-5im" secondAttribute="bottom" constant="19" id="eLv-pM-Lla"/>
-                            <constraint firstItem="WRT-sl-gbc" firstAttribute="top" secondItem="0WM-Lc-Sbo" secondAttribute="bottom" constant="47" id="ed9-4Z-yCF"/>
-                            <constraint firstItem="ZXz-Mm-ZAf" firstAttribute="top" secondItem="mvh-3p-dW3" secondAttribute="top" constant="17" id="iSs-Ql-zK7"/>
-                            <constraint firstItem="WOi-ii-poE" firstAttribute="top" secondItem="isE-BP-08c" secondAttribute="bottom" constant="44" id="jDr-Ue-WUZ"/>
-                            <constraint firstItem="fyz-iR-ulv" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="jaC-Mq-R5N"/>
-                            <constraint firstItem="wfr-k8-Obr" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="jsh-JB-JQT"/>
-                            <constraint firstItem="0yZ-mc-5im" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="kkC-SF-556"/>
-                            <constraint firstItem="Kde-Yv-OSL" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" constant="8" id="mGt-0R-E0s"/>
-                            <constraint firstItem="fyz-iR-ulv" firstAttribute="bottom" secondItem="mvh-3p-dW3" secondAttribute="bottom" id="nrt-FL-Dap"/>
-                            <constraint firstItem="usr-gy-7B3" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="o32-Ih-2Q2"/>
-                            <constraint firstItem="WOi-ii-poE" firstAttribute="leading" secondItem="fyz-iR-ulv" secondAttribute="trailing" id="oCU-HU-mMb"/>
-                            <constraint firstItem="FTa-KW-fsg" firstAttribute="top" secondItem="iM6-Rq-Nvv" secondAttribute="bottom" constant="5" id="oLr-r4-y3X"/>
-                            <constraint firstItem="0WM-Lc-Sbo" firstAttribute="top" secondItem="mvh-3p-dW3" secondAttribute="top" constant="12" id="sUC-M3-7X3"/>
-                            <constraint firstItem="MHh-Bq-R2h" firstAttribute="leading" secondItem="0yZ-mc-5im" secondAttribute="leading" id="smS-Zx-hTJ"/>
-                            <constraint firstItem="wfr-k8-Obr" firstAttribute="top" secondItem="usr-gy-7B3" secondAttribute="bottom" constant="-11" id="sot-B6-2KK"/>
-                            <constraint firstItem="WRT-sl-gbc" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="wbj-ET-Mna"/>
-                            <constraint firstItem="usr-gy-7B3" firstAttribute="top" secondItem="W4H-Gu-3hI" secondAttribute="bottom" constant="2" id="xbm-hJ-ynS"/>
-                            <constraint firstItem="FTa-KW-fsg" firstAttribute="leading" secondItem="Kde-Yv-OSL" secondAttribute="trailing" constant="15" id="z6T-g2-G4R"/>
+                            <constraint firstItem="0WM-Lc-Sbo" firstAttribute="leading" secondItem="iM6-Rq-Nvv" secondAttribute="trailing" constant="2" id="0Wn-Zj-JnQ"/>
+                            <constraint firstItem="0yZ-mc-5im" firstAttribute="bottom" secondItem="mvh-3p-dW3" secondAttribute="bottom" id="1GX-sN-QTb"/>
+                            <constraint firstItem="usr-gy-7B3" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="2T3-bT-jaZ"/>
+                            <constraint firstItem="fyz-iR-ulv" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="3qh-vP-9kO"/>
+                            <constraint firstItem="fyz-iR-ulv" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="5KG-U9-VHO"/>
+                            <constraint firstItem="FTa-KW-fsg" firstAttribute="leading" secondItem="Kde-Yv-OSL" secondAttribute="trailing" constant="2" id="6Ch-y3-Qlm"/>
+                            <constraint firstItem="mvh-3p-dW3" firstAttribute="trailing" secondItem="0WM-Lc-Sbo" secondAttribute="trailing" id="6oQ-3f-eUo"/>
+                            <constraint firstItem="WRT-sl-gbc" firstAttribute="leading" secondItem="ymI-S9-nG7" secondAttribute="trailing" constant="2" id="C0U-UN-fb2"/>
+                            <constraint firstItem="W4H-Gu-3hI" firstAttribute="top" secondItem="FTa-KW-fsg" secondAttribute="bottom" constant="8" id="FdJ-KD-lee"/>
+                            <constraint firstItem="MHh-Bq-R2h" firstAttribute="bottom" secondItem="mvh-3p-dW3" secondAttribute="bottom" id="JtM-Sm-yNR"/>
+                            <constraint firstItem="ZXz-Mm-ZAf" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" constant="8" id="Lv4-6k-jDT"/>
+                            <constraint firstItem="WOi-ii-poE" firstAttribute="bottom" secondItem="mvh-3p-dW3" secondAttribute="bottom" id="Lxp-4A-yfE"/>
+                            <constraint firstItem="usr-gy-7B3" firstAttribute="top" secondItem="W4H-Gu-3hI" secondAttribute="bottom" constant="2" id="VDB-ev-dyg"/>
+                            <constraint firstItem="W4H-Gu-3hI" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="WBC-mm-gYb"/>
+                            <constraint firstItem="Kde-Yv-OSL" firstAttribute="top" secondItem="ZXz-Mm-ZAf" secondAttribute="bottom" constant="20" id="WKQ-U9-69i"/>
+                            <constraint firstItem="wfr-k8-Obr" firstAttribute="centerY" secondItem="isE-BP-08c" secondAttribute="centerY" id="WPk-a8-3Qe"/>
+                            <constraint firstItem="0WM-Lc-Sbo" firstAttribute="leading" secondItem="FTa-KW-fsg" secondAttribute="trailing" constant="2" id="X0l-bf-gdS"/>
+                            <constraint firstItem="isE-BP-08c" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="YLJ-DS-1iy"/>
+                            <constraint firstItem="iM6-Rq-Nvv" firstAttribute="top" secondItem="mvh-3p-dW3" secondAttribute="top" constant="8" id="YgU-7e-0Gc"/>
+                            <constraint firstItem="ymI-S9-nG7" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="ZVV-t9-Cf1"/>
+                            <constraint firstItem="wfr-k8-Obr" firstAttribute="leading" secondItem="usr-gy-7B3" secondAttribute="leading" id="bB6-fe-Ot2"/>
+                            <constraint firstItem="WRT-sl-gbc" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="bfD-Xc-Q3P"/>
+                            <constraint firstItem="Kde-Yv-OSL" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" constant="8" id="e5V-wN-Lzh"/>
+                            <constraint firstItem="0WM-Lc-Sbo" firstAttribute="top" secondItem="mvh-3p-dW3" secondAttribute="top" constant="8" id="fIM-10-36J"/>
+                            <constraint firstItem="MHh-Bq-R2h" firstAttribute="trailing" secondItem="mvh-3p-dW3" secondAttribute="trailing" id="gQo-MZ-R9J"/>
+                            <constraint firstItem="iM6-Rq-Nvv" firstAttribute="leading" secondItem="ZXz-Mm-ZAf" secondAttribute="trailing" constant="2" id="h4Z-xQ-g9T"/>
+                            <constraint firstItem="isE-BP-08c" firstAttribute="top" secondItem="WRT-sl-gbc" secondAttribute="bottom" constant="49" id="hpx-vr-1CO"/>
+                            <constraint firstItem="fyz-iR-ulv" firstAttribute="top" secondItem="wfr-k8-Obr" secondAttribute="bottom" constant="8" id="jI5-2t-dgx"/>
+                            <constraint firstItem="WOi-ii-poE" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="mkq-0x-Vr9"/>
+                            <constraint firstItem="wfr-k8-Obr" firstAttribute="trailing" secondItem="ymI-S9-nG7" secondAttribute="trailing" id="nDc-1E-sqD"/>
+                            <constraint firstItem="FTa-KW-fsg" firstAttribute="top" secondItem="iM6-Rq-Nvv" secondAttribute="bottom" constant="8" id="os6-kL-MBW"/>
+                            <constraint firstItem="WRT-sl-gbc" firstAttribute="top" secondItem="0WM-Lc-Sbo" secondAttribute="bottom" constant="39" id="ra0-d4-MXb"/>
+                            <constraint firstItem="ZXz-Mm-ZAf" firstAttribute="top" secondItem="mvh-3p-dW3" secondAttribute="top" constant="8" id="rqD-k0-X3U"/>
+                            <constraint firstItem="W4H-Gu-3hI" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="sYX-cw-syN"/>
+                            <constraint firstItem="fyz-iR-ulv" firstAttribute="top" relation="lessThanOrEqual" secondItem="isE-BP-08c" secondAttribute="bottom" constant="22" id="tgC-DC-kOa"/>
+                            <constraint firstItem="0yZ-mc-5im" firstAttribute="centerX" secondItem="1de-a4-cOV" secondAttribute="centerX" id="wI4-vi-HJB"/>
+                            <constraint firstItem="WOi-ii-poE" firstAttribute="top" secondItem="fyz-iR-ulv" secondAttribute="bottom" constant="8" id="xXr-TM-n7R"/>
+                            <constraint firstItem="usr-gy-7B3" firstAttribute="leading" secondItem="mvh-3p-dW3" secondAttribute="leading" id="zAd-5c-6tr"/>
+                            <constraint firstItem="ymI-S9-nG7" firstAttribute="top" secondItem="FTa-KW-fsg" secondAttribute="bottom" constant="8" id="zXT-uB-oAy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mvh-3p-dW3"/>
                     </view>

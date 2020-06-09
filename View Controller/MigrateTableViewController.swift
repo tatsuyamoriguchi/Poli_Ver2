@@ -14,6 +14,8 @@ class MigrateTableViewController: UITableViewController, NSFetchedResultsControl
         override func viewDidLoad() {
             super.viewDidLoad()
             configureFetchedResultsController()
+            
+            
         }
     
     override func viewWillAppear(_ animated: Bool) {
