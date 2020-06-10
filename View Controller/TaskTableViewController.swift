@@ -477,15 +477,13 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     // Property for editActionForRowAt
     var selectedTask: Task?
 
-    
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
             
-            // MARK: - editActionForRowAt updateACtion
             
-            
-            let updateAction = UITableViewRowAction(style: .default, title: "✏️") { (action, indexPath) in
+            let updateAction = UIContextualAction(style: .normal, title: "✏️") { (action, view, handler) in
+                
                 if task.goalAssigned?.goalDone == true {
                     self.goalDoneAlert()
                     
@@ -495,11 +493,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     self.performSegue(withIdentifier: "updateTask", sender: self)
                 }
             }
+                updateAction.backgroundColor = UIColor.green
+
             
-            updateAction.backgroundColor = UIColor.green
-            
-            let deleteAction = UITableViewRowAction(style: .default, title: "🗑") { (action, indexPath)
-                in
+            let deleteAction = UIContextualAction(style: .normal, title: "🗑") { (action, view, handler) in
                 if task.goalAssigned?.goalDone == true {
                     self.goalDoneAlert()
                     
@@ -507,31 +504,90 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     // Call delete action
                     self.deleteAction(task: task, indexPath: indexPath)
                 }
+                handler(true)
             }
             
             deleteAction.backgroundColor = UIColor.red
             
-            let goalAction = UITableViewRowAction(style: .default, title: "🎯") { (action, indexPath) in
-                
-                if task.goalAssigned?.goalDone == true {
-                    self.goalDoneAlert()
-                } else {
-                    // do something
-                    self.selectedTask = task
-                    self.performSegue(withIdentifier: "updateTaskGoalSegue", sender: self)
-                    
-                }
+            let goalAction = UIContextualAction(style: .normal, title: "🎯") { (action, view, handler) in
+                             if task.goalAssigned?.goalDone == true {
+                       self.goalDoneAlert()
+                   } else {
+                       // do something
+                       self.selectedTask = task
+                       self.performSegue(withIdentifier: "updateTaskGoalSegue", sender: self)
+                       
+                   }
             }
+  
             goalAction.backgroundColor = UIColor.yellow
             
-            return [deleteAction, updateAction, goalAction]
+            let config = UISwipeActionsConfiguration(actions: [deleteAction, updateAction, goalAction])
+            
+            return config
             
         } else {
             fatalError("Attempt configure cell without a managed object")
         }
-        
     }
     
+
+    
+
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
+//
+//            // MARK: - editActionForRowAt updateACtion
+//
+//
+//            let updateAction = UITableViewRowAction(style: .default, title: "✏️") { (action, indexPath) in
+//                if task.goalAssigned?.goalDone == true {
+//                    self.goalDoneAlert()
+//
+//                } else {
+//                    // Call update action
+//                    self.selectedTask = task
+//                    self.performSegue(withIdentifier: "updateTask", sender: self)
+//                }
+//            }
+//
+//            updateAction.backgroundColor = UIColor.green
+//
+//            let deleteAction = UITableViewRowAction(style: .default, title: "🗑") { (action, indexPath)
+//                in
+//                if task.goalAssigned?.goalDone == true {
+//                    self.goalDoneAlert()
+//
+//                } else {
+//                    // Call delete action
+//                    self.deleteAction(task: task, indexPath: indexPath)
+//                }
+//            }
+//
+//            deleteAction.backgroundColor = UIColor.red
+//
+//            let goalAction = UITableViewRowAction(style: .default, title: "🎯") { (action, indexPath) in
+//
+//                if task.goalAssigned?.goalDone == true {
+//                    self.goalDoneAlert()
+//                } else {
+//                    // do something
+//                    self.selectedTask = task
+//                    self.performSegue(withIdentifier: "updateTaskGoalSegue", sender: self)
+//
+//                }
+//            }
+//            goalAction.backgroundColor = UIColor.yellow
+//
+//            return [deleteAction, updateAction, goalAction]
+//
+//        } else {
+//            fatalError("Attempt configure cell without a managed object")
+//        }
+//
+//    }
+//
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
@@ -592,6 +648,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                            
                        })
                    }
+                
+                completionHandler(true)
+                
                }
                
 

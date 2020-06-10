@@ -14,8 +14,19 @@ class MigrateTableViewController: UITableViewController, NSFetchedResultsControl
         override func viewDidLoad() {
             super.viewDidLoad()
             configureFetchedResultsController()
+            self.navigationItem.title = "Click a goal to sync on your iCloud account"
             
-            
+            // Create the info button
+            let infoButton = UIButton(type: .infoLight)
+            // You will need to configure the target action for the button itself, not the bar button itemr
+            infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+            // Create a bar button item using the info button as its custom view
+            let info = UIBarButtonItem(customView: infoButton)
+         //   let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+            //space.width = 30
+
+            //self.navigationItem.rightBarButtonItems = [saveButton, space, info, space, link]
+            self.navigationItem.rightBarButtonItem = info
         }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,7 +35,12 @@ class MigrateTableViewController: UITableViewController, NSFetchedResultsControl
         
     }
     
-    
+    @objc func getInfoAction() {
+        let NSL_migrateAlert = NSLocalizedString("NSL_migrateAlert", value: "iCloud Sync Alert", comment: "")
+        let NSL_migrateMessage = NSLocalizedString("NSL_migrateMessage", value: "Existing data from previous version is not automatically synced via your iCloud to another iOS device at the installation of this verison. Click a goal to migrate pre-existing data so that they can be synced to another device via your iCloud account. iCloud account is accessible by your iCloud account only unless the government was granted to access them by Apple, Inc. for instance in China. Newly added task to that existing goal will be howevere automatically synced to another iOS device via your iCloud account from now on. That goal and that newly added task only will show up on another iOS device, but not existing task data if you didn't migrate them for iCloud sync here.", comment: "")
+        
+        AlertNotification().alert(title: NSL_migrateAlert, message: NSL_migrateMessage, sender: self, tag: "migrateAlert")
+    }
     
     
 

@@ -30,7 +30,9 @@
                             <outlet property="delegate" destination="FTY-FO-dAY" id="KpB-BP-VUI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hap-Em-ThP"/>
+                    <navigationItem key="navigationItem" id="hap-Em-ThP">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="sqg-5Q-aK6"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPN-kf-xSF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -146,7 +148,7 @@
                                     <action selector="updateAccountPressed:" destination="Nax-AD-kiR" eventType="touchUpInside" id="YsI-vd-khV"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyz-iR-ulv">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyz-iR-ulv">
                                 <rect key="frame" x="0.0" y="313" width="375" height="261"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <string key="text">[Warning Please Read!] If updating Poli ToDo from ver 2, use the buttons below to migrate existing local data (goals and tasks, vision, and reward), if you want to sync your data among different iOS devices using your iCloud account. You need to migrate data only once and also can leave some goal data on your device for now and migrate them later if you want. You can specify which goal, vision, or reward data to migrate to iCloud sync mode. Newly added data will be however automatically synced to iCloud from now on,  even you decided to leave a specific old goal and associated task data on your device and not synced to iCloud, a newly added task data to that goal, for instance,  will be synced to your iCloud along with that specific assigned goal data. Some data duplicate may occur depending on the timing to migrate your data. You will need to login to your iCloud account from each device, and install this version of Poli ToDo to sync data on iCloud. The data on your iCloud is accessible only with your iCloud account unless the government's access is granted in some country (Chinese government has access to iCloud data stored on servers in China) Once migrated, data cannot be reverted to local store mode. Make sure you have enough storage space on your iCloud before migrating huge amount of local data to iCloud. </string>

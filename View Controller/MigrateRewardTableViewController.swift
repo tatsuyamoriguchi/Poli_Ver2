@@ -19,12 +19,29 @@ class MigrateRewardTableViewController: UITableViewController, NSFetchedResultsC
         super.viewDidLoad()
         configureFetchedResultsController()
         
+        self.navigationItem.title = "Click a reward to sync on your iCloud account"
+           
+           // Create the info button
+           let infoButton = UIButton(type: .infoLight)
+           // You will need to configure the target action for the button itself, not the bar button itemr
+           infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+           // Create a bar button item using the info button as its custom view
+           let info = UIBarButtonItem(customView: infoButton)
+           self.navigationItem.rightBarButtonItem = info
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         configureFetchedResultsController()
         
+    }
+    
+    @objc func getInfoAction() {
+        let NSL_migrateAlert = NSLocalizedString("NSL_migrateAlert", value: "iCloud Sync Alert", comment: "")
+        let NSL_migrateRewardMessage = NSLocalizedString("NSL_migrateRewardMessage", value: "Existing data from previous reward is not automatically synced via your iCloud to another iOS device at the installation of this verison. Click a reward to migrate pre-existing data so that they can be synced to another device via your iCloud account. iCloud account is accessible by your iCloud account only unless the government was granted to access them by Apple, Inc. for instance in China. Newly added reward will be however automatically synced to another iOS device via your iCloud account from now on. That reward only will show up on another iOS device, but not existing reward data if you didn't migrate them for iCloud sync here.", comment: "")
+        
+        AlertNotification().alert(title: NSL_migrateAlert, message: NSL_migrateRewardMessage, sender: self, tag: "migrateAlert")
     }
     
     
