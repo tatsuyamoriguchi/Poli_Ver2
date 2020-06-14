@@ -334,19 +334,19 @@ class Vision4GoalViewController: UIViewController, UITextFieldDelegate, UITextVi
         
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        //let greed = greeds[indexPath.row]
-        guard let vision = self.fetchedResultsController?.object(at: indexPath) as? Vision else { return nil }
-        let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
-        let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
-            
-            // Call delete action
-            self.deleteAction(itemToDelete: vision, indexPath: indexPath)
-            
-        }
-        
-        return [deleteAction]
-    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        //let greed = greeds[indexPath.row]
+//        guard let vision = self.fetchedResultsController?.object(at: indexPath) as? Vision else { return nil }
+//        let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
+//        let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
+//
+//            // Call delete action
+//            self.deleteAction(itemToDelete: vision, indexPath: indexPath)
+//
+//        }
+//
+//        return [deleteAction]
+//    }
     
     private func deleteAction(itemToDelete: Vision, indexPath: IndexPath) {
         // Pop up an alert to warn a user of deletion of data

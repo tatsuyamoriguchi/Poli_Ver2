@@ -395,18 +395,29 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        //let greed = greeds[indexPath.row]
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        //let greed = greeds[indexPath.row]
+//        guard let vision = self.fetchedResultsController?.object(at: indexPath) as? Vision else { return nil }
+//        let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
+//        let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
+//
+//            // Call delete action
+//            self.deleteAction(itemToDelete: vision, indexPath: indexPath)
+//
+//        }
+//
+//        return [deleteAction]
+//    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let vision = self.fetchedResultsController?.object(at: indexPath) as? Vision else { return nil }
         let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
-        let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
-            
-            // Call delete action
+        let deleteAction = UIContextualAction(style: .normal, title: NSL_deleteButton_03) {(action, view, handler) in
             self.deleteAction(itemToDelete: vision, indexPath: indexPath)
-            
+            handler(true)
         }
-        
-        return [deleteAction]
+        deleteAction.backgroundColor = UIColor.red
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     private func deleteAction(itemToDelete: Vision, indexPath: IndexPath) {

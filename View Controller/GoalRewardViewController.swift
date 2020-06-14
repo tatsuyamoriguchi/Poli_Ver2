@@ -275,8 +275,7 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             let NSL_cancelButton = NSLocalizedString("NSL_cancelButton", value: "Cancel", comment: "")
             actionSheet.addAction(UIAlertAction(title: NSL_cancelButton, style: .cancel, handler: nil))
         
-            if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad ){
-                
+            if UIDevice.current.userInterfaceIdiom == .pad {
                 if let popoverController = actionSheet.popoverPresentationController{
                     popoverController.sourceView = self.view
                     

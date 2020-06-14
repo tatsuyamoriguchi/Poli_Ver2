@@ -15,8 +15,40 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     var tasks = [Task]()
     var selectedGoal: Goal?
     var userName: String = ""
+    var today = Date()
+    
     
 
+    var showTomorrow: Bool? = false
+
+    //@IBOutlet weak var todayTomorrowButton: UIBarButtonItem!
+    var todayTomorrowButton: UIBarButtonItem!
+  
+    @objc func showTodayTomorrow() {
+       
+        if showTomorrow != true {
+            showTomorrow = true
+
+            let NSL_naviTomorrow = NSLocalizedString("NSL_naviTomorrow", value: "Tomorrow's Tasks To-Do", comment: "")
+            self.navigationItem.title = NSL_naviTomorrow
+
+            todayTomorrowButton.title = "◀️"
+
+        } else {
+            showTomorrow = false
+
+            let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks To-Do", comment: "")
+            self.navigationItem.title = NSL_naviToday
+            
+            todayTomorrowButton.title = "▶️"
+
+        }
+        
+        configureFetchedResultsController()
+        tableView.reloadData()
+    }
+
+    
     @objc func getInfoAction() {
         let NSL_shareAlert = NSLocalizedString("NSL_shareAlert", value: "To share with Facebook, LinkedIn or app that doens't show your Today's To-Do", comment: "")
         let NSL_shareMessage = NSLocalizedString("NSL_shareMessage", value: "Please use 'Copy' first, then tap share button again and paste copied your Today's To-Do(s) to Facebook or LinkedIn Share screen view.", comment: "")
@@ -51,6 +83,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             } else {
                 message.append(NSLocalizedString("\n- To Do: \(toDo ?? "ERROR NO TODO")", comment: "Message"))
             }
+         
             
         }
 
@@ -96,8 +129,6 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//    override func viewWillAppear(_ animated: Bool) {
 
         // Fetch Core Data
         configureFetchedResultsController()
@@ -113,10 +144,17 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             self.navigationItem.prompt = NSL_loginError
         }
         
-       
-        let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks To-Do", comment: "")
-        self.navigationItem.title = NSL_naviToday
         
+        
+        if showTomorrow != true {
+            todayTomorrowButton = UIBarButtonItem(title: "▶️", style: .plain, target: self, action: #selector(showTodayTomorrow))
+            
+            let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks To-Do", comment: "")
+             self.navigationItem.title = NSL_naviToday
+
+        } else {
+            todayTomorrowButton = UIBarButtonItem(title: "◀️", style: .plain, target: self, action: #selector(showTodayTomorrow))
+        }
    
  
         if let tasks = fetchedResultsController?.fetchedObjects {
@@ -134,17 +172,15 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
                 let info = UIBarButtonItem(customView: infoButton)
                 let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
                 space.width = 30
-                
-                navigationItem.rightBarButtonItems = [share, space, info]
+                navigationItem.rightBarButtonItems = [share, space, info, space, todayTomorrowButton]
                 
             } else {
                 let NSL_noTodaysTask = NSLocalizedString("NSL_noTodaysTask", value: "No Today's Task now.", comment: "")
                 let noTodaysTaskAlert = UIAlertController(title: NSLocalizedString("Alert", comment: "Alert title"), message: NSL_noTodaysTask, preferredStyle: .alert)
                 self.present(noTodaysTaskAlert, animated: true, completion: nil)
                 
-                // Hide rightBarButtonItem
-                navigationItem.rightBarButtonItem = nil
-                
+                navigationItem.rightBarButtonItem = todayTomorrowButton
+
                 // Display congratAlert view for x seconds
                 let when = DispatchTime.now() + 2
                 DispatchQueue.main.asyncAfter(deadline: when, execute: {
@@ -156,6 +192,8 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         } else { print("Error") }
         
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -163,17 +201,6 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
     }
 
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        // Fetch Core Data
-//        configureFetchedResultsController()
-//        // Reload the table view
-//        self.tableView.reloadData()
-//        DispatchQueue.main.async {
-//            self.tableView.reloadSectionIndexTitles()
-//        }
-//
-//
-//    }
     
     // MARK: - Core Data NSFetchedResultsController
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -191,19 +218,40 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         // Create the fetch request, set some sort descriptor, then feed the fetchedResultsController
         // the request with along with the managed object context, which we'll use the view context
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
-  
+
+        let donePredicate = NSPredicate(format: "isDone == %@", NSNumber(value: false))
+        var andPredicate: NSCompoundPredicate
+
         //var taskDate = Task.date
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
         
-        let dateFrom = calendar.startOfDay(for: Date())
+        var startDate: Date
+
+        if showTomorrow == false {
+            startDate = Date()
+        } else {
+            startDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+            print("****** showTomorrow = true *******")
+            print(startDate)
+        }
+
+        let dateFrom = calendar.startOfDay(for: startDate)
         let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
-        //        let todayPredicate = NSPredicate(format: "date >= %@ AND date < %@", dateFrom as CVarArg, dateTo! as CVarArg)
-        let todayPredicate = NSPredicate(format: "date < %@", dateTo! as CVarArg)
         
-        let donePredicate = NSPredicate(format: "isDone == %@", NSNumber(value: false))
-        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [todayPredicate, donePredicate])
+        var todayPredicate: NSPredicate
+        if showTomorrow == false {
+            todayPredicate = NSPredicate(format: "date < %@", dateTo! as CVarArg)
         
+        } else {
+            todayPredicate = NSPredicate(format: "date >= %@ && date < %@", dateFrom as CVarArg, dateTo! as CVarArg)
+            print("++++ showTomorrow = true +++++")
+        }
+
+
+        andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [todayPredicate, donePredicate])
+
+                
         fetchRequest.predicate = andPredicate
         
         // Declare sort descriptor
@@ -371,7 +419,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             }
             
             
-            let today = Date()
+            //let today = Date()
             let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
             
             

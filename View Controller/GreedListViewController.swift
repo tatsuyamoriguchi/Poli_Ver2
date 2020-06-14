@@ -279,18 +279,19 @@ func noTextInputAlert() {
     }
     
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        //let greed = greeds[indexPath.row]
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let greed = self.fetchedResultsController?.object(at: indexPath) as? Reward else { return nil }
+        
         let NSL_deleteButton_03 = NSLocalizedString("NSL_deleteButton_03", value: "Delete", comment: "")
-        let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_03) { (action, indexPath) in
-            
-            // Call delete action
+        let deleteAction = UIContextualAction(style: .normal, title: NSL_deleteButton_03) {(action, view, handler) in
             self.deleteAction(greed: greed, indexPath: indexPath)
-            
+            handler(true)
         }
-
-        return [deleteAction]
+        
+        deleteAction.backgroundColor = UIColor.red
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     private func deleteAction(greed: Reward, indexPath: IndexPath) {

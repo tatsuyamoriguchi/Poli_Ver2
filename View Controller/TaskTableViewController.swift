@@ -38,10 +38,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     var tasks = [Task]()
     
     var selectedGoal: Goal!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         print("selectedGoal.goalTitle: \(String(describing: selectedGoal?.goalTitle))")
         
         // NavigationItem
@@ -49,19 +49,19 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         self.navigationItem.prompt = NSL_naviTask
         self.navigationItem.title = selectedGoal?.goalTitle
         
-
+        
         let addTask = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         
         let noDateTask = UIBarButtonItem(title: "🗂", style: .done, target: self, action: #selector(showNoDateTask))
-    
-
+        
+        
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         space.width = 40
         
         let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
         // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁📆
-
-    
+        
+        
         if selectedGoal?.vision4Goal != nil {
             navigationItem.rightBarButtonItems = [addTask, space, vision,  space, noDateTask, space]
         } else {
@@ -81,13 +81,13 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         //
         print("showNoDateTask() was tapped.")
         if showAllTaskToggle == true {
-           showAllTaskToggle = false
+            showAllTaskToggle = false
         } else {
             showAllTaskToggle = true
         }
         
         configureFetchedResultsController()
-       tableView.reloadData()
+        tableView.reloadData()
     }
     
     @objc func addTapped(){
@@ -107,22 +107,22 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     func reload(nofitication: Notification) {
         print("reload was touched")
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+        
         context.refreshAllObjects()
         configureFetchedResultsController()
         tableView.reloadData()
-
-//        AlertNotification().alert(title: "Warning", message: "Please terminate and relaunch this app in order to reload the data changes you made from Share Extension. Otherwise this app may crash.", sender: self, tag: "extension")
+        
+        //        AlertNotification().alert(title: "Warning", message: "Please terminate and relaunch this app in order to reload the data changes you made from Share Extension. Otherwise this app may crash.", sender: self, tag: "extension")
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
-
+    
+    
+    
     // Core Data: NSFetchedResultsConroller
-     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
     
     // MARK: -Configure FetchResultsController
@@ -143,7 +143,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         } else {
             fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal!)
         }
-
+        
         let sortByDone = NSSortDescriptor(key: #keyPath(Task.isDone), ascending: true)
         let sortByDate = NSSortDescriptor(key: #keyPath(Task.date), ascending: true)
         let sortByToDo = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: true)
@@ -193,16 +193,16 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         print("tableView data update was ended at controllerDidChangeContent().")
         tableView.reloadData()
     }
-
+    
     
     func goalDoneAlert() {
-
+        
         let NSL_alertTitle_021 = NSLocalizedString("NSL_alertTitle_021", value: "Goal Already Done", comment: "")
         let NSL_alertMessage_021 = NSLocalizedString("NSL_alertMessage_021", value: "Unable to change task data. To enable task data editing, go back to Goal List view and use Update to change the goal's done status to Undone.", comment: "")
         AlertNotification().alert(title: NSL_alertTitle_021, message: NSL_alertMessage_021, sender: self, tag: "goalAlreadyDone")
     }
     
-
+    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -212,7 +212,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         }
         return 0
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = self.fetchedResultsController?.sections else {
             fatalError("No sections in fetchedResultscontroller")
@@ -232,7 +232,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             taskCell.textLabel?.numberOfLines = 0
             taskCell.detailTextLabel?.numberOfLines = 0
             
-
+            
             var dateString: String
             
             // Crash when task.date is nil
@@ -268,7 +268,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     taskCell.accessoryType = UITableViewCell.AccessoryType.none
                     taskCell.detailTextLabel?.textColor = .gray
                 }
-            
+                
             }  else {
                 taskCell.accessoryType = UITableViewCell.AccessoryType.none
                 
@@ -315,9 +315,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     
     func repeatAlert(previousTask: Task, repeatType: NSNumber) {
-
+        
         let repeatString: String
-
+        
         switch repeatType {
         case 1:
             repeatString = "Daily"
@@ -328,14 +328,14 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         case 3:
             repeatString = "Weekly"
             repeatAlertConfirm(clickedTask: previousTask, title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
-
+            
         default:
             print("repeatType error: nil or something else")
-
+            
         }
-  
         
-
+        
+        
     }
     
     func repeatAlertConfirm(clickedTask: Task, title: String, message: String) {
@@ -383,9 +383,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         }
     }
     
-//    func dayNumberOfWeek() -> Int? {
-//        return Calendar.current.dateComponents([.weekday], from: self).weekday
-//    }
+    //    func dayNumberOfWeek() -> Int? {
+    //        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    //    }
     
     func nextRepeatDate(previousTaskDate: Date, repeatType: Int) -> Date {
         let currentDate = previousTaskDate
@@ -420,7 +420,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         default:
             print("Error func nextRepeatDate")
         }
-   
+        
         //dateComponent.day = addDays
         
         guard let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate as Date) else { return currentDate as Date }
@@ -439,7 +439,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
- 
+        
         guard let task = self.fetchedResultsController?.object(at: indexPath) as? Task else { return }
         
         if task.goalAssigned?.goalDone == true {
@@ -469,14 +469,14 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     PlayAudio.sharedInstance.playClick(fileName: "smallbark", fileExt: ".wav")
                 }
             }
-
+            
         }
     }
     
-
+    
     // Property for editActionForRowAt
     var selectedTask: Task?
-
+    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
@@ -493,8 +493,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     self.performSegue(withIdentifier: "updateTask", sender: self)
                 }
             }
-                updateAction.backgroundColor = UIColor.green
-
+            updateAction.backgroundColor = UIColor.green
+            
             
             let deleteAction = UIContextualAction(style: .normal, title: "🗑") { (action, view, handler) in
                 if task.goalAssigned?.goalDone == true {
@@ -510,16 +510,16 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             deleteAction.backgroundColor = UIColor.red
             
             let goalAction = UIContextualAction(style: .normal, title: "🎯") { (action, view, handler) in
-                             if task.goalAssigned?.goalDone == true {
-                       self.goalDoneAlert()
-                   } else {
-                       // do something
-                       self.selectedTask = task
-                       self.performSegue(withIdentifier: "updateTaskGoalSegue", sender: self)
-                       
-                   }
+                if task.goalAssigned?.goalDone == true {
+                    self.goalDoneAlert()
+                } else {
+                    // do something
+                    self.selectedTask = task
+                    self.performSegue(withIdentifier: "updateTaskGoalSegue", sender: self)
+                    
+                }
             }
-  
+            
             goalAction.backgroundColor = UIColor.yellow
             
             let config = UISwipeActionsConfiguration(actions: [deleteAction, updateAction, goalAction])
@@ -531,67 +531,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         }
     }
     
-
     
-
-//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//
-//        if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
-//
-//            // MARK: - editActionForRowAt updateACtion
-//
-//
-//            let updateAction = UITableViewRowAction(style: .default, title: "✏️") { (action, indexPath) in
-//                if task.goalAssigned?.goalDone == true {
-//                    self.goalDoneAlert()
-//
-//                } else {
-//                    // Call update action
-//                    self.selectedTask = task
-//                    self.performSegue(withIdentifier: "updateTask", sender: self)
-//                }
-//            }
-//
-//            updateAction.backgroundColor = UIColor.green
-//
-//            let deleteAction = UITableViewRowAction(style: .default, title: "🗑") { (action, indexPath)
-//                in
-//                if task.goalAssigned?.goalDone == true {
-//                    self.goalDoneAlert()
-//
-//                } else {
-//                    // Call delete action
-//                    self.deleteAction(task: task, indexPath: indexPath)
-//                }
-//            }
-//
-//            deleteAction.backgroundColor = UIColor.red
-//
-//            let goalAction = UITableViewRowAction(style: .default, title: "🎯") { (action, indexPath) in
-//
-//                if task.goalAssigned?.goalDone == true {
-//                    self.goalDoneAlert()
-//                } else {
-//                    // do something
-//                    self.selectedTask = task
-//                    self.performSegue(withIdentifier: "updateTaskGoalSegue", sender: self)
-//
-//                }
-//            }
-//            goalAction.backgroundColor = UIColor.yellow
-//
-//            return [deleteAction, updateAction, goalAction]
-//
-//        } else {
-//            fatalError("Attempt configure cell without a managed object")
-//        }
-//
-//    }
-//
+    
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
-        
+            
             var calendarGrant: Bool?
             let calendarAction = UIContextualAction(style: .normal, title: "📅") { (action, view, completionHandler) in
                 
@@ -601,11 +546,11 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     self.eventStore = EKEventStore.init()
                     self.eventStore.requestAccess(to: .event, completion:  {
                         (granted, error) in
-                   
+                        
                         if granted
                         {
                             print("granted \(granted)")
-                             //To prevent warning
+                            //To prevent warning
                             DispatchQueue.main.async
                                 {
                                     let eventVC = EKEventEditViewController.init()
@@ -646,43 +591,46 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                             calendarGrant = false
                         }
                     })
-            }
-            
-            completionHandler(true)
-  
+                }
+                
+                
+                completionHandler(true)
+                
+                
                 if calendarGrant == false {
                     
                     AlertNotification().alert(title: NSLocalizedString("Calendar Access Denied", comment: "Alert title"), message: NSLocalizedString("Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on.", comment: "Alert message"), sender: self, tag: "calendar")
-
+                    
                 }
                 
-        }
-        
-        
-        let linkAction = UIContextualAction(style: .normal, title: "🔗") { (action, view, completionHandler) in
+            }
             
-            self.linkAction(task: task, indexPath: indexPath)
-        }
-        
-        linkAction.backgroundColor = .cyan
-        calendarAction.backgroundColor = .lightGray
-        
-        if task.url != nil {
-            let actionButtons = UISwipeActionsConfiguration(actions: [linkAction, calendarAction])
-            return actionButtons
+            
+            let linkAction = UIContextualAction(style: .normal, title: "🔗") { (action, view, completionHandler) in
+                
+                self.linkAction(task: task, indexPath: indexPath)
+                completionHandler(true)
+            }
+            
+            linkAction.backgroundColor = .cyan
+            calendarAction.backgroundColor = .lightGray
+            
+            if task.url != nil {
+                let actionButtons = UISwipeActionsConfiguration(actions: [linkAction, calendarAction])
+                return actionButtons
+            } else {
+                let actionButtons = UISwipeActionsConfiguration(actions: [calendarAction])
+                return actionButtons
+            }
+            
+            
         } else {
-            let actionButtons = UISwipeActionsConfiguration(actions: [calendarAction])
-            return actionButtons
+            fatalError("Attempt configure cell without a managed oject")
         }
         
-        
-    } else {
-    fatalError("Attempt configure cell without a managed oject")
     }
     
-}
-
-
+    
     
     
     private func linkAction(task: Task, indexPath: IndexPath) {
@@ -711,8 +659,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             let taskToDelete = self.fetchedResultsController?.object(at: indexPath)
             // Delete it from Core Data
             context.delete(taskToDelete as! NSManagedObject)
-         }
- 
+        }
+        
         let NSL_cancelButton = NSLocalizedString("NSL_cancelButton", value: "Cancel", comment: "")
         let cancelAction = UIAlertAction(title: NSL_cancelButton, style: .cancel, handler: nil)
         
@@ -744,7 +692,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             
             destVC.selectedTask = selectedTask
             destVC.segueName = "updateTask"
- 
+            
         } else if segue.identifier == "updateTaskGoalSegue" {
             
             let destVC = segue.destination as! TaskGoalTableViewController

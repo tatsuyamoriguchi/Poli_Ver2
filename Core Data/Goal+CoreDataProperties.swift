@@ -20,7 +20,7 @@ extension Goal {
     @NSManaged public var goalDescription: String?
     @NSManaged public var goalDone: Bool
     @NSManaged public var goalDueDate: NSDate?
-    @NSManaged public var goalReward: String?
+    //@NSManaged public var goalReward: String?
     @NSManaged public var goalRewardImage: NSData?
     @NSManaged public var goalTitle: String?
     @NSManaged public var reward4Goal: Reward?

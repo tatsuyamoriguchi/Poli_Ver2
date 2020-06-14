@@ -148,7 +148,7 @@ class MigrateTableViewController: UITableViewController, NSFetchedResultsControl
         newGoal.goalDone = selectedGoal.goalDone
         newGoal.goalDescription = selectedGoal.goalDescription
         newGoal.goalDueDate = selectedGoal.goalDueDate
-        newGoal.goalReward = selectedGoal.goalReward
+        //newGoal.goalReward = selectedGoal.goalReward
         newGoal.goalRewardImage = selectedGoal.goalRewardImage
         newGoal.vision4Goal = selectedGoal.vision4Goal
         newGoal.tasksAssigned = selectedGoal.tasksAssigned

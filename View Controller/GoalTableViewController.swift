@@ -436,28 +436,23 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     }
     
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal else { return nil }
+        let NSL_updateButton_01 = NSLocalizedString("NSL_updateButton_01", value: "Update", comment: "")
+        let updateAction = UIContextualAction(style: .normal, title: NSL_updateButton_01) { (action, view, handler) in
+            self.updateAction(goal: goal, indexPath: indexPath)
+            handler(true)
+        }
         
-        if let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal {
-            
-            let NSL_updateButton_01 = NSLocalizedString("NSL_updateButton_01", value: "Update", comment: "")
-            let updateAction = UITableViewRowAction(style: .default, title: NSL_updateButton_01) { (action, indexPath) in
-                // Call update action
-                self.updateAction(goal: goal, indexPath: indexPath)
-            }
-            let NSL_deleteButton_01 = NSLocalizedString("NSL_deleteButton_01", value: "Delete", comment: "")
-            let deleteAction = UITableViewRowAction(style: .default, title: NSL_deleteButton_01) { (action, indexPath) in
-                // Call delete action
-                self.deleteAction(goal: goal, indexPath: indexPath)
-                
-            }
-            deleteAction.backgroundColor = .red
-            updateAction.backgroundColor = .blue
-            return [deleteAction, updateAction]
-            
-        } else {
-            fatalError("Attempt configure cell without a managed object") }
+        let NSL_deleteButton_01 = NSLocalizedString("NSL_deleteButton_01", value: "Delete", comment: "")
+        let deleteAction = UIContextualAction(style: .normal, title: NSL_deleteButton_01) {(action, view, handler) in
+            self.deleteAction(goal: goal, indexPath: indexPath)
+            handler(true)
+        }
+        updateAction.backgroundColor = .blue
+        deleteAction.backgroundColor = UIColor.red
         
+        return UISwipeActionsConfiguration(actions: [deleteAction, updateAction])
     }
     
     private func updateAction(goal: Goal, indexPath: IndexPath) {
