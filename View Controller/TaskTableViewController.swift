@@ -13,7 +13,44 @@ import EventKitUI
 import UserNotifications
 
 
-class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEventEditViewDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
+class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEventEditViewDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    
+      
+    // MARK: -Search Bar
+    let searchController = UISearchController(searchResultsController: nil)
+
+    func navBar() {
+    
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Task"
+        tableView.tableHeaderView = searchController.searchBar
+        definesPresentationContext = true
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    // MARK: -Update Search Results
+    func updateSearchResults(for searchController: UISearchController) {
+        let text = searchController.searchBar.text
+        if (text?.isEmpty)! {
+            print("updateSearchResults text?.isEmpty ")
+            configureFetchedResultsController()
+            tableView.reloadData()
+            
+        } else {
+            self.fetchedResultsController?.fetchRequest.predicate = NSPredicate(format: "(toDo contains[c] %@ )", text!)
+           
+        }
+        
+        do {
+            try self.fetchedResultsController?.performFetch()
+            self.tableView.reloadData()
+        } catch { print(error) }
+    }
+
+    
     
     var eventStore: EKEventStore!
     
@@ -42,7 +79,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("selectedGoal.goalTitle: \(String(describing: selectedGoal?.goalTitle))")
+        // to display search bar
+        navBar()
+        
+        //print("selectedGoal.goalTitle: \(String(describing: selectedGoal?.goalTitle))")
         
         // NavigationItem
         let NSL_naviTask = NSLocalizedString("NSL_naviTask", value: "Task List", comment: "")
@@ -51,13 +91,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
         
         let addTask = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        
         let noDateTask = UIBarButtonItem(title: "🗂", style: .done, target: self, action: #selector(showNoDateTask))
-        
-        
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         space.width = 40
-        
         let vision = UIBarButtonItem(title: "🌈", style: .done, target: self, action: #selector(getVisionAction))
         // 🌅🌄🌠🎇🎆🌇⭐️🌈☀️🦄👁😀💎💰🔮📈👁‍🗨🏁📆
         
@@ -123,7 +159,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     // Core Data: NSFetchedResultsConroller
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
-    
+
     
     // MARK: -Configure FetchResultsController
     private func configureFetchedResultsController() {

@@ -11,7 +11,6 @@ import CoreData
 import AVFoundation
 import UserNotifications
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
