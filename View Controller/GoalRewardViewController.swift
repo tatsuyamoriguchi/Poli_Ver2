@@ -14,10 +14,10 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var goalRewardTextField: UITextField!
     @IBOutlet weak var goalRewardImageView: UIImageView!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var rewardValueTextField: UITextField!
     
     @IBAction func noRewardAction(_ sender: UIButton) {
         goalRewardTextField.text = nil
-        //goal.reward4Goal = nil
         greed = nil
         goalRewardImageView.image = UIImage(named: "PoliRoundIcon.png")
         
@@ -44,7 +44,6 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewDidLoad()
         // To update goal, show the goal title
         if segueName == "updateGoal" {
-            //goalRewardTextField.text = goal.goalReward // -> Reward entity
             goalRewardTextField.text = goal.reward4Goal?.title
             greed = goal.reward4Goal
 
@@ -58,15 +57,98 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             }
         }
         
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNew))
         let nextButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(nextGoal))
-        self.navigationItem.rightBarButtonItem = nextButton
+        self.navigationItem.rightBarButtonItems = [nextButton, addButton]
+
+
         goalRewardTextField.delegate = self
+        rewardValueTextField.delegate = self
  
         imagePickerController?.delegate = self
         
         configureFetchedResultsController()
 
     }
+    
+    @objc func nextGoal() {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        if segueName == "updateGoal" {
+            goal.goalTitle = goalTitle
+            goal.goalDescription = goalDescription
+            goal.goalDueDate = goalDueDate as NSDate? ?? nil
+            
+            goal.goalDone = false
+            goal.vision4Goal = vision4Goal
+            
+            // -> Reward entity
+            goal.reward4Goal = greed
+            goal.goalRewardImage = goalRewardImageView.image!.pngData() as NSData?
+            
+        } else {
+            let goal = Goal(context: context)
+            goal.goalTitle = goalTitle
+            goal.goalDescription = goalDescription
+            goal.goalDueDate = goalDueDate as NSDate? ?? nil
+                        
+            goal.goalDone = false
+            goal.vision4Goal = vision4Goal
+            
+            // -> Reward entity
+            goal.reward4Goal = greed // goalReward
+            goal.goalRewardImage =  goalRewardImageView.image!.pngData() as NSData?
+        }
+        
+        
+        
+        do {
+            try context.save()
+        }catch{
+            print("Saving Error: \(error.localizedDescription)")
+        }
+        
+        navigationController!.popToRootViewController(animated: true)
+        
+    }
+    
+    
+    @objc func addNew() {
+        
+        
+        if let newRewardTitle = goalRewardTextField.text, let newRewardValue = Int32(rewardValueTextField.text!) {
+ 
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let item = Reward(context: context)
+            
+            item.title = newRewardTitle
+            item.value = newRewardValue
+            
+            do {
+                try context.save()
+                print("managedContext was saved.")
+                
+            }catch{
+                print("Saving Error: \(error.localizedDescription)")
+            }
+            
+            goalRewardTextField.text = nil
+            rewardValueTextField.text = nil
+            
+        } else {
+            noTextInputAlert()
+        }
+    }
+    
+    func noTextInputAlert() {
+        
+        let NSL_alertTitle_100 = NSLocalizedString("NSL_alertTitle_100", value: "No Text Entry", comment: "")
+        let NSL_alertMessage_100 = NSLocalizedString("NSL_alertMessage_100", value: "This entry is mandatory. Please type one in the text field and value.", comment: "")
+        AlertNotification().alert(title: NSL_alertTitle_100, message: NSL_alertMessage_100, sender: self, tag: "noTextEntry")
+        
+    }
+    
+    
 
     // MARK: Core Data for Reward
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
@@ -180,6 +262,10 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
         
         goalRewardTextField.text = greed?.title
         
+        guard let value = greed?.value else { return }
+        let greedValue = LocaleConvert().currency2String(value: Int32(value))
+        rewardValueTextField.text = greedValue
+        
 //        guard let value = greed?.value else { return }
 //        let greedValue = String(value)
 //        greedValueLabel.text = greedValue
@@ -198,49 +284,7 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
         // Dispose of any resources that can be recreated.
     }
     
-    @objc func nextGoal() {
-        
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        if segueName == "updateGoal" {
-            goal.goalTitle = goalTitle
-            goal.goalDescription = goalDescription
-            goal.goalDueDate = goalDueDate as NSDate? ?? nil
-            
-            goal.goalDone = false
-            goal.vision4Goal = vision4Goal
-            
-            // -> Reward entity
-            //goal.goalReward = goalRewardTextField.text
-            goal.reward4Goal = greed
-            goal.goalRewardImage = goalRewardImageView.image!.pngData() as NSData?
-            
-        } else {
-            let goal = Goal(context: context)
-            goal.goalTitle = goalTitle
-            goal.goalDescription = goalDescription
-            goal.goalDueDate = goalDueDate as NSDate? ?? nil
-                        
-            goal.goalDone = false
-            goal.vision4Goal = vision4Goal
-            
-            // -> Reward entity
-            //goal.goalReward = goalRewardTextField.text // goalReward
-            goal.reward4Goal = greed // goalReward
-            
-            goal.goalRewardImage =  goalRewardImageView.image!.pngData() as NSData?
-        }
-        
-        
-        
-        do {
-            try context.save()
-        }catch{
-            print("Saving Error: \(error.localizedDescription)")
-        }
-        
-        navigationController!.popToRootViewController(animated: true)
-        
-    }
+
     
     
     
@@ -353,3 +397,5 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
+
+
