@@ -55,6 +55,7 @@
 		8C6B80B820FD749C0055D505 /* Poli.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B80B620FD749C0055D505 /* Poli.xcdatamodeld */; };
 		8C6B80BA20FD749E0055D505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C6B80B920FD749E0055D505 /* Assets.xcassets */; };
 		8C6B80BD20FD749E0055D505 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6B80BB20FD749E0055D505 /* LaunchScreen.storyboard */; };
+		8C6F5D772497290100DD1B53 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6F5D762497290100DD1B53 /* AuthenticationServices.framework */; };
 		8C710353231C5E9500D9B1C2 /* GreedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C710352231C5E9500D9B1C2 /* GreedListViewController.swift */; };
 		8C71255221928EB100E42E4C /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C71255121928EB100E42E4C /* KeychainPasswordItem.swift */; };
 		8C714D24248DC41400FB69BB /* MigrateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C714D23248DC41400FB69BB /* MigrateTableViewController.swift */; };
@@ -139,6 +140,7 @@
 		8C6B80B920FD749E0055D505 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C6B80BC20FD749E0055D505 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C6B80BE20FD749E0055D505 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C6F5D762497290100DD1B53 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		8C710352231C5E9500D9B1C2 /* GreedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedListViewController.swift; sourceTree = "<group>"; };
 		8C71255121928EB100E42E4C /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		8C714D23248DC41400FB69BB /* MigrateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MigrateTableViewController.swift; path = "View Controller/MigrateTableViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -173,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6F5D772497290100DD1B53 /* AuthenticationServices.framework in Frameworks */,
 				8C74D7E2248DF22B00D75523 /* CloudKit.framework in Frameworks */,
 				8CF86D89211AD5A10079A8C9 /* SpriteKit.framework in Frameworks */,
 				8C98C31D21191B1F00FAFADE /* AVFoundation.framework in Frameworks */,
@@ -287,6 +290,7 @@
 		8C98C31B21191B1E00FAFADE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C6F5D762497290100DD1B53 /* AuthenticationServices.framework */,
 				8C74D7E1248DF22A00D75523 /* CloudKit.framework */,
 				8CF86D88211AD5A10079A8C9 /* SpriteKit.framework */,
 				8C98C31C21191B1F00FAFADE /* AVFoundation.framework */,

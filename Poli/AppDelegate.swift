@@ -11,13 +11,14 @@ import CoreData
 import AVFoundation
 import UserNotifications
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     let userNotificationDelegate: LocalNotificationDelegate = LocalNotificationDelegate()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let center = UNUserNotificationCenter.current()
@@ -30,37 +31,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-//
-//    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-//        return true
-//
-//    }
-//
-//    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
-//        return true
-//    }
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
-
+    
     @available(iOS 13.0, *)
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         self.saveContext()
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    
     @available(iOS 13.0, *)
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -74,27 +65,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let container = NSPersistentCloudKitContainer(name: "Poli")
         
         
-//        // Get the store description
-//        guard let description = container.persistentStoreDescriptions.first else {
-//            fatalError("Couldn't retreve a persisten store description.")
-//        }
-        
-
-        
-        
         let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
-
+        
         var defaultURL: URL?
         if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
             defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
- 
-        // Initialize the CloudKit schema
-         let id = "iCloud.com.beckos.Poli"
-         let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
-         storeDescription.cloudKitContainerOptions = options
-        
+            
+            // Initialize the CloudKit schema
+            let id = "iCloud.com.beckos.Poli"
+            let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
+            storeDescription.cloudKitContainerOptions = options
+            
         }
-
+        
         if defaultURL == nil {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
             
@@ -105,58 +88,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
             storeDescription?.cloudKitContainerOptions = options
         }
-
- 
-
         
         
         container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
             
-          //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
-//            container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
-//
-//            if let error = error as NSError? {
-//                fatalError("Unresolved error \(error), \(error.userInfo)")
-//            }
-//
-//            if let url = defaultURL, url.absoluteString != storeURL.absoluteString {
-//                let coordinator = container.persistentStoreCoordinator
-//                if let oldStore = coordinator.persistentStore(for: url) {
-//                    do {
-//                        try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
-//                    } catch {
-//                        print(error.localizedDescription)
-//                    }
-//
-//                    // delete old store
-//                    let fileCoordinator = NSFileCoordinator(filePresenter: nil)
-//                    fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: { url in
-//                        do {
-//                            try FileManager.default.removeItem(at: url)
-//                        } catch {
-//                            print(error.localizedDescription)
-//                        }
-//                    })
-//                }
-//            }
+            //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+            container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
+            
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+            
+            if let url = defaultURL, url.absoluteString != storeURL.absoluteString {
+                let coordinator = container.persistentStoreCoordinator
+                if let oldStore = coordinator.persistentStore(for: url) {
+                    do {
+                        try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                    
+                    // delete old store
+                    let fileCoordinator = NSFileCoordinator(filePresenter: nil)
+                    fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: { url in
+                        do {
+                            try FileManager.default.removeItem(at: url)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    })
+                }
+            }
         })
-
-
-        // Initialize CloudKit schema
-//        do {
-//            // Uncomment to do a dry run and print the CK records it'll make
-//             //           try container.initializeCloudKitSchema(options: [.dryRun, .printSchema])
-//            // Uncomment to initialize your schema
-//            try container.initializeCloudKitSchema()
-//        } catch {
-//            print("Unable to initialize CloudKit schema: \(error.localizedDescription)")
-//        }
-        // End initializing CloudKit schema
         
         
         return container
     }()
-
+    
     
     // MARK: - Core Data Saving support
     @available(iOS 13.0, *)

@@ -245,6 +245,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
             touchIDButton.setImage(UIImage(named: "Touch-icon-lg"),  for: .normal)
         }
         
+        
+        // Check iCloud credentials
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {

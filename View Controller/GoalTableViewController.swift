@@ -9,14 +9,13 @@
 import UIKit
 import CoreData
 import UserNotifications
+import CloudKit
 
 class GoalTableViewController: UITableViewController, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
-    @IBAction func addGoalAction(_ sender: UIBarButtonItem) {
-        
-        
-    }
+    @IBAction func addGoalAction(_ sender: UIBarButtonItem) {    }
     
+    var iCloudStatus: String?
     var userName: String! = ""
 
     // Declare a variable to pass to UpdateGoalViewController
@@ -60,19 +59,33 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        // Check iCloud account login status
+        CKContainer.default().accountStatus { (accountStat, error) in
+            if #available(iOS 13.0, *) {
+                
+                
+                if (accountStat == .available) {
+                    print("iCloud is available.")
+                    self.iCloudStatus = "iCloud account synced"
+                } else {
+                    print("iCloud is not available.")
+                    self.iCloudStatus = "iCloud account not connected"
+                }
+            } else {
+                self.iCloudStatus = "iCloud sync not available"
+            }
+        }
         
         configureFetchedResultsController()
         
-        
         if UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
             userName = UserDefaults.standard.string(forKey: "userName")
+            
+            let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "%@", comment: ""), userName)
+            self.navigationItem.title = "\(NSL_naviItem)'s Goals"
+            self.navigationItem.prompt = iCloudStatus
 
-            
-            let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "Login as %@", comment: ""), userName)
-            self.navigationItem.prompt = NSL_naviItem
-            //self.navigationItem.title = "My Goals - \(NSL_naviItem)"
-            
+           
         }else {
             //self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")
             alertAction(title: "Login Aelrt", message: "Problem reading login information in UserDefaults. Please re-login.", actionPassed: logoutAction)
