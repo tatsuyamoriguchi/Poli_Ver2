@@ -67,21 +67,33 @@ class ShareViewController: SLComposeServiceViewController {
                             if let shareURL = url as? URL {
                                 // Save url to Core Data
                                 newBookmark.setValue(shareURL, forKey: "url")
-
+                                
                                 //newBookmark.url = shareURL
-
+                                
                                 self.saveContext()
-
+                                
                                 print(" ")
                                 print("if let shareURL = url as? URL was true")
                                 print("shareURL: \(shareURL)")
                             }
                         })
-
-                    } else
-
-                        // "public.plain-text" kUTTypePlainText as String
-                    if itemProvider.hasItemConformingToTypeIdentifier(kUTTypePlainText as String) {
+//                    } else if itemProvider.hasItemConformingToTypeIdentifier("public.plain-text") {
+//
+//                            itemProvider.loadItem(forTypeIdentifier: "public.plain-text", options: nil, completionHandler: { (string, error) -> Void in
+//                                if let string = (string as? String), let shareURL = URL(string: string) {
+//                                    
+//                                    newBookmark.setValue(shareURL, forKey: "url")
+//                                    self.saveContext()
+//                                    print(" ")
+//                                    print("if let shareText = item as? URL was true")
+//                                    print("shareURL: \(shareURL)")
+//                                }
+//                            })
+                        
+                        
+                        
+                    } else if itemProvider.hasItemConformingToTypeIdentifier(kUTTypePlainText as String) {
+                        
                         itemProvider.loadItem(forTypeIdentifier: kUTTypePlainText as String, options: nil, completionHandler: { (string, error) -> Void in
                             if let string = (string as? String), let shareURL = URL(string: string) {
                                 
@@ -92,6 +104,7 @@ class ShareViewController: SLComposeServiceViewController {
                                 print("shareURL: \(shareURL)")
                             }
                         })
+                    
                     }
                     
                     // Grab preview
@@ -137,23 +150,43 @@ class ShareViewController: SLComposeServiceViewController {
     
     var fetchedGoals = [Goal]()
     
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSCustomPersistentContainer(name: "Poli")
+    //@available(iOS 13.0, *)
+    //lazy var persistentContainer: NSPersistentContainer = {
+        //let container = NSCustomPersistentContainer(name: "Poli")
+
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "Poli")
+
         let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
         
         var defaultURL: URL?
         if let storeDescription = container.persistentStoreDescriptions.first, let url = storeDescription.url {
+            
             defaultURL = FileManager.default.fileExists(atPath: url.path) ? url : nil
+            
+            // Addition
+            // Initialize the CloudKit schema
+            let id = "iCloud.com.beckos.Poli"
+            let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
+            storeDescription.cloudKitContainerOptions = options
+            // Addition
         }
         
         if defaultURL == nil {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
+ 
+            // Addiditon
+            let storeDescription = container.persistentStoreDescriptions.first
+            // Initialize the CloudKit schema
+            let id = "iCloud.com.beckos.Poli"
+            let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
+            storeDescription?.cloudKitContainerOptions = options
+            // Addition
+            
         }
+
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            
-            //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
-            
-            
+         
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
