@@ -278,6 +278,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             
             do {
                 try context.save()
+                UIApplication.shared.applicationIconBadgeNumber = CountTaskNumber4Today().countTask()
+
             }catch{
                 print("Saving Error: \(error.localizedDescription)")
             }

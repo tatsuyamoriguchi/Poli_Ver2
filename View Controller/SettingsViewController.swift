@@ -205,6 +205,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         // Nexttime opening Settings view, it shows pre-defined time in DatePicker
         UserDefaults.standard.set(notificationTimePicker.date, forKey: "notificationTime")
  
+        UIApplication.shared.applicationIconBadgeNumber = CountTaskNumber4Today().countTask()
         
         // Attach image to notificaiton
         // If sets trigger repeats option to true, notificaiton doesn't attach image on second time or later.

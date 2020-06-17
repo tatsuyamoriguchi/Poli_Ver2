@@ -505,7 +505,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     PlayAudio.sharedInstance.playClick(fileName: "smallbark", fileExt: ".wav")
                 }
             }
-            
+            UIApplication.shared.applicationIconBadgeNumber = CountTaskNumber4Today().countTask()
+
         }
     }
     

@@ -12,8 +12,7 @@ import CoreData
 import UIKit
 
 class LocalNotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
-    //var context: NSManagedObjectContext!
-    //let selectedGoal: Goal?
+
     var tasks = [Task]()
     var userName: String! = nil
     
