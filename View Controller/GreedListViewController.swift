@@ -346,7 +346,7 @@ func noTextInputAlert() {
                                     eventVC.eventStore = self.eventStore
                                     eventVC.editViewDelegate = self
                                     
-                                    eventVC.event?.title = greed.title
+                                    
                                     eventVC.event?.isAllDay = true
                                         
                                     var eventString: String?
@@ -357,8 +357,7 @@ func noTextInputAlert() {
                                     } else {
                                         eventString = "Unable to obtain reward name and value."
                                     }
-                                    
-                                    eventVC.event?.notes = eventString
+                                    eventVC.event?.title = eventString
                                     eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
                                     
                                     self.present(eventVC, animated: false, completion: nil)
