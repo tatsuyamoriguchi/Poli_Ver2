@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreData
+import EventKit
+import EventKitUI
 
-class GreedListViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate {
+
+class GreedListViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate, EKEventViewDelegate, EKEventEditViewDelegate {
     
     
     //MARK:Properties
@@ -320,5 +323,77 @@ func noTextInputAlert() {
         
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let greed = self.fetchedResultsController?.object(at: indexPath) as? Reward else { return nil }
+        
+        let eventAction = UIContextualAction(style: .normal, title: "📆") {(action, view, handler) in
+ 
+            self.eventStore = EKEventStore.init()
+            self.eventStore.requestAccess(to: .event, completion:  {
+                        (granted, error) in
+
+                        //var calendarGrant: Bool?
+                        if granted
+                        {
+                            print("granted \(granted)")
+                        
+                            
+                            //To prevent warning
+                            DispatchQueue.main.async
+                                {
+                                    let eventVC = EKEventEditViewController.init()
+                                    eventVC.event = EKEvent.init(eventStore: self.eventStore)
+                                    eventVC.eventStore = self.eventStore
+                                    eventVC.editViewDelegate = self
+                                    
+                                    eventVC.event?.title = greed.title
+                                    eventVC.event?.isAllDay = true
+                                        
+                                    var eventString: String?
+                                    if let rewardName = greed.title {
+
+                                        let rewardValue = LocaleConvert().currency2String(value: Int32(greed.value))
+                                        eventString = "Enjoy your reward, Buy \(rewardName) for \(rewardValue)"
+                                    } else {
+                                        eventString = "Unable to obtain reward name and value."
+                                    }
+                                    
+                                    eventVC.event?.notes = eventString
+                                    eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
+                                    
+                                    self.present(eventVC, animated: false, completion: nil)
+                            }
+                        } else {
+                            print("error \(String(describing: error))")
+                            //calendarGrant = false
+                        }
+                    })
+
+            
+            handler(true)
+        }
+        
+        eventAction.backgroundColor = UIColor.blue
+        return UISwipeActionsConfiguration(actions: [eventAction])
+      
+    }
+    
+    var eventStore: EKEventStore!
+    
+    // EventKit to share to iCalendar
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    // to post an event to Calendar
+    func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
+        let calendar = self.eventStore.defaultCalendarForNewEvents
+        controller.title = NSLocalizedString("Event for \(calendar!.title)", comment: "Calendar event title")
+        return calendar!
+    }
     
 }

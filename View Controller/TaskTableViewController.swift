@@ -64,7 +64,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         self.dismiss(animated: true, completion: nil)
     }
     
-    func eventEditViewControllerDefaultCalendar(forNewEents controller: EKEventEditViewController) -> EKCalendar {
+    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
         let calendar = self.eventStore.defaultCalendarForNewEvents
         controller.title = NSLocalizedString("Event for \(calendar!.title)", comment: "Calendar event title")
         return calendar!
