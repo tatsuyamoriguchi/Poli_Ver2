@@ -14,14 +14,7 @@ import EventKit
 import EventKitUI
 
 class GoalTableViewController: UITableViewController, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, EKEventViewDelegate, EKEventEditViewDelegate {
-//    func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
-//        <#code#>
-//    }
-//
-//    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-//        <#code#>
-//    }
-//
+
      
     var eventStore: EKEventStore!
     // EventKit to share to iCalendar
@@ -461,7 +454,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
                                                             eventVC.event = EKEvent.init(eventStore: self.eventStore)
                                                             eventVC.eventStore = self.eventStore
                                                             eventVC.editViewDelegate = self
-                                                            //eventVC.event?.title = goal.reward4Goal?.title
+                                                            
                                                             eventVC.event?.isAllDay = true
 
                                                             var eventString: String?

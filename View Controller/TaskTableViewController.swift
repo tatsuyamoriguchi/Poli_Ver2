@@ -503,10 +503,62 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     taskCell.accessoryType = .checkmark
                     task.isDone = true
                     PlayAudio.sharedInstance.playClick(fileName: "smallbark", fileExt: ".wav")
+                    
+                    
+                    
+                    // EventKit for reward
+                    if task.reward4Task != nil {
+                        self.eventStore = EKEventStore.init()
+                        self.eventStore.requestAccess(to: .event, completion:  {
+                            (granted, error) in
+                            
+                            //var calendarGrant: Bool?
+                            if granted
+                            {
+                                print("granted \(granted)")
+                                
+                                
+                                //To prevent warning
+                                DispatchQueue.main.async
+                                    {
+                                        let eventVC = EKEventEditViewController.init()
+                                        eventVC.event = EKEvent.init(eventStore: self.eventStore)
+                                        eventVC.eventStore = self.eventStore
+                                        eventVC.editViewDelegate = self
+                                        
+                                        
+                                        eventVC.event?.isAllDay = true
+                                        
+                                        var eventString: String?
+                                        if let rewardName = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
+                                            
+                                            let rewardValue = LocaleConvert().currency2String(value: Int32(rewardValue))
+                                            eventString = "Enjoy your reward, Buy \(rewardName) for \(rewardValue)"
+                                        } else {
+                                            eventString = "Unable to obtain reward name and value."
+                                        }
+                                        eventVC.event?.title = eventString
+                                        eventVC.event?.notes = "Reward for Task: \(task.toDo ?? "Error: Unable to obtain a task title.")"
+                                        eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
+                                        
+                                        self.present(eventVC, animated: false, completion: nil)
+                                }
+                            } else {
+                                print("error \(String(describing: error))")
+                                //calendarGrant = false
+                            }
+                        })
+                        
+                        
+                        //handler(true)
+                        
+                    }
+                    // EventKit for reward
+                    
                 }
             }
             UIApplication.shared.applicationIconBadgeNumber = CountTaskNumber4Today().countTask()
-
+            
         }
     }
     
