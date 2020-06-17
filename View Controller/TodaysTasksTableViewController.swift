@@ -29,7 +29,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         if showTomorrow != true {
             showTomorrow = true
 
-            let NSL_naviTomorrow = NSLocalizedString("NSL_naviTomorrow", value: "Tomorrow's Tasks To-Do", comment: "")
+            let NSL_naviTomorrow = NSLocalizedString("NSL_naviTomorrow", value: "Tomorrow's Tasks", comment: "")
             self.navigationItem.title = NSL_naviTomorrow
 
             todayTomorrowButton.title = "◀️"
@@ -37,7 +37,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         } else {
             showTomorrow = false
 
-            let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks To-Do", comment: "")
+            let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks", comment: "")
             self.navigationItem.title = NSL_naviToday
             
             todayTomorrowButton.title = "▶️"
@@ -63,12 +63,17 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         var url: URL
    
         image = UIImage(named: "PoliRoundIcon")!
-        let NSL_postMessage = NSLocalizedString("NSL_postMessage", value: "Today's Tasks To Do: ", comment: "")
-        message = NSL_postMessage
+        let NSL_postMessage = NSLocalizedString("NSL_postMessage", value: "Today's Tasks: ", comment: "")
+        let NSL_postMessageTomorrow = NSLocalizedString("NSL_postMessageTomorrow", value: "Tomorrow's Tasks: ", comment: "")
+        if showTomorrow != true {
+            message = NSL_postMessage
+        } else {
+            message = NSL_postMessageTomorrow
+        }
         
         url = URL(string: "https://apps.apple.com/us/app/poli-todo/id1451371111")!
 
-        
+        configureFetchedResultsController()
         tasks = fetchedResultsController?.fetchedObjects as! [Task]
             
         var previousGoalTitle: String = ""
@@ -149,7 +154,7 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         if showTomorrow != true {
             todayTomorrowButton = UIBarButtonItem(title: "▶️", style: .plain, target: self, action: #selector(showTodayTomorrow))
             
-            let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks To-Do", comment: "")
+            let NSL_naviToday = NSLocalizedString("NSL_naviToday", value: "Today's Tasks", comment: "")
              self.navigationItem.title = NSL_naviToday
 
         } else {
