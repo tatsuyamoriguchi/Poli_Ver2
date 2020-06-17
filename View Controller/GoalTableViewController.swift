@@ -81,22 +81,23 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Check iCloud account login status
-        CKContainer.default().accountStatus { (accountStat, error) in
-            if #available(iOS 13.0, *) {
-                
-                
-                if (accountStat == .available) {
-                    print("iCloud is available.")
-                    self.iCloudStatus = "iCloud account synced"
-                } else {
-                    print("iCloud is not available.")
-                    self.iCloudStatus = "iCloud account not connected"
-                }
-            } else {
-                self.iCloudStatus = "iCloud sync not available"
-            }
-        }
+ // Check iCloud account login status
+ CKContainer.default().accountStatus { (accountStat, error) in
+     if #available(iOS 13.0, *) {
+         
+         if (accountStat == .available) {
+             print("viewDidLoad: iCloud is available.")
+             self.iCloudStatus = "iCloud account synced"
+         } else {
+             print("viewDidLoad: iCloud is not available.")
+             self.iCloudStatus = "iCloud account not connected"
+         }
+     } else {
+         self.iCloudStatus = "iCloud sync not available"
+     }
+ }
+
+        
         
         configureFetchedResultsController()
         
@@ -106,7 +107,6 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             let NSL_naviItem = String(format: NSLocalizedString("NSL_naviItem", value: "%@", comment: ""), userName)
             self.navigationItem.title = "\(NSL_naviItem)'s Goals"
             self.navigationItem.prompt = iCloudStatus
-
            
         }else {
             //self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")
@@ -136,6 +136,24 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 
         configureFetchedResultsController()
         tableView.reloadData()
+        
+        // Check iCloud account login status
+        CKContainer.default().accountStatus { (accountStat, error) in
+            if #available(iOS 13.0, *) {
+                
+                if (accountStat == .available) {
+                    print("viewWillAppear: iCloud is available.")
+                    self.iCloudStatus = "iCloud account synced"
+                } else {
+                    print("viewWillAppear: iCloud is not available.")
+                    self.iCloudStatus = "iCloud account not connected"
+                }
+            } else {
+                self.iCloudStatus = "iCloud sync not available"
+            }
+        }
+        self.navigationItem.prompt = iCloudStatus
+        
 
     }
 
