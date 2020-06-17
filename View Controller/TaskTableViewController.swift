@@ -627,7 +627,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
             
             var calendarGrant: Bool?
-            let calendarAction = UIContextualAction(style: .normal, title: "📅") { (action, view, completionHandler) in
+            let calendarAction = UIContextualAction(style: .normal, title: "📆") { (action, view, completionHandler) in
                 
                 if task.goalAssigned?.goalDone == true {
                     self.goalDoneAlert()
