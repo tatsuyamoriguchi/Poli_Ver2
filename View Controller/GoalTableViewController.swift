@@ -289,6 +289,170 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 //
 //    }
 //
+    
+    func checkGoalDone(selectedGoal: Goal) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@ && isDone == false", selectedGoal)
+        let sortByDone = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: false)
+        fetchRequest.sortDescriptors = [sortByDone]
+        
+        var undoneTasks: Array<Any>?
+        do {
+            undoneTasks = try context.fetch(fetchRequest)
+            if undoneTasks?.count == 0 || undoneTasks?.count == nil {
+                goalAchievedAlert(selectedGoal: selectedGoal)
+            } else {
+                print("Undone task exisits")
+                return
+            }
+            
+        } catch {
+            print("Unable to fetch for Today Task")
+        }
+        
+    }
+    
+    func goalAchievedAlert(selectedGoal: Goal){
+        
+        //DispatchQueue.main.async {
+        
+        let NSL_alertTitle_011 = NSLocalizedString("NSL_alertTitle_011", value: "Goal Achieved?", comment: " ")
+        let NSL_alertMessage_011 = String(format: NSLocalizedString("NSL_alertMessage_011 ", value: "All tasks registered to \"%@\" have been completed. If you have finished, press 'Celebrate it!' If you still need to continue, press 'Add More Task' and go to Task List view to add more.", comment: " "), selectedGoal.goalTitle!)
+        let alert = UIAlertController(title: NSL_alertTitle_011, message: NSL_alertMessage_011, preferredStyle: .alert)
+        
+        
+        let NSL_alertTitle_012 = NSLocalizedString("NSL_alertTitel_012", value: "Not Done Yet, Add More Task", comment: " ")
+        // Shouldn't this be Cancel with handler: nil???
+        alert.addAction(UIAlertAction(title: NSL_alertTitle_012, style: .default, handler: nil))
+        
+        let NSL_alertTitle_013 = NSLocalizedString("NSL_alertTitle_013", value: "It's Done, Let's Celebrate it!", comment: " ")
+        alert.addAction(UIAlertAction(title: NSL_alertTitle_013, style: .default, handler: {(action) in
+            
+            // Display Congratulation Message and Reward Image
+            let NSL_alertTitle_014 = NSLocalizedString("NSL_alertTitle_014", value: "Congratulation!", comment: "")
+            let rewardString: String?
+            
+            if self.selectedGoal?.reward4Goal?.title == nil { rewardString = "Poli" } else { rewardString = self.selectedGoal?.reward4Goal?.title }
+            let NSL_alertMessage_014 = String(format: NSLocalizedString("NSL_alertMessage_014", value: "You now deserve %@! now. Celebrate your accomplishment with the reward RIGHT NOW! Would like to schedule to get your reward?", comment: ""), rewardString!)
+            
+            let congratAlert = UIAlertController(title: NSL_alertTitle_014, message: NSL_alertMessage_014, preferredStyle: .alert)
+            
+            let imageView = UIImageView(frame: CGRect(x:150, y:180, width: 150, height: 150))
+            
+            if let goalRewardImageData = self.selectedGoal?.goalRewardImage as Data? {
+                imageView.image = UIImage(data: goalRewardImageData)
+            } else {
+                imageView.image = UIImage(named: "PoliRoundIcon")
+            }
+            
+            PlayAudio.sharedInstance.playClick(fileName: "triplebarking", fileExt: ".wav")
+            congratAlert.view.addSubview(imageView)
+            
+            
+            // Change goalDone value
+            self.selectedGoal?.goalDone = true
+            
+            // Declare ManagedObjectContext to save goalDone value
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            // Save to core data
+            do {
+                try context.save()
+                
+            }catch{
+                print("Saving Error: \(error.localizedDescription)")
+            }
+            
+            
+            // CongratAlert: Pressing "Yes" creates iCalendar event with reward data
+//            congratAlert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+//                self.performSegue(withIdentifier: "toGoalList", sender: self)
+//            }))
+            congratAlert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+            
+            congratAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action
+                in
+                
+                self.eventStore = EKEventStore.init()
+                self.eventStore.requestAccess(to: .event, completion:  {
+                    (granted, error) in
+                    
+//                    var calendarGrant: Bool?
+                    if granted
+                    {
+                        print("granted \(granted)")
+                        
+                        
+                        //To prevent warning
+                        DispatchQueue.main.async
+                            {
+                                
+                                let eventVC = EKEventEditViewController.init()
+                                eventVC.event = EKEvent.init(eventStore: self.eventStore)
+                                eventVC.eventStore = self.eventStore
+                                eventVC.editViewDelegate = self
+                                
+                                eventVC.event?.isAllDay = true
+                                
+                                var eventString: String?
+                                if let rewardName = self.selectedGoal?.reward4Goal?.title, let rewardValue = self.selectedGoal?.reward4Goal?.value  {
+                                    let rewardValue = LocaleConvert().currency2String(value: rewardValue)
+                                    
+                                    eventString = "Enjoy your reward, \"\(rewardName)\" for \(rewardValue)"
+                                } else {
+                                    eventString = "No reward or value"
+                                }
+                                
+                                
+                                eventVC.event?.title = eventString
+                                
+                                eventVC.event?.notes = "Reward for \(self.selectedGoal?.goalTitle ?? "Error: No Goal Title Found")"
+                                
+                                eventVC.event?.calendar =                                                             self.eventStore.defaultCalendarForNewEvents
+                                  
+                                self.present(eventVC, animated: false, completion: nil)
+//                                self.present(eventVC, animated: false, completion: {
+//                                    self.performSegue(withIdentifier: "toGoalList", sender: self)
+//                                })
+
+                        }
+                    } else {
+                        print("error \(String(describing: error))")
+                        
+                    }
+                })
+                
+                
+                
+                //}
+                
+            }))
+            
+            self.present(congratAlert, animated: true, completion: nil)
+            
+            // Display congratAlert view for x seconds
+            //                    let when = DispatchTime.now() + 3
+            //                    DispatchQueue.main.asyncAfter(deadline: when, execute: {
+            //                        congratAlert.dismiss(animated: true, completion: nil)
+            //
+            //                    })
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        // }
+        
+    }
+
+
+    
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -379,6 +543,8 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             goalCell.goalProgressPercentageLabel.text = String(format: "%.1f", goalProgressPercentage100) +  NSL_percentDone + " "
                 + progressMessage
             
+            
+            if goal.goalDone == false && goalProgress == 1.0 {  goalAchievedAlert(selectedGoal: goal)}
             
 /*
             // If all tasks have been done for the first time, display confirmation alert, if ok, change goalDone value to true
