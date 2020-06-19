@@ -53,7 +53,7 @@ class GoalDoneViewController: UIViewController {
         }
 
         //navigationController!.popToRootViewController(animated: true)
-        performSegue(withIdentifier: "toGoalList", sender: self)
+        performSegue(withIdentifier: "taskList", sender: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,9 +67,9 @@ class GoalDoneViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toGoalList" {
-            let destVC = segue.destination as! GoalTableViewController
-            destVC.userName = userName
+        if segue.identifier == "taskList" {
+            let destVC = segue.destination as! TaskTableViewController
+            destVC.selectedGoal = goal
     
         }
     }
