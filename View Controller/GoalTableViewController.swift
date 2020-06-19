@@ -290,32 +290,32 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
 //    }
 //
     
-    func checkGoalDone(selectedGoal: Goal) {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
-        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@ && isDone == false", selectedGoal)
-        let sortByDone = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: false)
-        fetchRequest.sortDescriptors = [sortByDone]
-        
-        var undoneTasks: Array<Any>?
-        do {
-            undoneTasks = try context.fetch(fetchRequest)
-            if undoneTasks?.count == 0 || undoneTasks?.count == nil {
-                goalAchievedAlert(selectedGoal: selectedGoal)
-            } else {
-                print("Undone task exisits")
-                return
-            }
-            
-        } catch {
-            print("Unable to fetch for Today Task")
-        }
-        
-    }
+//    func checkGoalDone(selectedGoal: Goal) {
+//
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            return
+//        }
+//        let context = appDelegate.persistentContainer.viewContext
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+//        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@ && isDone == false", selectedGoal)
+//        let sortByDone = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: false)
+//        fetchRequest.sortDescriptors = [sortByDone]
+//
+//        var undoneTasks: Array<Any>?
+//        do {
+//            undoneTasks = try context.fetch(fetchRequest)
+//            if undoneTasks?.count == 0 || undoneTasks?.count == nil {
+//                goalAchievedAlert(selectedGoal: selectedGoal)
+//            } else {
+//                print("Undone task exisits")
+//                return
+//            }
+//
+//        } catch {
+//            print("Unable to fetch for Today Task")
+//        }
+//
+//    }
     
     func goalAchievedAlert(selectedGoal: Goal){
         
@@ -544,7 +544,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
                 + progressMessage
             
             
-            if goal.goalDone == false && goalProgress == 1.0 {  goalAchievedAlert(selectedGoal: goal)}
+//            if goal.goalDone == false && goalProgress == 1.0 {  goalAchievedAlert(selectedGoal: goal)}
             
 /*
             // If all tasks have been done for the first time, display confirmation alert, if ok, change goalDone value to true

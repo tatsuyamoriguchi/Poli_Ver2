@@ -102,6 +102,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             navigationItem.rightBarButtonItems = [addTask, space, noDateTask, space]
         }
         
+        let leftBackButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(checkGoalDone))
+        navigationItem.leftBarButtonItem = leftBackButton
+        
         configureFetchedResultsController()
         tableView.reloadData()
         
@@ -117,6 +120,24 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 //        // check if all tasks of this goal are done
 //        if selectedGoal.goalDone == false { checkGoalDone() }
 //    }
+    
+    
+//    override func willMove(toParent parent: UIViewController?) {
+//        super.willMove(toParent: parent)
+//        if parent == nil {
+//            print("Hello? This is willMove")
+//            checkGoalDone()
+//        }
+//    }
+    
+//    override func didMove(toParent parent: UIViewController?) {
+//        super.didMove(toParent: parent)
+//        if parent == nil {
+//            print("Hello This is from didMove")
+//            checkGoalDone()
+//        }
+//    }
+    
     
     var showAllTaskToggle: Bool? = false
     
@@ -245,7 +266,13 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
         let NSL_alertTitle_021 = NSLocalizedString("NSL_alertTitle_021", value: "Goal Already Done", comment: "")
         let NSL_alertMessage_021 = NSLocalizedString("NSL_alertMessage_021", value: "Unable to change task data. To enable task data editing, go back to Goal List view and use Update to change the goal's done status to Undone.", comment: "")
-        AlertNotification().alert(title: NSL_alertTitle_021, message: NSL_alertMessage_021, sender: self, tag: "goalAlreadyDone")
+        let goalAlreadyDoneAlert = UIAlertController(title: NSL_alertTitle_021, message: NSL_alertMessage_021, preferredStyle: .alert)
+        goalAlreadyDoneAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            self.performSegue(withIdentifier: "toGoalList", sender: self)
+        }))
+        goalAlreadyDoneAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        present(goalAlreadyDoneAlert, animated: true, completion: nil)
+        //present(alert, animated: true, completion: nil)
     }
     
     
@@ -283,10 +310,26 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             
             // Crash when task.date is nil
             if task.date != nil {
+                
+                var repeatStyle: String = ""
+                
+                switch task.repeatTask {
+                case 1:
+                    repeatStyle = " 🔂 Daily"
+                case 2:
+                    repeatStyle = " 🔂 Weekly"
+                    
+                case 3:
+                    repeatStyle = " 🔂 Weekdays"
+                    
+                default:
+                    print("")
+                }
+
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = .full
-                
-                dateString = dateFormatter.string(from: (task.date)! as Date)
+                dateString = dateFormatter.string(from: (task.date)! as Date) + repeatStyle
+
             } else {
                 dateString = "No date assigned"
             }
@@ -295,7 +338,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 
                 let rewardValueString = LocaleConvert().currency2String(value: Int32(rewardValue))
                 
-                let rewardString = NSLocalizedString("Reward: ", comment: "") + rewardTitle + " - " + NSLocalizedString("Value: ", comment: "") +  rewardValueString
+                let rewardString = NSLocalizedString("🎁 ", comment: "") + rewardTitle + " - " + NSLocalizedString("💰 ", comment: "") +  rewardValueString
                 
                 taskCell.detailTextLabel?.text = dateString + "\n" + rewardString
             } else {
@@ -367,6 +410,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         switch repeatType {
         case 1:
             repeatString = "Daily"
+// Refactor this
             repeatAlertConfirm(clickedTask: previousTask, title: "Task Repeat Confirmation", message: "Do you want to repeat this task, \(repeatString)?")
         case 2:
             repeatString = "Weekdays"
@@ -649,7 +693,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         if task.repeatTask != nil || task.repeatTask != 0 {
             print("repeatAlert will be called")
             self.repeatAlert(previousTask: task, repeatType: task.repeatTask!)
-            
+ 
         }
         
     }
@@ -887,173 +931,176 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         } else if segue.identifier == "toGoalList" {
             //let destVC = segue.destination as! GoalTableViewController
             //destVC.userName = userName
-            
+
         }
         
     }
     
-//    func checkGoalDone() {
-//
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//        let context = appDelegate.persistentContainer.viewContext
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
-//        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@ && isDone == false", selectedGoal)
-//        let sortByDone = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: false)
-//        fetchRequest.sortDescriptors = [sortByDone]
-//
-//        var undoneTasks: Array<Any>?
-//        do {
-//            undoneTasks = try context.fetch(fetchRequest)
-//            if undoneTasks?.count == 0 || undoneTasks?.count == nil {
-//                goalAchievedAlert()
-//            } else {
-//                print("Undone task exisits")
-//                return
-//            }
-//
-//        } catch {
-//            print("Unable to fetch for Today Task")
-//        }
-//
-//    }
-//
-//
-//    func goalAchievedAlert(){
-//
-//        //DispatchQueue.main.async {
-//
-//        let NSL_alertTitle_011 = NSLocalizedString("NSL_alertTitle_011", value: "Goal Achieved?", comment: " ")
-//        let NSL_alertMessage_011 = String(format: NSLocalizedString("NSL_alertMessage_011 ", value: "All tasks registered to \"%@\" have been completed. If you have finished, press 'Celebrate it!' If you still need to continue, press 'Add More Task' and go to Task List view to add more.", comment: " "), self.selectedGoal.goalTitle!)
-//        let alert = UIAlertController(title: NSL_alertTitle_011, message: NSL_alertMessage_011, preferredStyle: .alert)
-//
-//
-//        let NSL_alertTitle_012 = NSLocalizedString("NSL_alertTitel_012", value: "Not Done Yet, Add More Task", comment: " ")
-//        // Shouldn't this be Cancel with handler: nil???
-//        alert.addAction(UIAlertAction(title: NSL_alertTitle_012, style: .default, handler: nil))
-//
-//        let NSL_alertTitle_013 = NSLocalizedString("NSL_alertTitle_013", value: "It's Done, Let's Celebrate it!", comment: " ")
-//        alert.addAction(UIAlertAction(title: NSL_alertTitle_013, style: .default, handler: {(action) in
-//
-//            // Display Congratulation Message and Reward Image
-//            let NSL_alertTitle_014 = NSLocalizedString("NSL_alertTitle_014", value: "Congratulation!", comment: "")
-//            let rewardString: String?
-//
-//            if self.selectedGoal.reward4Goal?.title == nil { rewardString = "Poli" } else { rewardString = self.selectedGoal.reward4Goal?.title }
-//            let NSL_alertMessage_014 = String(format: NSLocalizedString("NSL_alertMessage_014", value: "You now deserve %@! now. Celebrate your accomplishment with the reward RIGHT NOW! Would like to schedule to get your reward?", comment: ""), rewardString!)
-//
-//            let congratAlert = UIAlertController(title: NSL_alertTitle_014, message: NSL_alertMessage_014, preferredStyle: .alert)
-//
-//            let imageView = UIImageView(frame: CGRect(x:150, y:180, width: 150, height: 150))
-//
-//            if let goalRewardImageData = self.selectedGoal.goalRewardImage as Data? {
-//                imageView.image = UIImage(data: goalRewardImageData)
-//            } else {
-//                imageView.image = UIImage(named: "PoliRoundIcon")
-//            }
-//
-//            PlayAudio.sharedInstance.playClick(fileName: "triplebarking", fileExt: ".wav")
-//            congratAlert.view.addSubview(imageView)
-//
-//
-//            // Change goalDone value
-//            self.selectedGoal.goalDone = true
-//
-//            // Declare ManagedObjectContext to save goalDone value
-//            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//
-//            // Save to core data
-//            do {
-//                try context.save()
-//
-//            }catch{
-//                print("Saving Error: \(error.localizedDescription)")
-//            }
-//
-//
-//            // CongratAlert: Pressing "Yes" creates iCalendar event with reward data
-//            congratAlert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
-//                self.performSegue(withIdentifier: "toGoalList", sender: self)
-//            }))
-//
-//            congratAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action
-//                in
-//
-//                self.eventStore = EKEventStore.init()
-//                self.eventStore.requestAccess(to: .event, completion:  {
-//                    (granted, error) in
-//
-//                    //var calendarGrant: Bool?
-//                    if granted
-//                    {
-//                        print("granted \(granted)")
-//
-//
-//                        //To prevent warning
-//                        DispatchQueue.main.async
-//                            {
-//
-//                                let eventVC = EKEventEditViewController.init()
-//                                eventVC.event = EKEvent.init(eventStore: self.eventStore)
-//                                eventVC.eventStore = self.eventStore
-//                                eventVC.editViewDelegate = self
-//
-//                                eventVC.event?.isAllDay = true
-//
-//                                var eventString: String?
-//                                if let rewardName = self.selectedGoal.reward4Goal?.title, let rewardValue = self.selectedGoal.reward4Goal?.value  {
-//                                    let rewardValue = LocaleConvert().currency2String(value: rewardValue)
-//
-//                                    eventString = "Enjoy your reward, \"\(rewardName)\" for \(rewardValue)"
-//                                } else {
-//                                    eventString = "No reward or value"
-//                                }
-//
-//
-//                                eventVC.event?.title = eventString
-//
-//                                eventVC.event?.notes = "Reward for \(self.selectedGoal.goalTitle ?? "Error: No Goal Title Found")"
-//
-//                                eventVC.event?.calendar =                                                             self.eventStore.defaultCalendarForNewEvents
-//
-//                                //                                self.present(eventVC, animated: false, completion: nil)
-//                                self.present(eventVC, animated: false, completion: {
-//                                    self.performSegue(withIdentifier: "toGoalList", sender: self)
-//                                })
-//                        }
-//                    } else {
-//                        print("error \(String(describing: error))")
-//
-//                    }
-//                })
-//
-//
-//
-//                //}
-//
-//            }))
-//
-//            self.present(congratAlert, animated: true, completion: nil)
-//
-//            // Display congratAlert view for x seconds
-//            //                    let when = DispatchTime.now() + 3
-//            //                    DispatchQueue.main.asyncAfter(deadline: when, execute: {
-//            //                        congratAlert.dismiss(animated: true, completion: nil)
-//            //
-//            //                    })
-//
-//        }))
-//
-//        self.present(alert, animated: true, completion: nil)
-//
-//        // }
-//
-//    }
+    @objc func checkGoalDone() {
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@ && isDone == false", selectedGoal)
+        let sortByDone = NSSortDescriptor(key: #keyPath(Task.toDo), ascending: false)
+        fetchRequest.sortDescriptors = [sortByDone]
+
+        var undoneTasks: Array<Any>?
+        do {
+            undoneTasks = try context.fetch(fetchRequest)
+            if  selectedGoal.goalDone != true && (undoneTasks?.count == 0 || undoneTasks?.count == nil) {
+                goalAchievedAlert()
+            } else {
+                print("Undone task exisits")
+                self.performSegue(withIdentifier: "toGoalList", sender: self)
+                
+                return
+            }
+
+        } catch {
+            print("Unable to fetch for Today Task")
+        }
+
+    }
+
+
+    func goalAchievedAlert(){
+
+        //DispatchQueue.main.async {
+
+        let NSL_alertTitle_011 = NSLocalizedString("NSL_alertTitle_011", value: "Goal Achieved?", comment: " ")
+        let NSL_alertMessage_011 = String(format: NSLocalizedString("NSL_alertMessage_011 ", value: "All tasks registered to \"%@\" have been completed. If you have finished, press 'Celebrate it!' If you still need to continue, press 'Add More Task' and go to Task List view to add more.", comment: " "), self.selectedGoal.goalTitle!)
+        let alert = UIAlertController(title: NSL_alertTitle_011, message: NSL_alertMessage_011, preferredStyle: .alert)
+
+
+        let NSL_alertTitle_012 = NSLocalizedString("NSL_alertTitel_012", value: "Not Done Yet, Add More Task", comment: " ")
+        // Shouldn't this be Cancel with handler: nil???
+        alert.addAction(UIAlertAction(title: NSL_alertTitle_012, style: .default, handler: nil))
+
+        let NSL_alertTitle_013 = NSLocalizedString("NSL_alertTitle_013", value: "It's Done, Let's Celebrate it!", comment: " ")
+        alert.addAction(UIAlertAction(title: NSL_alertTitle_013, style: .default, handler: {(action) in
+
+            // Display Congratulation Message and Reward Image
+            let NSL_alertTitle_014 = NSLocalizedString("NSL_alertTitle_014", value: "Congratulation!", comment: "")
+            let rewardString: String?
+
+            if self.selectedGoal.reward4Goal?.title == nil { rewardString = "Poli" } else { rewardString = self.selectedGoal.reward4Goal?.title }
+            let NSL_alertMessage_014 = String(format: NSLocalizedString("NSL_alertMessage_014", value: "You now deserve %@! now. Celebrate your accomplishment with the reward RIGHT NOW! Would like to schedule to get your reward?", comment: ""), rewardString!)
+
+            let congratAlert = UIAlertController(title: NSL_alertTitle_014, message: NSL_alertMessage_014, preferredStyle: .alert)
+
+            let imageView = UIImageView(frame: CGRect(x:150, y:180, width: 150, height: 150))
+
+            if let goalRewardImageData = self.selectedGoal.goalRewardImage as Data? {
+                imageView.image = UIImage(data: goalRewardImageData)
+            } else {
+                imageView.image = UIImage(named: "PoliRoundIcon")
+            }
+
+            PlayAudio.sharedInstance.playClick(fileName: "triplebarking", fileExt: ".wav")
+            congratAlert.view.addSubview(imageView)
+
+
+            // Change goalDone value
+            self.selectedGoal.goalDone = true
+
+            // Declare ManagedObjectContext to save goalDone value
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+            // Save to core data
+            do {
+                try context.save()
+
+            }catch{
+                print("Saving Error: \(error.localizedDescription)")
+            }
+
+
+            // CongratAlert: Pressing "Yes" creates iCalendar event with reward data
+            congratAlert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+                self.performSegue(withIdentifier: "toGoalList", sender: self)
+            }))
+
+            congratAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action
+                in
+
+                self.eventStore = EKEventStore.init()
+                self.eventStore.requestAccess(to: .event, completion:  {
+                    (granted, error) in
+
+                    //var calendarGrant: Bool?
+                    if granted
+                    {
+                        print("granted \(granted)")
+
+
+                        //To prevent warning
+                        DispatchQueue.main.async
+                            {
+
+                                let eventVC = EKEventEditViewController.init()
+                                eventVC.event = EKEvent.init(eventStore: self.eventStore)
+                                eventVC.eventStore = self.eventStore
+                                eventVC.editViewDelegate = self
+
+                                eventVC.event?.isAllDay = true
+
+                                var eventString: String?
+                                if let rewardName = self.selectedGoal.reward4Goal?.title, let rewardValue = self.selectedGoal.reward4Goal?.value  {
+                                    let rewardValue = LocaleConvert().currency2String(value: rewardValue)
+
+                                    eventString = "Enjoy your reward, \"\(rewardName)\" for \(rewardValue)"
+                                } else {
+                                    eventString = "No reward or value"
+                                }
+
+
+                                eventVC.event?.title = eventString
+
+                                eventVC.event?.notes = "Reward for \(self.selectedGoal.goalTitle ?? "Error: No Goal Title Found")"
+
+                                eventVC.event?.calendar =                                                             self.eventStore.defaultCalendarForNewEvents
+
+                                //                                self.present(eventVC, animated: false, completion: nil)
+                                self.present(eventVC, animated: false, completion: {
+                                    self.performSegue(withIdentifier: "toGoalList", sender: self)
+                                })
+                        }
+                    } else {
+                        print("error \(String(describing: error))")
+
+                    }
+                })
+
+
+
+                //}
+
+            }))
+
+            self.present(congratAlert, animated: true, completion: nil)
+
+            // Display congratAlert view for x seconds
+            //                    let when = DispatchTime.now() + 3
+            //                    DispatchQueue.main.asyncAfter(deadline: when, execute: {
+            //                        congratAlert.dismiss(animated: true, completion: nil)
+            //
+            //                    })
+
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+
+        // }
+
+    }
     
-    //      func addMoreTask(goal: Goal) {
-    //           selectedGoal = goal
-    //           performSegue(withIdentifier: "taskList", sender: self)
-    //       }
+ 
+//    func addMoreTask(goal: Goal) {
+//        selectedGoal = goal
+//        performSegue(withIdentifier: "taskList", sender: self)
+//    }
     
 }

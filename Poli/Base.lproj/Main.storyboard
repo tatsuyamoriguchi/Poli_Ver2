@@ -870,7 +870,7 @@
                     <connections>
                         <outlet property="goalDoneSwitch" destination="tfx-gS-GAA" id="JHQ-jZ-Ddi"/>
                         <outlet property="goalTitleLabel" destination="qvN-V5-Eto" id="BJu-qC-FD6"/>
-                        <segue destination="PZL-Nv-HMk" kind="show" identifier="taskList" id="i6m-CN-wtu"/>
+                        <segue destination="PZL-Nv-HMk" kind="show" identifier="taskList2" id="i6m-CN-wtu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKt-qE-CiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -932,7 +932,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Om-wZ-eb2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2197" y="90"/>
+            <point key="canvasLocation" x="2271" y="70"/>
         </scene>
         <!--Task Goal Table View Controller-->
         <scene sceneID="awK-VX-dAV">
