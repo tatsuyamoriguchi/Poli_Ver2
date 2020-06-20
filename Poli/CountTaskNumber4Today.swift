@@ -15,14 +15,6 @@ class CountTaskNumber4Today {
     var today = Date()
     
     
-    //    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
-    
-    //var tasks = fetchedResultsController?.fetchedObjects as! [Task]
-    //
-    //    for task in tasks {
-    //
-    //    }
-    
     func countTask() -> Int {
         let total: Int
         if let tasks = getArrayOfTasksDueTillToday() {
@@ -37,10 +29,10 @@ class CountTaskNumber4Today {
     }
     
     func getArrayOfTasksDueTillToday() -> Array<Any>?{
-        
-        
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        
         // Create the fetch request, set some sort descriptor, then feed the fetchedResultsController
         // the request with along with the managed object context, which we'll use the view context
 

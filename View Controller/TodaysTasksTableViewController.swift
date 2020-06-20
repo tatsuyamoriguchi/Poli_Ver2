@@ -194,7 +194,9 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
                 })
                 
             }
-        } else { print("Error") }
+        } else { print("Error: fetchedObjects failed") }
+        
+        UIApplication.shared.applicationIconBadgeNumber = CountTaskNumber4Today().countTask()
         
     }
     

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let userNotificationDelegate: LocalNotificationDelegate = LocalNotificationDelegate()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+                
         let center = UNUserNotificationCenter.current()
         center.delegate = userNotificationDelegate
         
