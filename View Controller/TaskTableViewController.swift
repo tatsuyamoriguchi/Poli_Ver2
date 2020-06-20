@@ -78,7 +78,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+    
         // to display search bar
         navBar()
         
@@ -106,7 +109,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         navigationItem.leftBarButtonItem = leftBackButton
         
         configureFetchedResultsController()
-        tableView.reloadData()
+        self.tableView.reloadData()
         
         // To notify a change made to Core Data by Share Extension
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: reload)
@@ -117,12 +120,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        print("***    ***** viewWillAppear called *****    ***")
 
-        configureFetchedResultsController()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            
+            self.configureFetchedResultsController()
+            self.tableView.reloadData()
 
-        // check if all tasks of this goal are done
-//        if selectedGoal.goalDone == false { checkGoalDone() }
+        }
+   
     }
     
     
@@ -130,7 +136,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 //        super.willMove(toParent: parent)
 //        if parent == nil {
 //            print("Hello? This is willMove")
-//            checkGoalDone()
+//            // Work around for Core Data iCloud sync bug that doesn't update UI after syncing till the app isrelaunched
+//            saveCoreData()
+//
 //        }
 //    }
     
@@ -153,9 +161,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         } else {
             showAllTaskToggle = true
         }
-        
+
         configureFetchedResultsController()
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     @objc func addTapped(){
@@ -256,7 +264,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         self.tableView.endUpdates()
         
         print("tableView data update was ended at controllerDidChangeContent().")
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
         // check if all tasks of this goal are done
         //if selectedGoal.goalDone == false { checkGoalDone() }
     }
@@ -344,35 +355,71 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 taskCell.detailTextLabel?.text = dateString
             }
             
-            if task.isDone == true {
+//            if task.isDone == true {
+//                taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
+//                taskCell.detailTextLabel?.textColor = .black
+//            } else if task.date == nil {
+//                if task.isDone == true {
+//                    taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
+//                    taskCell.detailTextLabel?.textColor = .gray
+//                } else {
+//                    taskCell.accessoryType = UITableViewCell.AccessoryType.none
+//                    taskCell.detailTextLabel?.textColor = .gray
+//                }
+//
+//            }  else {
+//                taskCell.accessoryType = UITableViewCell.AccessoryType.none
+//
+//                let today = Date()
+//                let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
+//
+//                switch evaluate {
+//                // If task date is today, display it in purple
+//                case ComparisonResult.orderedSame :
+//                    taskCell.detailTextLabel?.textColor = .purple
+//                // If task date passed today, display it in red
+//                case ComparisonResult.orderedAscending :
+//                    taskCell.detailTextLabel?.textColor = .red
+//                default:
+//                    taskCell.detailTextLabel?.textColor = .black
+//                }
+//            }
+            
+
+            
+            switch task.isDone {
+            case true:
                 taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
-                taskCell.detailTextLabel?.textColor = .black
-            } else if task.date == nil {
-                if task.isDone == true {
-                    taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
+                
+                switch task.date {
+                case nil:
                     taskCell.detailTextLabel?.textColor = .gray
-                } else {
-                    taskCell.accessoryType = UITableViewCell.AccessoryType.none
-                    taskCell.detailTextLabel?.textColor = .gray
-                }
-                
-            }  else {
-                taskCell.accessoryType = UITableViewCell.AccessoryType.none
-                
-                let today = Date()
-                let evaluate = NSCalendar.current.compare(task.date! as Date, to: today, toGranularity: .day)
-                
-                switch evaluate {
-                // If task date is today, display it in purple
-                case ComparisonResult.orderedSame :
-                    taskCell.detailTextLabel?.textColor = .purple
-                // If task date passed today, display it in red
-                case ComparisonResult.orderedAscending :
-                    taskCell.detailTextLabel?.textColor = .red
                 default:
                     taskCell.detailTextLabel?.textColor = .black
                 }
+            case false:
+                taskCell.accessoryType = UITableViewCell.AccessoryType.none
+                
+                let today = Date()
+                if let taskDate = task.date { let evaluate = NSCalendar.current.compare(taskDate as Date, to: today, toGranularity: .day)
+                    switch evaluate {
+                    // If task date is today, display it in purple
+                    case ComparisonResult.orderedSame :
+                        taskCell.detailTextLabel?.textColor = .purple
+                    // If task date passed today, display it in red
+                    case ComparisonResult.orderedAscending :
+                        taskCell.detailTextLabel?.textColor = .red
+                    case ComparisonResult.orderedDescending :
+                        taskCell.detailTextLabel?.textColor = .black
+                    default:
+                        taskCell.detailTextLabel?.textColor = .gray
+                    }
+
+                } else { taskCell.detailTextLabel?.textColor = .gray }
+                
             }
+            
+            
             
             var toDoString: String?
             
@@ -460,14 +507,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
         print("****goToRepeat called *****")
         
-        do {
-            try context.save()
-            print("*****goToRepeat-context.save() called ******")
-            self.taskRewardEventKit(task: previousTask)
-
-        }catch{
-            print("Saving Error: \(error.localizedDescription)")
-        }
+//        do {
+//            try context.save()
+//            print("*****goToRepeat-context.save() called ******")
+//            self.taskRewardEventKit(task: previousTask)
+//
+//        }catch{
+//            print("Saving Error: \(error.localizedDescription)")
+//        }
+        saveCoreData()
     }
     
     
@@ -574,6 +622,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 if taskCell.accessoryType == .checkmark {
                     taskCell.accessoryType = .none
                     task.isDone = false
+                    
                     PlayAudio.sharedInstance.playClick(fileName: "whining", fileExt: ".wav")
                 }else {
                     
@@ -586,6 +635,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 
                 }
                 // End of if taskCell.accessoryType == .checkmark { } else { clause
+                saveCoreData()
 
             }
             //if let taskCell = tableView.cellForRow(at: indexPath) {
@@ -594,6 +644,19 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         }
         // End of } else if task.goalAssigned?.goalDone == false { cluase
         
+    }
+    
+    func saveCoreData() {
+        // Declare ManagedObjectContext to save goalDone value
+          let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+          // Save to core data
+          do {
+              try context.save()
+
+          }catch{
+              print("Saving Error: \(error.localizedDescription)")
+          }
     }
     
     func checkRepeat(task: Task) {
@@ -895,16 +958,17 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             // Change goalDone value
             self.selectedGoal.goalDone = true
 
-            // Declare ManagedObjectContext to save goalDone value
-            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-            // Save to core data
-            do {
-                try context.save()
-
-            }catch{
-                print("Saving Error: \(error.localizedDescription)")
-            }
+            self.saveCoreData()
+//            // Declare ManagedObjectContext to save goalDone value
+//            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//
+//            // Save to core data
+//            do {
+//                try context.save()
+//
+//            }catch{
+//                print("Saving Error: \(error.localizedDescription)")
+//            }
 
 
             // CongratAlert: Pressing "Yes" creates iCalendar event with reward data

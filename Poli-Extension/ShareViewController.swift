@@ -14,6 +14,7 @@ import MobileCoreServices
 
 class ShareViewController: SLComposeServiceViewController {
     
+    
     var selectedGoal: Goal?
     var goals = [Goal]()
     
@@ -124,9 +125,25 @@ class ShareViewController: SLComposeServiceViewController {
         self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
     }
     
+//    override var preferredContentSize: CGSize {
+//         get {
+//             if let fullSize = self.presentingViewController?.view.bounds.size {
+//                 return CGSize(width: fullSize.width * 0.5,
+//                               height: fullSize.height * 0.75)
+//             }
+//             return super.preferredContentSize
+//         }
+//         set {
+//             super.preferredContentSize = newValue
+//         }
+//     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.preferredContentSize = CGSize(width: 100, height: 500)
+        
+        
         placeholder = NSLocalizedString("Type something here to activate 'Post' button.", comment: "Placeholder")
         
         fetchGoals()

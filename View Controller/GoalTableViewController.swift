@@ -417,7 +417,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             let rewardPart2 = " 💰" + rewardValue + "\n"
             
             if let goalDescriptionText = goal.goalDescription {
-                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 +  NSLocalizedString("Notes: \n", comment: "Title for goal description") + goalDescriptionText
+                goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2 +  NSLocalizedString("📋 ", comment: "Title for goal description") + goalDescriptionText
             } else {
                 goalCell.goalDescriptionTextView.text = rewardPart1 + rewardPart2
             }
