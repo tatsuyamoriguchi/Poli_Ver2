@@ -115,11 +115,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
        // if selectedGoal.goalDone == false { checkGoalDone() }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//        // check if all tasks of this goal are done
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        configureFetchedResultsController()
+        tableView.reloadData()
+
+        // check if all tasks of this goal are done
 //        if selectedGoal.goalDone == false { checkGoalDone() }
-//    }
+    }
     
     
 //    override func willMove(toParent parent: UIViewController?) {
