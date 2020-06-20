@@ -184,7 +184,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     }
     
     
-    
     // Core Data: NSFetchedResultsConroller
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
@@ -221,7 +220,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -240,8 +238,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         case .update:
             if(indexPath != nil) {
                 self.tableView.cellForRow(at: indexPath! as IndexPath)
-                
-                
             }
         case .move:
             self.tableView.deleteRows(at: [indexPath! as IndexPath], with: .fade)
@@ -267,14 +263,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         let NSL_alertTitle_021 = NSLocalizedString("NSL_alertTitle_021", value: "Goal Already Done", comment: "")
         let NSL_alertMessage_021 = NSLocalizedString("NSL_alertMessage_021", value: "Unable to change task data. To enable task data editing, go back to Goal List view and use Update to change the goal's done status to Undone.", comment: "")
         let goalAlreadyDoneAlert = UIAlertController(title: NSL_alertTitle_021, message: NSL_alertMessage_021, preferredStyle: .alert)
+        
         goalAlreadyDoneAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            self.performSegue(withIdentifier: "toGoalList", sender: self)
+            self.performSegue(withIdentifier: "toUndoneGoal", sender: self)
         }))
+        
         goalAlreadyDoneAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         present(goalAlreadyDoneAlert, animated: true, completion: nil)
         //present(alert, animated: true, completion: nil)
     }
-    
     
     
     // MARK: - Table view data source
@@ -293,8 +290,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
         let sectionInfo = sections[section]
         return sectionInfo.numberOfObjects
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -344,7 +339,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             } else {
                 taskCell.detailTextLabel?.text = dateString
             }
-            
             
             if task.isDone == true {
                 taskCell.accessoryType = UITableViewCell.AccessoryType.checkmark
@@ -396,7 +390,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             }
         } else {
             fatalError("Attempt configure cell without a managed object")
-            
         }
         
         return taskCell
@@ -421,10 +414,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             
         default:
             print("repeatType error: nil or something else")
-            
         }
-        
-        
         
     }
     
@@ -441,17 +431,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         }))
         
         alert.addAction(UIAlertAction(title: NSL_oK, style: .default, handler: {(handler) in
+            
             self.goToRepeat(previousTask: clickedTask)
-            print("*****alert.addAction was run******")
+            
         }))
         present(alert, animated: true, completion: nil)
 
-//        present(alert, animated: true, completion: {
-//            if self.selectedGoal.goalDone == false {
-//                alert.dismiss(animated: true, completion: { self.checkGoalDone() })
-//            }
-//        })
-        
     }
     
     
@@ -462,7 +447,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         
         newTask.toDo = previousTask.toDo
         newTask.isImportant = previousTask.isImportant
-        
         newTask.date = nextRepeatDate(previousTaskDate: previousTask.date! as Date, repeatType: previousTask.repeatTask as! Int) as NSDate
         newTask.isDone = false
         newTask.goalAssigned = selectedGoal
@@ -475,20 +459,17 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         do {
             try context.save()
             print("*****goToRepeat-context.save() called ******")
+            self.taskRewardEventKit(task: previousTask)
+
         }catch{
             print("Saving Error: \(error.localizedDescription)")
         }
     }
     
-    //    func dayNumberOfWeek() -> Int? {
-    //        return Calendar.current.dateComponents([.weekday], from: self).weekday
-    //    }
     
     func nextRepeatDate(previousTaskDate: Date, repeatType: Int) -> Date {
         let currentDate = previousTaskDate
-        
         var dateComponent = DateComponents()
-        
         let addDays: Int
         
         switch repeatType {
@@ -507,7 +488,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 addDays = 2
             default:
                 addDays = 1
-                
             }
             dateComponent.day = addDays
             
@@ -564,29 +544,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
                                 
                                 self.present(eventVC, animated: false, completion: nil)
-//                                self.present(eventVC, animated: false, completion: {
-//                                    eventVC.dismiss(animated: false, completion: nil)
-//                                    self.checkGoalDone()
-//                                    })
-
-                                
-//                                let queue = DispatchQueue(label: "taskEvenKit")
-//                                queue.sync{
-//                                    self.present(eventVC, animated: false, completion: nil)
-//                                }
-//                                eventVC.dismiss(animated: false, completion: { self.checkGoalDone()})
-
-
                         }
-                        // End of Dispatch
-                                //        present(alert, animated: true, completion: {
-                        //
-                        //            if self.selectedGoal.goalDone == false {
-                        //                self.dismiss(animated: true, completion: { self.checkGoalDone() })
-                        //            }
-                        //        })
-                        
-                        
+
                     } else {
                         print("error \(String(describing: error))")
                     }
@@ -594,18 +553,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 })
                 // End of  self.eventStore.requestAccess({
         }
-
     }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
         guard let task = self.fetchedResultsController?.object(at: indexPath) as? Task else { return }
         
         if task.goalAssigned?.goalDone == true {
             goalDoneAlert()
-            
             
         } else if task.goalAssigned?.goalDone == false {
             // checkmark on select
@@ -624,58 +580,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     checkRepeat(task: task)
                     print("checkRepeat called at if taskCell.accessoryType == .checkmark { } else { clause")
 
-//                    let taskEventKitQueue = DispatchQueue(label: "taskEventKitQueue")
-//                    taskEventKitQueue.sync {
-                        
-//                        // EventKit for reward
-//                        if task.reward4Task != nil {
-//
-//                            self.eventStore = EKEventStore.init()
-//                            self.eventStore.requestAccess(to: .event, completion:  {
-//                                (granted, error) in
-//                                if granted
-//                                {
-//                                    print("granted \(granted)")
-//                                    //To prevent warning
-//                                    DispatchQueue.main.sync
-//                                        {
-//                                            let eventVC = EKEventEditViewController.init()
-//                                            eventVC.event = EKEvent.init(eventStore: self.eventStore)
-//                                            eventVC.eventStore = self.eventStore
-//                                            eventVC.editViewDelegate = self
-//                                            eventVC.event?.isAllDay = true
-//                                            var eventString: String?
-//                                            if let rewardName = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
-//                                                let rewardValue = LocaleConvert().currency2String(value: Int32(rewardValue))
-//                                                eventString = "Enjoy your reward, \(rewardName) for \(rewardValue)"
-//                                            } else {
-//                                                eventString = "Unable to obtain reward name and value."
-//                                            }
-//                                            eventVC.event?.title = eventString
-//                                            eventVC.event?.notes = "Reward for Task: \(task.toDo ?? "Error: Unable to obtain a task title.")"
-//                                            eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
-//                                            self.present(eventVC, animated: false, completion: nil)
-//
-//                                    }
-//                                    // End of Dispatch
-//
-//                                } else {
-//                                    print("error \(String(describing: error))")
-//                                }
-//
-//                                // End of if granted
-//                            })
-//                            // End of  self.eventStore.requestAccess({
-//                    }
-                    // End of EventKit for reward
-                        
-//                    }
-                    // End of DispatchQueue
-//                    let repeatSync = DispatchQueue(label: "repeatSync")
-//                     repeatSync.sync {
-//                         self.checkRepeat(task: task)
-//                     }
-
                 }
                 // End of if taskCell.accessoryType == .checkmark { } else { clause
 
@@ -683,7 +587,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             //if let taskCell = tableView.cellForRow(at: indexPath) {
             
             UIApplication.shared.applicationIconBadgeNumber = CountTaskNumber4Today().countTask()
-            
         }
         // End of } else if task.goalAssigned?.goalDone == false { cluase
         
@@ -693,9 +596,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         if task.repeatTask != nil || task.repeatTask != 0 {
             print("repeatAlert will be called")
             self.repeatAlert(previousTask: task, repeatType: task.repeatTask!)
- 
         }
-        
     }
     
     
@@ -705,7 +606,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         if let task = self.fetchedResultsController?.object(at: indexPath) as? Task {
-            
             
             let updateAction = UIContextualAction(style: .normal, title: "✏️") { (action, view, handler) in
                 
@@ -719,7 +619,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 }
             }
             updateAction.backgroundColor = UIColor.green
-            
             
             let deleteAction = UIContextualAction(style: .normal, title: "🗑") { (action, view, handler) in
                 if task.goalAssigned?.goalDone == true {
@@ -746,16 +645,13 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             }
             
             goalAction.backgroundColor = UIColor.yellow
-            
             let config = UISwipeActionsConfiguration(actions: [deleteAction, updateAction, goalAction])
-            
             return config
             
         } else {
             fatalError("Attempt configure cell without a managed object")
         }
     }
-    
     
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -813,8 +709,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                     
                                     self.present(eventVC, animated: false, completion: nil)
                             }
-                            
-                            
 
                         } else {
                             print("error \(String(describing: error))")
@@ -823,18 +717,13 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     })
                 }
                 
-                
                 completionHandler(true)
                 
-                
                 if calendarGrant == false {
-                    
                     AlertNotification().alert(title: NSLocalizedString("Calendar Access Denied", comment: "Alert title"), message: NSLocalizedString("Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on.", comment: "Alert message"), sender: self, tag: "calendar")
-                    
                 }
                 
             }
-            
             
             let linkAction = UIContextualAction(style: .normal, title: "🔗") { (action, view, completionHandler) in
                 
@@ -853,14 +742,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 return actionButtons
             }
             
-            
         } else {
             fatalError("Attempt configure cell without a managed oject")
         }
-        
     }
-    
-    
     
     
     private func linkAction(task: Task, indexPath: IndexPath) {
@@ -913,7 +798,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 destVC.selectedGoal = selectedGoal
                 destVC.segueName = "addTask"
                 print("selectedGoal.goalTitle: \(String(describing: selectedGoal?.goalTitle))")
-                
             }
             
         } else if segue.identifier == "updateTask" {
@@ -932,6 +816,11 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             //let destVC = segue.destination as! GoalTableViewController
             //destVC.userName = userName
 
+        } else if segue.identifier == "toUndoneGoal" {
+            let destVC = segue.destination as! GoalDoneViewController
+            destVC.goal = selectedGoal
+            destVC.goal.goalDone = selectedGoal.goalDone
+            
         }
         
     }
@@ -962,18 +851,14 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         } catch {
             print("Unable to fetch for Today Task")
         }
-
     }
 
 
     func goalAchievedAlert(){
 
-        //DispatchQueue.main.async {
-
         let NSL_alertTitle_011 = NSLocalizedString("NSL_alertTitle_011", value: "Goal Achieved?", comment: " ")
         let NSL_alertMessage_011 = String(format: NSLocalizedString("NSL_alertMessage_011 ", value: "All tasks registered to \"%@\" have been completed. If you have finished, press 'Celebrate it!' If you still need to continue, press 'Add More Task' and go to Task List view to add more.", comment: " "), self.selectedGoal.goalTitle!)
         let alert = UIAlertController(title: NSL_alertTitle_011, message: NSL_alertMessage_011, preferredStyle: .alert)
-
 
         let NSL_alertTitle_012 = NSLocalizedString("NSL_alertTitel_012", value: "Not Done Yet, Add More Task", comment: " ")
         // Shouldn't this be Cancel with handler: nil???
@@ -1035,7 +920,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     {
                         print("granted \(granted)")
 
-
                         //To prevent warning
                         DispatchQueue.main.async
                             {
@@ -1044,7 +928,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 eventVC.event = EKEvent.init(eventStore: self.eventStore)
                                 eventVC.eventStore = self.eventStore
                                 eventVC.editViewDelegate = self
-
                                 eventVC.event?.isAllDay = true
 
                                 var eventString: String?
@@ -1056,14 +939,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                     eventString = "No reward or value"
                                 }
 
-
                                 eventVC.event?.title = eventString
-
                                 eventVC.event?.notes = "Reward for \(self.selectedGoal.goalTitle ?? "Error: No Goal Title Found")"
-
                                 eventVC.event?.calendar =                                                             self.eventStore.defaultCalendarForNewEvents
 
-                                //                                self.present(eventVC, animated: false, completion: nil)
                                 self.present(eventVC, animated: false, completion: {
                                     self.performSegue(withIdentifier: "toGoalList", sender: self)
                                 })
@@ -1074,33 +953,12 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                     }
                 })
 
-
-
-                //}
-
             }))
 
             self.present(congratAlert, animated: true, completion: nil)
-
-            // Display congratAlert view for x seconds
-            //                    let when = DispatchTime.now() + 3
-            //                    DispatchQueue.main.asyncAfter(deadline: when, execute: {
-            //                        congratAlert.dismiss(animated: true, completion: nil)
-            //
-            //                    })
-
         }))
 
         self.present(alert, animated: true, completion: nil)
-
-        // }
-
     }
-    
- 
-//    func addMoreTask(goal: Goal) {
-//        selectedGoal = goal
-//        performSegue(withIdentifier: "taskList", sender: self)
-//    }
-    
+
 }

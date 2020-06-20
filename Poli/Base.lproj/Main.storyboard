@@ -444,13 +444,13 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="2" id="6nD-5W-mh4"/>
                                             </constraints>
-                                            <color key="progressTintColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="progressTintColor" red="1" green="0.45098039215686275" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </progressView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Goal Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2oG-TI-W87">
                                             <rect key="frame" x="0.0" y="8" width="414" height="30"/>
-                                            <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.0" green="0.67978654544001216" blue="0.69275612604974623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahA-YV-Xcy">
@@ -492,7 +492,6 @@
                                         <constraint firstItem="2oG-TI-W87" firstAttribute="leading" secondItem="EYg-Ny-YZb" secondAttribute="leading" id="xPW-Vx-u5k"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.6705882352941176" green="0.9882352941176471" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="goalDescriptionTextView" destination="pK1-nL-rSe" id="tdZ-by-OWm"/>
                                     <outlet property="goalDueDateLabel" destination="Xre-lg-kuf" id="eZg-NC-Tbk"/>
@@ -671,7 +670,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="508.69565217391306" y="895.3125"/>
+            <point key="canvasLocation" x="507" y="1634"/>
         </scene>
         <!--Goal Reward-->
         <scene sceneID="qhD-d7-j0G">
@@ -875,7 +874,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKt-qE-CiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-352.5" y="897.88732394366195"/>
+            <point key="canvasLocation" x="-490" y="906"/>
         </scene>
         <!--Task Table View Controller-->
         <scene sceneID="o5M-7E-fYh">
@@ -928,11 +927,12 @@
                         <segue destination="kmR-6c-LEk" kind="show" identifier="updateTask" id="XHg-Fr-gtW"/>
                         <segue destination="6WB-0P-iTW" kind="show" identifier="updateTaskGoalSegue" id="wDx-MT-Dsk"/>
                         <segue destination="d4h-Jc-DXe" kind="show" identifier="toGoalList" id="x9Z-MU-eMi"/>
+                        <segue destination="kRf-Gi-h3g" kind="show" identifier="toUndoneGoal" id="AiY-EY-Xft"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Om-wZ-eb2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2271" y="70"/>
+            <point key="canvasLocation" x="1858" y="102"/>
         </scene>
         <!--Task Goal Table View Controller-->
         <scene sceneID="awK-VX-dAV">
@@ -970,7 +970,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P56-GH-YPr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3000" y="906"/>
+            <point key="canvasLocation" x="2965" y="985"/>
         </scene>
         <!--Task-->
         <scene sceneID="eIE-pb-uk0">
@@ -1240,7 +1240,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.6705882352941176" green="0.9882352941176471" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.90196078431372551" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="81V-2E-PAo" firstAttribute="trailing" secondItem="34F-2u-SmS" secondAttribute="trailing" id="2qc-WK-See"/>
                             <constraint firstItem="8am-Ip-PY2" firstAttribute="top" secondItem="WPP-KT-HvA" secondAttribute="bottom" constant="8" id="44L-kz-aJX"/>
@@ -1290,9 +1290,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="5Ve-Cu-FCA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.6705882352941176" green="0.9882352941176471" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.90196078431372551" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.6705882352941176" green="0.9882352941176471" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.40000000000000002" green="0.90196078430000004" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -1577,13 +1577,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yaO-12-89S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764.375" y="895.77464788732391"/>
+            <point key="canvasLocation" x="1764" y="1634"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="743-aW-3gV"/>
         <segue reference="XHg-Fr-gtW"/>
         <segue reference="Uba-WO-OBv"/>
+        <segue reference="RZ0-xt-YyH"/>
         <segue reference="wjN-o3-DDz"/>
         <segue reference="x9Z-MU-eMi"/>
     </inferredMetricsTieBreakers>
