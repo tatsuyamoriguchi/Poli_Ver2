@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Goal" representedClassName=".Goal" syncable="YES">
+        <attribute name="dataMigrate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="goalDescription" optional="YES" attributeType="String"/>
         <attribute name="goalDone" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="goalDueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -12,6 +13,7 @@
         <relationship name="vision4Goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vision" inverseName="vision4Goal" inverseEntity="Vision"/>
     </entity>
     <entity name="Reward" representedClassName="Reward" syncable="YES">
+        <attribute name="migrate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="reward4Goal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="reward4Goal" inverseEntity="Goal"/>
@@ -21,6 +23,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isImportant" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="migrate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="repeatTask" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="toDo" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
@@ -28,15 +31,16 @@
         <relationship name="reward4Task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="reward4Task" inverseEntity="Reward"/>
     </entity>
     <entity name="Vision" representedClassName=".Vision" syncable="YES">
+        <attribute name="migrate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="vision4Goal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Goal" inverseName="vision4Goal" inverseEntity="Goal"/>
     </entity>
     <elements>
-        <element name="Goal" positionX="-63" positionY="-18" width="128" height="178"/>
-        <element name="Reward" positionX="90" positionY="63" width="128" height="103"/>
-        <element name="Task" positionX="241" positionY="51" width="128" height="163"/>
-        <element name="Vision" positionX="90" positionY="63" width="128" height="103"/>
+        <element name="Goal" positionX="-63" positionY="-18" width="128" height="193"/>
+        <element name="Reward" positionX="90" positionY="63" width="128" height="118"/>
+        <element name="Task" positionX="241" positionY="51" width="128" height="178"/>
+        <element name="Vision" positionX="90" positionY="63" width="128" height="118"/>
     </elements>
 </model>

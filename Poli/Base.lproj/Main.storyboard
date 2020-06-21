@@ -7,6 +7,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Data Migrate Table View Controller-->
+        <scene sceneID="kLF-vt-0Sa">
+            <objects>
+                <tableViewController id="Oef-V9-nqc" customClass="DataMigrateTableViewController" customModule="Poli" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5FQ-gL-RSV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kki-RI-gPA">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kki-RI-gPA" id="Pue-9v-qui">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Oef-V9-nqc" id="pjw-7d-ydZ"/>
+                            <outlet property="delegate" destination="Oef-V9-nqc" id="WUT-dy-bzh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="css-T5-eoV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UnQ-aq-auW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="-4734"/>
+        </scene>
         <!--Migrate Table View Controller-->
         <scene sceneID="cNq-t8-Kgm">
             <objects>
@@ -36,7 +65,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPN-kf-xSF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="-2467"/>
+            <point key="canvasLocation" x="2033" y="-4066"/>
         </scene>
         <!--Settings-->
         <scene sceneID="rVo-r9-WjO">
@@ -108,7 +137,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="isE-BP-08c">
                                 <rect key="frame" x="334" y="226" width="80" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.67978654540000005" blue="0.69275612600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="wfD-cb-D68"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="65" id="ygx-bt-Yk8"/>
@@ -122,7 +151,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WOi-ii-poE">
                                 <rect key="frame" x="0.0" y="651" width="80" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.67978654540000005" blue="0.69275612600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="CLX-rR-aq5"/>
                                     <constraint firstAttribute="height" constant="65" id="viY-ge-atf"/>
@@ -136,7 +165,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0WM-Lc-Sbo">
                                 <rect key="frame" x="334" y="8" width="80" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.67978654540000005" blue="0.69275612600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="E0J-vj-fUY"/>
                                     <constraint firstAttribute="height" constant="65" id="zrz-b9-WXi"/>
@@ -151,14 +180,23 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyz-iR-ulv">
                                 <rect key="frame" x="0.0" y="313" width="414" height="330"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">[Warning Please Read!] If updating Poli ToDo from ver 2, use the buttons below to migrate existing local data (goals and tasks, vision, and reward), if you want to sync your data among different iOS devices using your iCloud account. You need to migrate data only once and also can leave some goal data on your device for now and migrate them later if you want. You can specify which goal, vision, or reward data to migrate to iCloud sync mode. Newly added data will be however automatically synced to iCloud from now on,  even you decided to leave a specific old goal and associated task data on your device and not synced to iCloud, a newly added task data to that goal, for instance,  will be synced to your iCloud along with that specific assigned goal data. Some data duplicate may occur depending on the timing to migrate your data. You will need to login to your iCloud account from each device, and install this version of Poli ToDo to sync data on iCloud. The data on your iCloud is accessible only with your iCloud account unless the government's access is granted in some country (Chinese government has access to iCloud data stored on servers in China) Once migrated, data cannot be reverted to local store mode. Make sure you have enough storage space on your iCloud before migrating huge amount of local data to iCloud. </string>
+                                <mutableString key="text">[Warning Please Read!] 
+- Poli ToDo version 3 synchronizes your data on your iPhone/iPad/Mac via your iCloud account. Your Apple ID is required to access to your iCloud space.
+
+- Version 2 existing data can be migrated to iCloud sync using buttons below. Extra text “iCloud Sync” will be added to data title. Alter it as you like at Update/Edit view.
+
+- You just need to migrate data only once. 
+
+- Even you decided to not migrate a ver 2 existing goal, all NEW or UPDATED task data will be synced along with its associated information such as goal title and reward.
+
+- Unless somebody takes a peak on your iPhone or your government is granted to access to your iCloud data by Apple, Inc, your Poli ToDo data is secured and private. Apple’s technologies and app review process won’t allow anyone to do it. Stay safe and improve yourself with Poli ToDo!</mutableString>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MHh-Bq-R2h">
                                 <rect key="frame" x="334" y="651" width="80" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.67978654540000005" blue="0.69275612600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="W8d-3v-14n"/>
                                     <constraint firstAttribute="width" constant="80" id="ZI1-HG-jG8"/>
@@ -179,7 +217,7 @@
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WRT-sl-gbc">
                                 <rect key="frame" x="334" y="112" width="80" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.67978654540000005" blue="0.69275612600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="8nd-rW-98q"/>
                                     <constraint firstAttribute="width" constant="80" id="uAU-nX-ooH"/>
@@ -200,7 +238,7 @@
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0yZ-mc-5im">
                                 <rect key="frame" x="167" y="651" width="80" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.67978654540000005" blue="0.69275612600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="5Nf-Bd-Zj8"/>
                                     <constraint firstAttribute="height" constant="65" id="Y1T-Z7-h2K"/>
@@ -269,11 +307,12 @@
                         <outlet property="userNameTextField" destination="iM6-Rq-Nvv" id="bMD-kY-C9w"/>
                         <segue destination="71g-LD-oV9" kind="presentation" identifier="backtoLoginSegue" id="7KY-6u-1Vw"/>
                         <segue destination="d4h-Jc-DXe" kind="show" identifier="ToGoalListSegue" id="rgA-VP-5DN"/>
+                        <segue destination="Oef-V9-nqc" kind="show" id="eUf-gC-jsZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDr-Ra-KWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="508" y="-1520.6896551724139"/>
+            <point key="canvasLocation" x="-1036" y="-3059"/>
         </scene>
         <!--Vision-->
         <scene sceneID="Oyd-yK-xth">
@@ -1357,7 +1396,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puj-uW-civ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2151" y="-2467"/>
+            <point key="canvasLocation" x="2032" y="-3389"/>
         </scene>
         <!--Migrate Reward Table View Controller-->
         <scene sceneID="5iW-ik-O3l">
@@ -1392,7 +1431,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ukE-vK-toG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2966" y="-2465"/>
+            <point key="canvasLocation" x="2032" y="-2655"/>
         </scene>
         <!--Reward List-->
         <scene sceneID="fvA-MP-1Xg">
@@ -1596,12 +1635,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="743-aW-3gV"/>
+        <segue reference="7KY-6u-1Vw"/>
         <segue reference="XHg-Fr-gtW"/>
         <segue reference="Uba-WO-OBv"/>
         <segue reference="AiY-EY-Xft"/>
         <segue reference="wjN-o3-DDz"/>
-        <segue reference="x9Z-MU-eMi"/>
+        <segue reference="rgA-VP-5DN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="PoliRoundIcon" width="133.33332824707031" height="133.33332824707031"/>

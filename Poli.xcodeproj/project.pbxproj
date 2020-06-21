@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8C004A6E20FEB14D00960B3A /* GoalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C004A6D20FEB14D00960B3A /* GoalTableViewController.swift */; };
 		8C004A7020FEB3A600960B3A /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C004A6F20FEB3A600960B3A /* TaskTableViewController.swift */; };
 		8C004A7220FEB3C100960B3A /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C004A7120FEB3C100960B3A /* TaskViewController.swift */; };
+		8C131319249F0D9900900C41 /* DataMigrateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C131318249F0D9900900C41 /* DataMigrateTableViewController.swift */; };
 		8C14447F232EFFDE00FCE647 /* ShareSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AD418232EE0CB0041A451 /* ShareSelectViewController.swift */; };
 		8C144485232F118D00FCE647 /* Goal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65A71D231EAE2100034E09 /* Goal+CoreDataProperties.swift */; };
 		8C144486232F119000FCE647 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65A71C231EAE2100034E09 /* Goal+CoreDataClass.swift */; };
@@ -46,7 +47,7 @@
 		8C65A72D231ECB3100034E09 /* Reward+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65A729231ECB3100034E09 /* Reward+CoreDataProperties.swift */; };
 		8C65FCF0232DE6C1009BD6B0 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65FCEF232DE6C1009BD6B0 /* ShareViewController.swift */; };
 		8C65FCF3232DE6C1009BD6B0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C65FCF1232DE6C1009BD6B0 /* MainInterface.storyboard */; };
-		8C65FCF7232DE6C1009BD6B0 /* Poli-Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C65FCED232DE6C0009BD6B0 /* Poli-Extension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8C65FCF7232DE6C1009BD6B0 /* Poli-Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C65FCED232DE6C0009BD6B0 /* Poli-Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C65FCFD232E0096009BD6B0 /* NSCustomPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65FCFC232E0096009BD6B0 /* NSCustomPersistentContainer.swift */; };
 		8C65FCFE232E0188009BD6B0 /* NSCustomPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65FCFC232E0096009BD6B0 /* NSCustomPersistentContainer.swift */; };
 		8C65FCFF232E019C009BD6B0 /* Poli.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B80B620FD749C0055D505 /* Poli.xcdatamodeld */; };
@@ -104,6 +105,7 @@
 		8C004A6D20FEB14D00960B3A /* GoalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTableViewController.swift; sourceTree = "<group>"; };
 		8C004A6F20FEB3A600960B3A /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		8C004A7120FEB3C100960B3A /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		8C131318249F0D9900900C41 /* DataMigrateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMigrateTableViewController.swift; sourceTree = "<group>"; };
 		8C219F9922FE613F00E87A2B /* LocationAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuth.swift; sourceTree = "<group>"; };
 		8C27360C21169F1600A482B3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8C27360E2116CB2200A482B3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				8C27360E2116CB2200A482B3 /* SettingsViewController.swift */,
 				8CE809B8212A31A20076756C /* LocalNotificationDelegate.swift */,
 				8C714D23248DC41400FB69BB /* MigrateTableViewController.swift */,
+				8C131318249F0D9900900C41 /* DataMigrateTableViewController.swift */,
 				8C491FDF248F7D4D007DED98 /* MigrateVisionTableViewController.swift */,
 				8C491FDD248F7CC9007DED98 /* MigrateRewardTableViewController.swift */,
 				8C004A6D20FEB14D00960B3A /* GoalTableViewController.swift */,
@@ -447,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C6B80B820FD749C0055D505 /* Poli.xcdatamodeld in Sources */,
+				8C131319249F0D9900900C41 /* DataMigrateTableViewController.swift in Sources */,
 				8C632CF7231E32D400887206 /* Vision4GoalViewController.swift in Sources */,
 				8C65A725231EAE2100034E09 /* Goal+CoreDataProperties.swift in Sources */,
 				8C5EFBB92341647300CD8D4B /* ShareSelectViewController.swift in Sources */,
@@ -495,7 +499,6 @@
 /* Begin PBXTargetDependency section */
 		8C65FCF6232DE6C1009BD6B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 8C65FCEC232DE6C0009BD6B0 /* Poli-Extension */;
 			targetProxy = 8C65FCF5232DE6C1009BD6B0 /* PBXContainerItemProxy */;
 		};
@@ -578,7 +581,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.beckos.Poli.Poli-Extension";
@@ -605,7 +608,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 3.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.beckos.Poli.Poli-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -78,10 +78,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(true)
-    
+        
         // to display search bar
         navBar()
         
@@ -162,6 +161,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
             showAllTaskToggle = true
         }
 
+        
         configureFetchedResultsController()
         self.tableView.reloadData()
     }
