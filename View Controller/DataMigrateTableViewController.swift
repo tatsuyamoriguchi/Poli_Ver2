@@ -10,47 +10,59 @@ import UIKit
 import CoreData
 
 class DataMigrateTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-
+    
     // Properties
     var selectedEntityName: String = "Goal"
     
     
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            configureFetchedResultsController(entityName: selectedEntityName)
-            self.navigationItem.title = "Click any to sync data"
-            
-            // Sapce between bar buttons
-            let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
-            space.width = 30
-
-            // Create the info button
-            let infoButton = UIButton(type: .infoLight)
-            // You will need to configure the target action for the button itself, not the bar button itemr
-            infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
-            // Create a bar button item using the info button as its custom view
-            let info = UIBarButtonItem(customView: infoButton)
-            
-            
-            let goalButton = UIBarButtonItem(title: "Goal", style: .plain, target: self, action: #selector(selectGoal))
-            let rewardButton = UIBarButtonItem(title: "Reward", style: .plain, target: self, action:  #selector(selectReward))
-            let visionButton = UIBarButtonItem(title: "Vision", style: .plain, target: self, action: #selector(selectVision))
-            
-            self.navigationItem.rightBarButtonItems = [info, space, goalButton, space, rewardButton, space, visionButton, space]
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureFetchedResultsController(entityName: selectedEntityName)
+        self.navigationItem.title = "Click any to sync data"
+        
+        // Sapce between bar buttons
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+        space.width = 30
+        
+        // Create the info button
+        let infoButton = UIButton(type: .infoLight)
+        // You will need to configure the target action for the button itself, not the bar button itemr
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        // Create a bar button item using the info button as its custom view
+        let info = UIBarButtonItem(customView: infoButton)
+        
+        
+        let goalButton = UIBarButtonItem(title: "Goal", style: .plain, target: self, action: #selector(selectGoal))
+        let rewardButton = UIBarButtonItem(title: "Reward", style: .plain, target: self, action:  #selector(selectReward))
+        let visionButton = UIBarButtonItem(title: "Vision", style: .plain, target: self, action: #selector(selectVision))
+        
+        self.navigationItem.rightBarButtonItems = [info, space, goalButton, space, rewardButton, space, visionButton, space]
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         configureFetchedResultsController(entityName: selectedEntityName)
         
     }
-
-    @objc func selectGoal() {        selectedEntityName = "Goal"    }
-    @objc func selectReward() {        selectedEntityName = "Reward"    }
-    @objc func selectVision() {        selectedEntityName = "Vision"    }
-
-
-
+    
+    @objc func selectGoal() {
+        selectedEntityName = "Goal"
+        configureFetchedResultsController(entityName: selectedEntityName)
+        tableView.reloadData()
+    }
+    @objc func selectReward() {
+        selectedEntityName = "Reward"
+        configureFetchedResultsController(entityName: selectedEntityName)
+        tableView.reloadData()
+    }
+    @objc func selectVision() {
+        selectedEntityName = "Vision"
+        configureFetchedResultsController(entityName: selectedEntityName)
+        tableView.reloadData()
+    }
+    
+    
+    
     @objc func getInfoAction() {
         let NSL_migrateAlert = NSLocalizedString("NSL_migrateAlert", value: "iCloud Sync Alert", comment: "")
         let NSL_migrateMessage = NSLocalizedString("NSL_migrateMessage", value: "Existing data from previous version is not automatically synced via your iCloud to another iOS/MacOS devices at the installation of this verison. Click a goal/reward/vsion to migrate pre-existing data so that they can be synced to another device via your iCloud account. iCloud data is accessible by your iCloud account only unless the government in some country is granted to access them by Apple, Inc. Newly added task to that existing goal will be howevere automatically synced to another iOS/MacOS devices via your iCloud account from now on. That goal and that newly added task only will show up on another iOS device, but not existing task data if you didn't migrate them for iCloud sync here.", comment: "")
@@ -58,34 +70,39 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         AlertNotification().alert(title: NSL_migrateAlert, message: NSL_migrateMessage, sender: self, tag: "migrateAlert")
     }
     
-
-
-
+    
+    
+    
     // MARK: -Configure FetchResultsController
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
-   
+    
     private func configureFetchedResultsController(entityName: String) {
-   
-        var sortDescriptor: NSSortDescriptor
-
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         switch entityName {
         case "Goal":
-            sortDescriptor = NSSortDescriptor(key: #keyPath(Goal.goalTitle), ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: #keyPath(Goal.goalTitle), ascending: true)
+            // Sort fetchRequest array data
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
         case "Reward":
-            sortDescriptor = NSSortDescriptor(key: #keyPath(Reward.title), ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: #keyPath(Reward.title), ascending: true)
+            // Sort fetchRequest array data
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
         case "Vision":
-            sortDescriptor = NSSortDescriptor(key: #keyPath(Vision.title), ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: #keyPath(Vision.title), ascending: true)
+            // Sort fetchRequest array data
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
         default:
             print("Error: unable to obtain #keyPath for fetchReuest sortDescriptor.")
         }
-
-        // Sort fetchRequest array data
-        fetchRequest.sortDescriptors = [sortDescriptor]
-
+        
+        
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController?.delegate = self
@@ -175,31 +192,48 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
             
             print("Error: unable to get cell.textLabel?.text content")
         }
-
-
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let selectedGoal = self.fetchedResultsController?.object(at: indexPath) as? Goal else { return }
-        migrateOneGoal(selectedGoal: selectedGoal)
+        switch selectedEntityName {
+        case "Goal":
+            guard let selectedGoal = self.fetchedResultsController?.object(at: indexPath) as? Goal else { return }
+            migrateOneGoal(selectedGoal: selectedGoal)
+            
+        case "Reward":
+            guard let selectedReward = self.fetchedResultsController?.object(at: indexPath) as? Reward else { return }
+            migrateOneReward(selectedReward: selectedReward)
+            
+        case "Vision":
+            guard let selectedVision = self.fetchedResultsController?.object(at: indexPath) as? Vision else { return }
+            migrateOneVision(selectedVision: selectedVision)
+            
+        default:
+            print("Error: unable to call fetchedResultsController at didSelectRowAt.")
+        }
+        
     }
+    
+    
     
     
     func migrateOneGoal(selectedGoal: Goal) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let newGoal = Goal(context: context)
         
-        newGoal.goalTitle = selectedGoal.goalTitle! + " iCloud syncing"
+        newGoal.goalTitle = selectedGoal.goalTitle!
         newGoal.goalDone = selectedGoal.goalDone
         newGoal.goalDescription = selectedGoal.goalDescription
         newGoal.goalDueDate = selectedGoal.goalDueDate
-        //newGoal.goalReward = selectedGoal.goalReward
+        //newEntity.goalReward = selectedGoal.goalReward
         newGoal.goalRewardImage = selectedGoal.goalRewardImage
         newGoal.vision4Goal = selectedGoal.vision4Goal
         newGoal.tasksAssigned = selectedGoal.tasksAssigned
         newGoal.reward4Goal = selectedGoal.reward4Goal
+        newGoal.migrate = true
         
         migrateTasksOfOneGoal(selectedGoal: selectedGoal, newGoal: newGoal)
         
@@ -229,6 +263,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
             newTask.url = taskToMigrate.url
             newTask.reward4Task = taskToMigrate.reward4Task
             newTask.goalAssigned = newGoal
+            newTask.migrate = true
             
             do {
                 context.delete(taskToMigrate as NSManagedObject)
@@ -253,6 +288,147 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
             print("Error in fetching Task data ")
             return []
         }
+    }
+    
+    
+    
+    
+    func migrateOneVision(selectedVision: Vision) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let newVision = Vision(context: context)
+        
+        newVision.title = selectedVision.title
+        newVision.status = selectedVision.status
+        newVision.notes = selectedVision.notes
+        newVision.vision4Goal = selectedVision.vision4Goal
+        newVision.migrate = true
+        
+        do {
+            // Delete it from Core Data
+            context.delete(selectedVision as NSManagedObject)
+            try context.save()
+        }catch{
+            print("Saving or Deleting Vision context Error: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    func migrateVision(){
+        
+        let visionArray = visionToArray(entityName: "Vision")
+        var errorDitection: Int? = 0
+        
+        for visionToMigrate in visionArray {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let newVision = Vision(context: context)
+            
+            newVision.title = visionToMigrate.title
+            newVision.status = visionToMigrate.status
+            newVision.notes = visionToMigrate.notes
+            newVision.vision4Goal = visionToMigrate.vision4Goal
+            newVision.migrate = true
+            do {
+                context.delete(visionToMigrate as NSManagedObject)
+                try context.save()
+            }catch{
+                print("*******migrateEntity() delete or saving error*******")
+                errorDitection! += 1
+            }
+        }
+        
+        if errorDitection != 0 {
+            AlertNotification().alert(title: "Vision Migration Failed", message: "Vision data migration failed \(String(describing: errorDitection)) times.", sender: self, tag: "")
+        } else  {
+            AlertNotification().alert(title: "Vision Migration Done", message: "Vision data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data.", sender: self, tag: "")
+        }
+        
+    }
+    
+    
+    
+    func visionToArray(entityName: String) -> Array<Vision> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        var objects: [Vision]
+        
+        do {
+            try objects = context.fetch(fetchRequest) as! [Vision]
+            return objects
+        } catch {
+            print("Error in fetching Reward data")
+            return []
+        }
+        
+    }
+    
+    
+    
+    func migrateOneReward(selectedReward: Reward) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let newReward = Reward(context: context)
+        
+        newReward.title = selectedReward.title
+        newReward.value = selectedReward.value
+        newReward.reward4Goal = selectedReward.reward4Goal
+        newReward.reward4Task = selectedReward.reward4Task
+        
+        newReward.migrate = true
+        do {
+            // Delete it from Core Data
+            context.delete(selectedReward as NSManagedObject)
+            try context.save()
+        }catch{
+            print("Saving or Deleting Reward context Error: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    func migrateReward() {
+        
+        let rewardArray = rewardToArray(entityName: "Reward")
+        let errorDitection: Int? = 0
+        
+        for rewardToMigrate in rewardArray {
+            
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let newReward = Reward(context: context)
+            
+            newReward.title = rewardToMigrate.title
+            newReward.value = rewardToMigrate.value
+            newReward.reward4Goal = rewardToMigrate.reward4Goal
+            newReward.reward4Task = rewardToMigrate.reward4Task
+            newReward.migrate = true
+            
+            do {
+                context.delete(rewardToMigrate as NSManagedObject)
+                try context.save()
+                
+            }catch{
+                print("*******migrateEntity() delete or saving error*******")
+            }
+        }
+        
+        if errorDitection != 0 {
+            AlertNotification().alert(title: "Reward Migration Failed", message: "Reward data migration failed \(String(describing: errorDitection)) times.", sender: self, tag: "")
+        } else  {
+            AlertNotification().alert(title: "Reward Migration Done", message: "Reward data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data.", sender: self, tag: "")
+        }
+        
+    }
+    
+    func rewardToArray(entityName: String) -> Array<Reward> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        var objects: [Reward]
+        
+        do {
+            try objects = context.fetch(fetchRequest) as! [Reward]
+            return objects
+        } catch {
+            print("Error in fetching Reward data")
+            return []
+        }
+        
     }
     
 }

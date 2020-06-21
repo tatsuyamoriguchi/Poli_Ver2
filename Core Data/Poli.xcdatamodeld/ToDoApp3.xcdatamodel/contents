@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Goal" representedClassName=".Goal" syncable="YES">
-        <attribute name="dataMigrate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="goalDescription" optional="YES" attributeType="String"/>
         <attribute name="goalDone" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="goalDueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goalReward" optional="YES" attributeType="String"/>
         <attribute name="goalRewardImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="goalTitle" optional="YES" attributeType="String"/>
+        <attribute name="migrate" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="reward4Goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="reward4Goal" inverseEntity="Reward"/>
         <relationship name="tasksAssigned" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="goalAssigned" inverseEntity="Task"/>
         <relationship name="vision4Goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vision" inverseName="vision4Goal" inverseEntity="Vision"/>

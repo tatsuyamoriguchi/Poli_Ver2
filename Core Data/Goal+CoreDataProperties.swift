@@ -26,6 +26,7 @@ extension Goal {
     @NSManaged public var reward4Goal: Reward?
     @NSManaged public var tasksAssigned: NSSet?
     @NSManaged public var vision4Goal: Vision?
+    @NSManaged public var migrate: Bool
 
 }
 

@@ -21,6 +21,7 @@ extension Reward {
     @NSManaged public var value: Int32
     @NSManaged public var reward4Goal: NSSet?
     @NSManaged public var reward4Task: NSSet?
+    @NSManaged public var migrate: Bool
 
 }
 
