@@ -148,6 +148,8 @@ class Vision4GoalViewController: UIViewController, UITextFieldDelegate, UITextVi
         vision?.title = visionTextField.text
         vision?.notes = visionNotesTextView.text
         //vision?.status = Int16(statusPicker.selectedRow(inComponent: 0))
+        //vision?.dataVer = 3
+        
         if vision != nil {vision4Goal = vision} else {vision4Goal = goal?.vision4Goal }
         
         save()

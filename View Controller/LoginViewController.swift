@@ -38,7 +38,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
     var userPassword: String = ""
     var isOpening: Bool = true
 
-    let storedUserName = UserDefaults.standard.object(forKey: "userName") as? String
+    var storedUserName = UserDefaults.standard.object(forKey: "userName") as? String
     
     // Create a reference to BiometricIDAuth
     let touchMe = BiometricIDAuth()
@@ -52,6 +52,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
     @IBAction func registerPressed(_ sender: UIButton) {
         userName = userNameTextField.text!
         userPassword = passwordTextField.text!
+        
+        // For test
+        //storedUserName = nil
         
         // User login account already exists alert
         if (UserDefaults.standard.object(forKey: "userName") as? String) != nil {

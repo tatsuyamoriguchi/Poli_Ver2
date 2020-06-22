@@ -174,9 +174,12 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             
             if let itemTitle = visionTextField.text, let itemNotes = visionNotesTextView.text {
                 let itemStatus = statusPicker.selectedRow(inComponent: 0)
+                
+                // Why am I using setValue here??? Change to vision.title = itemTitle
                 item.setValue(itemTitle, forKey: "title")
                 item.setValue(itemNotes, forKey: "notes")
                 item.setValue(itemStatus, forKey: "status")
+                item.setValue(3, forKey: "dataVer")
             } else {
                 print("itemTitle or itemNotes is nil???")
             }
@@ -194,6 +197,7 @@ class VisionViewController: UIViewController, UITextFieldDelegate, UITextViewDel
             vision?.title = visionTextField.text
             vision?.notes = visionNotesTextView.text
             vision?.status = Int16(statusPicker.selectedRow(inComponent: 0))
+            vision?.dataVer = 3
             
             save()
             

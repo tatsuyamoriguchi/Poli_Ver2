@@ -63,11 +63,11 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
         if segueName == "addGoal" {
                 goal = Goal(context: context)
         } else {}
-        
         goal.goalTitle = goalTitleTextView.text
-
         goal.goalDone = false
         goal.goalDescription = goalDescriptionTextView.text
+        goal.dataVer = 3
+        
         if goalDateSwitch.isOn == true {
             goal.goalDueDate = goalDueDatePicker.date as NSDate
             

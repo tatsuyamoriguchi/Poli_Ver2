@@ -739,9 +739,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                         {
                             print("granted \(granted)")
                             //To prevent warning
-                            //DispatchQueue.main.async
-                            let queue = DispatchQueue(label: "EKQueueu")
-                            queue.sync
+                            DispatchQueue.main.async
+                            
                                 {
                                     let eventVC = EKEventEditViewController.init()
                                     eventVC.event = EKEvent.init(eventStore: self.eventStore)

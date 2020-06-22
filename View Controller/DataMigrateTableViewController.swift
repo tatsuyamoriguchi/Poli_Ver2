@@ -36,7 +36,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         let rewardButton = UIBarButtonItem(title: "Reward", style: .plain, target: self, action:  #selector(selectReward))
         let visionButton = UIBarButtonItem(title: "Vision", style: .plain, target: self, action: #selector(selectVision))
         
-        self.navigationItem.rightBarButtonItems = [info, space, goalButton, space, rewardButton, space, visionButton, space]
+        self.navigationItem.rightBarButtonItems = [info, space, visionButton, space, rewardButton, space, goalButton, space]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +65,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     
     @objc func getInfoAction() {
         let NSL_migrateAlert = NSLocalizedString("NSL_migrateAlert", value: "iCloud Sync Alert", comment: "")
-        let NSL_migrateMessage = NSLocalizedString("NSL_migrateMessage", value: "Existing data from previous version is not automatically synced via your iCloud to another iOS/MacOS devices at the installation of this verison. Click a goal/reward/vsion to migrate pre-existing data so that they can be synced to another device via your iCloud account. iCloud data is accessible by your iCloud account only unless the government in some country is granted to access them by Apple, Inc. Newly added task to that existing goal will be howevere automatically synced to another iOS/MacOS devices via your iCloud account from now on. That goal and that newly added task only will show up on another iOS device, but not existing task data if you didn't migrate them for iCloud sync here.", comment: "")
+        let NSL_migrateMessage = NSLocalizedString("NSL_migrateMessage", value: "Click any data in a list to sync onto another iOS/MacOS devices via your iCloud account. Migrated data is grayed out. You need to migrate data only once. WARNING: Newly added task with this version to your existing goal, even if you didn't migrate, will show up on your another iOS/MacOS devices, along with that task's associated information such as goal, reward, and/or vision.", comment: "")
         
         AlertNotification().alert(title: NSL_migrateAlert, message: NSL_migrateMessage, sender: self, tag: "migrateAlert")
     }
@@ -82,6 +82,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
+        fetchRequest.predicate = NSPredicate(format: "dataVer != 3 || dataVer == nil")
         switch entityName {
         case "Goal":
             let sortDescriptor = NSSortDescriptor(key: #keyPath(Goal.goalTitle), ascending: true)
@@ -176,17 +177,17 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         case "Goal":
             if let item = self.fetchedResultsController?.object(at: indexPath) as? Goal {
                 cell.textLabel?.text = item.goalTitle
-                if item.migrate == true { cell.backgroundColor = .gray } else { cell.backgroundColor = .clear }
+                if item.dataVer == 3 { cell.backgroundColor = .gray } else { cell.backgroundColor = .clear }
             }
         case "Reward":
             if let item = self.fetchedResultsController?.object(at: indexPath) as? Reward {
                 cell.textLabel?.text = item.title
-                if item.migrate == true { cell.backgroundColor = .gray } else { cell.backgroundColor = .clear }
+                if item.dataVer == 3 { cell.backgroundColor = .gray } else { cell.backgroundColor = .clear }
             }
         case "Vision":
             if let item = self.fetchedResultsController?.object(at: indexPath) as? Vision {
                 cell.textLabel?.text = item.title
-                if item.migrate == true { cell.backgroundColor = .gray } else { cell.backgroundColor = .clear }
+                if item.dataVer == 3 { cell.backgroundColor = .gray } else { cell.backgroundColor = .clear }
             }
         default:
             
@@ -233,13 +234,15 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         newGoal.vision4Goal = selectedGoal.vision4Goal
         newGoal.tasksAssigned = selectedGoal.tasksAssigned
         newGoal.reward4Goal = selectedGoal.reward4Goal
-        newGoal.migrate = true
+        newGoal.dataVer = 3
         
         migrateTasksOfOneGoal(selectedGoal: selectedGoal, newGoal: newGoal)
         
         do {
             // Delete it from Core Data
             context.delete(selectedGoal as NSManagedObject)
+            
+            // Save context
             try context.save()
         }catch{
             print("Saving or Deleting Goal context Error: \(error.localizedDescription)")
@@ -248,7 +251,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     
     func migrateTasksOfOneGoal(selectedGoal: Goal, newGoal: Goal) {
         
-        let taskArray = selectedGoalTasksToArray(selectedGoal: selectedGoal)
+        let taskArray = selectedGoalTasksToArray(newGoal: newGoal)
         
         for taskToMigrate in taskArray {
             
@@ -263,26 +266,43 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
             newTask.url = taskToMigrate.url
             newTask.reward4Task = taskToMigrate.reward4Task
             newTask.goalAssigned = newGoal
-            newTask.migrate = true
+            newTask.dataVer = 3
+
+            print("")
+            print("newTask.dataVer ************************************")
+            print(newTask.dataVer)
+            print("")
             
             do {
                 context.delete(taskToMigrate as NSManagedObject)
                 try context.save()
+                
+                print("")
+                print("migrateTasksOfOneGoal func touched. context was saved: newTask.dataVer")
+                print(newTask.dataVer)
+                print("")
+                
             }catch{
                 print("*******migrateTasksOfOneGoal() delete or saving error*******")
             }
         }
     }
     
-    func selectedGoalTasksToArray(selectedGoal: Goal) -> Array<Task> {
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
-        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal)
+    func selectedGoalTasksToArray(newGoal: Goal) -> Array<Task> {
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+        fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", newGoal)
+        
         var objects: [Task]
         do {
             try objects = context.fetch(fetchRequest) as! [Task]
+            
+            print("")
+            print("selectedGoalTasksToArray func touched. objects")
+            print(objects)
+            print("")
+            
             return objects
         } catch {
             print("Error in fetching Task data ")
@@ -293,6 +313,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     
     
     
+    // Migrate vision one at a time
     func migrateOneVision(selectedVision: Vision) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let newVision = Vision(context: context)
@@ -301,7 +322,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         newVision.status = selectedVision.status
         newVision.notes = selectedVision.notes
         newVision.vision4Goal = selectedVision.vision4Goal
-        newVision.migrate = true
+        newVision.dataVer = 3
         
         do {
             // Delete it from Core Data
@@ -313,6 +334,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     }
     
     
+    // Migrate all visions at once Not implemeted on UI yet
     func migrateVision(){
         
         let visionArray = visionToArray(entityName: "Vision")
@@ -326,7 +348,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
             newVision.status = visionToMigrate.status
             newVision.notes = visionToMigrate.notes
             newVision.vision4Goal = visionToMigrate.vision4Goal
-            newVision.migrate = true
+            newVision.dataVer = 3
             do {
                 context.delete(visionToMigrate as NSManagedObject)
                 try context.save()
@@ -344,8 +366,6 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         
     }
     
-    
-    
     func visionToArray(entityName: String) -> Array<Vision> {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -362,7 +382,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     }
     
     
-    
+    // Migrate reward one at a time
     func migrateOneReward(selectedReward: Reward) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let newReward = Reward(context: context)
@@ -372,7 +392,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         newReward.reward4Goal = selectedReward.reward4Goal
         newReward.reward4Task = selectedReward.reward4Task
         
-        newReward.migrate = true
+        newReward.dataVer = 3
         do {
             // Delete it from Core Data
             context.delete(selectedReward as NSManagedObject)
@@ -383,6 +403,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     }
     
     
+    // Migrate all rewards at once, not implemented on UI yet
     func migrateReward() {
         
         let rewardArray = rewardToArray(entityName: "Reward")
@@ -397,7 +418,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
             newReward.value = rewardToMigrate.value
             newReward.reward4Goal = rewardToMigrate.reward4Goal
             newReward.reward4Task = rewardToMigrate.reward4Task
-            newReward.migrate = true
+            newReward.dataVer = 3
             
             do {
                 context.delete(rewardToMigrate as NSManagedObject)

@@ -110,8 +110,12 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
             let item = NSManagedObject(entity: entity, insertInto: managedContext)
             let itemValue = Int32(greedValueSliderOutlet.value)
             let itemTitle = greedTextField.text
+            
+            // Why am I using setValue here??? Change to greed?.title = itemTitle
             item.setValue(itemTitle, forKey: "title")
             item.setValue(itemValue, forKey: "value")
+            item.setValue(3, forKey: "dataVer")
+            
             save()
         }
         
@@ -126,6 +130,8 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
             greed?.title = greedTextField.text
             let greedValue = Int32(greedValueSliderOutlet.value)
             greed?.value = greedValue
+            greed?.dataVer = 3
+            
             save()
         }
     }
@@ -142,6 +148,7 @@ class GreedListViewController: UIViewController, UITextFieldDelegate, UITableVie
         
         greedTextField.text = ""
         greedValueLabel.text = NSLocalizedString("Use the slider below to set a value.", comment: "Instruction for slider")
+        
         displayButtons(editStatus: false)
         
         UserDefaults.standard.set(maxValueFloat, forKey: "greedValueMax")

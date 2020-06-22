@@ -253,6 +253,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                 selectedTask.reward4Task = greed
                 
                 selectedTask.repeatTask = NSNumber(value: repeatSegmentedControl.selectedSegmentIndex)
+                
+                selectedTask.dataVer = 3
                                 
                 
             }else if segueName == "addTask" {
@@ -272,6 +274,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                 task.goalAssigned = selectedGoal
                 task.reward4Task = greed
                 task.url = urlURL
+                task.dataVer = 3
+                
             }else {
                 print("segueName wasn't detected.")
             }

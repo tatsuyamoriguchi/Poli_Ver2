@@ -21,7 +21,7 @@ extension Vision {
     @NSManaged public var status: Int16
     @NSManaged public var title: String?
     @NSManaged public var vision4Goal: NSSet?
-    @NSManaged public var migrate: Bool
+    @NSManaged public var dataVer: Int32
 
 }
 

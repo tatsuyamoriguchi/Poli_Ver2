@@ -34,38 +34,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UnQ-aq-auW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="-4734"/>
-        </scene>
-        <!--Migrate Table View Controller-->
-        <scene sceneID="cNq-t8-Kgm">
-            <objects>
-                <tableViewController id="FTY-FO-dAY" customClass="MigrateTableViewController" customModule="Poli" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CN3-cf-tbP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GoalCell" id="Ktc-nG-L2c">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ktc-nG-L2c" id="Is4-Fr-aPI">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="FTY-FO-dAY" id="SRu-ia-mZZ"/>
-                            <outlet property="delegate" destination="FTY-FO-dAY" id="KpB-BP-VUI"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="hap-Em-ThP">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="sqg-5Q-aK6"/>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LPN-kf-xSF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2033" y="-4066"/>
+            <point key="canvasLocation" x="2254" y="-2693"/>
         </scene>
         <!--Settings-->
         <scene sceneID="rVo-r9-WjO">
@@ -168,14 +137,14 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyz-iR-ulv">
                                 <rect key="frame" x="0.0" y="315" width="332" height="401"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <mutableString key="text">[Warning Please Read!] 
+                                <string key="text">[Warning Please Read!] 
 - Poli ToDo version 3 synchronizes your data on your iPhone/iPad/Mac via your iCloud account. Your Apple ID is required to access to your iCloud space.
 
-- Version 2 existing data can be migrated to iCloud sync pressing a button left, which displays Migration view. You need to migrate data only once. 
+- Version 2 existing data can be migrated to iCloud sync pressing a button, "Migrate Data", which displays Migration view. You need to migrate data only once. 
 
 - Even you decided to not migrate a version-2 existing goal, all NEW or UPDATED task data will be synced along with its associated information such as goal title and reward.
 
-- Unless somebody takes a peak on your iPhone or your government is granted to access to your iCloud data by Apple, Inc, your Poli ToDo data is secured and private. Apple’s technologies and app review process won’t allow anyone to do it. Stay safe and improve yourself with Poli ToDo!</mutableString>
+- Unless somebody takes a peak on your iPhone or your government is granted to access to your iCloud data by Apple, Inc, your Poli ToDo data is secured and private. Apple’s technologies and app review process won’t allow anyone to do it. Stay safe and improve yourself with Poli ToDo!</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -278,7 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDr-Ra-KWh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1036.231884057971" y="-3059.5108695652175"/>
+            <point key="canvasLocation" x="333" y="-2193"/>
         </scene>
         <!--Vision-->
         <scene sceneID="Oyd-yK-xth">
@@ -675,7 +644,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="507" y="1634"/>
+            <point key="canvasLocation" x="509" y="1834"/>
         </scene>
         <!--Goal Reward-->
         <scene sceneID="qhD-d7-j0G">
@@ -816,7 +785,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1764" y="1833.7331334332835"/>
+            <point key="canvasLocation" x="3235" y="1835"/>
         </scene>
         <!--Undone Goal-->
         <scene sceneID="Zv9-8Q-VHI">
@@ -1329,76 +1298,6 @@
             </objects>
             <point key="canvasLocation" x="-435" y="75"/>
         </scene>
-        <!--Migrate Vision Table View Controller-->
-        <scene sceneID="tAw-Do-Vgk">
-            <objects>
-                <tableViewController id="i2L-Za-wzo" customClass="MigrateVisionTableViewController" customModule="Poli" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xi0-SC-KQB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="wXs-Cz-6gf">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wXs-Cz-6gf" id="gYR-aU-c2p">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="i2L-Za-wzo" id="Imw-8d-Av5"/>
-                            <outlet property="delegate" destination="i2L-Za-wzo" id="Bop-uX-V4A"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="B0J-iK-Fde">
-                        <barButtonItem key="rightBarButtonItem" title="Migrate All" id="gDO-ga-BB5">
-                            <connections>
-                                <action selector="migrateAllOnPressed:" destination="i2L-Za-wzo" id="Smf-US-4p1"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="puj-uW-civ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2032" y="-3389"/>
-        </scene>
-        <!--Migrate Reward Table View Controller-->
-        <scene sceneID="5iW-ik-O3l">
-            <objects>
-                <tableViewController id="bPh-r4-IV1" customClass="MigrateRewardTableViewController" customModule="Poli" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6xZ-iF-WHm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="I0g-LJ-kb0">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I0g-LJ-kb0" id="xMg-NF-6Eo">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="bPh-r4-IV1" id="6Mw-7j-PeL"/>
-                            <outlet property="delegate" destination="bPh-r4-IV1" id="LDW-jh-B7f"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="1nU-D5-x56">
-                        <barButtonItem key="rightBarButtonItem" title="Migrate All" id="Blc-t8-D3g">
-                            <connections>
-                                <action selector="migrateAllOnPressed:" destination="bPh-r4-IV1" id="b8L-We-0W2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ukE-vK-toG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2032" y="-2655"/>
-        </scene>
         <!--Reward List-->
         <scene sceneID="fvA-MP-1Xg">
             <objects>
@@ -1597,7 +1496,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yaO-12-89S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="1634"/>
+            <point key="canvasLocation" x="1858" y="1835"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

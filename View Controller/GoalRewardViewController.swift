@@ -86,6 +86,9 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             goal.reward4Goal = greed
             goal.goalRewardImage = goalRewardImageView.image!.pngData() as NSData?
             
+            // Data version
+            goal.dataVer = 3
+            
         } else {
             let goal = Goal(context: context)
             goal.goalTitle = goalTitle
@@ -98,6 +101,8 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             // -> Reward entity
             goal.reward4Goal = greed // goalReward
             goal.goalRewardImage =  goalRewardImageView.image!.pngData() as NSData?
+            
+            goal.dataVer = 3
         }
         
         
@@ -123,6 +128,7 @@ class GoalRewardViewController: UIViewController, UIImagePickerControllerDelegat
             
             item.title = newRewardTitle
             item.value = newRewardValue
+            item.dataVer = 3
             
             do {
                 try context.save()
