@@ -327,10 +327,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 case 1:
                     repeatStyle = " 🔂 Daily"
                 case 2:
-                    repeatStyle = " 🔂 Weekly"
+                    repeatStyle = " 🔂 Weekdays"
                     
                 case 3:
-                    repeatStyle = " 🔂 Weekdays"
+                    repeatStyle = " 🔂 Weekly"
                     
                 default:
                     print("")
@@ -585,6 +585,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 eventVC.eventStore = self.eventStore
                                 eventVC.editViewDelegate = self
                                 eventVC.event?.isAllDay = true
+
                                 var eventString: String?
                                 if let rewardName = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
                                     let rewardValue = LocaleConvert().currency2String(value: Int32(rewardValue))
@@ -664,7 +665,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
     }
     
     func checkRepeat(task: Task) {
-        if task.repeatTask != nil || task.repeatTask != 0 {
+        if task.repeatTask == nil || task.repeatTask == 0 {
+            taskRewardEventKit(task: task)
+        } else {
             print("repeatAlert will be called")
             self.repeatAlert(previousTask: task, repeatType: task.repeatTask!)
         }
