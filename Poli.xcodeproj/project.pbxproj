@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,7 +45,7 @@
 		8C65A72D231ECB3100034E09 /* Reward+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65A729231ECB3100034E09 /* Reward+CoreDataProperties.swift */; };
 		8C65FCF0232DE6C1009BD6B0 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65FCEF232DE6C1009BD6B0 /* ShareViewController.swift */; };
 		8C65FCF3232DE6C1009BD6B0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C65FCF1232DE6C1009BD6B0 /* MainInterface.storyboard */; };
-		8C65FCF7232DE6C1009BD6B0 /* Poli-Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C65FCED232DE6C0009BD6B0 /* Poli-Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8C65FCF7232DE6C1009BD6B0 /* Poli-Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C65FCED232DE6C0009BD6B0 /* Poli-Extension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C65FCFD232E0096009BD6B0 /* NSCustomPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65FCFC232E0096009BD6B0 /* NSCustomPersistentContainer.swift */; };
 		8C65FCFE232E0188009BD6B0 /* NSCustomPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65FCFC232E0096009BD6B0 /* NSCustomPersistentContainer.swift */; };
 		8C65FCFF232E019C009BD6B0 /* Poli.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C6B80B620FD749C0055D505 /* Poli.xcdatamodeld */; };
@@ -487,6 +487,7 @@
 /* Begin PBXTargetDependency section */
 		8C65FCF6232DE6C1009BD6B0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 8C65FCEC232DE6C0009BD6B0 /* Poli-Extension */;
 			targetProxy = 8C65FCF5232DE6C1009BD6B0 /* PBXContainerItemProxy */;
 		};
