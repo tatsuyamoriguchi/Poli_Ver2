@@ -65,7 +65,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     
     @objc func getInfoAction() {
         let NSL_migrateAlert = NSLocalizedString("NSL_migrateAlert", value: "iCloud Sync Alert", comment: "")
-        let NSL_migrateMessage = NSLocalizedString("NSL_migrateMessage", value: "Click any data in a list to sync onto another iOS/MacOS devices via your iCloud account. Migrated data is grayed out. You need to migrate data only once. WARNING: Newly added task with this version to your existing goal, even if you didn't migrate, will show up on your another iOS/MacOS devices, along with that task's associated information such as goal, reward, and/or vision.", comment: "")
+        let NSL_migrateMessage = NSLocalizedString("NSL_migrateMessage", value: "Click any data in a list to sync onto another iOS/MacOS devices via your iCloud account. You need to migrate data only once. WARNING: Newly added task with this version to your existing goal, even if you didn't migrate, will show up on your another iOS/MacOS devices, along with that task's associated information such as goal, reward, and/or vision.", comment: "")
         
         AlertNotification().alert(title: NSL_migrateAlert, message: NSL_migrateMessage, sender: self, tag: "migrateAlert")
     }

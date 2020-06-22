@@ -585,7 +585,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 eventVC.eventStore = self.eventStore
                                 eventVC.editViewDelegate = self
                                 eventVC.event?.isAllDay = true
-
+                                eventVC.event?.startDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+                                eventVC.event?.endDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+                                
                                 var eventString: String?
                                 if let rewardName = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
                                     let rewardValue = LocaleConvert().currency2String(value: Int32(rewardValue))
@@ -594,13 +596,11 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                     eventString = "Unable to obtain reward name and value."
                                 }
                                 eventVC.event?.title = eventString
-                                eventVC.event?.notes = "Reward for Task: \(task.toDo ?? "Error: Unable to obtain a task title.")"
+                                eventVC.event?.notes = "Reward for completing a task: \(task.toDo ?? "Error: Unable to obtain a task title.")"
                                 eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
                                 
                                 self.present(eventVC, animated: false, completion: nil)
-                                print("")
-                                print("taskRewardEventKit was touched ****************************************")
-                                print("")
+                
                         }
 
                     } else {
@@ -1002,6 +1002,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 eventVC.eventStore = self.eventStore
                                 eventVC.editViewDelegate = self
                                 eventVC.event?.isAllDay = true
+                                eventVC.event?.startDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+                                eventVC.event?.endDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+
 
                                 var eventString: String?
                                 if let rewardName = self.selectedGoal.reward4Goal?.title, let rewardValue = self.selectedGoal.reward4Goal?.value  {
@@ -1013,7 +1016,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 }
 
                                 eventVC.event?.title = eventString
-                                eventVC.event?.notes = "Reward for \(self.selectedGoal.goalTitle ?? "Error: No Goal Title Found")"
+                                eventVC.event?.notes = "Reward for achieving a goal, \(self.selectedGoal.goalTitle ?? "Error: No Goal Title Found")"
                                 eventVC.event?.calendar =                                                             self.eventStore.defaultCalendarForNewEvents
 
                                 self.present(eventVC, animated: false, completion: {
