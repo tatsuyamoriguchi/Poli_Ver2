@@ -64,11 +64,12 @@
 		8C927DB92334974B00B70092 /* LocaleConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C927DB82334974B00B70092 /* LocaleConvert.swift */; };
 		8C98C31D21191B1F00FAFADE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C98C31C21191B1F00FAFADE /* AVFoundation.framework */; };
 		8CB3A03B2104097F00774DE6 /* GoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3A03A2104097F00774DE6 /* GoalTableViewCell.swift */; };
+		8CB7490024A15EC6005E1D43 /* PoliRoundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB748FF24A15EC6005E1D43 /* PoliRoundIcon.png */; };
+		8CB7490124A15EC6005E1D43 /* PoliRoundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB748FF24A15EC6005E1D43 /* PoliRoundIcon.png */; };
 		8CC955DD249985B100731E0D /* CountTaskNumber4Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC955DC249985B100731E0D /* CountTaskNumber4Today.swift */; };
 		8CD66AA921A3B1990087C14D /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD66AA821A3B1980087C14D /* TouchIDAuthentication.swift */; };
 		8CE809B9212A31A20076756C /* LocalNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE809B8212A31A20076756C /* LocalNotificationDelegate.swift */; };
 		8CE90872210ECC3D007AB95F /* GoalProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE90871210ECC3D007AB95F /* GoalProgress.swift */; };
-		8CF0733523355FEE0083FCB5 /* PoliRoundIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CF0733423355FEE0083FCB5 /* PoliRoundIcon.png */; };
 		8CF25A0721195E3200634987 /* PlayAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF25A0621195E3200634987 /* PlayAudio.swift */; };
 		8CF86D89211AD5A10079A8C9 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF86D88211AD5A10079A8C9 /* SpriteKit.framework */; };
 		CBC4637E23C30679008C289C /* TaskGoalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC4637D23C30679008C289C /* TaskGoalTableViewController.swift */; };
@@ -151,11 +152,11 @@
 		8C927DB82334974B00B70092 /* LocaleConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleConvert.swift; sourceTree = "<group>"; };
 		8C98C31C21191B1F00FAFADE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8CB3A03A2104097F00774DE6 /* GoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTableViewCell.swift; sourceTree = "<group>"; };
+		8CB748FF24A15EC6005E1D43 /* PoliRoundIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PoliRoundIcon.png; sourceTree = "<group>"; };
 		8CC955DC249985B100731E0D /* CountTaskNumber4Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTaskNumber4Today.swift; sourceTree = "<group>"; };
 		8CD66AA821A3B1980087C14D /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		8CE809B8212A31A20076756C /* LocalNotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationDelegate.swift; sourceTree = "<group>"; };
 		8CE90871210ECC3D007AB95F /* GoalProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgress.swift; sourceTree = "<group>"; };
-		8CF0733423355FEE0083FCB5 /* PoliRoundIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PoliRoundIcon.png; sourceTree = "<group>"; };
 		8CF25A0621195E3200634987 /* PlayAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAudio.swift; sourceTree = "<group>"; };
 		8CF86D88211AD5A10079A8C9 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		CBC4637D23C30679008C289C /* TaskGoalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGoalTableViewController.swift; sourceTree = "<group>"; };
@@ -231,7 +232,7 @@
 		8C6B80A320FD749C0055D505 = {
 			isa = PBXGroup;
 			children = (
-				8CF0733423355FEE0083FCB5 /* PoliRoundIcon.png */,
+				8CB748FF24A15EC6005E1D43 /* PoliRoundIcon.png */,
 				8C6B80AE20FD749C0055D505 /* Poli */,
 				8C004A7320FEB3E300960B3A /* View Controller */,
 				8C6B80CC20FDBFAF0055D505 /* Core Data */,
@@ -397,6 +398,7 @@
 			files = (
 				8C65FCF3232DE6C1009BD6B0 /* MainInterface.storyboard in Resources */,
 				8C902EF9233F2E1300CC93A5 /* InfoPlist.strings in Resources */,
+				8CB7490124A15EC6005E1D43 /* PoliRoundIcon.png in Resources */,
 				8C902EF6233F2E1300CC93A5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,9 +409,9 @@
 			files = (
 				8C616A8F2130CCF200784934 /* Localizable.strings in Resources */,
 				8C6B80BD20FD749E0055D505 /* LaunchScreen.storyboard in Resources */,
-				8CF0733523355FEE0083FCB5 /* PoliRoundIcon.png in Resources */,
 				8C6B80BA20FD749E0055D505 /* Assets.xcassets in Resources */,
 				8C6B80B520FD749C0055D505 /* Main.storyboard in Resources */,
+				8CB7490024A15EC6005E1D43 /* PoliRoundIcon.png in Resources */,
 				8C616A8C2130CCF200784934 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
