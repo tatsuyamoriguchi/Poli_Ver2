@@ -54,6 +54,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     var selectedTask: Task!
     var context: NSManagedObjectContext!
     var urlURL: URL?
+    var reward4Update: Reward?
   
 
     @IBAction func dateSwitchAction(_ sender: UISwitch) {
@@ -79,7 +80,6 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         if segueName == "addTask" {
             isDoneSwitch.isOn = false
             let NSL_naviAdd = NSLocalizedString("NSL_naviAdd", value: "Add Task", comment: "")
@@ -95,6 +95,9 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
             repeatSegmentedControl.selectedSegmentIndex = 0
             
         } else if segueName == "updateTask" {
+            
+            reward4Update = selectedTask.reward4Task
+            
             toDoTextField.text = selectedTask.toDo
             isImportantSwitch.isOn = selectedTask.isImportant
             
@@ -250,7 +253,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
                 else {
                     selectedTask.date = nil
                 }
-                selectedTask.reward4Task = greed
+                selectedTask.reward4Task = reward4Update
                 
                 selectedTask.repeatTask = NSNumber(value: repeatSegmentedControl.selectedSegmentIndex)
                 
@@ -392,32 +395,37 @@ class TaskViewController: UIViewController, UITextFieldDelegate, NSFetchedResult
         
         // Deselect row remove checkmark when tapping the same row as last Selected row.
         if  let lastSelectedIndex = lastSelected, lastSelected == indexPath {
-
+            
             tableView.cellForRow(at: lastSelectedIndex)?.accessoryType = .none
             greed = nil
             lastSelected = nil
             selectedTask.reward4Task = nil
             print(" ")
             print("let lastSelectedIndex = lastSelected, lastSelected == indexPath Passed")
-
+            
+            
             // In case when tapping any of other rows than previously selected row.
         }else {
-
-        if lastSelected != nil {
-            tableView.cellForRow(at: lastSelected!)?.accessoryType = .none
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-            greed = self.fetchedResultsController?.object(at: indexPath) as? Reward
-            //selectedTask.reward4Task = greed
-            self.lastSelected = indexPath
             
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-            greed = self.fetchedResultsController?.object(at: indexPath) as? Reward
-            self.lastSelected = indexPath
+            if lastSelected != nil {
+                tableView.cellForRow(at: lastSelected!)?.accessoryType = .none
+                tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+                greed = self.fetchedResultsController?.object(at: indexPath) as? Reward
+                //selectedTask.reward4Task = greed
+                self.lastSelected = indexPath
+                
+            } else {
+                tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+                greed = self.fetchedResultsController?.object(at: indexPath) as? Reward
+                self.lastSelected = indexPath
+            }
+            print("let selected = self.lastSelected failed")
+            
         }
-                        print("let selected = self.lastSelected failed")
-        
-        }
+
+        // For task update
+        reward4Update = greed
+
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
