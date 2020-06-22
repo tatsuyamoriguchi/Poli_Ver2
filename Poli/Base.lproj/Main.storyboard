@@ -902,9 +902,11 @@
                         <segue destination="6WB-0P-iTW" kind="show" identifier="updateTaskGoalSegue" id="wDx-MT-Dsk"/>
                         <segue destination="d4h-Jc-DXe" kind="show" identifier="toGoalList" id="x9Z-MU-eMi"/>
                         <segue destination="kRf-Gi-h3g" kind="show" identifier="toUndoneGoal" id="AiY-EY-Xft"/>
+                        <segue destination="8Wi-J4-iKY" kind="unwind" identifier="unwindToGoalTableVCSegue" unwindAction="unwindToGoalTableVCWithSegue:" id="AWX-RT-iR3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Om-wZ-eb2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8Wi-J4-iKY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3000" y="75"/>
         </scene>
@@ -1505,7 +1507,7 @@
         <segue reference="Uba-WO-OBv"/>
         <segue reference="AiY-EY-Xft"/>
         <segue reference="wjN-o3-DDz"/>
-        <segue reference="rgA-VP-5DN"/>
+        <segue reference="x9Z-MU-eMi"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="PoliRoundIcon" width="133.33332824707031" height="133.33332824707031"/>

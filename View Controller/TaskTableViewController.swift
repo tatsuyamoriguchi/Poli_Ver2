@@ -915,7 +915,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 goalAchievedAlert()
             } else {
                 print("Undone task exisits")
-                self.performSegue(withIdentifier: "toGoalList", sender: self)
+                self.performSegue(withIdentifier: "unwindToGoalTableVCSegue", sender: self)
                 
                 return
             }
@@ -978,7 +978,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 
             // CongratAlert: Pressing "Yes" creates iCalendar event with reward data
             congratAlert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
-                self.performSegue(withIdentifier: "toGoalList", sender: self)
+                self.performSegue(withIdentifier: "unwindToGoalTableVCSegue", sender: self)
             }))
 
             congratAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action

@@ -16,6 +16,10 @@ import EventKitUI
 class GoalTableViewController: UITableViewController, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, EKEventViewDelegate, EKEventEditViewDelegate {
     
     
+    // To unwind from TaskTableVC
+    @IBAction func unwindToGoalTableVC(segue: UIStoryboardSegue) {}
+    
+    
     var eventStore: EKEventStore!
     // EventKit to share to iCalendar
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
