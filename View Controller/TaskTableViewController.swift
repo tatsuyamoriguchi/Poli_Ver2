@@ -912,7 +912,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         do {
             undoneTasks = try context.fetch(fetchRequest)
             if  selectedGoal.goalDone != true && (undoneTasks?.count == 0 || undoneTasks?.count == nil) {
+                
                 goalAchievedAlert()
+                
             } else {
                 print("Undone task exisits")
                 self.performSegue(withIdentifier: "unwindToGoalTableVCSegue", sender: self)
@@ -923,6 +925,10 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         } catch {
             print("Unable to fetch for Today Task")
         }
+    }
+    
+    func goalAchievedWithNoRewardAlert() {
+
     }
 
 
@@ -1012,7 +1018,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
 
                                     eventString = "Enjoy your reward, \"\(rewardName)\" for \(rewardValue)"
                                 } else {
-                                    eventString = "No reward or value"
+                                    eventString = "No reward or value was assinged."
                                 }
 
                                 eventVC.event?.title = eventString
