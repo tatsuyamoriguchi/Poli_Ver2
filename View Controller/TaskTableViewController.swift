@@ -506,6 +506,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
         newTask.repeatTask = previousTask.repeatTask
         
         print("****goToRepeat called *****")
+        taskRewardEventKit(task:previousTask)
         
 //        do {
 //            try context.save()
@@ -596,6 +597,9 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents
                                 
                                 self.present(eventVC, animated: false, completion: nil)
+                                print("")
+                                print("taskRewardEventKit was touched ****************************************")
+                                print("")
                         }
 
                     } else {
@@ -740,7 +744,6 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                             print("granted \(granted)")
                             //To prevent warning
                             DispatchQueue.main.async
-                            
                                 {
                                     let eventVC = EKEventEditViewController.init()
                                     eventVC.event = EKEvent.init(eventStore: self.eventStore)
