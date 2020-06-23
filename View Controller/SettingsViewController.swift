@@ -46,8 +46,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    var userName: String!
-    var userPassword: String!
+    var userName: String?
+    var userPassword: String?
     let storedUserName = UserDefaults.standard.object(forKey: "userName") as? String
     let storedPassword = UserDefaults.standard.object(forKey: "userPassword") as? String
   
@@ -64,13 +64,15 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         userNameTextField.delegate = self
         passwordTextField.delegate = self
         
-        let NSL_alertTitle_007 = NSLocalizedString("NSL_alertTitle_007", value: "User Name Mismatched", comment: " ")
-        let NSL_alertMessage_007 = NSLocalizedString("NSL_alertMessage_007", value: "User Name you used doesn't match with stored one, somehow. Please press ok to go back to Login view and re-login.", comment: " ")
+
+        // Check if properly user info are obtained
         if userName != storedUserName {
+            
+            let NSL_alertTitle_007 = NSLocalizedString("NSL_alertTitle_007", value: "User Name Mismatched", comment: " ")
+            let NSL_alertMessage_007 = NSLocalizedString("NSL_alertMessage_007", value: "User Name you used doesn't match with stored one, somehow. Please press ok to go back to Login view and re-login.", comment: " ")
             alertAction(title: NSL_alertTitle_007, message: NSL_alertMessage_007, actionPassed: loginSegue)
             
         } else {
@@ -78,7 +80,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             passwordTextField.text = storedPassword
         }
         
-        
+        // Notificaiton setting for daily reminder
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 // Permissions are granted
@@ -104,7 +106,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        // PickerView for Goal Type
+        
+        // Goal type PickerView for Goal sorting
         self.GoalTypePicker.delegate = self
         self.GoalTypePicker.dataSource = self
         pickerData = [NSLocalizedString("All Goals", comment: "Picker menu"),
@@ -145,14 +148,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         
         userName = userNameTextField.text!
         userPassword = passwordTextField.text!
-
-        if userNameTextField.text == "" || passwordTextField.text == "" {
-            // no enough input entry alert
-            let NSL_alertTitle_008 = NSLocalizedString("NSL_alertTitle_008", value: "Need More Information", comment: " ")
-            let NSL_alertMessage_008 = NSLocalizedString("NSL_alertMessage_008", value: "Fill both information: User Name and Password", comment: " ")
-            alertAction(title: NSL_alertTitle_008, message: NSL_alertMessage_008, actionPassed: noAction)
+        
+        
+        if let userName = userNameTextField.text, let userPassword = passwordTextField.text  {
             
-        } else {
             // Set a user login account
             UserDefaults.standard.set(userName, forKey: "userName")
             //UserDefaults.standard.set(userPassword, forKey: "userPassword")
@@ -176,7 +175,15 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             let NSL_alertMessage_009 = NSLocalizedString("NSL_alertMessage_009", value: "Please re-login with new user information.", comment: " ")
             alertAction(title: NSL_alertTitle_009, message: NSL_alertMessage_009, actionPassed: loginSegue)
             
+            
+        } else {
+            // no enough input entry alert
+            let NSL_alertTitle_008 = NSLocalizedString("NSL_alertTitle_008", value: "Need More Information", comment: " ")
+            let NSL_alertMessage_008 = NSLocalizedString("NSL_alertMessage_008", value: "Fill both information: User Name and Password", comment: " ")
+            alertAction(title: NSL_alertTitle_008, message: NSL_alertMessage_008, actionPassed: noAction)
+            
         }
+        
     }
     
     func setNotification() {

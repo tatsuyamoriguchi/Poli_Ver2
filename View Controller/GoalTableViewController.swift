@@ -38,17 +38,16 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     }
     
     
-    
-    @IBAction func addGoalAction(_ sender: UIBarButtonItem) {    }
-    
     var iCloudStatus: String?
-    var userName: String! = ""
-    
+    var userName: String?
+
     // Declare a variable to pass to UpdateGoalViewController
     var selectedGoal: Goal?
     var statusString: String = ""
     var status: Bool = false
     var dueDateString: String? = ""
+    
+    @IBAction func addGoalAction(_ sender: UIBarButtonItem) {    }
     
     
     @IBAction func logoutPressed(_ sender: Any) {
@@ -105,14 +104,13 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
         
         configureFetchedResultsController()
         
-        if UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
-            if let userName = UserDefaults.standard.string(forKey: "userName") {
+        if let userName = UserDefaults.standard.string(forKey: "userName"), UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
+            
             self.navigationItem.title = userName + NSLocalizedString("'s Goals", comment: "navigationItem.title")
             self.navigationItem.prompt = iCloudStatus
+            
         }else {
-            //self.navigationItem.prompt = NSLocalizedString("Log in error", comment: "Login error")
             alertAction(title: NSLocalizedString("Login Aelrt", comment: "Alert.title"), message: NSLocalizedString("Problem reading login information in UserDefaults. Please re-login.", comment: "Alert.message"), actionPassed: logoutAction)
-            }
         }
         
         
@@ -472,39 +470,78 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "addGoal"{
-            let destVC = segue.destination as! GoalTitleViewController
-            //destVC.goal = Goal
-            destVC.segueName = segue.identifier
+        if let userName = UserDefaults.standard.string(forKey: "userName"), UserDefaults.standard.bool(forKey: "isLoggedIn") == true {
+
+            switch segue.identifier {
+            case "addGoal":
+                        let destVC = segue.destination as! GoalTitleViewController
+                          destVC.segueName = segue.identifier
+            case "updateGoal":
+                let destVC = segue.destination as! GoalTitleViewController
+                
+                destVC.goal = selectedGoal
+                destVC.segueName = segue.identifier
+            case "toGoalDone":
+                        let destVC = segue.destination as! GoalDoneViewController
+                          destVC.goal = selectedGoal
+                          destVC.userName = userName
+            case "taskList":
+                let destVC = segue.destination as! TaskTableViewController
+                destVC.selectedGoal = selectedGoal
+            case "settingsSegue":
+                let destVC = segue.destination as! SettingsViewController
+                destVC.userName = userName
+            case "logoutSegue":
+                let destVC = segue.destination as! LoginViewController
+                destVC.isOpening = false
+            case "todaysTasksSegue":
+                let destVC = segue.destination as! TodaysTasksTableViewController
+                destVC.userName = userName
+            default:
+                print("Segue Error: unable to obtain segue name.")
+                
+            }
             
-        } else if segue.identifier == "updateGoal" {
             
-            let destVC = segue.destination as! GoalTitleViewController
-            
-            destVC.goal = selectedGoal
-            destVC.segueName = segue.identifier
-            
-        } else if segue.identifier == "toGoalDone" {
-            let destVC = segue.destination as! GoalDoneViewController
-            destVC.goal = selectedGoal
-            destVC.userName = userName!
-            
-        } else if segue.identifier == "taskList" {
-            
-            let destVC = segue.destination as! TaskTableViewController
-            destVC.selectedGoal = selectedGoal
-        } else if segue.identifier == "settingsSegue" {
-            let destVC = segue.destination as! SettingsViewController
-            destVC.userName = userName
-            
-        } else if segue.identifier == "logoutSegue" {
-            let destVC = segue.destination as! LoginViewController
-            destVC.isOpening = false
-            
-        } else if segue.identifier == "todaysTasksSegue" {
-            let destVC = segue.destination as! TodaysTasksTableViewController
-            destVC.userName = userName
+        }else {
+            alertAction(title: NSLocalizedString("Login Aelrt", comment: "Alert.title"), message: NSLocalizedString("Problem reading login information in UserDefaults. Please re-login.", comment: "Alert.message"), actionPassed: logoutAction)
         }
+        
+//        
+//        
+//        
+//        if segue.identifier == "addGoal"{
+//            let destVC = segue.destination as! GoalTitleViewController
+//            destVC.segueName = segue.identifier
+//            
+//        } else if segue.identifier == "updateGoal" {
+//            
+//            let destVC = segue.destination as! GoalTitleViewController
+//            
+//            destVC.goal = selectedGoal
+//            destVC.segueName = segue.identifier
+//            
+//        } else if segue.identifier == "toGoalDone" {
+//            let destVC = segue.destination as! GoalDoneViewController
+//            destVC.goal = selectedGoal
+//            destVC.userName = userName
+//            
+//        } else if segue.identifier == "taskList" {
+//            
+//            let destVC = segue.destination as! TaskTableViewController
+//            destVC.selectedGoal = selectedGoal
+//        } else if segue.identifier == "settingsSegue" {
+//            let destVC = segue.destination as! SettingsViewController
+//            destVC.userName = userName
+//            
+//        } else if segue.identifier == "logoutSegue" {
+//            let destVC = segue.destination as! LoginViewController
+//            destVC.isOpening = false
+//            
+//        } else if segue.identifier == "todaysTasksSegue" {
+//            let destVC = segue.destination as! TodaysTasksTableViewController
+//            destVC.userName = userName
+//        }
     }
     
 }
