@@ -536,8 +536,8 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                 
                                 if let taskToDo = task.toDo {
                                     
-                                    let taskCompleteString = NSLocalizedString("taskCompleteString", value: "Reward for completing a task: ", comment: "event.notes")
-                                    eventVC.event?.notes =  taskCompleteString + taskToDo
+                                    let NSL_taskCompleteString = NSLocalizedString("NSL_taskCompleteString", value: "Reward for completing a task:", comment: "event.notes")
+                                    eventVC.event?.notes =  NSL_taskCompleteString + taskToDo
                                 }else {
                                     
                                 eventVC.event?.notes = NSLocalizedString("Error: Unable to obtain a task title.", comment: "event.notes")
@@ -717,15 +717,15 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                         let rewardValueString = LocaleConvert().currency2String(value: rewardValue)
                                         
                                         
-                                        let NSL_reward = NSLocalizedString("NSL_reward", value: "Reward: ", comment: "")
-                                        let NSL_value = NSLocalizedString("NSL_value", value: "Value: ", comment: "")
+                                        let NSL_reward = NSLocalizedString("NSL_reward", value: "Reward:", comment: "EKevent.notes")
+                                        let NSL_value = NSLocalizedString("NSL_value", value: "Value:", comment: "EKEvent.notes")
                                         
                                         let reward4ThisTask = NSL_reward +  rewardString + "\n" + NSL_value + String(rewardValueString)
                                         
                                         
                                         
                                         if let goalTitleString = task.goalAssigned?.goalTitle  {
-                                            let NSL_goal = NSLocalizedString("NSL_goal", value:"Goal: ", comment: "")
+                                            let NSL_goal = NSLocalizedString("NSL_goal", value:"Goal:", comment: "EKEvent.notes")
 
                                             eventString = NSL_goal + goalTitleString + "\n" + reward4ThisTask + "\n" + eventURL!
                                         
@@ -737,7 +737,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                                     } else {
                                         
                                         if let goalTitleString = task.goalAssigned?.goalTitle {
-                                            let NSL_goal = NSLocalizedString("NSL_goal", value:"Goal: ", comment: "")
+                                            let NSL_goal = NSLocalizedString("NSL_goal", value:"Goal:", comment: "EKEvent.notes")
                                             eventString = NSL_goal + goalTitleString + "\n" + eventURL!
                                         } else {
                                             let NSL_noGoal = NSLocalizedString("NSL_noGoal", value: "No goal assignd", comment: "Error message")

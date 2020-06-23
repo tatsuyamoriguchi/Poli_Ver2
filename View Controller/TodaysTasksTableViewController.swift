@@ -63,8 +63,8 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
         var url: URL
    
         image = UIImage(named: "PoliRoundIcon")!
-        let NSL_postMessage = NSLocalizedString("NSL_postMessage", value: "Today's Tasks: ", comment: "")
-        let NSL_postMessageTomorrow = NSLocalizedString("NSL_postMessageTomorrow", value: "Tomorrow's Tasks: ", comment: "")
+        let NSL_postMessage = NSLocalizedString("NSL_postMessage", value: "Today's Tasks:", comment: "")
+        let NSL_postMessageTomorrow = NSLocalizedString("NSL_postMessageTomorrow", value: "Tomorrow's Tasks:", comment: "")
         if showTomorrow != true {
             message = NSL_postMessage
         } else {

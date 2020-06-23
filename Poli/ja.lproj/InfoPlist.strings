@@ -26,4 +26,4 @@
 "NSPhotoLibraryUsageDescription" = "OKをクリックして撮影してください。";
 
 /* Privacy - Location Always Usage Description */
-"NSLocationAlwaysUsageDescription" = "このアプリからCalendarイベントを作成する際位置情報にアクセスします。（常時）"
+"このアプリからCalendarイベントを作成する際位置情報にアクセスします。（常時）";

@@ -360,7 +360,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             
             // Display Progress rate and a message in a cell
             let progressMessage: String = GoalProgress().goalProgressAchieved(percentage: goalProgress)
-            let NSL_percentDone = NSLocalizedString("NSL_percentDone", value: "% Done, ", comment: "")
+            let NSL_percentDone = NSLocalizedString("NSL_percentDone", value: "% Done,", comment: "")
             goalCell.goalProgressPercentageLabel.text = String(format: "%.1f", goalProgressPercentage100) +  NSL_percentDone + " "
                 + progressMessage
             

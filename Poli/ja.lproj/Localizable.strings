@@ -1,5 +1,5 @@
 /* navigationItem.title */
-"(userName)'s Goals" = "(userName)の目標リスト";
+"'s Goals" = "の目標リスト";
 
 /* UIBarButtonItem */
 "< Back" = "＜ 戻る";
@@ -284,6 +284,9 @@
 /* Due date text with parameters */
 "NSL_dueDateLabel" = "期限： %1$@ - %2$@";
 
+/* EKEvent.notes */
+"NSL_goal" = "目標:";
+
 /* No comment provided by engineer. */
 "NSL_goalDescription" = "目標の目的（ビジョン）、詳細、経過記録、注意事項、課題等自由に書き込んで下さい。";
 
@@ -348,6 +351,15 @@
 "NSL_oK" = "OK";
 
 /* No comment provided by engineer. */
+"NSL_percentDone" = "%達成";
+
+/* No comment provided by engineer. */
+"NSL_postMessage" = "今日の予定タスク:";
+
+/* No comment provided by engineer. */
+"NSL_postMessageTomorrow" = "明日の予定タスク:";
+
+/* No comment provided by engineer. */
 "NSL_progressAmazing" = "すげーな";
 
 /* No comment provided by engineer. */
@@ -367,6 +379,9 @@
 
 /* No comment provided by engineer. */
 "NSL_progressNothing" = "まーだなんもしてないの？";
+
+/* EKevent.notes */
+"NSL_reward" = "ご褒美:";
 
 /* No comment provided by engineer. */
 "NSL_shareAlert" = "FacebookやLinkedInのように今日のTo-Doを表示しないアプリに共有したい場合";
@@ -401,6 +416,9 @@
 /* No comment provided by engineer. */
 "NSL_taskAlertTitle" = "タスク設定法";
 
+/* event.notes */
+"NSL_taskCompleteString" = "タスク完了したご褒美:";
+
 /* No comment provided by engineer. */
 "NSL_updateButton_01" = "更新";
 
@@ -409,6 +427,9 @@
 
 /* No comment provided by engineer. */
 "NSL_userFallback" = "ユーザー名とパスワードを入力して下さい。";
+
+/* EKEvent.notes */
+"NSL_value" = "金額:";
 
 /* No comment provided by engineer. */
 "NSL_vision4GoalButton" = "Vision";

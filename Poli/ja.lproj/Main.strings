@@ -187,3 +187,5 @@
 /* Class = "UILabel"; text = "User Name"; ObjectID = "ZXz-Mm-ZAf"; */
 "ZXz-Mm-ZAf.text" = "ユーザー名";
 
+/* Class = "UITextView"; */
+"fyz-iR-ulv.text" = "① Poli Todo ver 3はお使いの他のiPhoneやiPadやMac上のPoli ToDoとデータを同期します。Apple IDでログインしているiCloudアカウントによってデータ共有されます。② Ver 2の既存データを変換して同期させることが可能です。③ 既存データの目標を変換していなくても、Ver 3上で作成もしくは更新したタスクは同期されます。④Poli Todoのデータはユーザー以外はアクセスできません。（例外：Apple Incは中国政府に中国内のiCloudサーバーへのアクセスを許可しています。）?";
