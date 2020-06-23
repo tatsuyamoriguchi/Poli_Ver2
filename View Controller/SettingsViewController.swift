@@ -46,8 +46,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    var userName: String! = ""
-    var userPassword: String! = ""
+    var userName: String!
+    var userPassword: String!
     let storedUserName = UserDefaults.standard.object(forKey: "userName") as? String
     let storedPassword = UserDefaults.standard.object(forKey: "userPassword") as? String
   

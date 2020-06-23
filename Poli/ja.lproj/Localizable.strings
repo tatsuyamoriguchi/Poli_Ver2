@@ -74,7 +74,7 @@
 "iCloud account not connected" = "iCloud に接続されていません。";
 
 /* iCloudStatus */
-"iCloud account synced" = "iCloud に接毒中";
+"iCloud account synced" = "iCloud に接続中";
 
 /* iCloudStatus */
 "iCloud sync not available" = "iCloud 同期ができません。";
