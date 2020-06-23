@@ -390,7 +390,7 @@
 "NSL_shareGoalAlert" = "目標設定法";
 
 /* No comment provided by engineer. */
-"NSL_shareGoalMessage" = "ビジョン＞目標＞タスク　目標はS.M.A.R.T.に基づいて設定してください。「S：Specific 具体性、M：Measura bl 計測性、A：Achievable 達成可能、R：Relevant ビジョン整合性、T：Time-Bound　期限」最初は1週間ほどで達成できる程度のものから目標設定を始めましょう。計画は緩く、実行は確実に！";
+"NSL_shareGoalMessage" = "ビジョン＞目標＞タスク　目標はS.M.A.R.T.に基づいて設定してください。「S：Specific 具体性、M：Measurable 計測性、A：Achievable 達成可能、R：Relevant ビジョン整合性、T：Time-Bound　期限」最初は1週間ほどで達成できる程度のものから目標設定を始めましょう。計画は緩く、実行は確実に！";
 
 /* No comment provided by engineer. */
 "NSL_shareMessage" = "共有メニューから「コピー」をまず選択し、共有ボタンを再度押してからFacebookやLinkedInの共有ポスティングスクリーンのメッセージ欄にペーストしてください。";

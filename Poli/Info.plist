@@ -39,7 +39,7 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>When creating an Calendar event from this app, it needs to access location data.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>When creating an Calendar event from this app, it needs to access location data, (always). </string>
+	<string>When creating an Calendar event from this app, it needs to access location data, (always).</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>When creating an Calendar event from this app, it needs to access location data, while it is in use.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

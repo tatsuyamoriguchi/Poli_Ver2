@@ -19,11 +19,12 @@
 /* Privacy - Location Always and When In Use Usage Description */
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際位置情報にアクセスします。";
 
+/* Privacy - Location Always Usage Description */
+"NSLocationAlwaysUsageDescription" = "このアプリからCalendarイベントを作成する際位置情報にアクセスします。（常時）";
+
 /* Privacy - Location When In Use Usage Description */
 "NSLocationWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際このアプリが起動されている間、位置情報にアクセスします。";
 
 /* Privacy - Photo Library Usage Description */
 "NSPhotoLibraryUsageDescription" = "OKをクリックして撮影してください。";
 
-/* Privacy - Location Always Usage Description */
-"このアプリからCalendarイベントを作成する際位置情報にアクセスします。（常時）";

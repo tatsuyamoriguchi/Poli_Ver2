@@ -34,6 +34,9 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "ahA-YV-Xcy"; */
 "ahA-YV-Xcy.text" = "Label";
 
+/* Class = "UILabel"; text = "1] Poli ToDo version 3 synchronizes your data on your iPhone/iPad/Mac via your iCloud account. Your Apple ID is required. [2] Version 2 existing data can be migrated to iCloud sync.  [3] All NEW or UPDATED task data will be synced. [4] Your Poli ToDo data is secured and private."; ObjectID = "Aqd-fF-q97"; */
+"Aqd-fF-q97.text" = "① Poli Todo ver 3はお使いの他のiPhoneやiPadやMac上のPoli ToDoとデータを同期します。Apple IDでログインしているiCloudアカウントによってデータ共有されます。② Ver 2の既存データを変換して同期させることが可能です。③ 既存データの目標を変換していなくても、Ver 3上で作成もしくは更新したタスクは同期されます。④Poli Todoのデータはユーザー以外はアクセスできません。（例外：Apple Incは中国政府に中国内のiCloudサーバーへのアクセスを許可しています。）";
+
 /* Class = "UINavigationItem"; title = "My Goals"; ObjectID = "AqS-Uw-cHf"; */
 "AqS-Uw-cHf.title" = "私の目標！";
 
@@ -187,5 +190,3 @@
 /* Class = "UILabel"; text = "User Name"; ObjectID = "ZXz-Mm-ZAf"; */
 "ZXz-Mm-ZAf.text" = "ユーザー名";
 
-/* Class = "UITextView"; */
-"fyz-iR-ulv.text" = "① Poli Todo ver 3はお使いの他のiPhoneやiPadやMac上のPoli ToDoとデータを同期します。Apple IDでログインしているiCloudアカウントによってデータ共有されます。② Ver 2の既存データを変換して同期させることが可能です。③ 既存データの目標を変換していなくても、Ver 3上で作成もしくは更新したタスクは同期されます。④Poli Todoのデータはユーザー以外はアクセスできません。（例外：Apple Incは中国政府に中国内のiCloudサーバーへのアクセスを許可しています。）?";
