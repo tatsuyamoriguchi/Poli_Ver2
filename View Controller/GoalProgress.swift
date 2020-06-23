@@ -28,27 +28,12 @@ class GoalProgress: NSNumber {
         let today = calendar.startOfDay(for: Date())
         let differenceOfDate = calendar.dateComponents([.day], from: today, to: dueDate)
         var remainingDays: Int
-
-        print("++++++++++++++++++")
-        print("dueDate")
-        print(dueDate)
-        print("today")
-        print(today)
-        print("differenceOfDate")
-        print(differenceOfDate)
-        print("++++++++++++++++++")
         
         if isDone == false {
 
             if let dayInt = differenceOfDate.day {
 
-                print("dayInt")
-                print(dayInt)
-
                 switch dayInt {
-
-
-
                 case ..<0:
                     let NSL_statusPassed = NSLocalizedString("NSL_statusPassed", value: "Due Date has passed.", comment: "")
                     statusString = NSL_statusPassed

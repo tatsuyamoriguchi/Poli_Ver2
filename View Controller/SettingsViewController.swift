@@ -11,6 +11,8 @@ import UserNotifications
 
 class SettingsViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
     
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!

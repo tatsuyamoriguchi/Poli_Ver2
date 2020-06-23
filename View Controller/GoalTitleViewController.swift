@@ -168,11 +168,11 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
     
 
     @objc func getInfoAction() {
-        let NSL_shareAlert = NSLocalizedString("NSL_addGoalAlert", value: "How to set a goal", comment: "")
+        let NSL_shareGoalAlert = NSLocalizedString("NSL_shareGoalAlert", value: "How to set a goal", comment: "")
         
-        let NSL_shareMessage = NSLocalizedString("NSL_goalTitle", value: "A goal is one of requirements to achieve in order to realize your vision/dream. A goal should be compliant to S.M.A.R.T. [S: Specific, M: Measurable, A: Achievable, R: Relevant, T: Time-Bound]\n\nSpecific: Remove ambiguity from the goal statement such as 'I want to master how to run faster.', instead write a statement like 'Make a faster start 0.5 seconds.', 'Sustain the initial start speed for 30 meters.', 'Boost the speed in the last 40 m.'\n\nMeasurable: A goal statement has to be able to be measurable by numbers so that you can monitor your progress. Instead of stating like 'Increase monthly sale', say 'Increase monthly sale from $500,000 to $600,000.' The achievement of a goal has to be clear and obvious by numbers or specific and concrete event or result.\n\nAchievable: A goal has to be realistically achievable in skill-wise, time-wise, location-wise, and financial-wise. Do not underestimate unexpected event and lack of skill/knowledge/resource. Take time to examine if your goal is realistically achievable.\n\nRelevant: A goal has to be aligned to realizing your vision/dream. Do not mix irrelevant item with goals. A goal has to be one of requirements and worthwhile for contributing to realize your vision/dream.\n\nTime-Bound: A goal has to have a deadline. Do not unrealistically set deadline, but once it is set, stick with it. Once postponing it, you’d never be able to complete it. The shorter the time range is, The better. Start with setting up a goal to be done by one week. It shouldn’t be more than 6 weeks to sustain your motivation.\n\nAchieving a goal is sometime hard to do. Give yourself reward to motivate. ", comment: "")
+        let NSL_shareGoalMessage = NSLocalizedString("NSL_shareGoalMessage", value: "Vision > Goal > Task  A goal should be compliant to S.M.A.R.T. [S: Specific, M: Measurable, A: Achievable, R: Relevant, T: Time-Bound] Start with setting up a goal to be done by one week. Be easy when planning, execute it, surely.", comment: "")
         
-        AlertNotification().alert(title: NSL_shareAlert, message: NSL_shareMessage, sender: self, tag: "shareAlert")
+        AlertNotification().alert(title: NSL_shareGoalAlert, message: NSL_shareGoalMessage, sender: self, tag: "shareAlert")
     }
 
     override func viewDidLayoutSubviews() {

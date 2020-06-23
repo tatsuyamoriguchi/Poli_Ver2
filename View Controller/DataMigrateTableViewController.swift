@@ -18,7 +18,7 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
     override func viewDidLoad() {
         super.viewDidLoad()
         configureFetchedResultsController(entityName: selectedEntityName)
-        self.navigationItem.title = "Click any to sync data"
+        self.navigationItem.title = NSLocalizedString("Click any to sync data", comment: "navigationItem.title")
         
         // Sapce between bar buttons
         let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
@@ -32,9 +32,9 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         let info = UIBarButtonItem(customView: infoButton)
         
         
-        let goalButton = UIBarButtonItem(title: "Goal", style: .plain, target: self, action: #selector(selectGoal))
-        let rewardButton = UIBarButtonItem(title: "Reward", style: .plain, target: self, action:  #selector(selectReward))
-        let visionButton = UIBarButtonItem(title: "Vision", style: .plain, target: self, action: #selector(selectVision))
+        let goalButton = UIBarButtonItem(title: NSLocalizedString("Goal", comment: "UIBarButtonItem"), style: .plain, target: self, action: #selector(selectGoal))
+        let rewardButton = UIBarButtonItem(title: NSLocalizedString("Reward", comment: "UIBarButtonItem"), style: .plain, target: self, action:  #selector(selectReward))
+        let visionButton = UIBarButtonItem(title: NSLocalizedString("Vision", comment: "UIBarButtonItem"), style: .plain, target: self, action: #selector(selectVision))
         
         self.navigationItem.rightBarButtonItems = [info, space, visionButton, space, rewardButton, space, goalButton, space]
     }
@@ -267,20 +267,10 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
             newTask.reward4Task = taskToMigrate.reward4Task
             newTask.goalAssigned = newGoal
             newTask.dataVer = 3
-
-            print("")
-            print("newTask.dataVer ************************************")
-            print(newTask.dataVer)
-            print("")
             
             do {
                 context.delete(taskToMigrate as NSManagedObject)
                 try context.save()
-                
-                print("")
-                print("migrateTasksOfOneGoal func touched. context was saved: newTask.dataVer")
-                print(newTask.dataVer)
-                print("")
                 
             }catch{
                 print("*******migrateTasksOfOneGoal() delete or saving error*******")
@@ -359,9 +349,9 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         }
         
         if errorDitection != 0 {
-            AlertNotification().alert(title: "Vision Migration Failed", message: "Vision data migration failed \(String(describing: errorDitection)) times.", sender: self, tag: "")
+            AlertNotification().alert(title: NSLocalizedString("Vision Migration Failed", comment: "AlertNotificaiton.title"), message: NSLocalizedString("Vision data migration failed \(String(describing: errorDitection)) times.", comment: "alertNotification.message"), sender: self, tag: "")
         } else  {
-            AlertNotification().alert(title: "Vision Migration Done", message: "Vision data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data.", sender: self, tag: "")
+            AlertNotification().alert(title: NSLocalizedString("Vision Migration Done", comment: "AlertNotification.title"), message: NSLocalizedString("Vision data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data.", comment: "AlertNotification.message"), sender: self, tag: "")
         }
         
     }
@@ -430,9 +420,9 @@ class DataMigrateTableViewController: UITableViewController, NSFetchedResultsCon
         }
         
         if errorDitection != 0 {
-            AlertNotification().alert(title: "Reward Migration Failed", message: "Reward data migration failed \(String(describing: errorDitection)) times.", sender: self, tag: "")
+            AlertNotification().alert(title: NSLocalizedString("Reward Migration Failed", comment: "AlertNotification.title"), message: NSLocalizedString("Reward data migration failed \(String(describing: errorDitection)) times.", comment: "AlertNotificaiton.message"), sender: self, tag: "")
         } else  {
-            AlertNotification().alert(title: "Reward Migration Done", message: "Reward data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data.", sender: self, tag: "")
+            AlertNotification().alert(title: NSLocalizedString("Reward Migration Done", comment: "AlertNotificaiton.title"), message: NSLocalizedString("Reward data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data.", comment: "AlertNotification.message"), sender: self, tag: "")
         }
         
     }

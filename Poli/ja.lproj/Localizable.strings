@@ -1,3 +1,9 @@
+/* navigationItem.title */
+"(userName)'s Goals" = "(userName)の目標リスト";
+
+/* UIBarButtonItem */
+"< Back" = "＜ 戻る";
+
 /* Picker menu */
 "Active" = "選択可";
 
@@ -10,8 +16,7 @@
 /* Alert title */
 "Alert" = "注意";
 
-/* Picker manu
-   Picker menu */
+/* Picker menu */
 "All Goals" = "全目標";
 
 /* Alert title */
@@ -20,20 +25,59 @@
 /* Alert button */
 "Cancel" = "キャンセル";
 
+/* navigationItem.title */
+"Click any to sync data" = "クリックしてデータ同期";
+
+/* No comment provided by engineer. */
+"Congratulation!" = "おめでとう！";
+
+/* repeatStyle */
+"Daily" = "毎日反復";
+
+/* Alert.message */
+"Do you want to repeat this task?" = "このタスクを反復しますか。";
+
 /* Picker menu */
 "Done" = "完了";
 
 /* Picker menu */
 "Done Goals Only" = "完了した目標のみ表示";
 
+/* eventString */
+"Enjoy your reward" = "ご褒美タイム！";
+
+/* eventString */
+"Enjoy your reward, Buy (rewardName) for (rewardValue)" = "ご褒美に (rewardValue) で \"(rewardName)\"";
+
+/* eventString */
+"Enjoy your reward!" = "ご褒美タイム！";
+
 /* Alert title */
 "Error" = "エラー";
+
+/* event.notes */
+"Error: No Goal Title Found" = "エラー：目標のタイトルが見つかりませんでした。";
+
+/* event.notes */
+"Error: Unable to obtain a task title." = "エラー：タスクのタイトルがありませんでした。";
 
 /* Calendar event title */
 "Event for (calendar!.title)" = "(calendar!.title) 向けイベント";
 
+/* UIBarButtonItem */
+"Goal" = "目標";
+
 /* sharelink.title */
 "Goal Selected" = "選択した目標";
+
+/* iCloudStatus */
+"iCloud account not connected" = "iCloud に接続されていません。";
+
+/* iCloudStatus */
+"iCloud account synced" = "iCloud に接毒中";
+
+/* iCloudStatus */
+"iCloud sync not available" = "iCloud 同期ができません。";
 
 /* Picker menu */
 "Inactive" = "使用停止中";
@@ -41,11 +85,21 @@
 /* Login error */
 "Log in error" = "ログインエラー";
 
-/* Error message */
-"No goal assignd" = "目標が設定されていません。";
+/* Alert.title */
+"Login Aelrt" = "ログイン警告";
+
+/* No comment provided by engineer. */
+"No" = "いいえ";
+
+/* dateString
+   dueDateString */
+"No date assigned" = "日付が設定されていません。";
 
 /* Error message */
 "No reward assigned" = "ご褒美が設定されていません。";
+
+/* eventString */
+"No reward or value was assinged." = "ご褒美やその価値が設定されていません。";
 
 /* Alert message */
 "No User Name found" = "ユーザー名が見つかりません。";
@@ -61,15 +115,6 @@
 
 /* No comment provided by engineer. */
 "NSL_" = "FaceID/TouchIDが設定されていません。";
-
-/* No comment provided by engineer. */
-"NSL_addGoalAlert" = "目標設定法";
-
-/* No comment provided by engineer. */
-"NSL_addTaskAlert" = "作業予定の策定法";
-
-/* No comment provided by engineer. */
-"NSL_addVisionAlert" = "Visionの描き方";
 
 /* (No Comment) */
 "NSL_alertCancel" = "キャンセル";
@@ -127,6 +172,9 @@
 
 /* No comment provided by engineer. */
 "NSL_alertMessage_024" = "この記入項目は必須です。";
+
+/* No comment provided by engineer. */
+"NSL_alertMessage_100" = "入力事項が足りません。";
 
 /* (No Comment) */
 "NSL_alertTitel_012" = "まだまだ、タスク追加";
@@ -192,6 +240,9 @@
 "NSL_alertTitle_024" = "記入がありません。";
 
 /* No comment provided by engineer. */
+"NSL_alertTitle_100" = "テキスト入力がありません。";
+
+/* No comment provided by engineer. */
 "NSL_authFailed" = "個人認証に問題がありました。";
 
 /* No comment provided by engineer. */
@@ -215,6 +266,9 @@
 /* (No Comment) */
 "NSL_contentTitle" = "日次の通知";
 
+/* repeatString */
+"NSL_daily" = "毎日反復";
+
 /* No comment provided by engineer. */
 "NSL_deleteButton_01" = "削除";
 
@@ -234,9 +288,6 @@
 "NSL_goalDescription" = "目標の目的（ビジョン）、詳細、経過記録、注意事項、課題等自由に書き込んで下さい。";
 
 /* No comment provided by engineer. */
-"NSL_linkButton" = "リンク";
-
-/* No comment provided by engineer. */
 "NSL_loginError" = "ログインエラー";
 
 /* No comment provided by engineer. */
@@ -246,13 +297,16 @@
 "NSL_loginUsername" = "%@ としてログイン";
 
 /* No comment provided by engineer. */
+"NSL_migrateAlert" = "iCloud 同期に関する注意";
+
+/* No comment provided by engineer. */
+"NSL_migrateMessage" = "データをクリックすると、ご登録されている iCloud アカウントを通してご利用の他の iOS/MacOS デバイスに データが同期されます。データ変換は一度だけです。【注意】バージョン3で新たに追加もしくは既存タスクの更新をした場合、その目標データを変換していなくても、そのタスクデータは同期されます。そのタスクに紐づいている目標タイトルデータやご褒美データも同期されます。";
+
+/* No comment provided by engineer. */
 "NSL_naviAdd" = "タスクの追加";
 
 /* No comment provided by engineer. */
 "NSL_naviError" = "エラー：segueNameが確認できませんでした。";
-
-/* No comment provided by engineer. */
-"NSL_naviItem" = "ログイン名：%@";
 
 /* No comment provided by engineer. */
 "NSL_naviMissing" = "ログイン名が認識されまませんでした。";
@@ -267,10 +321,16 @@
 "NSL_naviToday" = "今日の予定タスク";
 
 /* No comment provided by engineer. */
+"NSL_naviTomorrow" = "明日の予定タスク";
+
+/* No comment provided by engineer. */
 "NSL_naviUpdate" = "タスク更新";
 
 /* No comment provided by engineer. */
 "NSL_nextButton_01" = "次へ";
+
+/* Error message */
+"NSL_noGoal" = "目標が設定されてません。";
 
 /* (No Comment) */
 "NSL_notifTitle_001" = "りょ！";
@@ -312,7 +372,19 @@
 "NSL_shareAlert" = "FacebookやLinkedInのように今日のTo-Doを表示しないアプリに共有したい場合";
 
 /* No comment provided by engineer. */
+"NSL_shareGoalAlert" = "目標設定法";
+
+/* No comment provided by engineer. */
+"NSL_shareGoalMessage" = "ビジョン＞目標＞タスク　目標はS.M.A.R.T.に基づいて設定してください。「S：Specific 具体性、M：Measura bl 計測性、A：Achievable 達成可能、R：Relevant ビジョン整合性、T：Time-Bound　期限」最初は1週間ほどで達成できる程度のものから目標設定を始めましょう。計画は緩く、実行は確実に！";
+
+/* No comment provided by engineer. */
 "NSL_shareMessage" = "共有メニューから「コピー」をまず選択し、共有ボタンを再度押してからFacebookやLinkedInの共有ポスティングスクリーンのメッセージ欄にペーストしてください。";
+
+/* No comment provided by engineer. */
+"NSL_shareVisionAlert" = "ビジョン策定法";
+
+/* No comment provided by engineer. */
+"NSL_shareVisionMessage" = "ビジョンはあなたの夢を実現させたものです。どんな自分になりたいのか。具体的に夢を描いて現実的な計画を立てて夢を実現させる目標を達成させましょう。";
 
 /* No comment provided by engineer. */
 "NSL_statusLeft" = "残り%1$d日と%2$d時間";
@@ -324,13 +396,13 @@
 "NSL_statusToday" = "残り%d時間";
 
 /* No comment provided by engineer. */
-"NSL_taskTitle" = "タスクとは目標を達成させるのに必要な作業のこと。「100m走で0.5秒スタートを速める。」という目標を達成させるために、「Usain Boldのスタートの仕方をビデオA、 B、 Cを8月1日までに見て学ぶ。」というのが作業の例です。作業は通常1時間以内に完了するものです。完了するのに1時間以上必要な場合は、その作業を分割しましょう。もし該当する作業実行に気乗りしない時は、何かご褒美を設定しましょう。作業の内容は明確にし、すぐにその作業を始められるように曖昧なところがないようにしましょう。後回しにしようとする時は大抵作業内容が曖昧であることが多いです。作業内容は極力具体的に、またなるべく小さく分割しましょう。";
+"NSL_taskAlertMessage" = "タスクとは目標を達成させるのに必要な作業のこと。「100m走で0.5秒スタートを速める。」という目標を達成させるために、「Usain Boldのスタートの仕方をビデオA、 B、 Cを8月1日までに見て学ぶ。」というのが作業の例です。作業は通常1時間以内に完了するものです。完了するのに1時間以上必要な場合は、その作業を分割しましょう。もし該当する作業実行に気乗りしない時は、何かご褒美を設定しましょう。作業の内容は明確にし、すぐにその作業を始められるように曖昧なところがないようにしましょう。後回しにしようとする時は大抵作業内容が曖昧であることが多いです。作業内容は極力具体的に、またなるべく小さく分割しましょう。";
+
+/* No comment provided by engineer. */
+"NSL_taskAlertTitle" = "タスク設定法";
 
 /* No comment provided by engineer. */
 "NSL_updateButton_01" = "更新";
-
-/* No comment provided by engineer. */
-"NSL_updateButton_02" = "更新";
 
 /* No comment provided by engineer. */
 "NSL_userCancel" = "キャンセルされました。";
@@ -341,20 +413,56 @@
 /* No comment provided by engineer. */
 "NSL_vision4GoalButton" = "Vision";
 
+/* repeatString */
+"NSL_weekdays" = "平日反復";
+
+/* repeatString */
+"NSL_weekly" = "毎週反復";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
 /* Alert message */
 "Please allow Poli ToDo to access your calendars. Launch iPhone Settings Poli to turn Calendar setting on." = "Poli ToDoにCalendarへのアクセスを許可してください。iPhoneの設定アプリでPoliをクリック、Calendar設定をONにしてください。";
 
 /* Alert message */
 "Please type a title for a vision." = "Visionのタイトルを記入してください。";
 
+/* Alert.message */
+"Problem reading login information in UserDefaults. Please re-login." = "ログイン情報の取得に問題がありました。もう一度ログインし直してください。";
+
+/* UIBarButtonItem */
+"Reward" = "ご褒美";
+
+/* AlertNotificaiton.message */
+"Reward data migration failed (String(describing: errorDitection)) times." = "ご褒美データの変換失敗：(String(describing: errorDitection)) 回";
+
+/* AlertNotification.message */
+"Reward data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data." = "ご褒美データは iCloud 同期モードに変換されました。データ同期させたい iOS/MacOS デバイスで同じ iCloud アカウントでログインしてデータ同期してください。";
+
+/* event.notes */
+"Reward for achieving a goal!" = "目標達成のご褒美！";
+
+/* AlertNotificaiton.title */
+"Reward Migration Done" = "ご褒美データの変換完了";
+
+/* AlertNotification.title */
+"Reward Migration Failed" = "ご褒美データの変換失敗";
+
 /* Alert title */
 "Save" = "保存";
+
+/* searchBar.placeholder */
+"Search Task" = "タスク検索";
 
 /* Placeholder */
 "Select a Goal" = "目標の選択";
 
 /* Placeholder */
 "Select a Goal." = "目標の選択";
+
+/* Alert.title */
+"Task Repeat Confirmation" = "タスク反復の確認";
 
 /* Error message */
 "Touch ID not available" = "Touch IDが使えません。";
@@ -368,8 +476,14 @@
 /* Placeholder */
 "Type url here like https://www.beckos.com" = "URLを記入してください。例：https://www.beckos.com";
 
+/* eventString */
+"Unable to obtain reward name and value." = "ご褒美名とその価値データを取得できませんでした。";
+
 /* Picker menu */
-"Undone Goals Only" = "未了の目標のみ表示";
+"Undone with Due" = "期限付きの未達成目標";
+
+/* Picker menu */
+"Undone without Due" = "期限なしの未達成目標";
 
 /* Button */
 "Update" = "更新";
@@ -377,23 +491,30 @@
 /* Instruction for slider */
 "Use the slider below to set a value." = "スライダーを動かして金額を設定してください。";
 
-/* Title for goal description */
-"GOAL NOTES: " = "目標メモ：";
+/* UIBarButtonItem */
+"Vision" = "ビジョン";
 
-"NSL_goalTitle" = "目標達成させて自分を変えよう！実現可能で進捗が計測できてやる価値のある具体的な目標をまず設定してください。達成すればあなたの生活や仕事に実際にプラスになるものにしましょう。\n\n「No.1 ファッションフォトグラファーになること」は目標ではありません。それは実現させたいビジョン、つまり夢のことです。いくつもの目標を達成させた先にある最終的に実現させたい夢のことです。ビジョンは山の頂上みたいなもので、一度に一つだけにしましょう。一つのビジョンが実現できたら次のビジョンを作ってください。同時に二つも三つもビジョンを持たないように。一回に登る山は一つだけにしましょう。\n\n「海岸沿いで行うファッション向け撮影技術を習得する。」が実現させる具体的な目標で、山の頂上「No.1 ファッションフォトグラファーになること」に近づく通過点の一つ、つまり目標のひとつになります。タスク（作業）は目標を達成するための実際の実行項目です。「海を背景とした情景撮影法を学ぶ」はタスクとしてはあまり具体的ではありません。「海の風景を背景にファッションモデルを撮影するのに一番良いレンズを選ぶ方法を調べる。」が具体的で実行し易い行動の最小単位、つまりそれ以上他に何したら良いか考えなくて良いサイズの「やること」つまりタスクになります。なるべく2時間以内に完了するタスクを設定しましょう。\n\n「毎日6時に起床する。」は目標ではなく、反復タスクもしくはタスクを実行し易くするために身に付けたい習慣のことです。習慣付けをタスクの一つにしても構いませんがそれによって達成できる目標を明確にしましょう。山の頂上に登るというビジョンのためにいくつも通過点（目標）を目指して山登りをしていくわけで、山登りに必要なもの、ピッケル、登山靴、地図、飲料水を買うことがタスクになります。\n\n実現させたいビジョン（夢）を具体的に描いたら、その都度目標を設定して、目標ごとの様々なタスクを一つ一つをこなしながらビジョンに近づいて行きましょう。1週間から5週間で達成できる目標が効果的です。短期間でいくつも目標を達成できるとやる気も上がるでしょう";
+/* alertNotification.message */
+"Vision data migration failed (String(describing: errorDitection)) times." = "ビジョンデータの変換失敗。(String(describing: errorDitection)) 回";
 
-"NSL_Reward" = "ご褒美：";
+/* AlertNotification.message */
+"Vision data were migrated to iCloud sync mode. Make sure you log in the same iCloud account on your iOS devices to sync data." = "ビジョンデータは iCloud 同期モードに変換されました。お使いの iOS/MacOSで同じ iCloud アカウントでログインするとデータ同期します。";
+
+/* AlertNotification.title */
+"Vision Migration Done" = "ビジョンデータの変換完了";
+
+/* AlertNotificaiton.title */
+"Vision Migration Failed" = "ビジョンデータの変換失敗";
+
+/* repeatStype */
+"Weekdays" = "平日反復";
+
+/* repeatStyle */
+"Weekly" = "毎週反復";
 
 /* No comment provided by engineer. */
-
-"NSL_Value" = "金額：";
+"Yes" = "はい";
 
 /* No comment provided by engineer. */
-"NSL_visionTitle" = "Vision（理想）とはあなたの夢を実現させるために到達する最終地点のことで、「何になりたいか。」ということです。例えば、iOSアプリ開発者になることがVisionであり、iOSアプリ開発の仕事を取ることは手段（目標）の一つに過ぎません。どんなiOSアプリ開発者になりたいのか自問してください。安定を求めて大きい組織で働きたいのか、リスクはあるが様々なことに挑戦できるスタートアップで働きたいのか、不安定でもフレキシブルな働き方のできるフリーランサーとして働きたいのか。どの地域で働きたいのか。どんなタイプの人たちと働きたいのか。どんな製品やプロジェクトで働きたいのか。\n\nVisionは一つである必要はないですが、できれば同時に複数はもたず一つに絞ることをお勧めします。但し、キャリアのVision、健康改善のVision、家族のVisionというように種類別に持つことも可能です。\n\nVisionには期限がありません。何かになっていること、その状態がVisionだからです。例えば、バレーボールで金メダル獲得したオリンピック選手であることがVisionであり、東京オリンピックで金メダルを獲得することはVisionを実現させるための目標の一つに過ぎません。";
-
-
-"Reward: " = "ご褒美：";
-
-"Value: " = "金額：";
-
+"Your hard work pays off and feel your progress now!" = "よく頑張りました。前進したね！";
 

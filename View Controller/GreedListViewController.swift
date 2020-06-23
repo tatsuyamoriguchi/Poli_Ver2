@@ -360,9 +360,9 @@ func noTextInputAlert() {
                                     if let rewardName = greed.title {
 
                                         let rewardValue = LocaleConvert().currency2String(value: Int32(greed.value))
-                                        eventString = "Enjoy your reward, Buy \(rewardName) for \(rewardValue)"
+                                        eventString = NSLocalizedString("Enjoy your reward, Buy \(rewardName) for \(rewardValue)", comment: "eventString")
                                     } else {
-                                        eventString = "Unable to obtain reward name and value."
+                                        eventString = NSLocalizedString("Unable to obtain reward name and value.", comment: "eventString")
                                     }
                                     eventVC.event?.title = eventString
                                     eventVC.event?.calendar = self.eventStore.defaultCalendarForNewEvents

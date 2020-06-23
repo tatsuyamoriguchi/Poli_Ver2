@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "aAs-sn-vmz"; */
 "aAs-sn-vmz.text" = "詳細";
 
-/* Class = "UIViewController"; title = "Goal Display"; ObjectID = "aFb-Eg-P8g"; */
-"aFb-Eg-P8g.title" = "目標の表示";
-
 /* Class = "UILabel"; text = "Label"; ObjectID = "ahA-YV-Xcy"; */
 "ahA-YV-Xcy.text" = "Label";
 
@@ -52,8 +49,8 @@
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "cqk-Cx-Mfp"; */
 "cqk-Cx-Mfp.normalTitle" = "ログイン";
 
-/* Class = "UILabel"; text = "Use this date as Task's Due Date or Starting Date"; ObjectID = "cUc-0S-wgD"; */
-"cUc-0S-wgD.text" = "タスク実行期限もしくは実行開始日（どちらか決めて変えないように）";
+/* Class = "UILabel"; text = "Date Assigned Off/On"; ObjectID = "cUc-0S-wgD"; */
+"cUc-0S-wgD.text" = "期限もしくは開始日";
 
 /* Class = "UIViewController"; title = "Goal Reward"; ObjectID = "dSK-z6-Wqj"; */
 "dSK-z6-Wqj.title" = "目標達成時のご褒美";
@@ -88,8 +85,14 @@
 /* Class = "UIButton"; normalTitle = "Set Goal Type to Display"; ObjectID = "isE-BP-08c"; */
 "isE-BP-08c.normalTitle" = "表示する目標タイプの選択";
 
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "j8I-sw-Szs"; */
+"j8I-sw-Szs.normalTitle" = "保存";
+
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "jPx-Zc-C87"; */
 "jPx-Zc-C87.normalTitle" = "キャンセル";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "Kde-Yv-OSL"; */
+"Kde-Yv-OSL.text" = "パスワード";
 
 /* Class = "UIViewController"; title = "Task"; ObjectID = "kmR-6c-LEk"; */
 "kmR-6c-LEk.title" = "タスク";
@@ -109,6 +112,9 @@
 /* Class = "UILabel"; text = "Title"; ObjectID = "Ne9-fc-lnA"; */
 "Ne9-fc-lnA.text" = "タイトル";
 
+/* Class = "UIButton"; normalTitle = "No Reward"; ObjectID = "NqI-CZ-95c"; */
+"NqI-CZ-95c.normalTitle" = "ご褒美なし";
+
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "nT0-uU-F2k"; */
 "nT0-uU-F2k.normalTitle" = "キャンセル";
 
@@ -126,6 +132,21 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "qvN-V5-Eto"; */
 "qvN-V5-Eto.text" = "Label";
+
+/* Class = "UISegmentedControl"; sar-dt-QYa.segmentTitles[0] = "Repeat Off"; ObjectID = "sar-dt-QYa"; */
+"sar-dt-QYa.segmentTitles[0]" = "反復解除";
+
+/* Class = "UISegmentedControl"; sar-dt-QYa.segmentTitles[1] = "Daily"; ObjectID = "sar-dt-QYa"; */
+"sar-dt-QYa.segmentTitles[1]" = "毎日反復";
+
+/* Class = "UISegmentedControl"; sar-dt-QYa.segmentTitles[2] = "Weekday"; ObjectID = "sar-dt-QYa"; */
+"sar-dt-QYa.segmentTitles[2]" = "平日反復";
+
+/* Class = "UISegmentedControl"; sar-dt-QYa.segmentTitles[3] = "Weekly"; ObjectID = "sar-dt-QYa"; */
+"sar-dt-QYa.segmentTitles[3]" = "毎週反復";
+
+/* Class = "UIButton"; normalTitle = "Migrate Data"; ObjectID = "t8S-VC-OVD"; */
+"t8S-VC-OVD.normalTitle" = "データ変換";
 
 /* Class = "UILabel"; text = "Max:"; ObjectID = "Tvj-Gq-yaS"; */
 "Tvj-Gq-yaS.text" = "最大値：";
@@ -159,4 +180,10 @@
 
 /* Class = "UILabel"; text = "Goal Due Date"; ObjectID = "Xre-lg-kuf"; */
 "Xre-lg-kuf.text" = "目標達成期限";
+
+/* Class = "UILabel"; text = "Date Assigned Off/On"; ObjectID = "ZkY-4n-E9t"; */
+"ZkY-4n-E9t.text" = "日付設定";
+
+/* Class = "UILabel"; text = "User Name"; ObjectID = "ZXz-Mm-ZAf"; */
+"ZXz-Mm-ZAf.text" = "ユーザー名";
 

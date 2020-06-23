@@ -72,7 +72,7 @@ class Vision4GoalViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     @objc func getInfoAction() {
 
-        AlertNotification().alert(title: VisionViewController().NSL_shareAlert, message: VisionViewController().NSL_shareMessage, sender: self, tag: "shareAlert")
+        AlertNotification().alert(title: VisionViewController().NSL_shareVisionAlert, message: VisionViewController().NSL_shareVisionMessage, sender: self, tag: "shareAlert")
     }
     
     
