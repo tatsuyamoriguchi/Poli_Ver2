@@ -301,11 +301,11 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             var rewardPart1: String?
             
             if let rewardTitle = goal.reward4Goal?.title {
-                rewardPart1 = "🎁 " + rewardTitle
+                rewardPart1 = "🎁" + " " + rewardTitle
             } else {
                 rewardPart1 = NSLocalizedString("No reward assigned", comment: "Error message")
             }
-            let rewardPart2 = " 💰" + rewardValue + "\n"
+            let rewardPart2 = " " + "💰" + rewardValue + "\n"
             
             if let goalDescriptionText = goal.goalDescription {
                 goalCell.goalDescriptionTextView.text = rewardPart1! + rewardPart2 +  "📋 " + goalDescriptionText

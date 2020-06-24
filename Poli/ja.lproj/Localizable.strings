@@ -26,6 +26,9 @@
 "Cancel" = "キャンセル";
 
 /* navigationItem.title */
+"Change Goal Assigned" = "タスクの目標変更";
+
+/* navigationItem.title */
 "Click any to sync data" = "クリックしてデータ同期";
 
 /* No comment provided by engineer. */
@@ -81,9 +84,6 @@
 
 /* Picker menu */
 "Inactive" = "使用停止中";
-
-/* Login error */
-"Log in error" = "ログインエラー";
 
 /* Alert.title */
 "Login Aelrt" = "ログイン警告";
@@ -256,6 +256,12 @@
 
 /* No comment provided by engineer. */
 "NSL_cancelButton" = "キャンセル";
+
+/* No comment provided by engineer. */
+"NSL_chagneGoalAlertMessage" = "リストの目標をクリックして変更。完了してない目標のみ表示されるので、このリストに表示させるには、まずその目標の完了ステータスを変更してください。";
+
+/* No comment provided by engineer. */
+"NSL_chagneGoalAlertTitle" = "このタスクの目標変更";
 
 /* (No Comment) */
 "NSL_contentBody" = "さぁ、タスクの実行に集中しよう！";

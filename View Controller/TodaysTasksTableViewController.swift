@@ -420,7 +420,10 @@ class TodaysTasksTableViewController: UITableViewController, NSFetchedResultsCon
             
             if var rewardString = task.reward4Task?.title, let rewardValue = task.reward4Task?.value {
                 let rewardValueString = LocaleConvert().currency2String(value: Int32(rewardValue))
-                rewardString = NSLocalizedString("🎁 ", comment: "") + rewardString + " - " + NSLocalizedString("💰 ", comment: "") + rewardValueString
+                
+                let rewardString1 = "🎁" + " " + rewardString + " : "
+                let rewardString2 = "💰" +  " " + rewardValueString
+                rewardString = rewardString1 + rewardString2
                 
                 cell.detailTextLabel?.text = dateString + "\n" + rewardString
             } else {

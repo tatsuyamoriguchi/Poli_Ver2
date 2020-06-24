@@ -327,7 +327,7 @@ class TaskTableViewController: UITableViewController, EKEventViewDelegate, EKEve
                 
                 let rewardValueString = LocaleConvert().currency2String(value: Int32(rewardValue))
                 
-                let rewardString = "🎁 " + rewardTitle + " - " + "💰 " +  rewardValueString
+                let rewardString = "🎁" + " " + rewardTitle + " : " + "💰" + " " + rewardValueString
                 
                 taskCell.detailTextLabel?.text = dateString + "\n" + rewardString
             } else {

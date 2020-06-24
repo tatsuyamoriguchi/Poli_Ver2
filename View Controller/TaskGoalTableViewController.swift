@@ -27,6 +27,25 @@ class TaskGoalTableViewController: UITableViewController, NSFetchedResultsContro
     override func viewDidLoad() {
         super.viewDidLoad()
         configureFetchedResultsController()
+        self.navigationItem.title = NSLocalizedString("Change Goal Assigned", comment: "navigationItem.title")
+        
+        // Create the info button
+        let infoButton = UIButton(type: .infoLight)
+        // You will need to configure the target action for the button itself, not the bar button itemr
+        infoButton.addTarget(self, action: #selector(getInfoAction), for: .touchUpInside)
+        // Create a bar button item using the info button as its custom view
+        let info = UIBarButtonItem(customView: infoButton)
+        
+        navigationItem.rightBarButtonItem = info
+        
+    }
+    
+    @objc func getInfoAction() {
+        let NSL_chagneGoalAlertTitle = NSLocalizedString("NSL_chagneGoalAlertTitle", value: "Change a goal assigned", comment: "")
+        
+        let NSL_chagneGoalAlertMessage = NSLocalizedString("NSL_chagneGoalAlertMessage", value: "Tap a goal cell to change. Only undone goals are displayed. Change a goal done status first to be displayed here.", comment: "")
+        
+        AlertNotification().alert(title: NSL_chagneGoalAlertTitle, message: NSL_chagneGoalAlertMessage, sender: self, tag: "shareAlert")
     }
     
     // MARK: - Core Data
@@ -44,11 +63,13 @@ class TaskGoalTableViewController: UITableViewController, NSFetchedResultsContro
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Goal")
         //fetchRequest.predicate = NSPredicate(format: "goalAssigned == %@", selectedGoal!)
         
-        let sortByDone = NSSortDescriptor(key: #keyPath(Goal.goalDone), ascending: true)
+        fetchRequest.predicate = NSPredicate(format: "goalDone = false")
+        
+        //let sortByDone = NSSortDescriptor(key: #keyPath(Goal.goalDone), ascending: true)
         let sortByDate = NSSortDescriptor(key: #keyPath(Goal.goalDueDate), ascending: true)
         let sortByToDo = NSSortDescriptor(key: #keyPath(Goal.goalTitle), ascending: true)
         
-        fetchRequest.sortDescriptors = [sortByDone, sortByDate, sortByToDo]
+        fetchRequest.sortDescriptors = [sortByDate, sortByToDo]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -86,6 +107,7 @@ class TaskGoalTableViewController: UITableViewController, NSFetchedResultsContro
 
         if let goal = self.fetchedResultsController?.object(at: indexPath) as? Goal {
             cell.textLabel?.text = goal.goalTitle
+            
             if goal.goalTitle == selectedTask?.goalAssigned?.goalTitle {
                 cell.accessoryType = .checkmark
                 

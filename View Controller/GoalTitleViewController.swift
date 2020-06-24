@@ -154,16 +154,12 @@ class GoalTitleViewController: UIViewController, UITextViewDelegate {
         space.width = 30
         
         navigationItem.rightBarButtonItems = [nextButton, space, info]
-        
 
         //
         let NSL_goalDescription = NSLocalizedString("NSL_goalDescription", value: "Write the purpose, details, log, etc. of this goal.", comment: "")
         self.instructionLabel.text = NSL_goalDescription
         
-
-        
         goalDescriptionTextView.delegate = self
-        
     }
     
 
