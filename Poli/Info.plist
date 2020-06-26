@@ -22,6 +22,8 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.productivity</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -29,9 +31,9 @@
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Allow this app to access to Calendar to le you schedule a task.</string>
+	<string>Allow this app to access to Calendar to let you schedule a task.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Please click OK to take a photo.</string>
+	<string>Allow this app to access  to Camera to take a photo for a goal's image displayed in goal list view.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>When creating an Calendar event from this app, it needs to accee contact data, while it is in use.</string>
 	<key>NSFaceIDUsageDescription</key>
@@ -43,7 +45,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>When creating an Calendar event from this app, it needs to access location data, while it is in use.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please click OK to choose a photo.</string>
+	<string>Allow this app to access  to Photo library to select a photo for a goal's image displayed in goal list view.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -71,7 +73,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 </dict>
 </plist>

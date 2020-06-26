@@ -19,8 +19,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let userNotificationDelegate: LocalNotificationDelegate = LocalNotificationDelegate()
     
+    override func buildMenu(with builder: UIMenuBuilder)
+    {
+        #if targetEnvironment(macCatalyst)
+        print("UIKit running on macOS")
+        super.buildMenu(with: builder)
+        builder.remove(menu: .help)
+        
+        #else
+        print("Your regular code")
+        #endif
+        
+    }
+    
+    
+    
+    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
                 
+        
         let center = UNUserNotificationCenter.current()
         center.delegate = userNotificationDelegate
         
@@ -60,11 +78,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
-    
+        
+    // For iOS 13.0 Core Data iCloud sync
     @available(iOS 13.0, *)
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Poli")
-        
+   
         
         let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.beckos.Poli")!.appendingPathComponent("Poli.sqlite")
         
@@ -76,12 +95,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let id = "iCloud.com.beckos.Poli"
             let options = NSPersistentCloudKitContainerOptions(containerIdentifier: id)
             storeDescription.cloudKitContainerOptions = options
-            
         }
         
         if defaultURL == nil {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
-            
             
             let storeDescription = container.persistentStoreDescriptions.first
             // Initialize the CloudKit schema
@@ -90,16 +107,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             storeDescription?.cloudKitContainerOptions = options
         }
         
-        
         container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
-            
-            //container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType
+
             container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
-            
+
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            
+
             if let url = defaultURL, url.absoluteString != storeURL.absoluteString {
                 let coordinator = container.persistentStoreCoordinator
                 if let oldStore = coordinator.persistentStore(for: url) {
@@ -108,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     } catch {
                         print(error.localizedDescription)
                     }
-                    
+
                     // delete old store
                     let fileCoordinator = NSFileCoordinator(filePresenter: nil)
                     fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: { url in
@@ -121,14 +136,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         })
-        
-        
+
         return container
     }()
     
     
     // MARK: - Core Data Saving support
-    @available(iOS 13.0, *)
+//    @available(iOS 13.0, *)
     func saveContext () {
         let context = persistentContainer.viewContext
         

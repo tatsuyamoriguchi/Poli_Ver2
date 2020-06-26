@@ -8,7 +8,7 @@
 "NSCalendarsUsageDescription" = "作業予定を入れるのにCalendarへのアクセスをこのアプリに認める。";
 
 /* Privacy - Camera Usage Description */
-"NSCameraUsageDescription" = "OKをクリックして撮影してください。";
+"NSCameraUsageDescription" = "このアプリにCameraにアクセスさせると目標リストに表示する目標データのイメージにする写真を撮影ことができます。";
 
 /* Privacy - Contacts Usage Description */
 "NSContactsUsageDescription" = "このアプリからCalendarイベントを作成する際連絡先データにアクセスします。";
@@ -26,5 +26,5 @@
 "NSLocationWhenInUseUsageDescription" = "このアプリからCalendarイベントを作成する際このアプリが起動されている間、位置情報にアクセスします。";
 
 /* Privacy - Photo Library Usage Description */
-"NSPhotoLibraryUsageDescription" = "OKをクリックして撮影してください。";
+"NSPhotoLibraryUsageDescription" = "このアプリにフォトにアクセスさせると目標リストに表示する目標データのイメージを選択することができます。";
 

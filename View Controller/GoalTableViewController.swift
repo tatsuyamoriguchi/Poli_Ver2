@@ -60,7 +60,7 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
     
     func logoutAction() {
         // Logout and back to login view
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        
         performSegue(withIdentifier: "logoutSegue", sender: nil)
     }
     
@@ -494,6 +494,11 @@ class GoalTableViewController: UITableViewController, UINavigationControllerDele
             case "logoutSegue":
                 let destVC = segue.destination as! LoginViewController
                 destVC.isOpening = false
+                UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                navigationController?.popViewController(animated: true)
+
+                dismiss(animated: true, completion: nil)
+                
             case "todaysTasksSegue":
                 let destVC = segue.destination as! TodaysTasksTableViewController
                 destVC.userName = userName

@@ -196,6 +196,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
     override func viewDidLoad() {
         super.viewDidLoad()
   
+//       isModalInPresentation = true
+        
         if #available(iOS 13.0, *) {
             isModalInPresentation = true
         } else {
@@ -220,6 +222,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
         userNameTextField.delegate = self
         passwordTextField.delegate = self
 
+        userNameTextField.text = ""
+        passwordTextField.text = ""
         
         if (storedUserName == nil) {
             loginButton.isHidden = true
@@ -255,6 +259,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, CAAnimationDel
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        userNameTextField.text = ""
+        passwordTextField.text = ""
+        
         let touchBool = touchMe.canEvaluatePolicy()
         if touchBool {
             touchIDLoginAction()
